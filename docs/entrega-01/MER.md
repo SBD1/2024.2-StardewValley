@@ -74,6 +74,8 @@ O Modelo Entidade Relacionamento para bancos de dados é um modelo que descreve 
 
 ## 2. Atributos
 
+()***** = entidade sem atributos até então :(
+
 - **Jogador**: <ins>id</ins>, `nome`, `vidaAtual`, `vidaMax`, `estamina`, `nível`, `experiência`
 
 - **Missão**: <ins>tipo</ins>, `nome`, `descrição`, `tipo`
