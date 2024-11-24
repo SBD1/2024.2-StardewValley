@@ -3,7 +3,7 @@
 | Data | Versão | Autor | Alterações | 
 | :--: | :----: | ----- | ---------- | 
 | 23/11/2024 |  1.0 |  [Manuella Valadares](https://github.com/manuvaladares)| Criação do documento MER | 
-| 23/11/2024 |  1.1 |  [Gabriel Fernando](https://github.com/MMcLovin)| [Preenche entidades](#1-entidades) e [atributos](#2-atributos) | 
+| 23/11/2024 |  1.1 |  [Gabriel Fernando](https://github.com/MMcLovin)| Preenche [entidades](#1-entidades) e [atributos](#2-atributos) | 
 
 
 # Modelo Entidade-Relacionamento
