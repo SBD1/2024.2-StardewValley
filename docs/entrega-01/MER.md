@@ -12,65 +12,65 @@ O Modelo Entidade Relacionamento para bancos de dados é um modelo que descreve 
 
 ## 1. Entidades
 
-- **Jogador**
-
-- **Missão**
-    - **combate**
-    - **coleta**
-
-- **InstânciaMissão**
-
-- **Recompensa**
-
-- **inventário**
-
-- **InstânciaItem**
-
-- **Item**
-    - **utensílio**
-        - **ferramenta**
-        - **armas**
-    - **Equipamento**
-        - **Arma**
-        - **Armadura**
-        - **Acessório**
-    - **Consumível**
-
-- **Minério**
+- **Ambiente**
+    - **caverna**
+    - **CasaJogador**
+    - **celeiro**
+    - **Mapa**
 
 - **Animal**
 
-- **InstânciaAnimal**
+- **Caixa de mensagem**
+
+- **Estoque**
 
 - **Inimigo**
 
-- **InstânciaInimigo**
+- **InstanciaAnimal**
 
-- **Habilidade**
-    - **HabMineração**
-    - **HabCombate**
-    - **HabCultivo**
+- **InstanciaInimigo**
+
+- **InstanciaMissão**
+
+- **InstanciaPlanta**
+
+- **Inventário**
+
+- **Jogador**
+
+- **Loja**
 
 - **Mapa**
 
-- **Ambiente**
-    - **Caverna**
-    - **Plantação**
-    - **CasaJogador**
-    - **Loja**
-    - **Celeiro**
+- **Minerio_bruto**
 
-- **solo**
+- **plantação**
+
+- **Recompensa**
+
+- **Recurso**
 
 - **Semente**
 
-- **InstânciaPlanta**
+- **Solo**
 
-- **caixa de mensagem**
+- **Utensilio**
 
-- **inventário "estoque"**
+- **Habilidade**
+    - **HabCombate**
+    - **HabCultivo**
+    - **HabMineração**
 
-- **Andar**
+- **Item**
+    - **consumivel**
+    - **Semente**
+    - **Utensilio**
+        - **arma**
+        - **ferramenta**
+
+- **Missão**
+    - **coleta**
+    - **combate**
 
 ## 2. Atributos
 
@@ -94,9 +94,9 @@ O Modelo Entidade Relacionamento para bancos de dados é um modelo que descreve 
 
 - **Coleta**: <ins>tipo</ins>, `tipoMaterial`, `quantidade`, `valorTotal`
 
-- **Inimigo**: <ins>id</ins>, (`nome`, `tipo`, `vida`, `dano`, `experiência`)*****
+- **Inimigo**: <ins>id</ins>, `nome`, `tipo`, `vida`, `dano`
 
-- **InstânciaInimigo**: <ins>id</ins>, (`id_inimigo`, `vidaAtual`)*****
+- **InstânciaInimigo**: <ins>id</ins>, `id_inimigo`, `vidaAtual`
 
 - **Habilidade**: <ins>id</ins>, `nível`, `tipo`, `xpMin`, `xpMax`
 
@@ -110,21 +110,21 @@ O Modelo Entidade Relacionamento para bancos de dados é um modelo que descreve 
 
 - **InstânciaPlanta**: <ins>id</ins>, `nome`, `diaDropar`, `plantaDrop`
 
-- **Ambiente**: <ins>id</ins>, (`nome`, `tipo`)*****
+- **Ambiente**: <ins>id_ambiente</ins>, `tipo`
 
-- **Mapa**: <ins>id</ins>, (`nome`)*****
+- **Mapa**: <ins>idMapa</ins>, `nome`
 
-- **Caverna**: <ins>id</ins>, (`nome`)*****
+- **Caverna**: <ins>andar</ins>, `quantidade_mobs`, `minérios`, `item_recompensa`
 
-- **Plantação**: <ins>id</ins>, (`nome`, `qtd_plantas`)*****
+- **Plantação**: `qtd_plantas`
 
-- **CasaJogador**: <ins>id</ins>, (`id_jogador`)*****
+- **CasaJogador**: <ins>id</ins>, `id_jogador`********************
 
-- **Loja**: <ins>id</ins>()*****
+- **Loja**: <ins>id_loja</ins>, `proprietário`, `nome`, `descrição`
 
-- **Celeiro**: <ins>id</ins>, (`id_jogador`, `qtd_animais`)*****
+- **Celeiro**: <ins>id_celeiro</ins>, `qtd_animais`
 
-- **Inventário**: <ins>id</ins>, (`id_jogador`, `estoque`, `capacidade`)*****
+- **Inventário**: <ins>id</ins>, `quantidade_item`
 
 ## 3. Relacionamentos
 
