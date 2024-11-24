@@ -74,57 +74,75 @@ O Modelo Entidade Relacionamento para bancos de dados é um modelo que descreve 
 
 ## 2. Atributos
 
-()***** = entidade sem atributos até então :(
-
-- **Jogador**: <ins>id</ins>, `nome`, `vidaAtual`, `vidaMax`, `estamina`, `nível`, `experiência`
-
-- **Missão**: <ins>tipo</ins>, `nome`, `descrição`, `tipo`
-
-- **InstânciaMissão**: <ins>id</ins>, `dataInicio`, `dataFinalização`, `status`
-
-- **Recompensa**: <ins>id</ins>, `tipoItem`, `quantidade`
-
-- **Item**: <ins>id_item</ins>, `nome`, `descrição`, `id_categoria`, `tipo_item`, `quantidade`
+- **Ambiente**: <ins>id_ambiente</ins>, `tipo`
 
 - **Animal**: <ins>id</ins>, `nome`, `diasTotalDropar`, `tipo`, `itemDrop`, `preço`
 
-- **InstânciaAnimal**: <ins>id</ins>, `diasAtual`, `prontoDropar`
+- **Arma**: <ins>tipo_arma</ins>, `dano`
 
-- **Combate**: <ins>tipo</ins>, `tipoInimigo`, `quantidadeInimigo`
+- **Caixa de Mensagem**: <ins>id_caixa</ins>
+
+- **CasaJogador**: <ins>id</ins>, `id_jogador`
+
+- **Caverna**: <ins>andar</ins>, `quantidade_mobs`, `minérios`, `item_recompensa`
+
+- **Celeiro**: <ins>id_celeiro</ins>, `qtd_animais`
 
 - **Coleta**: <ins>tipo</ins>, `tipoMaterial`, `quantidade`, `valorTotal`
 
-- **Inimigo**: <ins>id</ins>, `nome`, `tipo`, `vida`, `dano`
+- **Combate**: <ins>tipo</ins>, `tipoInimigo`, `quantidadeInimigo`
 
-- **InstânciaInimigo**: <ins>id</ins>, `id_inimigo`, `vidaAtual`
+- **Consumível**: <ins>tipo_consumível</ins>, `duração`, `efeito`
 
-- **Habilidade**: <ins>id</ins>, `nível`, `tipo`, `xpMin`, `xpMax`
+- **Estoque**: <ins>produto</ins>, `preço`
 
-- **HabMineração**: <ins>id</ins>, `reducaoEnergiaMinerar`, `minerioBonus`
+- **Ferramenta**: <ins>tipo_ferramenta</ins>, `eficiência`
 
 - **HabCombate**: <ins>id</ins>, `vidaBonus`, `danoBonus`
 
 - **HabCultivo**: <ins>id</ins>, `reducaoEnergiaCultivar`, `cultivoBonus`
 
-- **Semente**: <ins>id</ins>, `bool_regou`, `diaAtual`, `diaDropar`, `prontoColher`
+- **Habilidade**: <ins>id</ins>, `nível`, `tipo`, `xpMin`, `xpMax`
+
+- **HabMineração**: <ins>id</ins>, `reducaoEnergiaMinerar`, `minerioBonus`
+
+- **Inimigo**: <ins>id</ins>, `nome`, `tipo`, `vida`, `dano`
+
+- **InstânciaAnimal**: <ins>id</ins>, `diasAtual`, `prontoDropar`
+
+- **InstânciaInimigo**: <ins>id</ins>, `id_inimigo`, `vidaAtual`
+
+- **InstânciaMissão**: <ins>id</ins>, `dataInicio`, `dataFinalização`, `status`
 
 - **InstânciaPlanta**: <ins>id</ins>, `nome`, `diaDropar`, `plantaDrop`
 
-- **Ambiente**: <ins>id_ambiente</ins>, `tipo`
+- **Inventário**: <ins>id</ins>, `quantidade_item`
 
-- **Mapa**: <ins>idMapa</ins>, `nome`
+- **Item**: <ins>id_item</ins>, `nome`, `descrição`, `id_categoria`, `tipo_item`, `quantidade`
 
-- **Caverna**: <ins>andar</ins>, `quantidade_mobs`, `minérios`, `item_recompensa`
-
-- **Plantação**: `qtd_plantas`
-
-- **CasaJogador**: <ins>id</ins>, `id_jogador`********************
+- **Jogador**: <ins>id</ins>, `nome`, `vidaAtual`, `vidaMax`, `estamina`, `nível`, `experiência`
 
 - **Loja**: <ins>id_loja</ins>, `proprietário`, `nome`, `descrição`
 
-- **Celeiro**: <ins>id_celeiro</ins>, `qtd_animais`
+- **Mapa**: <ins>idMapa</ins>, `nome`
 
-- **Inventário**: <ins>id</ins>, `quantidade_item`
+- **Mineral**: <ins>tipo_minério</ins>, `preço`
+
+- **Minério_Bruto**: <ins> </ins>, `***********`
+
+- **Missão**: <ins>tipo</ins>, `nome`, `descrição`, `tipo`
+
+- **Plantação**: `qtd_plantas`
+
+- **Recompensa**: <ins>id</ins>, `tipoItem`, `quantidade`
+
+- **Recurso**: <ins>tipo_recurso</ins>, `***********`
+
+- **Semente**: <ins>id</ins>, `bool_regou`, `diaAtual`, `diaDropar`, `prontoColher`
+
+- **Solo**: <ins>tipo_recurso</ins>
+
+- **Utensilio**: <ins></ins>, `**********`
 
 ## 3. Relacionamentos
 
