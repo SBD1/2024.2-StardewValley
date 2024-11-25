@@ -271,3 +271,166 @@
 
 ---  
 
+### Entidade: Mapa  
+#### Descrição: Representa os mapas disponíveis no jogo, onde as ações podem ocorrer.  
+
+#### Campos:  
+| Nome       | Descrição                   | Tipo de dado | Tamanho | Restrições de domínio (PK, FK, NOT NULL, Unique, Identity, intervalo de valores) |  
+| :--------: | :-------------------------: | :----------: | :-----: | :----------------------------------------------------------------------------:   |  
+| idMapa     | Identificador único do mapa | INT          | -       | PK, NOT NULL, Unique                                                              |  
+| nome       | Nome do mapa                | VARCHAR      | 255     | NOT NULL                                                                          |  
+
+---
+
+### Entidade: Estoque  
+#### Descrição: Representa os itens disponíveis no estoque da loja ou do jogador.  
+
+#### Campos:  
+| Nome       | Descrição                        | Tipo de dado | Tamanho | Restrições de domínio (PK, FK, NOT NULL, Unique, Identity, intervalo de valores) |  
+| :--------: | :------------------------------: | :----------: | :-----: | :----------------------------------------------------------------------------:   |  
+| produto    | Nome do produto no estoque       | VARCHAR      | 255     | NOT NULL                                                                          |  
+| preço      | Preço do produto no estoque      | DECIMAL      | -       | NOT NULL                                                                          |  
+
+---
+
+### Entidade: Inimigo  
+#### Descrição: Representa os inimigos encontrados no jogo.  
+
+#### Campos:  
+| Nome       | Descrição                        | Tipo de dado | Tamanho | Restrições de domínio (PK, FK, NOT NULL, Unique, Identity, intervalo de valores) |  
+| :--------: | :------------------------------: | :----------: | :-----: | :----------------------------------------------------------------------------:   |  
+| id         | Identificador único do inimigo  | INT          | -       | PK, NOT NULL, Unique                                                              |  
+| nome       | Nome do inimigo                 | VARCHAR      | 255     | NOT NULL                                                                          |  
+| tipo       | Tipo do inimigo                 | VARCHAR      | 100     | NOT NULL                                                                          |  
+| vida       | Vida do inimigo                 | INT          | -       | NOT NULL                                                                          |  
+| dano       | Dano causado pelo inimigo       | INT          | -       | NOT NULL                                                                          |  
+
+---
+
+### Entidade: Recurso  
+#### Descrição: Representa os recursos coletáveis ou utilizáveis no jogo.  
+
+#### Campos:  
+| Nome         | Descrição                   | Tipo de dado | Tamanho | Restrições de domínio (PK, FK, NOT NULL, Unique, Identity, intervalo de valores) |  
+| :----------: | :-------------------------: | :----------: | :-----: | :----------------------------------------------------------------------------:   |  
+| tipo_recurso | Tipo do recurso             | VARCHAR      | 50      | NOT NULL                                                                          |  
+
+---
+
+### Entidade: Solo  
+#### Descrição: Representa diferentes tipos de solo no jogo.  
+
+#### Campos:  
+| Nome         | Descrição                   | Tipo de dado | Tamanho | Restrições de domínio (PK, FK, NOT NULL, Unique, Identity, intervalo de valores) |  
+| :----------: | :-------------------------: | :----------: | :-----: | :----------------------------------------------------------------------------:   |  
+| tipo_recurso | Tipo de recurso associado  | VARCHAR      | 50      | NOT NULL                                                                          |  
+
+---
+
+### Entidade: Habilidade  
+#### Descrição: Representa as habilidades do jogador no jogo.  
+
+#### Campos:  
+| Nome     | Descrição                   | Tipo de dado | Tamanho | Restrições de domínio (PK, FK, NOT NULL, Unique, Identity, intervalo de valores) |  
+| :------: | :-------------------------: | :----------: | :-----: | :----------------------------------------------------------------------------:   |  
+| id       | Identificador único         | INT          | -       | PK, NOT NULL, Unique                                                              |  
+| nível    | Nível da habilidade         | INT          | -       | NOT NULL                                                                          |  
+| tipo     | Tipo da habilidade          | VARCHAR      | 50      | NOT NULL                                                                          |  
+| xpMin    | Experiência mínima necessária | INT          | -       |                                                                                  |  
+| xpMax    | Experiência máxima necessária | INT          | -       |                                                                                  |  
+
+---
+
+### Entidade: HabCombate  
+#### Descrição: Representa habilidades de combate do jogador.  
+
+#### Campos:  
+| Nome        | Descrição                   | Tipo de dado | Tamanho | Restrições de domínio (PK, FK, NOT NULL, Unique, Identity, intervalo de valores) |  
+| :---------: | :-------------------------: | :----------: | :-----: | :----------------------------------------------------------------------------:   |  
+| id          | Identificador único         | INT          | -       | PK, NOT NULL, Unique                                                              |  
+| vidaBonus   | Bônus de vida               | INT          | -       |                                                                                  |  
+| danoBonus   | Bônus de dano               | INT          | -       |                                                                                  |  
+
+---
+
+### Entidade: HabCultivo  
+#### Descrição: Representa habilidades relacionadas ao cultivo.  
+
+#### Campos:  
+| Nome                 | Descrição                       | Tipo de dado | Tamanho | Restrições de domínio (PK, FK, NOT NULL, Unique, Identity, intervalo de valores) |  
+| :------------------: | :-----------------------------: | :----------: | :-----: | :----------------------------------------------------------------------------:   |  
+| id                   | Identificador único             | INT          | -       | PK, NOT NULL, Unique                                                              |  
+| reducaoEnergiaCultivar | Redução de energia no cultivo  | INT          | -       |                                                                                  |  
+| cultivoBonus         | Bônus de cultivo                | INT          | -       |                                                                                  |  
+
+---
+
+### Entidade: HabMineração  
+#### Descrição: Representa habilidades relacionadas à mineração.  
+
+#### Campos:  
+| Nome                  | Descrição                       | Tipo de dado | Tamanho | Restrições de domínio (PK, FK, NOT NULL, Unique, Identity, intervalo de valores) |  
+| :-------------------: | :-----------------------------: | :----------: | :-----: | :----------------------------------------------------------------------------:   |  
+| id                    | Identificador único             | INT          | -       | PK, NOT NULL, Unique                                                              |  
+| reducaoEnergiaMinerar | Redução de energia na mineração | INT          | -       |                                                                                  |  
+| minerioBonus          | Bônus de mineração              | INT          | -       |                                                                                  |  
+
+---
+
+### Entidade: Consumível  
+#### Descrição: Representa itens consumíveis no jogo.  
+
+#### Campos:  
+| Nome           | Descrição                   | Tipo de dado | Tamanho | Restrições de domínio (PK, FK, NOT NULL, Unique, Identity, intervalo de valores) |  
+| :------------: | :-------------------------: | :----------: | :-----: | :----------------------------------------------------------------------------:   |  
+| tipo_consumível | Tipo do consumível          | VARCHAR      | 50      | NOT NULL                                                                          |  
+| duração        | Duração do efeito           | INT          | -       | NOT NULL                                                                          |  
+| efeito         | Efeito causado pelo item    | VARCHAR      | 255     |                                                                                  |  
+
+---
+
+### Entidade: Utensílio  
+#### Descrição: Representa utensílios utilizados no jogo para diferentes funções.  
+
+#### Campos:  
+| Nome           | Descrição                       | Tipo de dado | Tamanho | Restrições de domínio (PK, FK, NOT NULL, Unique, Identity, intervalo de valores) |  
+| :------------: | :-----------------------------: | :----------: | :-----: | :----------------------------------------------------------------------------:   |  
+| tipo_utensílio | Tipo do utensílio               | VARCHAR      | 100     | NOT NULL                                                                          |  
+| nível          | Nível necessário para uso       | INT          | -       | NOT NULL                                                                          |  
+
+---
+
+### Entidade: Missão  
+#### Descrição: Representa as missões disponíveis no jogo.  
+
+#### Campos:  
+| Nome           | Descrição                       | Tipo de dado | Tamanho | Restrições de domínio (PK, FK, NOT NULL, Unique, Identity, intervalo de valores) |  
+| :------------: | :-----------------------------: | :----------: | :-----: | :----------------------------------------------------------------------------:   |  
+| tipo           | Tipo da missão                  | VARCHAR      | 100     | NOT NULL                                                                          |  
+| nome           | Nome da missão                  | VARCHAR      | 255     | NOT NULL                                                                          |  
+| descrição      | Descrição detalhada da missão   | TEXT         | -       |                                                                                  |  
+
+---
+
+### Entidade: Coleta  
+#### Descrição: Representa missões relacionadas à coleta de materiais no jogo.  
+
+#### Campos:  
+| Nome           | Descrição                       | Tipo de dado | Tamanho | Restrições de domínio (PK, FK, NOT NULL, Unique, Identity, intervalo de valores) |  
+| :------------: | :-----------------------------: | :----------: | :-----: | :----------------------------------------------------------------------------:   |  
+| tipoMaterial   | Tipo de material coletado       | VARCHAR      | 100     | NOT NULL                                                                          |  
+| quantidade     | Quantidade necessária           | INT          | -       | NOT NULL                                                                          |  
+| valorTotal     | Valor total do material coletado| DECIMAL      | -       |                                                                                  |  
+
+---
+
+### Entidade: Combate  
+#### Descrição: Representa missões ou interações relacionadas ao combate no jogo.  
+
+#### Campos:  
+| Nome           | Descrição                       | Tipo de dado | Tamanho | Restrições de domínio (PK, FK, NOT NULL, Unique, Identity, intervalo de valores) |  
+| :------------: | :-----------------------------: | :----------: | :-----: | :----------------------------------------------------------------------------:   |  
+| tipoInimigo    | Tipo de inimigo                 | VARCHAR      | 100     | NOT NULL                                                                          |  
+| quantidadeInimigo | Quantidade de inimigos        | INT          | -       | NOT NULL                                                                          |  
+
+--- 
