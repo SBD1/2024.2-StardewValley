@@ -118,6 +118,18 @@
 | descrição          | Descrição da missão                | TEXT         | -       |                                                                                  | 
 
 ---
+### Entidade: Instância Missão  
+#### Descrição: Representa unitariamente as missões do jogo.  
+
+#### Campos:  
+| Nome               | Descrição                           | Tipo de dado | Tamanho | Restrições de domínio (PK, FK, NOT NULL, Unique, Identity, intervalo de valores) |  
+| :-----------------: | :--------------------------------: | :----------: | :-----: | :----------------------------------------------------------------------------:   |  
+| Missão    | Identificador da missão      | INT          | -       | FK, NOT NULL                                                                          | 
+| id               | Identificador único da missão | INT      | -      | PK, NOT NULL                                                                          |  
+| dataInicio               | Dia do início da missão     |INT       | -     | NOT NULL                                                                          |  
+| dataFinalização          | Dia do conclusão da missão                | INT        | -       |                       | 
+
+---
 
 ### Entidade: Inventário  
 #### Descrição: Armazena os itens coletados ou adquiridos pelo jogador.  
@@ -402,9 +414,25 @@
 
 --- 
 
-## Versionamento
-| Data | Versão | Autor | Alterações | 
-| :--: | :----: | ----- | ---------- | 
-|23/11/2024| `1.0` | [Manuella Valadares](https://github.com/manuvaladares)| Versão Inicial do Dicionário de Dados|
-|24/11/2024| `1.1` | [Gabriel Zaranza](https://github.com/GZaranza)| Ajustando colunas das tabelas|
-|24/11/2024| `1.2`| [Manuella Valadares](https://github.com/manuvaladares)| Principais relações feitas|
+### Entidade: Ferramenta 
+#### Descrição: Representa os utensílios do tipo ferramenta  
+
+#### Campos:  
+| Nome           | Descrição                       | Tipo de dado | Tamanho | Restrições de domínio (PK, FK, NOT NULL, Unique, Identity, intervalo de valores) |  
+| :------------: | :-----------------------------: | :----------: | :-----: | :----------------------------------------------------------------------------:   |  
+| tipo_ferramenta    | tipo da ferramenta                 | VARCHAR      | 100     | PK, Identity, NOT NULL                                         |  
+| tipo_utensílio | Tipo do utensílio         | VARCHAR          | 100      | FK                                                                         |  
+| eficiência    | Afinidade da ferramenta      | INT          | -       |  NOT NULL                                                                          |
+
+--- 
+### Entidade: Arma
+#### Descrição: Representa os utensílios do tipo arma 
+
+#### Campos:  
+| Nome           | Descrição                       | Tipo de dado | Tamanho | Restrições de domínio (PK, FK, NOT NULL, Unique, Identity, intervalo de valores) |  
+| :------------: | :-----------------------------: | :----------: | :-----: | :----------------------------------------------------------------------------:   |  
+| tipo_arma    | tipo da arma                | VARCHAR      | 100     | PK, Identity, NOT NULL                                         |  
+| tipo_utensílio | Tipo do utensílio         | VARCHAR          | 100      | FK                                                                         |  
+| dano    | quantidade de dano da arma      | INT          | -       |  NOT NULL                                                                          |
+
+--- 
