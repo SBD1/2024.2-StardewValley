@@ -148,11 +148,11 @@ O Modelo Entidade Relacionamento para bancos de dados é um modelo que descreve 
 
 **Inventario contém Item**
 
--   Um inventário pode conter nenhum ou vários itens (0, n), mas um item contido está contido em apenas um inventário por vez (1,1) - verificar: n deveria poder fazer parte de mais de um inventário?
+-   Um inventário pode conter nenhum ou vários itens (0, n), mas um item está contido em apenas um inventário por vez (1,1) 
 
 **Minerio Bruto <ins>dropa</ins> Mineral**
 
-- Um minério bruto <ins>dropa</ins> apenas um mineral (1, 1) e um mineral pode ser <ins>dropado</ins> por nenhum ou vários minérios brutos (0, n) - verificar: faz sentido (0, n)?
+- Um minério bruto <ins>dropa</ins> apenas um tipo de mineral (1, 1) e um mineral pode ser <ins>dropado</ins> por nenhum ou vários minérios brutos (0, n) 
 
 **Instancia De Planta <ins>dropa</ins> Consumivel**
 
@@ -164,7 +164,7 @@ O Modelo Entidade Relacionamento para bancos de dados é um modelo que descreve 
 
 **Jogador completa InstânciaMissão**
 
-- Um jogador pode completar nenhuma ou várias instâncias de missões (0, n) e uma instância de missão é completada apenas por um jogador (1, 1) - arrumar: cardinalidade no DER
+- Um jogador pode completar nenhuma ou várias instâncias de missões (0, n) e uma instância de missão é completada apenas por um jogador (1, 1) 
 
 **Jogador possui Inventario**
 
@@ -188,7 +188,7 @@ O Modelo Entidade Relacionamento para bancos de dados é um modelo que descreve 
 
 **Jogador está Ambiente**
 
-- Um jogador pode estar em nenhum ou apenas um ambiente (0, 1) e um ambiente pode ter apenas um jogador (1, 1) - verificar: tá certo isso de (0,1)?
+- Um jogador pode estar em nenhum ou apenas um ambiente (0, 1) e um ambiente pode ter apenas um jogador (1, 1) 
 
 **Jogador ataca InstânciaInimigo**
 
@@ -212,7 +212,7 @@ O Modelo Entidade Relacionamento para bancos de dados é um modelo que descreve 
 
 **Caixa De Mensagem contém InstânciaMissão**
 
-- Uma caixa de mensagem contém nenhuma ou várias instãncias de missões (0, n) e uma instância de missão pode estar contida ou não em uma caixa de mensagem (0, 1) - arrumar: cardinalidade no DER
+- Uma caixa de mensagem contém nenhuma ou várias instãncias de missões (0, n) e uma instância de missão pode estar contida ou não em uma caixa de mensagem (0, 1) 
 
 **Caverna contém Minerio Bruto**
 
@@ -224,7 +224,7 @@ O Modelo Entidade Relacionamento para bancos de dados é um modelo que descreve 
 
 **Semente gera InstanciaPlanta**
 
-- Uma semente gera apenas uma instancia de planta (1, 1) e uma instancia de planta pode ser gerada por nenhuma ou várias sementes (0, n) - verificar: faz sentido o (0, n)?  
+- Uma semente gera apenas uma instancia de planta (1, 1) e uma instancia de planta gerar por nenhuma ou várias sementes (0, n)
 
 **Mapa possui Ambiente**
 
