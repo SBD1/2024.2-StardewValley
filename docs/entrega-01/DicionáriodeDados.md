@@ -35,6 +35,7 @@
 | :-----------: | :---------------------------: | :----------: | :-----: | :----------------------------------------------------------------------------:   |
 | id_ambiente   | Identificador único do ambiente | INT         | -       | PK, NOT NULL, Unique                                                              |
 | tipo          | Tipo do ambiente               | VARCHAR      | 50      | NOT NULL                                                                          |
+| idMapa        | Identificador único do mapa    | INT          |         | FK, NOT NULL,Unique
 
 ---
 
@@ -59,8 +60,8 @@
 #### Campos:
 | Nome          | Descrição | Tipo de dado | Tamanho | Restrições de domínio (PK, FK, NOT NULL, Unique, Identity, intervalo de valores) |
 | :-----------: | :-------: | :----------: | :-----: | :----------------------------------------------------------------------------:   |
-|               |           |              |         |                                                                                  |
-
+| idMinérioBruto| Identificador do minério| INT|         | PK, NOT NULL, Unique                                                                                 |
+| bool_minerado | 
 ---
 
 ### Entidade: Loja
