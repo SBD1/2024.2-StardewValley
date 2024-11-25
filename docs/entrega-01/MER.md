@@ -44,7 +44,7 @@ O Modelo Entidade Relacionamento para bancos de dados é um modelo que descreve 
 
 - **Minerio_bruto**
 
-- **plantação**
+- **Plantação**
 
 - **Recompensa**
 
@@ -54,23 +54,21 @@ O Modelo Entidade Relacionamento para bancos de dados é um modelo que descreve 
 
 - **Solo**
 
-- **Utensilio**
-
 - **Habilidade**
     - **HabCombate**
     - **HabCultivo**
     - **HabMineração**
 
 - **Item**
-    - **consumivel**
+    - **Consumivel**
     - **Semente**
     - **Utensilio**
         - **arma**
-        - **ferramenta**
+        - **Ferramenta**
 
 - **Missão**
-    - **coleta**
-    - **combate**
+    - **Coleta**
+    - **Combate**
 
 ## 2. Atributos
 
@@ -88,9 +86,9 @@ O Modelo Entidade Relacionamento para bancos de dados é um modelo que descreve 
 
 - **Celeiro**: <ins>id_celeiro</ins>, `qtd_animais`
 
-- **Coleta**: <ins>tipo</ins>, `tipoMaterial`, `quantidade`, `valorTotal`
+- **Coleta**: <ins>tipoMaterial</ins>, `tipoMaterial`, `quantidade`, `valorTotal`
 
-- **Combate**: <ins>tipo</ins>, `tipoInimigo`, `quantidadeInimigo`
+- **Combate**: <ins>tipoInimigo</ins>, `tipoInimigo`, `quantidadeInimigo`
 
 - **Consumível**: <ins>tipo_consumível</ins>, `duração`, `efeito`
 
@@ -108,7 +106,7 @@ O Modelo Entidade Relacionamento para bancos de dados é um modelo que descreve 
 
 - **Inimigo**: <ins>id</ins>, `nome`, `tipo`, `vida`, `dano`
 
-- **InstânciaAnimal**: <ins>id</ins>, `diasAtual`, `prontoDropar`
+- **InstânciaAnimal**: <ins>id</ins>, `diaAtual`, `prontoDropar`
 
 - **InstânciaInimigo**: <ins>id</ins>, `id_inimigo`, `vidaAtual`
 
@@ -136,13 +134,13 @@ O Modelo Entidade Relacionamento para bancos de dados é um modelo que descreve 
 
 - **Recompensa**: <ins>id</ins>, `tipoItem`, `quantidade`
 
-- **Recurso**: <ins>tipo_recurso</ins>, `***********`
+- **Recurso**: <ins>tipo_recurso</ins>
 
-- **Semente**: <ins>id</ins>, `bool_regou`, `diaAtual`, `diaDropar`, `prontoColher`
+- **Semente**: <ins>id</ins>, `bool_regou`, `bool_livre`,`diaAtual`, `diaDropar`, `prontoColher`
 
 - **Solo**: <ins>tipo_recurso</ins>
 
-- **Utensilio**: <ins></ins>, `**********`
+- **Utensilio**: <ins>tipo_utensílio</ins>, `nível`
 
 ## 3. Relacionamentos
 
