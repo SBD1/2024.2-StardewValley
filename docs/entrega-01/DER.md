@@ -1,8 +1,4 @@
- ## Versionamento
 
-|Data | Versão | Autor | Alterações | 
-|:--:|:------:| :-----------------------------------------: | :--------: | 
-|23/11/2024|  1.0   | [Manuella Valadares](https://github.com/manuvaladares)| Criação do documento DER |
 
 
 # Diagrama Entidade-Relacionamento
@@ -18,3 +14,9 @@ O diagrama fornece uma visão lógica do banco de dados, fornecendo um conceito 
 <p>Figura 1: DER versão 1</p>
 <p style="margin-top: -1%; font-size: 12px">Fonte: Elaboração própria</p>
 </div>
+
+## Versionamento
+
+| Data | Versão | Autor | Alterações | 
+| :--: | :----: | ----- | ---------- | 
+|23/11/2024|  `1.0`   | [Manuella Valadares](https://github.com/manuvaladares)| Criação do documento DER |

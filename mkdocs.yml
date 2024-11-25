@@ -1,0 +1,49 @@
+site_name: Stardew Valley
+site_url: https://github.com/SBD1/2024.2-StardewValley 
+repo_url: https://github.com/SBD1/2024.2-StardewValley
+repo_name: 2024.2-StardewValley
+
+nav:
+  - Equipe: index.md
+  - Diagrama Entidade-Relacionamento: entrega-01/DER.md
+  - Dicionário de Dados: entrega-01/DicionáriodeDados.md
+  - Modelo Entidade-Relacionamento: entrega-01/MER.md
+  - Modelo Relacional: entrega-01/MREL.md
+
+extra_css:
+  - stylesheets/stardew.css
+
+theme:
+  language: pt-BR
+  name: material
+  favicon: img/StardewLogo.png 
+  logo: img/StardewLogo.png
+  features:
+    - navigation.tabs
+    - navigation.top
+  palette:
+    - scheme: slate
+      primary: indigo
+      accent: custom
+      toggle:
+        icon: material/toggle-switch-off-outline
+        name: Mudar para o modo claro
+    - scheme: default
+      primary: indigo
+      accent: custom
+      toggle:
+        icon: material/toggle-switch
+        name: Mudar para o modo escuro
+
+
+markdown_extensions:
+  - pymdownx.superfences:
+      custom_fences:
+        - name: mermaid
+          class: mermaid
+          format: !!python/name:pymdownx.superfences.fence_code_format
+  - pymdownx.tabbed:
+      alternate_style: true
+      slugify: !!python/object/apply:pymdownx.slugs.slugify
+        kwds:
+          case: lower

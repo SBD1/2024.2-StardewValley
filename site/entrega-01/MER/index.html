@@ -1,0 +1,1007 @@
+
+<!doctype html>
+<html lang="pt" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+        <link rel="canonical" href="https://github.com/SBD1/2024.2-StardewValley/entrega-01/MER/">
+      
+      
+        <link rel="prev" href="../Dicion%C3%A1riodeDados/">
+      
+      
+        <link rel="next" href="../MREL/">
+      
+      
+      <link rel="icon" href="../../img/StardewLogo.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.5.45">
+    
+    
+      
+        <title>Modelo Entidade-Relacionamento - Stardew Valley</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.0253249f.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.06af60db.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../../stylesheets/stardew.css">
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="slate" data-md-color-primary="indigo" data-md-color-accent="custom">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#modelo-entidade-relacionamento" class="md-skip">
+          Pular para conteúdo
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Cabeçalho">
+    <a href="../.." title="Stardew Valley" class="md-header__button md-logo" aria-label="Stardew Valley" data-md-component="logo">
+      
+  <img src="../../img/StardewLogo.png" alt="logo">
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Stardew Valley
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Modelo Entidade-Relacionamento
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="indigo" data-md-color-accent="custom"  aria-label="Mudar para o modo claro"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Mudar para o modo claro" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M17 6H7c-3.31 0-6 2.69-6 6s2.69 6 6 6h10c3.31 0 6-2.69 6-6s-2.69-6-6-6m0 10H7c-2.21 0-4-1.79-4-4s1.79-4 4-4h10c2.21 0 4 1.79 4 4s-1.79 4-4 4M7 9c-1.66 0-3 1.34-3 3s1.34 3 3 3 3-1.34 3-3-1.34-3-3-3"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="custom"  aria-label="Mudar para o modo escuro"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Mudar para o modo escuro" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M17 7H7a5 5 0 0 0-5 5 5 5 0 0 0 5 5h10a5 5 0 0 0 5-5 5 5 0 0 0-5-5m0 8a3 3 0 0 1-3-3 3 3 0 0 1 3-3 3 3 0 0 1 3 3 3 3 0 0 1-3 3"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Buscar" placeholder="Buscar" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Pesquisar">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Limpar" aria-label="Limpar" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Inicializando busca
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/SBD1/2024.2-StardewValley" title="Ir para repositório" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.6.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81"/></svg>
+  </div>
+  <div class="md-source__repository">
+    2024.2-StardewValley
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+            
+<nav class="md-tabs" aria-label="Abas" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../.." class="md-tabs__link">
+        
+  
+    
+  
+  Equipe
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../DER/" class="md-tabs__link">
+        
+  
+    
+  
+  Diagrama Entidade-Relacionamento
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../Dicion%C3%A1riodeDados/" class="md-tabs__link">
+        
+  
+    
+  
+  Dicionário de Dados
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+    
+  
+  
+    <li class="md-tabs__item md-tabs__item--active">
+      <a href="./" class="md-tabs__link">
+        
+  
+    
+  
+  Modelo Entidade-Relacionamento
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../MREL/" class="md-tabs__link">
+        
+  
+    
+  
+  Modelo Relacional
+
+      </a>
+    </li>
+  
+
+      
+    </ul>
+  </div>
+</nav>
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navegação" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="Stardew Valley" class="md-nav__button md-logo" aria-label="Stardew Valley" data-md-component="logo">
+      
+  <img src="../../img/StardewLogo.png" alt="logo">
+
+    </a>
+    Stardew Valley
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/SBD1/2024.2-StardewValley" title="Ir para repositório" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.6.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81"/></svg>
+  </div>
+  <div class="md-source__repository">
+    2024.2-StardewValley
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Equipe
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DER/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Diagrama Entidade-Relacionamento
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Dicion%C3%A1riodeDados/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Dicionário de Dados
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  <span class="md-ellipsis">
+    Modelo Entidade-Relacionamento
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  <span class="md-ellipsis">
+    Modelo Entidade-Relacionamento
+  </span>
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Índice">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Índice
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#1-entidades" class="md-nav__link">
+    <span class="md-ellipsis">
+      1. Entidades
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2-atributos" class="md-nav__link">
+    <span class="md-ellipsis">
+      2. Atributos
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3-relacionamentos" class="md-nav__link">
+    <span class="md-ellipsis">
+      3. Relacionamentos
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#versionamento" class="md-nav__link">
+    <span class="md-ellipsis">
+      Versionamento
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../MREL/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Modelo Relacional
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Índice">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Índice
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#1-entidades" class="md-nav__link">
+    <span class="md-ellipsis">
+      1. Entidades
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2-atributos" class="md-nav__link">
+    <span class="md-ellipsis">
+      2. Atributos
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3-relacionamentos" class="md-nav__link">
+    <span class="md-ellipsis">
+      3. Relacionamentos
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#versionamento" class="md-nav__link">
+    <span class="md-ellipsis">
+      Versionamento
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+  
+  
+
+
+<h1 id="modelo-entidade-relacionamento">Modelo Entidade-Relacionamento</h1>
+<p>O Modelo Entidade Relacionamento para bancos de dados é um modelo que descreve os objetos (entidades) envolvidos em um negócio, com suas características (atributos) e como elas se relacionam entre si (relacionamentos).</p>
+<h2 id="1-entidades">1. Entidades</h2>
+<ul>
+<li>
+<p><strong>Ambiente</strong></p>
+<ul>
+<li><strong>caverna</strong></li>
+<li><strong>CasaJogador</strong></li>
+<li><strong>celeiro</strong></li>
+<li><strong>Mapa</strong></li>
+</ul>
+</li>
+<li>
+<p><strong>Animal</strong></p>
+</li>
+<li>
+<p><strong>Caixa de mensagem</strong></p>
+</li>
+<li>
+<p><strong>Estoque</strong></p>
+</li>
+<li>
+<p><strong>Inimigo</strong></p>
+</li>
+<li>
+<p><strong>InstâciAAnimal</strong></p>
+</li>
+<li>
+<p><strong>InstânciaInimigo</strong></p>
+</li>
+<li>
+<p><strong>InstanciaMissão</strong></p>
+</li>
+<li>
+<p><strong>InstanciaPlanta</strong></p>
+</li>
+<li>
+<p><strong>Inventário</strong></p>
+</li>
+<li>
+<p><strong>Jogador</strong></p>
+</li>
+<li>
+<p><strong>Loja</strong></p>
+</li>
+<li>
+<p><strong>Mapa</strong></p>
+</li>
+<li>
+<p><strong>Minerio_bruto</strong></p>
+</li>
+<li>
+<p><strong>Plantação</strong></p>
+</li>
+<li>
+<p><strong>Recompensa</strong></p>
+</li>
+<li>
+<p><strong>Recurso</strong></p>
+</li>
+<li>
+<p><strong>Semente</strong></p>
+</li>
+<li>
+<p><strong>Solo</strong></p>
+</li>
+<li>
+<p><strong>Habilidade</strong></p>
+<ul>
+<li><strong>HabCombate</strong></li>
+<li><strong>HabCultivo</strong></li>
+<li><strong>HabMineração</strong></li>
+</ul>
+</li>
+<li>
+<p><strong>Item</strong></p>
+<ul>
+<li><strong>Consumivel</strong></li>
+<li><strong>Semente</strong></li>
+<li><strong>Utensilio</strong><ul>
+<li><strong>arma</strong></li>
+<li><strong>Ferramenta</strong></li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>Missão</strong></p>
+<ul>
+<li><strong>Coleta</strong></li>
+<li><strong>Combate</strong></li>
+</ul>
+</li>
+</ul>
+<h2 id="2-atributos">2. Atributos</h2>
+<ul>
+<li>
+<p><strong>Ambiente</strong>: <ins>id_ambiente</ins>, <code>tipo</code></p>
+</li>
+<li>
+<p><strong>Animal</strong>: <ins>id</ins>, <code>nome</code>, <code>diasTotalDropar</code>, <code>tipo</code>, <code>itemDrop</code>, <code>preço</code></p>
+</li>
+<li>
+<p><strong>Arma</strong>: <ins>tipo_arma</ins>, <code>dano</code></p>
+</li>
+<li>
+<p><strong>Caixa de Mensagem</strong>: <ins>id_caixa</ins></p>
+</li>
+<li>
+<p><strong>CasaJogador</strong>: <ins>id</ins>, <code>id_jogador</code></p>
+</li>
+<li>
+<p><strong>Caverna</strong>: <ins>andar</ins>, <code>quantidade_mobs</code>, <code>minérios</code>, <code>item_recompensa</code></p>
+</li>
+<li>
+<p><strong>Celeiro</strong>: <ins>id_celeiro</ins>, <code>qtd_animais</code></p>
+</li>
+<li>
+<p><strong>Coleta</strong>: <ins>tipoMaterial</ins>, <code>tipoMaterial</code>, <code>quantidade</code>, <code>valorTotal</code></p>
+</li>
+<li>
+<p><strong>Combate</strong>: <ins>tipoInimigo</ins>, <code>tipoInimigo</code>, <code>quantidadeInimigo</code></p>
+</li>
+<li>
+<p><strong>Consumível</strong>: <ins>tipo_consumível</ins>, <code>duração</code>, <code>efeito</code></p>
+</li>
+<li>
+<p><strong>Estoque</strong>: <ins>produto</ins>, <code>preço</code></p>
+</li>
+<li>
+<p><strong>Ferramenta</strong>: <ins>tipo_ferramenta</ins>, <code>eficiência</code></p>
+</li>
+<li>
+<p><strong>HabCombate</strong>: <ins>id</ins>, <code>vidaBonus</code>, <code>danoBonus</code></p>
+</li>
+<li>
+<p><strong>HabCultivo</strong>: <ins>id</ins>, <code>reducaoEnergiaCultivar</code>, <code>cultivoBonus</code></p>
+</li>
+<li>
+<p><strong>Habilidade</strong>: <ins>id</ins>, <code>nível</code>, <code>tipo</code>, <code>xpMin</code>, <code>xpMax</code></p>
+</li>
+<li>
+<p><strong>HabMineração</strong>: <ins>id</ins>, <code>reducaoEnergiaMinerar</code>, <code>minerioBonus</code></p>
+</li>
+<li>
+<p><strong>Inimigo</strong>: <ins>id</ins>, <code>nome</code>, <code>tipo</code>, <code>vida</code>, <code>dano</code></p>
+</li>
+<li>
+<p><strong>InstânciaAnimal</strong>: <ins>id</ins>, <code>diaAtual</code>, <code>prontoDropar</code></p>
+</li>
+<li>
+<p><strong>InstânciaInimigo</strong>: <ins>id</ins>, <code>id_inimigo</code>, <code>vidaAtual</code></p>
+</li>
+<li>
+<p><strong>InstânciaMissão</strong>: <ins>id</ins>, <code>dataInicio</code>, <code>dataFinalização</code>, <code>status</code></p>
+</li>
+<li>
+<p><strong>InstânciaPlanta</strong>: <ins>id</ins>, <code>nome</code>, <code>diaDropar</code>, <code>plantaDrop</code></p>
+</li>
+<li>
+<p><strong>Inventário</strong>: <ins>id</ins>, <code>quantidade_item</code></p>
+</li>
+<li>
+<p><strong>Item</strong>: <ins>id_item</ins>, <code>nome</code>, <code>descrição</code>, <code>id_categoria</code>, <code>tipo_item</code>, <code>quantidade</code></p>
+</li>
+<li>
+<p><strong>Jogador</strong>: <ins>id</ins>, <code>nome</code>, <code>vidaAtual</code>, <code>vidaMax</code>, <code>estamina</code>, <code>nível</code>, <code>experiência</code></p>
+</li>
+<li>
+<p><strong>Loja</strong>: <ins>id_loja</ins>, <code>proprietário</code>, <code>nome</code>, <code>descrição</code></p>
+</li>
+<li>
+<p><strong>Mapa</strong>: <ins>idMapa</ins>, <code>nome</code></p>
+</li>
+<li>
+<p><strong>Mineral</strong>: <ins>tipo_minério</ins>, <code>preço</code></p>
+</li>
+<li>
+<p><strong>Minério_Bruto</strong>: <ins> </ins>, <code>***********</code></p>
+</li>
+<li>
+<p><strong>Missão</strong>: <ins>tipo</ins>, <code>nome</code>, <code>descrição</code>, <code>tipo</code></p>
+</li>
+<li>
+<p><strong>Plantação</strong>: <code>qtd_plantas</code></p>
+</li>
+<li>
+<p><strong>Recompensa</strong>: <ins>id</ins>, <code>tipoItem</code>, <code>quantidade</code></p>
+</li>
+<li>
+<p><strong>Recurso</strong>: <ins>tipo_recurso</ins></p>
+</li>
+<li>
+<p><strong>Semente</strong>: <ins>id</ins>, <code>bool_regou</code>, <code>bool_livre</code>,<code>diaAtual</code>, <code>diaDropar</code>, <code>prontoColher</code></p>
+</li>
+<li>
+<p><strong>Solo</strong>: <ins>tipo_recurso</ins></p>
+</li>
+<li>
+<p><strong>Utensilio</strong>: <ins>tipo_utensílio</ins>, <code>nível</code></p>
+</li>
+</ul>
+<h2 id="3-relacionamentos">3. Relacionamentos</h2>
+<p><strong>Missão possui InstânciaMissão</strong></p>
+<ul>
+<li>Uma missão pode possuir nenhuma ou várias instâncias (0, n), mas uma instância de missão está relacionada apenas a uma missão (1, 1)</li>
+</ul>
+<p><strong>Animal possui InstâciAanimal</strong></p>
+<ul>
+<li>Um tipo de animal pode possuir nenhuma ou várias instâncias (0, n), mas uma instância de animal está relacionada a apenas um tipo de animal (1, 1).</li>
+</ul>
+<p><strong>Inventario contém Item</strong></p>
+<ul>
+<li>Um inventário pode conter nenhum ou vários itens (0, n), mas um item contido está contido em apenas um inventário por vez (1,1) - verificar: n deveria poder fazer parte de mais de um inventário?</li>
+</ul>
+<p><strong>Minerio Bruto <ins>dropa</ins> Mineral</strong></p>
+<ul>
+<li>Um minério bruto <ins>dropa</ins> apenas um mineral (1, 1) e um mineral pode ser <ins>dropado</ins> por nenhum ou vários minérios brutos (0, n) - verificar: faz sentido?</li>
+</ul>
+<p><strong>Instancia De Planta <ins>dropa</ins> Consumivel</strong></p>
+<ul>
+<li>Uma instância de planta <ins>dropa</ins> nenhum ou vários consumíveis (0, n) e um consumível pode ser <ins>dropado</ins> por nenhuma ou vários instâncias de planta(0, n).</li>
+</ul>
+<p><strong>Jogador quebra Minerio Bruto</strong></p>
+<ul>
+<li>Um jogador pode quebrar nenhum ou vários minérios brutos (0, n) e um minério bruto é quebrado apenas por um jogador (1, 1)</li>
+</ul>
+<p><strong>Jogador completa InstânciaMissão</strong></p>
+<ul>
+<li>Um jogador pode completar nenhuma ou várias instâncias de missões (0, n) e uma instância de missão é completada apenas por um jogador (1, 1) - arrumar: cardinalidade no DER</li>
+</ul>
+<p><strong>Jogador possui Inventario</strong></p>
+<ul>
+<li>Um jogador possui nenhum ou apenas um inventário (0, 1) e um inventário é possuído apenas por um um jogador (1, 1)</li>
+</ul>
+<p><strong>Jogador possui HabMineração</strong></p>
+<ul>
+<li>Um jogador possui apenas uma habilidade de mineração e uma habilidade de mineração é possuída apenas por um jogador (1, 1) - arrumar: cardinalidade no DER</li>
+</ul>
+<p><strong>Jogador possui Habcombate</strong></p>
+<ul>
+<li>Um jogador possui apenas uma habilidade de combate e uma habilidade de combate é possuída apenas por um jogador (1, 1)</li>
+</ul>
+<p><strong>Jogador possui Habcultivo</strong></p>
+<ul>
+<li>Um jogador possui apenas uma habilidade de cultivo e uma habilidade de cultivo é possuída apenas por um jogador (1, 1)  </li>
+</ul>
+<p><strong>Jogador interage InstâciAanimal</strong></p>
+<ul>
+<li>Um jogador pode interagir com nenhuma ou várias instâncias de animais (0, n) e uma instância de animal pode interagir apenas com um jogador (1, 1)</li>
+</ul>
+<p><strong>Jogador está Ambiente</strong></p>
+<ul>
+<li>Um jogador pode estar em nenhum ou apenas um ambiente (0, 1) e um ambiente pode ter apenas um jogador (1, 1) - verificar: tá certo isso de (0,1)?</li>
+</ul>
+<p><strong>Jogador ataca InstânciaInimigo</strong></p>
+<ul>
+<li>Um jogador pode atacar nenhuma ou várias instancias de um inimigo (0, n) e uma instância de inimigo pode ser atacada apenas por um jogador (1, 1)</li>
+</ul>
+<p><strong>Jogador planta Semente</strong></p>
+<ul>
+<li>Um jogador pode plantar nenhuma ou várias sementes (0, n) e uma semente é plantada apenas por um jogador (1, 1)</li>
+</ul>
+<p><strong>Jogador rega Solo</strong></p>
+<ul>
+<li>Um jogador pode regar nenhum ou vários solos (0, n) e um solo é regado apenas por um jogador (1, 1) </li>
+</ul>
+<p><strong>Inimigo possui InstânciaInimigo</strong></p>
+<ul>
+<li>Um inimigo pode possuir nenhuma ou várias instâncias e uma instância de inimigo (0, n) é atreladada a apenas um tipo de inimigo (1, 1)</li>
+</ul>
+<p><strong>InstânciaInimigo pertence Caverna</strong></p>
+<ul>
+<li>Uma instância de inimigo pertence a apenas uma caverna (1, 1) e uma caverna tem nenhuma ou várias instâncias de inimigo (0, n)  </li>
+</ul>
+<p><strong>Caixa De Mensagem contém InstânciaMissão</strong></p>
+<ul>
+<li>Uma caixa de mensagem contém nenhuma ou várias instãncias de missões (0, n) e uma instância de missão pode estar contida ou não em uma caixa de mensagem (0, 1) - arrumar: cardinalidade no DER</li>
+</ul>
+<p><strong>Caverna contém Minerio Bruto</strong></p>
+<ul>
+<li>Uma caverna contém nenhum ou vários minérios brutos (0, n) e um minério bruto pode estar contido em nenhuma ou várias cavernas (0, n) </li>
+</ul>
+<p><strong>Estoque possui Item</strong></p>
+<ul>
+<li>Um estoque possui nenhum ou vários itens (0, n) e um item está contido em apenas um estoque (1, 1)</li>
+</ul>
+<p><strong>Semente gera InstanciaPlanta</strong></p>
+<ul>
+<li>Uma semente gera apenas uma instancia de planta (1, 1) e uma instancia de planta pode ser gerada por nenhuma ou várias sementes (0, n) - verificar: faz sentido o (0, n)?  </li>
+</ul>
+<p><strong>Mapa possui Ambiente</strong></p>
+<ul>
+<li>Um mapa possuí nenhum ou vários ambientes (0, n) e um ambiente é possuído por apenas um mapa (1, 1)  </li>
+</ul>
+<p><strong>Plantação possui Solo</strong></p>
+<ul>
+<li>Uma plantação possui nenhum ou vários solos (0, n) e um solo é possído apenas por uma plantação (1, 1)  </li>
+</ul>
+<p><strong>CasaJogador possui Caixa De Mensagem</strong></p>
+<ul>
+<li>Uma casa do jogador possui nenhuma ou apenas uma (0, 1) caixa de mensagem e uma caixa de mensagem é possuida apenas por uma casa do jogador (1, 1)</li>
+</ul>
+<p><strong>InstâciaAnimal está Celeiro</strong></p>
+<ul>
+<li>Uma instância de animal pode estar apenas em um celeiro (1, 1) e um celeiro pode ter nenhuma oou várias instâncias de animais (0, n)   </li>
+</ul>
+<p><strong>Loja possui Estoque</strong></p>
+<ul>
+<li>Uma loja possui nenhum ou apenas um estoque (0, 1) e um estoque é possuido por apenas uma loja (1, 1)</li>
+</ul>
+<p><strong>Loja melhora Utensílio</strong></p>
+<ul>
+<li>Uma loja melhora nenhum ou vários untensílios (0, n) e um utensílio é melhorado apenas por uma loja (1, 1)</li>
+</ul>
+<h2 id="versionamento">Versionamento</h2>
+<table>
+<thead>
+<tr>
+<th style="text-align: center;">Data</th>
+<th style="text-align: center;">Versão</th>
+<th>Autor</th>
+<th>Alterações</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: center;">23/11/2024</td>
+<td style="text-align: center;"><code>1.0</code></td>
+<td><a href="https://github.com/manuvaladares">Manuella Valadares</a></td>
+<td>Criação do documento MER</td>
+</tr>
+<tr>
+<td style="text-align: center;">23/11/2024</td>
+<td style="text-align: center;"><code>1.1</code></td>
+<td><a href="https://github.com/MMcLovin">Gabriel Fernando</a></td>
+<td>Preenche <a href="#1-entidades">entidades</a> e <a href="#2-atributos">atributos</a></td>
+</tr>
+<tr>
+<td style="text-align: center;">24/11/2024</td>
+<td style="text-align: center;"><code>1.2</code></td>
+<td><a href="https://github.com/MMcLovin">Gabriel Fernando</a></td>
+<td>atualiza <a href="#1-entidades">entidades</a>, <a href="#2-atributos">atributos</a> e preenche <a href="#3-relacionamentos">relacionamentos</a></td>
+</tr>
+</tbody>
+</table>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  Voltar para o topo
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    <script id="__config" type="application/json">{"base": "../..", "features": ["navigation.tabs", "navigation.top"], "search": "../../assets/javascripts/workers/search.6ce7567c.min.js", "translations": {"clipboard.copied": "Copiado para \u00e1rea de transfer\u00eancia", "clipboard.copy": "Copiar para \u00e1rea de transfer\u00eancia", "search.result.more.one": "mais 1 nesta p\u00e1gina", "search.result.more.other": "# mais nesta p\u00e1gina", "search.result.none": "Nenhum documento encontrado", "search.result.one": "1 documento encontrado", "search.result.other": "# documentos encontrados", "search.result.placeholder": "Digite para iniciar a busca", "search.result.term.missing": "Ausente", "select.version": "Selecione a vers\u00e3o"}}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.83f73b43.min.js"></script>
+      
+    
+  </body>
+</html>

@@ -1,10 +1,4 @@
-## Versionamento
 
-| Data | Versão | Autor | Alterações | 
-| :--: | :----: | ----- | ---------- | 
-| 23/11/2024 |  1.0 |  [Manuella Valadares](https://github.com/manuvaladares)| Criação do documento MER | 
-| 23/11/2024 |  1.1 |  [Gabriel Fernando](https://github.com/MMcLovin)| Preenche [entidades](#1-entidades) e [atributos](#2-atributos) | 
-| 24/11/2024 |  1.1 |  [Gabriel Fernando](https://github.com/MMcLovin)| atualiza [entidades](#1-entidades), [atributos](#2-atributos) e preenche [relacionamentos](#3-relacionamentos) | 
 
 
 # Modelo Entidade-Relacionamento
@@ -27,9 +21,9 @@ O Modelo Entidade Relacionamento para bancos de dados é um modelo que descreve 
 
 - **Inimigo**
 
-- **InstanciaAnimal**
+- **InstâciAAnimal**
 
-- **InstanciaInimigo**
+- **InstânciaInimigo**
 
 - **InstanciaMissão**
 
@@ -146,115 +140,122 @@ O Modelo Entidade Relacionamento para bancos de dados é um modelo que descreve 
 
 ## 3. Relacionamentos
 
-**Missão possui Instanciamissao**
+**Missão possui InstânciaMissão**
 
--   
+-   Uma missão pode possuir nenhuma ou várias instâncias (0, n), mas uma instância de missão está relacionada apenas a uma missão (1, 1)
 
-**Animal possui Instanciaanimal**
+**Animal possui InstâciAanimal**
 
--   
+-   Um tipo de animal pode possuir nenhuma ou várias instâncias (0, n), mas uma instância de animal está relacionada a apenas um tipo de animal (1, 1).
 
-**Inventario contem Item**
+**Inventario contém Item**
 
--   
+-   Um inventário pode conter nenhum ou vários itens (0, n), mas um item contido está contido em apenas um inventário por vez (1,1) - verificar: n deveria poder fazer parte de mais de um inventário?
 
-**Minerio Bruto dropa Mineral**
+**Minerio Bruto <ins>dropa</ins> Mineral**
 
--   
+- Um minério bruto <ins>dropa</ins> apenas um mineral (1, 1) e um mineral pode ser <ins>dropado</ins> por nenhum ou vários minérios brutos (0, n) - verificar: faz sentido?
 
-**Instancia De Planta dropa Consumivel**
+**Instancia De Planta <ins>dropa</ins> Consumivel**
 
--   
+- Uma instância de planta <ins>dropa</ins> nenhum ou vários consumíveis (0, n) e um consumível pode ser <ins>dropado</ins> por nenhuma ou vários instâncias de planta(0, n).
 
 **Jogador quebra Minerio Bruto**
 
--   
+- Um jogador pode quebrar nenhum ou vários minérios brutos (0, n) e um minério bruto é quebrado apenas por um jogador (1, 1)
 
-**Jogador completa Instanciamissao**
+**Jogador completa InstânciaMissão**
 
--   
+- Um jogador pode completar nenhuma ou várias instâncias de missões (0, n) e uma instância de missão é completada apenas por um jogador (1, 1) - arrumar: cardinalidade no DER
 
 **Jogador possui Inventario**
 
--   
+- Um jogador possui nenhum ou apenas um inventário (0, 1) e um inventário é possuído apenas por um um jogador (1, 1)
 
-**Jogador possui Habmineração**
+**Jogador possui HabMineração**
 
--   
+- Um jogador possui apenas uma habilidade de mineração e uma habilidade de mineração é possuída apenas por um jogador (1, 1) - arrumar: cardinalidade no DER
 
 **Jogador possui Habcombate**
 
--   
+- Um jogador possui apenas uma habilidade de combate e uma habilidade de combate é possuída apenas por um jogador (1, 1)
 
 **Jogador possui Habcultivo**
 
--   
+- Um jogador possui apenas uma habilidade de cultivo e uma habilidade de cultivo é possuída apenas por um jogador (1, 1)  
 
-**Jogador interage Instanciaanimal**
+**Jogador interage InstâciAanimal**
 
--   
+- Um jogador pode interagir com nenhuma ou várias instâncias de animais (0, n) e uma instância de animal pode interagir apenas com um jogador (1, 1)
 
-**Jogador esta Ambiente**
+**Jogador está Ambiente**
 
--   
+- Um jogador pode estar em nenhum ou apenas um ambiente (0, 1) e um ambiente pode ter apenas um jogador (1, 1) - verificar: tá certo isso de (0,1)?
 
-**Jogador ataca Instanciainimigo**
+**Jogador ataca InstânciaInimigo**
 
--   
+- Um jogador pode atacar nenhuma ou várias instancias de um inimigo (0, n) e uma instância de inimigo pode ser atacada apenas por um jogador (1, 1)
 
 **Jogador planta Semente**
 
--   
+- Um jogador pode plantar nenhuma ou várias sementes (0, n) e uma semente é plantada apenas por um jogador (1, 1)
 
 **Jogador rega Solo**
 
--   
+- Um jogador pode regar nenhum ou vários solos (0, n) e um solo é regado apenas por um jogador (1, 1) 
 
-**Inimigo possui Instanciainimigo**
+**Inimigo possui InstânciaInimigo**
 
--   
+- Um inimigo pode possuir nenhuma ou várias instâncias e uma instância de inimigo (0, n) é atreladada a apenas um tipo de inimigo (1, 1)
 
-**Instanciainimigo pertence Caverna**
+**InstânciaInimigo pertence Caverna**
 
--   
+- Uma instância de inimigo pertence a apenas uma caverna (1, 1) e uma caverna tem nenhuma ou várias instâncias de inimigo (0, n)  
 
-**Caixa De Mensagem contem Instanciamissao**
+**Caixa De Mensagem contém InstânciaMissão**
 
--   
+- Uma caixa de mensagem contém nenhuma ou várias instãncias de missões (0, n) e uma instância de missão pode estar contida ou não em uma caixa de mensagem (0, 1) - arrumar: cardinalidade no DER
 
-**Caverna contem Minerio Bruto**
+**Caverna contém Minerio Bruto**
 
--   
+- Uma caverna contém nenhum ou vários minérios brutos (0, n) e um minério bruto pode estar contido em nenhuma ou várias cavernas (0, n) 
 
 **Estoque possui Item**
 
--   
+- Um estoque possui nenhum ou vários itens (0, n) e um item está contido em apenas um estoque (1, 1)
 
-**Semente gera Instanciaplanta**
+**Semente gera InstanciaPlanta**
 
--   
+- Uma semente gera apenas uma instancia de planta (1, 1) e uma instancia de planta pode ser gerada por nenhuma ou várias sementes (0, n) - verificar: faz sentido o (0, n)?  
 
 **Mapa possui Ambiente**
 
--   
+- Um mapa possuí nenhum ou vários ambientes (0, n) e um ambiente é possuído por apenas um mapa (1, 1)  
 
 **Plantação possui Solo**
 
--   
+- Uma plantação possui nenhum ou vários solos (0, n) e um solo é possído apenas por uma plantação (1, 1)  
 
-**Casajogador possui Caixa De Mensagem**
+**CasaJogador possui Caixa De Mensagem**
 
--   
+- Uma casa do jogador possui nenhuma ou apenas uma (0, 1) caixa de mensagem e uma caixa de mensagem é possuida apenas por uma casa do jogador (1, 1)
 
-**Instaciaanimal está Celeiro**
+**InstâciaAnimal está Celeiro**
 
--   
+- Uma instância de animal pode estar apenas em um celeiro (1, 1) e um celeiro pode ter nenhuma oou várias instâncias de animais (0, n)   
 
 **Loja possui Estoque**
 
--   
+- Uma loja possui nenhum ou apenas um estoque (0, 1) e um estoque é possuido por apenas uma loja (1, 1)
 
-**Loja melhora Estoque**
+**Loja melhora Utensílio**
 
--   
+-   Uma loja melhora nenhum ou vários untensílios (0, n) e um utensílio é melhorado apenas por uma loja (1, 1)
 
+## Versionamento
+
+| Data | Versão | Autor | Alterações | 
+| :--: | :----: | ----- | ---------- | 
+| 23/11/2024 | `1.0` |  [Manuella Valadares](https://github.com/manuvaladares)| Criação do documento MER | 
+| 23/11/2024 | `1.1` |  [Gabriel Fernando](https://github.com/MMcLovin)| Preenche [entidades](#1-entidades) e [atributos](#2-atributos) | 
+| 24/11/2024 | `1.2` |  [Gabriel Fernando](https://github.com/MMcLovin)| atualiza [entidades](#1-entidades), [atributos](#2-atributos) e preenche [relacionamentos](#3-relacionamentos) | 
