@@ -4,6 +4,7 @@
 | :--: | :----: | ----- | ---------- | 
 | 23/11/2024 |  1.0 |  [Manuella Valadares](https://github.com/manuvaladares)| Criação do documento MER | 
 | 23/11/2024 |  1.1 |  [Gabriel Fernando](https://github.com/MMcLovin)| Preenche [entidades](#1-entidades) e [atributos](#2-atributos) | 
+| 24/11/2024 |  1.1 |  [Gabriel Fernando](https://github.com/MMcLovin)| atualiza [entidades](#1-entidades), [atributos](#2-atributos) e preenche [relacionamentos](#3-relacionamentos) | 
 
 
 # Modelo Entidade-Relacionamento
@@ -142,7 +143,118 @@ O Modelo Entidade Relacionamento para bancos de dados é um modelo que descreve 
 
 - **Utensilio**: <ins>tipo_utensílio</ins>, `nível`
 
+
 ## 3. Relacionamentos
 
-**Personagem possui Inventário**
-- descrição
+**Missão possui Instanciamissao**
+
+-   
+
+**Animal possui Instanciaanimal**
+
+-   
+
+**Inventario contem Item**
+
+-   
+
+**Minerio Bruto dropa Mineral**
+
+-   
+
+**Instancia De Planta dropa Consumivel**
+
+-   
+
+**Jogador quebra Minerio Bruto**
+
+-   
+
+**Jogador completa Instanciamissao**
+
+-   
+
+**Jogador possui Inventario**
+
+-   
+
+**Jogador possui Habmineração**
+
+-   
+
+**Jogador possui Habcombate**
+
+-   
+
+**Jogador possui Habcultivo**
+
+-   
+
+**Jogador interage Instanciaanimal**
+
+-   
+
+**Jogador esta Ambiente**
+
+-   
+
+**Jogador ataca Instanciainimigo**
+
+-   
+
+**Jogador planta Semente**
+
+-   
+
+**Jogador rega Solo**
+
+-   
+
+**Inimigo possui Instanciainimigo**
+
+-   
+
+**Instanciainimigo pertence Caverna**
+
+-   
+
+**Caixa De Mensagem contem Instanciamissao**
+
+-   
+
+**Caverna contem Minerio Bruto**
+
+-   
+
+**Estoque possui Item**
+
+-   
+
+**Semente gera Instanciaplanta**
+
+-   
+
+**Mapa possui Ambiente**
+
+-   
+
+**Plantação possui Solo**
+
+-   
+
+**Casajogador possui Caixa De Mensagem**
+
+-   
+
+**Instaciaanimal está Celeiro**
+
+-   
+
+**Loja possui Estoque**
+
+-   
+
+**Loja melhora Estoque**
+
+-   
+
