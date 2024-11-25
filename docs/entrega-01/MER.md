@@ -1,6 +1,5 @@
 
 
-
 # Modelo Entidade-Relacionamento
 
 O Modelo Entidade Relacionamento para bancos de dados é um modelo que descreve os objetos (entidades) envolvidos em um negócio, com suas características (atributos) e como elas se relacionam entre si (relacionamentos).
@@ -9,9 +8,8 @@ O Modelo Entidade Relacionamento para bancos de dados é um modelo que descreve 
 
 - **Ambiente**
     - **caverna**
-    - **CasaJogador**
+    - **casaJogador**
     - **celeiro**
-    - **Mapa**
 
 - **Animal**
 
@@ -21,7 +19,7 @@ O Modelo Entidade Relacionamento para bancos de dados é um modelo que descreve 
 
 - **Inimigo**
 
-- **InstâciAAnimal**
+- **InstâciaAnimal**
 
 - **InstânciaInimigo**
 
@@ -144,7 +142,7 @@ O Modelo Entidade Relacionamento para bancos de dados é um modelo que descreve 
 
 -   Uma missão pode possuir nenhuma ou várias instâncias (0, n), mas uma instância de missão está relacionada apenas a uma missão (1, 1)
 
-**Animal possui InstâciAanimal**
+**Animal possui InstâciaAnimal**
 
 -   Um tipo de animal pode possuir nenhuma ou várias instâncias (0, n), mas uma instância de animal está relacionada a apenas um tipo de animal (1, 1).
 
