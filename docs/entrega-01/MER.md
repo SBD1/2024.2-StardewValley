@@ -111,7 +111,7 @@ O Modelo Entidade Relacionamento para bancos de dados é um modelo que descreve 
 
 - **Item**: <ins>id_item</ins>, `nome`, `descrição`, `id_categoria`, `tipo_item`, `quantidade`
 
-- **Jogador**: <ins>id</ins>, `nome`, `vidaAtual`, `vidaMax`, `estamina`, `nível`, `experiência`
+- **Jogador**: <ins>id</ins>, `nome`, `vidaAtual`, `vidaMax`, `dano_ataque`, `tempo`, `xp_combate`, `dia`, `xp_cultivo`
 
 - **Loja**: <ins>id_loja</ins>, `proprietário`, `nome`, `descrição`
 
@@ -119,7 +119,7 @@ O Modelo Entidade Relacionamento para bancos de dados é um modelo que descreve 
 
 - **Mineral**: <ins>tipo_minério</ins>, `preço`
 
-- **Minério_Bruto**: <ins> </ins>, `***********`
+- **Minério_Bruto**: <ins>id_minerio_bruto</ins>, ` bool_minerado`
 
 - **Missão**: <ins>tipo</ins>, `nome`, `descrição`, `tipo`
 
@@ -152,7 +152,7 @@ O Modelo Entidade Relacionamento para bancos de dados é um modelo que descreve 
 
 **Minerio Bruto <ins>dropa</ins> Mineral**
 
-- Um minério bruto <ins>dropa</ins> apenas um mineral (1, 1) e um mineral pode ser <ins>dropado</ins> por nenhum ou vários minérios brutos (0, n) - verificar: faz sentido?
+- Um minério bruto <ins>dropa</ins> apenas um mineral (1, 1) e um mineral pode ser <ins>dropado</ins> por nenhum ou vários minérios brutos (0, n) - verificar: faz sentido (0, n)?
 
 **Instancia De Planta <ins>dropa</ins> Consumivel**
 
