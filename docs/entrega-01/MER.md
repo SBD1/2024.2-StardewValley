@@ -256,6 +256,6 @@ O Modelo Entidade Relacionamento para bancos de dados é um modelo que descreve 
 
 | Data | Versão | Autor | Alterações | 
 | :--: | :----: | ----- | ---------- | 
-| 23/11/2024 |  1.0 |  [Manuella Valadares](https://github.com/manuvaladares)| Criação do documento MER | 
-| 23/11/2024 |  1.1 |  [Gabriel Fernando](https://github.com/MMcLovin)| Preenche [entidades](#1-entidades) e [atributos](#2-atributos) | 
-| 24/11/2024 |  1.2 |  [Gabriel Fernando](https://github.com/MMcLovin)| atualiza [entidades](#1-entidades), [atributos](#2-atributos) e preenche [relacionamentos](#3-relacionamentos) | 
+| 23/11/2024 | `1.0` |  [Manuella Valadares](https://github.com/manuvaladares)| Criação do documento MER | 
+| 23/11/2024 | `1.1` |  [Gabriel Fernando](https://github.com/MMcLovin)| Preenche [entidades](#1-entidades) e [atributos](#2-atributos) | 
+| 24/11/2024 | `1.2` |  [Gabriel Fernando](https://github.com/MMcLovin)| atualiza [entidades](#1-entidades), [atributos](#2-atributos) e preenche [relacionamentos](#3-relacionamentos) | 

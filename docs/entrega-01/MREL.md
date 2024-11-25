@@ -8,4 +8,4 @@ O Modelo Relacional(MREL) apresenta um diagrama lógico de como as entidades e s
 
 | Data | Versão | Autor | Alterações | 
 | :--: | :----: | ----- | ---------- | 
-|23/11/2024|1.0| [Manuella Valadares](https://github.com/manuvaladares)| Versão Inicial do Modelo relacional(MREL)|
+|23/11/2024| `1.0`| [Manuella Valadares](https://github.com/manuvaladares)| Versão Inicial do Modelo relacional(MREL)|

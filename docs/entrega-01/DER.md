@@ -19,4 +19,4 @@ O diagrama fornece uma visão lógica do banco de dados, fornecendo um conceito 
 
 | Data | Versão | Autor | Alterações | 
 | :--: | :----: | ----- | ---------- | 
-|23/11/2024|  1.0   | [Manuella Valadares](https://github.com/manuvaladares)| Criação do documento DER |
+|23/11/2024|  `1.0`   | [Manuella Valadares](https://github.com/manuvaladares)| Criação do documento DER |

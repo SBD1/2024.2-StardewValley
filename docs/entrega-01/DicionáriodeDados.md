@@ -433,6 +433,6 @@
 ## Versionamento
 | Data | Versão | Autor | Alterações | 
 | :--: | :----: | ----- | ---------- | 
-|23/11/2024|1.0| [Manuella Valadares](https://github.com/manuvaladares)| Versão Inicial do Dicionário de Dados|
-|24/11/2024|1.1| [Gabriel Zaranza](https://github.com/GZaranza)| Ajustando colunas das tabelas|
-|24/11/2024|1.2| [Manuella Valadares](https://github.com/manuvaladares)| Principais relações feitas|
+|23/11/2024| `1.0` | [Manuella Valadares](https://github.com/manuvaladares)| Versão Inicial do Dicionário de Dados|
+|24/11/2024| `1.1` | [Gabriel Zaranza](https://github.com/GZaranza)| Ajustando colunas das tabelas|
+|24/11/2024| `1.2`| [Manuella Valadares](https://github.com/manuvaladares)| Principais relações feitas|
