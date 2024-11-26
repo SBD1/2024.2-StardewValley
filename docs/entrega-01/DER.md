@@ -9,7 +9,14 @@ O diagrama Entidade Relacionamento (DER) é composto por um conjunto de objetos 
 O diagrama fornece uma visão lógica do banco de dados, fornecendo um conceito mais generalizado de como estão estruturados os dados de um sistema.
 
  </p>
-<div align="center"> <img src="../img/DER_v1.png" height="auto" width="auto"/> </div> 
+
+<div align="center"> 
+
+    ![imagem](../img/DER_v1.png)
+
+ </div> 
+
+
 <div style="text-align: center">
 <p>Figura 1: DER versão 1</p>
 <p style="margin-top: -1%; font-size: 12px">Fonte: Elaboração própria</p>
