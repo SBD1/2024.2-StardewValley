@@ -4,11 +4,14 @@
 
 O Modelo Relacional(MREL) apresenta um diagrama lógico de como as entidades e seus devidos relacionamentos serão mapeados no bando de dados, por isso é um modelo não atrelado a nenhum tipo de sistema de gerenciamento de banco de dados (SGBD) específico. 
 
-<div align="center"> <img src="../img/MERL_v1.png" height="auto" width="auto"/> </div> 
-<div style="text-align: center">
-<p>Figura 1: MREL versão 1</p>
-<p style="margin-top: -1%; font-size: 12px">Fonte: Elaboração própria</p>
-</div>
+
+<font size="2"><p style="text-align: center">Figura 1: MREL versão 1</p></font>
+
+<center>
+    ![imagem](../img/MERL_v1.png)
+</center>
+
+<font size="2"><p style="text-align: center">Fonte: Elaboração própria</p></font>
 
 ## Versionamento
 

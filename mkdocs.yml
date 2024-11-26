@@ -5,6 +5,8 @@ repo_name: 2024.2-StardewValley
 
 nav:
   - Equipe: index.md
+  - Apresentações: 
+    - Módulo 1: entrega-01/apresentação_1.md
   - Diagrama Entidade-Relacionamento: entrega-01/DER.md
   - Dicionário de Dados: entrega-01/DicionáriodeDados.md
   - Modelo Entidade-Relacionamento: entrega-01/MER.md
