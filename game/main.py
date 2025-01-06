@@ -2,7 +2,6 @@ from setup.database import setup_database, get_connection
 
 import os
 
-# Caminho do arquivo DDL
 DDL_FILE_PATH = os.path.join(os.path.dirname(__file__), "db/ddl.sql")
 
 def criar_personagem():
@@ -27,7 +26,6 @@ def criar_personagem():
         cursor.close()
         conn.close()
 
-# Função para listar jogadores existentes
 def listar_personagens():
     try:
         conn = get_connection()
@@ -47,7 +45,6 @@ def listar_personagens():
         cursor.close()
         conn.close()
 
-# Função para carregar um personagem existente
 def carregar_personagem(jogador_id):
     try:
         conn = get_connection()
@@ -95,7 +92,7 @@ def menu_inicial():
 
 if __name__ == "__main__":
     print("Inicializando o banco de dados...")
-    setup_database(DDL_FILE_PATH)  # Configura o banco de dados
+    setup_database(DDL_FILE_PATH)  
 
     jogador = menu_inicial()
     if jogador:
