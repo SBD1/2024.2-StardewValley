@@ -13,14 +13,26 @@ CREATE TABLE IF NOT EXISTS loja (
 );
 
 
-CREATE TABLE IF NOT EXISTS jogador (
-  id_jogador SERIAL PRIMARY KEY,
-  nome VARCHAR(255) NOT NULL,
-  vidaAtual INTEGER NOT NULL,
-  vidaMax INTEGER NOT NULL,
-  estamina INTEGER NOT NULL,
-  nivel INTEGER NOT NULL,
-  experiencia INTEGER NOT NULL
+CREATE TABLE IF NOT EXISTS Jogador (
+    id INT PRIMARY KEY,
+    dia INT NOT NULL,
+    tempo INT NOT NULL,
+    vidaMax FLOAT NOT NULL,
+    vidaAtual FLOAT NOT NULL,
+    nome VARCHAR(100) NOT NULL,
+    xp_mineracao FLOAT NOT NULL,
+    xp_cultivo FLOAT NOT NULL,
+    xp_combate FLOAT NOT NULL,
+    dano_ataque FLOAT NOT NULL,
+    fk_habMineracao_fk_Habilidade_id INT,
+    fk_habCombate_fk_Habilidade_id INT,
+    fk_habCultivo_fk_Habilidade_id INT,
+    CONSTRAINT fk_Jogador_habMineracao FOREIGN KEY (fk_habMineracao_fk_Habilidade_id)
+        REFERENCES habMineracao (fk_Habilidade_id),
+    CONSTRAINT fk_Jogador_habCombate FOREIGN KEY (fk_habCombate_fk_Habilidade_id)
+        REFERENCES habCombate (fk_Habilidade_id),
+    CONSTRAINT fk_Jogador_habCultivo FOREIGN KEY (fk_habCultivo_fk_Habilidade_id)
+        REFERENCES habCultivo (fk_Habilidade_id)
 );
 
 CREATE TABLE IF NOT EXISTS estoque_produto (
@@ -97,4 +109,91 @@ CREATE TABLE IF NOT EXISTS recurso (
   tipo_recurso VARCHAR(50) NOT NULL,
   preco DECIMAL NOT NULL,
   FOREIGN KEY (id_item) REFERENCES item(id_item)
+);
+
+CREATE TABLE IF NOT EXISTS Habilidade (
+    id INT PRIMARY KEY,
+    nivel INT NOT NULL,
+    tipo VARCHAR(50) NOT NULL,
+    xpMin INT NOT NULL,
+    xpMax INT NOT NULL
+);
+
+CREATE TABLE IF NOT EXISTS habMineracao (
+    reducaoEnergiaMinera INT NOT NULL,
+    minerioBonus INT NOT NULL,
+    fk_Habilidade_id INT,
+    PRIMARY KEY (fk_Habilidade_id),
+    CONSTRAINT fk_habMineracao_Habilidade FOREIGN KEY (fk_Habilidade_id)
+        REFERENCES Habilidade (id)
+);
+
+CREATE TABLE IF NOT EXISTS habCombate (
+    vidaBonus INT NOT NULL,
+    danoBonus INT NOT NULL,
+    fk_Habilidade_id INT,
+    PRIMARY KEY (fk_Habilidade_id),
+    CONSTRAINT fk_habCombate_Habilidade FOREIGN KEY (fk_Habilidade_id)
+        REFERENCES Habilidade (id)
+);
+
+CREATE TABLE IF NOT EXISTS habCultivo (
+    cultivoBonus INT NOT NULL,
+    reducaoEnergiaCultiva INT NOT NULL,
+    fk_Habilidade_id INT,
+    PRIMARY KEY (fk_Habilidade_id),
+    CONSTRAINT fk_habCultivo_Habilidade FOREIGN KEY (fk_Habilidade_id)
+        REFERENCES Habilidade (id)
+);
+
+CREATE TABLE IF NOT EXISTS Inimigo (
+    id INT PRIMARY KEY,
+    vidaMax FLOAT NOT NULL,
+    tipo VARCHAR(50) NOT NULL,
+    dano FLOAT NOT NULL,
+    nome VARCHAR(100) NOT NULL
+);
+
+CREATE TABLE IF NOT EXISTS Instancia_de_Inimigo (
+    id INT PRIMARY KEY,
+    tipo VARCHAR(50) NOT NULL,
+    vidaAtual FLOAT NOT NULL,
+    fk_Caverna_andar INT,
+    fk_inimigo_id INT NOT NULL,
+    CONSTRAINT fk_Instancia_Inimigo FOREIGN KEY (fk_inimigo_id)
+        REFERENCES Inimigo (id)
+);
+
+CREATE TABLE IF NOT EXISTS ataca (
+    fk_Jogador_id INT NOT NULL,
+    fk_Instancia_de_Inimigo_id INT NOT NULL,
+    PRIMARY KEY (fk_Jogador_id, fk_Instancia_de_Inimigo_id),
+    CONSTRAINT fk_ataca_Jogador FOREIGN KEY (fk_Jogador_id)
+        REFERENCES Jogador (id),
+    CONSTRAINT fk_ataca_Instancia_de_Inimigo FOREIGN KEY (fk_Instancia_de_Inimigo_id)
+        REFERENCES Instancia_de_Inimigo (id)
+);
+
+CREATE TABLE IF NOT EXISTS Animal (
+    id INT PRIMARY KEY,
+    preco FLOAT NOT NULL,
+    itemDrop VARCHAR(100) NOT NULL,
+    tipo VARCHAR(50) NOT NULL,
+    diasTotalDropar INT NOT NULL,
+    nome VARCHAR(100) NOT NULL
+);
+
+CREATE TABLE IF NOT EXISTS Instancia_de_Animal (
+    id INT PRIMARY KEY,
+    prontoDropa BOOLEAN NOT NULL,
+    diaAtual INT NOT NULL,
+    fk_Animal_id INT NOT NULL,
+    fk_Jogador_id INT,
+    fk_Celeiro_id INT,
+    CONSTRAINT fk_Instancia_Animal FOREIGN KEY (fk_Animal_id)
+        REFERENCES Animal (id),
+    CONSTRAINT fk_Instancia_Jogador FOREIGN KEY (fk_Jogador_id)
+        REFERENCES Jogador (id),
+    CONSTRAINT fk_Instancia_Celeiro FOREIGN KEY (fk_Celeiro_id)
+        REFERENCES Celeiro (id)
 );
