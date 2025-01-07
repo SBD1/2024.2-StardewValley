@@ -1,9 +1,3 @@
-CREATE TABLE IF NOT EXISTS Celeiro (
-    id SERIAL PRIMARY KEY,
-    nome VARCHAR(100) NOT NULL,
-    localizacao TEXT NOT NULL
-);
-
 CREATE TABLE IF NOT EXISTS Habilidade (
     id SERIAL PRIMARY KEY,
     nivel INT NOT NULL,
@@ -38,13 +32,6 @@ CREATE TABLE IF NOT EXISTS habCultivo (
 
 CREATE TABLE IF NOT EXISTS categoria (
     id_categoria SERIAL PRIMARY KEY,
-    nome VARCHAR(100) NOT NULL,
-    descricao TEXT NOT NULL
-);
-
-CREATE TABLE IF NOT EXISTS loja (
-    id_loja SERIAL PRIMARY KEY,
-    proprietario VARCHAR(255) NOT NULL,
     nome VARCHAR(100) NOT NULL,
     descricao TEXT NOT NULL
 );
@@ -190,4 +177,64 @@ CREATE TABLE IF NOT EXISTS Instancia_de_Animal (
     FOREIGN KEY (fk_Animal_id) REFERENCES Animal(id),
     FOREIGN KEY (fk_Jogador_id) REFERENCES Jogador(id),
     FOREIGN KEY (fk_Celeiro_id) REFERENCES Celeiro(id)
+);
+
+-- parte de mapa
+CREATE TABLE IF NOT EXISTS Mapa (
+    idMapa INT PRIMARY KEY,
+    nome VARCHAR(100) NOT NULL,
+    descricao TEXT NOT NULL
+);
+
+CREATE TABLE IF NOT EXISTS Ambiente (
+    id_ambiente INT PRIMARY KEY,
+    tipo VARCHAR(50) NOT NULL,
+    fk_idMapa INT NOT NULL,
+    fk_jogador_id SERIAL,
+    FOREIGN KEY (fk_idMapa) REFERENCES Mapa(idMapa),
+    FOREIGN KEY (fk_jogador_id) REFERENCES Jogador(id)
+);
+
+CREATE TABLE IF NOT EXISTS Caverna (
+    andar SERIAL PRIMARY KEY,
+    quantidade_mobs INT NOT NULL,
+    minerios VARCHAR(100) NOT NULL,
+    item_recompensa VARCHAR(100),
+    fk_ambiente INT,
+    FOREIGN KEY (fk_ambiente) REFERENCES Ambiente(id_ambiente)
+);
+
+CREATE TABLE IF NOT EXISTS Celeiro (
+    id_celeiro INT PRIMARY KEY,
+    qtd_animais INT NOT NULL,
+    fk_id_ambiente TEXT NOT NULL,
+    FOREIGN KEY (fk_id_ambiente) REFERENCES Ambiente(id_ambiente)
+);
+
+
+CREATE TABLE IF NOT EXISTS loja (
+    id_loja INT PRIMARY KEY,
+    proprietario VARCHAR(255) NOT NULL,
+    nome VARCHAR(100) NOT NULL,
+    fk_id_ambiente INT NOT NULL,
+    FOREIGN KEY (fk_id_ambiente) REFERENCES Ambiente(id_ambiente)
+);
+
+CREATE TABLE IF NOT EXISTS Plantacao (
+    qtd_plantas INT NOT NULL,
+    fk_id_ambiente INT NOT NULL,
+    FOREIGN KEY (fk_id_ambiente) REFERENCES Ambiente(id_ambiente)
+);
+
+CREATE TABLE IF NOT EXISTS planta (
+    id_planta INT PRIMARY KEY,
+    nome VARCHAR(50) NOT NULL,
+    diaDropar INT NOT NULL,
+    plantaDrop VARCHAR(50) NOT NULL
+);
+
+CREATE TABLE IF NOT EXISTS solo (
+    tipo_recurso VARCHAR(50) NOT NULL,
+    fk_jogador_id SERIAL NOT NULL,
+    FOREIGN KEY (fk_jogador_id) REFERENCES Jogador(id)
 );
