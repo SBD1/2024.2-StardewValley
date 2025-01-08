@@ -238,3 +238,23 @@ CREATE TABLE IF NOT EXISTS solo (
     fk_jogador_id SERIAL NOT NULL,
     FOREIGN KEY (fk_jogador_id) REFERENCES Jogador(id)
 );
+
+CREATE TABLE IF NOT EXISTS Instancia_de_Planta (
+    id INT PRIMARY KEY,
+    nome VARCHAR(50) NOT NULL,
+    diaDropar INT NOT NULL,
+    plantaDrop VARCHAR(50) NOT NULL
+);
+
+CREATE TABLE IF NOT EXISTS semente (
+    id INT PRIMARY KEY,
+    bool_regou BOOLEAN NOT NULL,
+    bool_livre BOOLEAN NOT NULL,
+    diaAtual INT NOT NULL,
+    prontoColher BOOLEAN NOT NULL,
+    fk_jogador_id SERIAL NOT NULL,
+    fk_instancia_planta_id INT NOT NULL,
+    FOREIGN KEY (fk_jogador_id) REFERENCES Jogador(id),
+    FOREIGN KEY (fk_instancia_planta_id) REFERENCES Instancia_de_Planta(id)
+);
+
