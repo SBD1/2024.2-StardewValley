@@ -44,7 +44,42 @@ def listar_personagens():
     finally:
         cursor.close()
         conn.close()
+def menu_jogo(jogador):
+    while True:
+        
+        dia_atual = jogador[1]
+        tempo_atual = jogador[2]
+        vida_maxima = jogador[3]
+        vida_atual = jogador[4]
+        nome_player = jogador[5]
+        xp_mineracao = jogador[6]
+        xp_cultivo = jogador[7]
+        xp_combate = jogador[8]
+        dano_ataque = jogador[9]
 
+        # Exibindo informações do jogador
+        print("\n##### Stardew Valley 🌾 #####\n")
+        print(f"Dia: {dia_atual} | Tempo: {tempo_atual}")
+        print(f"Fazendeiro(a): {nome_player}")
+        print(f"Vida 🖤: {vida_atual}/{vida_maxima}")
+        print(f"Dano de Ataque ⚔️: {dano_ataque}")
+        print(f"XP Mineração ⛏️: {xp_mineracao}")
+        print(f"XP Cultivo 🌱: {xp_cultivo}")
+        print(f"XP Combate 🛡️: {xp_combate}\n")
+
+        print("Suas opções:")
+        opcoes_menu = [
+            
+        ]
+        
+        for op in opcoes_menu:
+            print(op)
+
+        escolha = input("\nO que você deseja fazer?\n> ")
+
+        break
+    
+    
 def carregar_personagem(jogador_id):
     try:
         conn = get_connection()
@@ -65,7 +100,7 @@ def carregar_personagem(jogador_id):
 
 def menu_inicial():
     while True:
-        print("\nBem-vindo ao Stardew Valley!")
+        print("\n##### Stardew Valley 🌾 #####\n")
         print("1. Criar novo personagem")
         print("2. Continuar com um personagem existente")
         print("3. Sair")
@@ -97,3 +132,5 @@ if __name__ == "__main__":
     jogador = menu_inicial()
     if jogador:
         print(f"\nVocê está pronto para começar, {jogador[5]}!")
+        print(jogador)
+        menu_jogo(jogador)
