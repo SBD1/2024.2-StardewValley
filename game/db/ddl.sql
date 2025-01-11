@@ -34,7 +34,7 @@ CREATE TABLE IF NOT EXISTS habMineracao (
     reducaoEnergiaMinera INT NOT NULL,
     minerioBonus INT NOT NULL,
     PRIMARY KEY (fk_Habilidade_id),
-    FOREIGN KEY (fk_Habilidade_id) REFERENCES Habilidade(id)
+    FOREIGN KEY (fk_Habilidade_id) REFERENCES Habilidade(id_habilidade)
 );
 
 CREATE TABLE IF NOT EXISTS habCombate (
@@ -45,7 +45,7 @@ CREATE TABLE IF NOT EXISTS habCombate (
     vidaBonus INT NOT NULL,
     danoBonus INT NOT NULL,
     PRIMARY KEY (fk_Habilidade_id),
-    FOREIGN KEY (fk_Habilidade_id) REFERENCES Habilidade(id)
+    FOREIGN KEY (fk_Habilidade_id) REFERENCES Habilidade(id_habilidade)
 );
 
 CREATE TABLE IF NOT EXISTS habCultivo (
@@ -56,7 +56,7 @@ CREATE TABLE IF NOT EXISTS habCultivo (
     cultivoBonus INT NOT NULL,
     reducaoEnergiaCultiva INT NOT NULL,
     PRIMARY KEY (fk_Habilidade_id),
-    FOREIGN KEY (fk_Habilidade_id) REFERENCES Habilidade(id)
+    FOREIGN KEY (fk_Habilidade_id) REFERENCES Habilidade(id_habilidade)
 );
 
 CREATE TABLE IF NOT EXISTS Jogador (
@@ -83,149 +83,151 @@ CREATE TABLE IF NOT EXISTS Jogador (
 
 -- Tabelas dependentes de outras tabelas
 
-CREATE TABLE IF NOT EXISTS Ambiente (
+CREATE TABLE IF NOT EXISTS Ambiente (--popular Manuella
     id_ambiente INT PRIMARY KEY,
-    tipo VARCHAR(50) NOT NULL,
-    fk_idMapa INT NOT NULL,
+    tipo VARCHAR(50),
+    fk_id_mapa INT NOT NULL,
     fk_jogador_id INT,
     descricao TEXT NOT NULL,
     transitar_1 INT,
     transitar_2 INT,
     transitar_3 INT,
     transitar_4 INT,
-    transitar_5 INT,
+    transitar_5 INT,-
     transitar_6 INT,
-    FOREIGN KEY (fk_idMapa) REFERENCES Mapa(idMapa),
-    FOREIGN KEY (fk_jogador_id) REFERENCES Jogador(id)
+    FOREIGN KEY(fk_id_mapa) REFERENCES Mapa(id_mapa),
+    FOREIGN KEY (fk_jogador_id) REFERENCES Jogador(id_jogador)
 );
 
-CREATE TABLE IF NOT EXISTS Caverna (
+CREATE TABLE IF NOT EXISTS Casa_Jogador(
+    fk_id_ambiente INT NOT NULL,
+    fk_id_caixa_mensagem INT NOT NULL,
+    FOREIGN KEY (fk_id_ambiente) REFERENCES Ambiente(id_ambiente),
+    FOREIGN KEY (fk_caixa_mensagem) REFERENCES Caixa_Mensagem(id_Caixa_Mensagem)
+)
+
+CREATE TABLE IF NOT EXISTS Caverna (--popular Manuella
     andar SERIAL PRIMARY KEY,
     fk_id_ambiente INT NOT NULL,
     quantidade_mobs INT NOT NULL,
     qtd_minerio INT NOT NULL,
     fk_id_minerio_item INT NOT NULL,
     fk_item_recompensa INT NOT NULL,
-    FOREIGN KEY (fk_id_ambiente) REFERENCES Ambiente(id_ambiente)
-    FOREIGN KEY (fk_id_minerio_item) REFERENCES mineral(id_item)
+    FOREIGN KEY (fk_id_ambiente) REFERENCES Ambiente(id_ambiente),
+    FOREIGN KEY (fk_id_minerio_item) REFERENCES mineral(id_item),
     FOREIGN KEY (fk_id_item_recompensa) REFERENCES item(id_item)
 );
 
 CREATE TABLE IF NOT EXISTS Celeiro (
     id_celeiro SERIAL PRIMARY KEY,
-    qtd_animais INT NOT NULL,
+    qtd_animais INT NOT NULL DEFAULT 0,
+    qtd_max_animais INT NOT NULL DEFAULT 10,
     fk_id_ambiente INT NOT NULL,
     FOREIGN KEY (fk_id_ambiente) REFERENCES Ambiente(id_ambiente)
 );
 
 CREATE TABLE IF NOT EXISTS Plantacao (
-    qtd_plantas INT NOT NULL,
+    id_plantacao SERIAL PRIMARY KEY,
+    qtd_plantas INT NOT NULL DEFAULT 0,
+    qtd_plantas_max INT NOT NULL DEFAULT 10,
     fk_id_ambiente INT NOT NULL,
     FOREIGN KEY (fk_id_ambiente) REFERENCES Ambiente(id_ambiente)
 );
 
-CREATE TABLE IF NOT EXISTS loja (
+CREATE TABLE IF NOT EXISTS loja (--popular Manuella
     id_loja INT PRIMARY KEY,
     nome VARCHAR(100) NOT NULL,
-    proprietario VARCHAR(255) NOT NULL,
+    proprietario VARCHAR(100) NOT NULL,
     fk_id_ambiente INT NOT NULL,
-    FOREIGN KEY (fk_id_ambiente) REFERENCES Ambiente(id_ambiente)
+    fk_id_estoque INT NOT NULL,
+    FOREIGN KEY (fk_id_ambiente) REFERENCES Ambiente(id_ambiente),
+    FOREIGN KEY (fk_id_estoque) REFERENCES Estoque_produto(id_estoque)
 );
 
-CREATE TABLE IF NOT EXISTS estoque_produto (
-    id_estoque_produto SERIAL PRIMARY KEY,
-    produto VARCHAR(255) NOT NULL,
-    preco DECIMAL NOT NULL
+CREATE TABLE IF NOT EXISTS estoque (--popular Isaac
+    id_estoque SERIAL PRIMARY KEY,
+    fk_id_item INT NOT NULL,
+    preco DECIMAL NOT NULL,
+    FOREIGN KEY (fk_id_item) REFERENCES Item(id_item)
 );
 
 CREATE TABLE IF NOT EXISTS inventario (
     id_inventario SERIAL PRIMARY KEY,
-    id_jogador INTEGER NOT NULL,
-    quantidade_item INTEGER NOT NULL,
-    FOREIGN KEY (id_jogador) REFERENCES Jogador(id)
+    fk_id_jogador INTEGER NOT NULL,
+    FOREIGN KEY (fk_id_jogador) REFERENCES Jogador(id_jogador)
 );
 
-CREATE TABLE IF NOT EXISTS item (
+CREATE TABLE IF NOT EXISTS item (--popular Marcos
     id_item SERIAL PRIMARY KEY,
-    -- nome VARCHAR(100) NOT NULL, Inserir em cada tipo de item
-    -- descricao TEXT NOT NULL, Inserir em cada tipo de item
-    id_categoria INTEGER NOT NULL,
-    -- quantidade INTEGER NOT NULL, Inserir em cada tipo de item
-    -- inventario_id INTEGER NOT NULL, Inserir em cada tipo de item
-    estoque_produto INTEGER NOT NULL,
-    FOREIGN KEY (id_categoria) REFERENCES categoria(id_categoria),
-    FOREIGN KEY (inventario_id) REFERENCES inventario(id_inventario),
-    FOREIGN KEY (estoque_produto) REFERENCES estoque_produto(id_estoque_produto)
+    tipo_item VARCHAR(20) NOT NULL,
+    fk_estoque_produto INTEGER DEFAULT 0,
+    fk_inventario_id INTEGER DEFAULT 0,
+    FOREIGN KEY (fk_inventario_id) REFERENCES inventario(id_inventario),
+    FOREIGN KEY (fk_estoque_produto) REFERENCES estoque_produto(id_estoque_produto)
 );
 
-CREATE TABLE IF NOT EXISTS consumivel (
-    id_item INTEGER PRIMARY KEY,
-    tipo_consumivel VARCHAR(50) NOT NULL,
-    duracao INTEGER NOT NULL,
-    efeito VARCHAR(255) NOT NULL,
-    FOREIGN KEY (id_item) REFERENCES item(id_item)
+CREATE TABLE IF NOT EXISTS consumivel (--popular Marcos
+    fk_id_item INTEGER PRIMARY KEY,
+    nome VARCHAR(100) NOT NULL,
+    descricao TEXT NOT NULL, -- add
+    efeito_vida INT NOT NULL,
+    FOREIGN KEY (fk_id_item) REFERENCES item(id_item)
 );
 
-CREATE TABLE IF NOT EXISTS utensilio (
-    id_item INTEGER PRIMARY KEY,
+CREATE TABLE IF NOT EXISTS utensilio (--popular Isaac 
+    fk_id_item INTEGER PRIMARY KEY,
     tipo_utensilio VARCHAR(100) NOT NULL,
-    nivel INTEGER NOT NULL,
-    id_loja INTEGER NOT NULL,
-    FOREIGN KEY (id_item) REFERENCES item(id_item),
-    FOREIGN KEY (id_loja) REFERENCES loja(id_loja)
+    FOREIGN KEY (fk_id_item) REFERENCES item(id_item)
 );
 
-CREATE TABLE IF NOT EXISTS ferramenta (
-    id_item INTEGER PRIMARY KEY,
-    tipo_ferramenta VARCHAR(100) NOT NULL,
-    id_utensilio INTEGER NOT NULL,
+CREATE TABLE IF NOT EXISTS ferramenta (--popular isaac
+    fk_id_item INTEGER PRIMARY KEY,
+    nome VARCHAR(100) NOT NULL,
+    descricao VARCHAR(100) NOT NULL,
+    fk_id_utensilio INTEGER NOT NULL,
     eficiencia INTEGER NOT NULL,
-    FOREIGN KEY (id_item) REFERENCES item(id_item),
-    FOREIGN KEY (id_utensilio) REFERENCES utensilio(id_item)
+    nivel INTEGER NOT NULL,
+    FOREIGN KEY (fk_id_item) REFERENCES item(id_item),
+    FOREIGN KEY (fk_id_utensilio) REFERENCES utensilio(id_item)
 );
 
-CREATE TABLE IF NOT EXISTS arma (
-    id_item INTEGER PRIMARY KEY,
-    tipo_arma VARCHAR(100) NOT NULL,
-    id_utensilio INTEGER NOT NULL,
-    dano INTEGER NOT NULL,
-    FOREIGN KEY (id_item) REFERENCES item(id_item),
-    FOREIGN KEY (id_utensilio) REFERENCES utensilio(id_item)
-);
+CREATE TABLE IF NOT EXISTS arma (--popular Isaac
+    fk_id_item INTEGER PRIMARY KEY,
+    nome VARCHAR(100) NOT NULL,
+    descricao VARCHAR(100) NOT NULL,
+    fk_id_utensilio INTEGER NOT NULL,    
+    FOREIGN KEY (fk_id_utensilio) REFERENCES utensilio(id_item)
+)
 
-CREATE TABLE IF NOT EXISTS mineral (
-    id_item INTEGER PRIMARY KEY,
-    tipo_minerio VARCHAR(50) NOT NULL,
+CREATE TABLE IF NOT EXISTS mineral (--popular Marcos
+    fk_id_item INTEGER PRIMARY KEY,
+    nome VARCHAR(100) NOT NULL,
+    descricao VARCHAR(100) NOT NULL,
+    resistencia INTEGER NOT NULL,
     preco DECIMAL NOT NULL,
-    FOREIGN KEY (id_item) REFERENCES item(id_item)
+    FOREIGN KEY (fk_id_item) REFERENCES item(id_item)
 );
 
-CREATE TABLE IF NOT EXISTS recurso (
-    id_item INTEGER PRIMARY KEY,
-    tipo_recurso VARCHAR(50) NOT NULL,
+CREATE TABLE IF NOT EXISTS recurso (--popular Marcos
+    fk_id_item INTEGER PRIMARY KEY,
+    nome VARCHAR(100) NOT NULL,
+    descricao VARCHAR(100) NOT NULL,
     preco DECIMAL NOT NULL,
-    FOREIGN KEY (id_item) REFERENCES item(id_item)
+    FOREIGN KEY (fk_id_item) REFERENCES item(id_item)
 );
 
 CREATE TABLE IF NOT EXISTS Instancia_de_Inimigo (
-    id SERIAL PRIMARY KEY,
-    tipo VARCHAR(50) NOT NULL,
+    id_instancia_de_inimigo SERIAL PRIMARY KEY,
     vidaAtual FLOAT NOT NULL,
     fk_Caverna_andar INT,
     fk_inimigo_id INT NOT NULL,
-    FOREIGN KEY (fk_inimigo_id) REFERENCES Inimigo(id)
+    FOREIGN KEY (fk_inimigo_id) REFERENCES Inimigo(id_inimigo),
+    FOREIGN KEY (fk_Caverna_andar) REFERENCES Caverna(andar)
 );
 
-CREATE TABLE IF NOT EXISTS ataca (
-    fk_Jogador_id INT NOT NULL,
-    fk_Instancia_de_Inimigo_id INT NOT NULL,
-    PRIMARY KEY (fk_Jogador_id, fk_Instancia_de_Inimigo_id),
-    FOREIGN KEY (fk_Jogador_id) REFERENCES Jogador(id),
-    FOREIGN KEY (fk_Instancia_de_Inimigo_id) REFERENCES Instancia_de_Inimigo(id)
-);
 
 CREATE TABLE IF NOT EXISTS Instancia_de_Animal (
-    id SERIAL PRIMARY KEY,
+    id_instancia_de_animal SERIAL PRIMARY KEY,
     prontoDropa BOOLEAN NOT NULL,
     diaAtual INT NOT NULL,
     fk_Animal_id INT NOT NULL,
@@ -236,86 +238,89 @@ CREATE TABLE IF NOT EXISTS Instancia_de_Animal (
     FOREIGN KEY (fk_Celeiro_id) REFERENCES Celeiro(id)
 );
 
-CREATE TABLE IF NOT EXISTS planta (
-    id_planta INT PRIMARY KEY,
-    nome VARCHAR(50) NOT NULL,
-    diaDropar INT NOT NULL,
-    plantaDrop VARCHAR(50) NOT NULL
-);
 
 CREATE TABLE IF NOT EXISTS Instancia_de_Planta (
-    id INT PRIMARY KEY,
+    id_instancia_de_planta INT PRIMARY KEY,
     nome VARCHAR(50) NOT NULL,
     diaDropar INT NOT NULL,
     plantaDrop VARCHAR(50) NOT NULL
 );
 
-CREATE TABLE IF NOT EXISTS semente (
-    id INT PRIMARY KEY,
+CREATE TABLE IF NOT EXISTS semente (--popular zaranza
+    id_semente INT PRIMARY KEY,
+    nome VARCHAR(100) NOT NULL,
+    descricao VARCHAR(100) NOT NULL,
+    diaAtual INT NOT NULL DEFAULT 0,
+    prontoColher BOOLEAN NOT NULL,
+    fk_id_item SERIAL NOT NULL,
+    fk_instancia_planta_id INT NOT NULL,
+    FOREIGN KEY (fk_instancia_planta_id) REFERENCES Instancia_de_Planta(id),
+    FOREIGN KEY (fk_id_item) REFERENCES item(id_item)
+);
+
+CREATE TABLE IF NOT EXISTS solo (--popular zaranza
+    id_solo SERIAL PRIMARY KEY,
+    tipo_recurso VARCHAR(50) NOT NULL,
+    fk_id_plantacao NOT NULL,
     bool_regou BOOLEAN NOT NULL,
     bool_livre BOOLEAN NOT NULL,
-    diaAtual INT NOT NULL,
-    prontoColher BOOLEAN NOT NULL,
-    fk_jogador_id SERIAL NOT NULL,
-    fk_instancia_planta_id INT NOT NULL,
-    FOREIGN KEY (fk_jogador_id) REFERENCES Jogador(id),
-    FOREIGN KEY (fk_instancia_planta_id) REFERENCES Instancia_de_Planta(id)
+    FOREIGN KEY (fk_id_plantacao) REFERENCES Plantacao(id_plantacao)
 );
 
-CREATE TABLE IF NOT EXISTS solo (
-    tipo_recurso VARCHAR(50) NOT NULL,
-    fk_jogador_id SERIAL NOT NULL,
-    FOREIGN KEY (fk_jogador_id) REFERENCES Jogador(id)
-);
-
-CREATE TABLE IF NOT EXISTS Missao (
-    -- MUDANÇA EM RELAÇÃO AO DER/DICIONÁRIO:
-    -- remove nome e descrição
+CREATE TABLE IF NOT EXISTS Missao (--popular Manuella
     id_missao SERIAL PRIMARY KEY, 
     tipo VARCHAR(50) NOT NULL
 );
 
-CREATE TABLE IF NOT EXISTS Combate (
-    -- MUDANÇA EM RELAÇÃO AO DER/DICIONÁRIO:
-    -- tipoInimigo VARCHAR(100) PRIMARY KEY -> tipo_Inimigo VARCHAR(50) FOREIGN KEY?
-    tipo_Inimigo VARCHAR(50) NOT NULL,
-    tipo VARCHAR(50) NOT NULL,
+CREATE TABLE IF NOT EXISTS missao_combate (--popular
+    fk_id_missao INT NOT NULL PRIMARY KEY,
+    fk_tipo_Inimigo VARCHAR(50) NOT NULL,
     nome VARCHAR(255) NOT NULL,
     descricao TEXT NOT NULL,
-    FOREIGN KEY (tipo_Inimigo) REFERENCES Inimigo(tipo)
+    dataInicio INT NOT NULL,
+    dataFinalizacao INT,
+    FOREIGN KEY (fk_tipo_Inimigo) REFERENCES Inimigo(tipo),
+    FOREIGN KEY (fk_id_missao) REFERENCES Missao(id_missao)
 );
 
-CREATE TABLE IF NOT EXISTS Coleta (
-    -- MUDANÇA EM RELAÇÃO AO DER/DICIONÁRIO:
-    -- tipoMaterial VARCHAR(100) PRIMARY KEY -> tipo_material VARCHAR(50) FOREIGN KEY?
-    fk_tipo_material VARCHAR(50) NOT NULL,
-    tipo VARCHAR(50) NOT NULL,
+CREATE TABLE IF NOT EXISTS missao_coleta (--popular
+    fk_id_missao INT NOT NULL PRIMARY KEY,
+    fk_tipo_minerio VARCHAR(50) NOT NULL,
     nome VARCHAR(255) NOT NULL,
     descricao TEXT NOT NULL,
-    FOREIGN KEY (tipo_material) REFERENCES mineral(tipo_minerio)
+    dataInicio INT NOT NULL,
+    dataFinalizacao INT,
+    FOREIGN KEY (fk_tipo_minerio) REFERENCES mineral(tipo_minerio),
+    FOREIGN KEY (fk_id_missao) REFERENCES Missao(id_missao)
 );
 
 CREATE TABLE IF NOT EXISTS Instancia_Missao (
-    id_Instancia_Missao  SERIAL PRIMARY KEY,
+    id_Instancia_Missao SERIAL PRIMARY KEY,
+    fk_id_jogador INT NOT NULL,
     fk_Missao INT NOT NULL,
-    dataInicio INT NOT NULL,
-    dataFinalizacao INT,
-    FOREIGN KEY (Missao) REFERENCES Missao(id_missao)
+    missao_finalizada BOOLEAN NOT NULL DEFAULT false,
+    FOREIGN KEY (Missao) REFERENCES Missao(id_missao),
+    FOREIGN KEY (fk_id_jogador) REFERENCES Jogador(id_jogador)
 );
 
 
-CREATE TABLE IF NOT EXISTS Recompensa (
+CREATE TABLE IF NOT EXISTS Recompensa (--popular manuella
     id_Recompensa  SERIAL PRIMARY KEY,
-    tipoItem VARCHAR(50) NOT NULL,
-    quantidade INT NOT NULL,
     fk_Jogador_id INT NOT NULL,
-    Instancia_Missao INT NOT NULL,
-    FOREIGN KEY (Jogador_id) REFERENCES Jogador(id),
-    FOREIGN KEY (Instancia_Missao) REFERENCES Instancia_Missao(id)
+    fk_id_item VARCHAR(50) NOT NULL,
+    fk_Instancia_Missao INT NOT NULL,
+    quantidade INT NOT NULL,
+    FOREIGN KEY (fk_Jogador_id) REFERENCES Jogador(id_jogador),
+    FOREIGN KEY (fk_id_item) REFERENCES item(id_item),
+    FOREIGN KEY (fk_Instancia_Missao) REFERENCES Instancia_Missao(id)
 );
 
 CREATE TABLE IF NOT EXISTS Caixa_Mensagem (
-    id_Caixa_Mensagem  SERIAL PRIMARY KEY,
-    Instancia_Missao INT NOT NULL,
-    FOREIGN KEY (Instancia_Missao) REFERENCES Instancia_Missao(id)
+    fk_Jogador_id INT NOT NULL,
+    id_Caixa_Mensagem SERIAL PRIMARY KEY,
+    fk_Instancia_Missao INT NOT NULL,
+    fk_casa_jogador INT NOT NULL,
+    FOREIGN KEY (fk_Instancia_Missao) REFERENCES Instancia_Missao(id_Instancia_Missao),
+    FOREIGN KEY (fk_Jogador_id) REFERENCES Jogador(id_jogador)
+    FOREIGN KEY (fk_casa_jogador) REFERENCES Casa_Jogador(id_Casa_jogador)
 );
