@@ -131,6 +131,7 @@ if __name__ == "__main__":
 
     jogador = menu_inicial()
     if jogador:
+        print(jogador)
         print(f"\nVocê está pronto para começar, {jogador[5]}!")
         print(jogador)
         menu_jogo(jogador)

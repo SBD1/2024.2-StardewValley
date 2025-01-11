@@ -83,7 +83,7 @@ VALUES
     (2, 'galinha', 3, 'galinha', 2, 30),--mudar o item drop para o id do ovo!!!
     (3, 'porco', 5, 'porco', 3, 40);--mudar o item  para o id do carne!!!
 
-INSERT INTO inimigo (id, nome, tipo, vida, dano) VALUES
+INSERT INTO inimigo (id, nome, tipo, vidaMax, dano) VALUES
     (1, 'Morcego da Caverna', 'caverna', 30, 5),
     (2, 'Aranha das Sombras', 'caverna', 20, 7),
     (3, 'Golem de Pedras', 'caverna', 50, 10),

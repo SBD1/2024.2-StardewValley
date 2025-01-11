@@ -9,6 +9,7 @@ services:
       - "5432:5432"
     volumes:
       - pg_data:/var/lib/postgresql/data
+      - ./db:/docker-entrypoint-initdb.d
     environment:
       POSTGRES_USER: stardew_user
       POSTGRES_PASSWORD: stardew_pass
