@@ -4,4 +4,4 @@ ENV POSTGRES_DB=stardew_db
 ENV POSTGRES_USER=stardew_user
 ENV POSTGRES_PASSWORD=stardew_pass
 
-COPY ./db/ddl.sql /docker-entrypoint-initdb.d/
+COPY ./db/ /docker-entrypoint-initdb.d/
