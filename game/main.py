@@ -13,7 +13,7 @@ def criar_personagem():
         cursor.execute(
             """
             INSERT INTO Jogador (nome) VALUES (%s)
-            RETURNING id;
+            RETURNING id_jogador;
             """,
             (nome,)
         )
@@ -31,7 +31,7 @@ def listar_personagens():
     try:
         conn = get_connection()
         cursor = conn.cursor()
-        cursor.execute("SELECT id, nome FROM Jogador")
+        cursor.execute("SELECT id_jogador, nome FROM Jogador")
         personagens = cursor.fetchall()
         if not personagens:
             print("Nenhum personagem encontrado. Você precisa criar um novo.")
@@ -85,7 +85,7 @@ def carregar_personagem(jogador_id):
     try:
         conn = get_connection()
         cursor = conn.cursor()
-        cursor.execute("SELECT * FROM Jogador WHERE id = %s", (jogador_id,))
+        cursor.execute("SELECT * FROM Jogador WHERE id_jogador = %s", (jogador_id,))
         jogador = cursor.fetchone()
         if jogador:
             print(f"\nBem-vindo de volta, {jogador[5]}!")
@@ -126,13 +126,15 @@ def menu_inicial():
         else:
             print("Opção inválida. Tente novamente.")
 
+def clear_terminal():
+    os.system('cls' if os.name == 'nt' else 'clear')
+
 if __name__ == "__main__":
     print("Inicializando o banco de dados...")
-    setup_database(DDL_FILE_PATH,DML_FILE_PATH)  
+    #setup_database(DDL_FILE_PATH,DML_FILE_PATH)  
 
     jogador = menu_inicial()
     if jogador:
-        print(jogador)
         print(f"\nVocê está pronto para começar, {jogador[5]}!")
-        print(jogador)
+        clear_terminal()
         menu_jogo(jogador)
