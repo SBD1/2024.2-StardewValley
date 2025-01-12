@@ -35,7 +35,7 @@ O Modelo Entidade Relacionamento para bancos de dados é um modelo que descreve 
 
 - **Mapa**
 
-- **Minerio_bruto**
+- **Mineral**
 
 - **Plantação**
 
@@ -65,75 +65,73 @@ O Modelo Entidade Relacionamento para bancos de dados é um modelo que descreve 
 
 ## 2. Atributos
 
-- **Ambiente**: <ins>id_ambiente</ins>, `tipo`
+**Ambiente**: <ins>id_ambiente</ins>, `tipo`, `fk_id_mapa`, `fk_jogador_id`, `descricao`, `transitar_1`, `transitar_2`, `transitar_3`, `transitar_4`, `transitar_5`, `transitar_6`
 
-- **Animal**: <ins>id</ins>, `nome`, `diasTotalDropar`, `tipo`, `itemDrop`, `preço`
+**Animal**: <ins>id_animal</ins>, `nome_animal`, `diasTotalDropar`, `tipo_animal`, `itemDrop`, `preco`
 
-- **Arma**: <ins>tipo_arma</ins>, `dano`
+**arma**: <ins>id_item</ins>, `nome`, `descricao`, `fk_id_utensilio`
 
-- **Caixa de Mensagem**: <ins>id_caixa</ins>
+**Caixa de Mensagem**: <ins>id_Caixa_Mensagem</ins>, `fk_Jogador_id`, `fk_Instancia_Missao`
 
-- **CasaJogador**: <ins>id</ins>, `id_jogador`
+**casaJJogador**: <ins> NÃO POSSUI CHAVE PRIMÁRIA (precisa ser adicionada)</ins>, `fk_id_ambiente`, `fk_id_caixa_mensagem`
 
-- **Caverna**: <ins>andar</ins>, `quantidade_mobs`, `minérios`, `item_recompensa`
+**caverna**: <ins>andar</ins>, `fk_id_ambiente`, `quantidade_mobs`, `qtd_minerio`, `fk_id_minerio_item`, `fk_id_item_recompensa`
 
-- **Celeiro**: <ins>id_celeiro</ins>, `qtd_animais`
+**celeiro**: <ins>id_celeiro</ins>, `qtd_animais`, `qtd_max_animais`, `fk_id_ambiente`
 
-- **Coleta**: <ins>tipoMaterial</ins>, `tipoMaterial`, `quantidade`, `valorTotal`
+**Consumivel**: <ins>id_item</ins>, `nome`, `descricao`, `efeito_vida`
 
-- **Combate**: <ins>tipoInimigo</ins>, `tipoInimigo`, `quantidadeInimigo`
+**Estoque**: <ins>id_estoque</ins>
 
-- **Consumível**: <ins>tipo_consumível</ins>, `duração`, `efeito`
+**Ferramenta**: <ins>id_item</ins>, `nome`, `descricao`, `fk_id_utensilio`, `eficiencia`, `nivel`
 
-- **Estoque**: <ins>produto</ins>, `preço`
+**Habilidade**: <ins>id_habilidade</ins>, `tipo`
 
-- **Ferramenta**: <ins>tipo_ferramenta</ins>, `eficiência`
+**HabCombate**: <ins>fk_Habilidade_id</ins>, `nivel`, `xpMin`, `xpMax`, `vidaBonus`, `danoBonus`
 
-- **HabCombate**: <ins>id</ins>, `vidaBonus`, `danoBonus`
+**HabCultivo**: <ins>fk_Habilidade_id</ins>, `nivel`, `xpMin`, `xpMax`, `cultivoBonus`, `reducaoEnergiaCultiva`
 
-- **HabCultivo**: <ins>id</ins>, `reducaoEnergiaCultivar`, `cultivoBonus`
+**HabMineracao**: <ins>fk_Habilidade_id</ins>, `reducaoEnergiaMinera`, `minerioBonus`, `nivel`, `xpMin`, `xpMax`
 
-- **Habilidade**: <ins>id</ins>, `nível`, `tipo`, `xpMin`, `xpMax`
+**Inimigo**: <ins>id_inimigo</ins>, `nome`, `tipo`, `vidaMax`, `dano`
 
-- **HabMineração**: <ins>id</ins>, `reducaoEnergiaMinerar`, `minerioBonus`
+**InstanciaAnimal**: <ins>id_instancia_de_animal</ins>, `prontoDropa`, `diaAtual`, `fk_Animal_id`, `fk_Jogador_id`, `fk_Celeiro_id`
 
-- **Inimigo**: <ins>id</ins>, `nome`, `tipo`, `vida`, `dano`
+**InstanciaInimigo**: <ins>id_instancia_de_inimigo</ins>, `vidaAtual`, `fk_Caverna_andar`, `fk_inimigo_id`
 
-- **InstânciaAnimal**: <ins>id</ins>, `diaAtual`, `prontoDropar`
+**InstanciaPlanta**: <ins>id_instancia_de_planta</ins>, `nome`, `diaDropar`, `plantaDrop`
 
-- **InstânciaInimigo**: <ins>id</ins>, `id_inimigo`, `vidaAtual`
+**InstanciaMissao**: <ins>id_Instancia_Missao</ins>, `fk_id_jogador`, `fk_Missao`, `missao_finalizada`
 
-- **InstânciaMissão**: <ins>id</ins>, `dataInicio`, `dataFinalização`, `status`
+**Inventário**: <ins>id_inventario</ins>, `fk_id_jogador`
 
-- **InstânciaPlanta**: <ins>id</ins>, `nome`, `diaDropar`, `plantaDrop`
+**Item**: <ins>id_item</ins>, `tipo_item`, `fk_estoque`, `fk_inventario_id`
 
-- **Inventário**: <ins>id</ins>, `quantidade_item`
+**Jogador**: <ins>id_jogador</ins>, `nome`, `dia`, `tempo`, `vidaMax`, `vidaAtual`, `xp_mineracao`, `xp_cultivo`, `xp_combate`, `dano_ataque`, `fk_habMineracao_fk_Habilidade_id`, `fk_habCombate_fk_Habilidade_id`, `fk_habCultivo_fk_Habilidade_id`
 
-- **Item**: <ins>id_item</ins>, `nome`, `descrição`, `id_categoria`, `tipo_item`, `quantidade`
+**Loja**: <ins>id_loja</ins>, `nome`, `proprietario`, `fk_id_ambiente`, `fk_id_estoque`
 
-- **Jogador**: <ins>id</ins>, `nome`, `vidaAtual`, `vidaMax`, `dano_ataque`, `tempo`, `xp_combate`, `dia`, `xp_cultivo`
+**Mapa**: <ins>id_mapa</ins>, `nome`
 
-- **Loja**: <ins>id_loja</ins>, `proprietário`, `nome`, `descrição`
+**Mineral**: <ins>id_item</ins>, `nome`, `descricao`, `resistencia`, `preco`
 
-- **Mapa**: <ins>idMapa</ins>, `nome`
+**MissaoCombate**: <ins>fk_id_missao</ins>, `fk_id_Inimigo`, `nome`, `descricao`, `dataInicio`, `dataFinalizacao`
 
-- **Mineral**: <ins>tipo_minério</ins>, `preço`
+**MissaoColeta**: <ins>fk_id_missao</ins>, `fk_id_minerio`, `nome`, `descricao`, `dataInicio`, `dataFinalizacao`
 
-- **Minério_Bruto**: <ins>id_minerio_bruto</ins>, ` bool_minerado`
+**Missao**: <ins>id_missao</ins>, `tipo`
 
-- **Missão**: <ins>tipo</ins>, `nome`, `descrição`, `tipo`
+**Plantacao**: <ins>id_plantacao</ins>, `qtd_plantas`, `qtd_plantas_max`, `fk_id_ambiente`
 
-- **Plantação**: `qtd_plantas`
+**Recurso**: <ins>id_item</ins>, `nome`, `descricao`, `preco`
 
-- **Recompensa**: <ins>id</ins>, `tipoItem`, `quantidade`
+**Recompensa**: <ins>id_Recompensa</ins>, `fk_Jogador_id`, `id_item`, `fk_Instancia_Missao`, `quantidade`
 
-- **Recurso**: <ins>tipo_recurso</ins>
+**Semente**: <ins>id_semente</ins>, `nome`, `descricao`, `diaAtual`, `prontoColher`, `id_item`, `fk_instancia_planta_id`
 
-- **Semente**: <ins>id</ins>, `bool_regou`, `bool_livre`,`diaAtual`, `diaDropar`, `prontoColher`
+**Solo**: <ins>id_solo</ins>, `tipo_recurso`, `fk_id_plantacao`, `bool_regou`, `bool_livre`
 
-- **Solo**: <ins>tipo_recurso</ins>
-
-- **Utensilio**: <ins>tipo_utensílio</ins>, `nível`
+**Utensilio**: <ins>id_item</ins>, `tipo_utensilio`
 
 
 ## 3. Relacionamentos
@@ -256,6 +254,7 @@ O Modelo Entidade Relacionamento para bancos de dados é um modelo que descreve 
 | :--: | :----: | ----- | ---------- | 
 | 23/11/2024 |  `1.0` |  [Manuella Valadares](https://github.com/manuvaladares)| Criação do documento MER | 
 | 23/11/2024 |  `1.1` |  [Gabriel Fernando](https://github.com/MMcLovin)| Preenche [entidades](#1-entidades) e [atributos](#2-atributos) | 
-| 24/11/2024 |  `1.1` |  [Gabriel Fernando](https://github.com/MMcLovin)| atualiza [entidades](#1-entidades), [atributos](#2-atributos) e preenche [relacionamentos](#3-relacionamentos) | 
-| 25/11/2024 |  `1.2` |  [Isaac Batista](https://github.com/isaacbatista26)| Retira [mapa](#1-entidades) da entidade 'ambiente' | 
-| 25/11/2024 |  `1.2` |  [Gabriel Fernando](https://github.com/MMcLovin)| Corrige atributos de [jogador](#2-atributos) e [minério bruto](#2-atributos) | 
+| 24/11/2024 |  `1.2` |  [Gabriel Fernando](https://github.com/MMcLovin)| atualiza [entidades](#1-entidades), [atributos](#2-atributos) e preenche [relacionamentos](#3-relacionamentos) | 
+| 25/11/2024 |  `1.3` |  [Isaac Batista](https://github.com/isaacbatista26)| Retira [mapa](#1-entidades) da entidade 'ambiente' | 
+| 25/11/2024 |  `1.4` |  [Gabriel Fernando](https://github.com/MMcLovin)| Corrige atributos de [jogador](#2-atributos) e [minério bruto](#2-atributos) | 
+| 12/01/2025 |  `1.5` |  [Gabriel Fernando](https://github.com/MMcLovin)| Atualiza entidades e atributos | 
