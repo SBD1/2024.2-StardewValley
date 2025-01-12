@@ -257,7 +257,7 @@ INSERT INTO recurso (id_item, nome, descricao, preco) VALUES
 (52, 'Tecido', 'Material flexível usado em artesanato.', 50.00),
 (53, 'Ovo de dinossauro', 'Um ovo de um dinossauro pré histórico', 200.00);
 
-INSERT INTO missao_combate (fk_id_missao, fk_tipo_Inimigo, nome, descricao, dataInicio)
+INSERT INTO missao_combate (fk_id_missao, fk_id_Inimigo, nome, descricao, dataInicio)
 VALUES 
 (1, 6, 'Iniciação', 'Derrote 10 Slimes Escuros para entrar na Guilda dos Aventureiros.', 1),  
 (2, 6, 'Precisa-se de Ajuda: Slimes Escuros', 'Elimine 20 Slimes Escuros.', 10), 
@@ -268,7 +268,7 @@ VALUES
 (7, 1, 'Precisa-se de Ajuda: Morcegos da Caverna', 'Derrote 25 Morcegos da Caverna na caverna.', 120), 
 (8,  5, 'Precisa-se de Ajuda: Fantasmas Errantes', 'Elimine 40 Fantasmas Errantes no deserto.', 155); 
 
-INSERT INTO missao_coleta (fk_id_missao, fk_tipo_minerio, nome, descricao, dataInicio)
+INSERT INTO missao_coleta (fk_id_missao, fk_id_minerio, nome, descricao, dataInicio)
 VALUES 
 (9, 30, 'Precisa-se de Ajuda: Bronze', 'Colete 20 unidades de Bronze para Clint.', 5), 
 (10, 31, 'Precisa-se de Ajuda: Ferro', 'Colete 40 unidades de Ferro para Clint.', 18), 
