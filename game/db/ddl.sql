@@ -93,7 +93,7 @@ CREATE TABLE IF NOT EXISTS Ambiente (--popular Manuella
     transitar_2 INT,
     transitar_3 INT,
     transitar_4 INT,
-    transitar_5 INT,-
+    transitar_5 INT,
     transitar_6 INT,
     FOREIGN KEY(fk_id_mapa) REFERENCES Mapa(id_mapa),
     FOREIGN KEY (fk_jogador_id) REFERENCES Jogador(id_jogador)
@@ -103,10 +103,10 @@ CREATE TABLE IF NOT EXISTS Casa_Jogador(
     fk_id_ambiente INT NOT NULL,
     fk_id_caixa_mensagem INT NOT NULL,
     FOREIGN KEY (fk_id_ambiente) REFERENCES Ambiente(id_ambiente),
-    FOREIGN KEY (fk_caixa_mensagem) REFERENCES Caixa_Mensagem(id_Caixa_Mensagem)
-)
+    FOREIGN KEY (fk_id_caixa_mensagem) REFERENCES Caixa_Mensagem(id_Caixa_Mensagem)
+);
 
-CREATE TABLE IF NOT EXISTS Caverna (--popular Manuella
+CREATE TABLE IF NOT EXISTS Caverna(--popular Manuella
     andar SERIAL PRIMARY KEY,
     fk_id_ambiente INT NOT NULL,
     quantidade_mobs INT NOT NULL,
@@ -197,7 +197,7 @@ CREATE TABLE IF NOT EXISTS arma (--popular Isaac
     descricao VARCHAR(100) NOT NULL,
     fk_id_utensilio INTEGER NOT NULL,    
     FOREIGN KEY (fk_id_utensilio) REFERENCES utensilio(id_item)
-)
+);
 
 CREATE TABLE IF NOT EXISTS mineral (--popular Marcos
     fk_id_item INTEGER PRIMARY KEY,
@@ -261,7 +261,7 @@ CREATE TABLE IF NOT EXISTS semente (--popular zaranza
 CREATE TABLE IF NOT EXISTS solo (--popular zaranza
     id_solo SERIAL PRIMARY KEY,
     tipo_recurso VARCHAR(50) NOT NULL,
-    fk_id_plantacao NOT NULL,
+    fk_id_plantacao INT NOT NULL,
     bool_regou BOOLEAN NOT NULL,
     bool_livre BOOLEAN NOT NULL,
     FOREIGN KEY (fk_id_plantacao) REFERENCES Plantacao(id_plantacao)
@@ -321,6 +321,6 @@ CREATE TABLE IF NOT EXISTS Caixa_Mensagem (
     fk_Instancia_Missao INT NOT NULL,
     fk_casa_jogador INT NOT NULL,
     FOREIGN KEY (fk_Instancia_Missao) REFERENCES Instancia_Missao(id_Instancia_Missao),
-    FOREIGN KEY (fk_Jogador_id) REFERENCES Jogador(id_jogador)
+    FOREIGN KEY (fk_Jogador_id) REFERENCES Jogador(id_jogador),
     FOREIGN KEY (fk_casa_jogador) REFERENCES Casa_Jogador(id_Casa_jogador)
 );

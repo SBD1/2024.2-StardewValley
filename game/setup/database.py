@@ -12,37 +12,8 @@ def get_connection():
         port=os.getenv("DB_PORT", 5432)
     )
 
-def populate_data(cursor):
-    # Inserir dados na tabela Habilidade
-    cursor.execute("""
-        INSERT INTO Habilidade (id, nivel, tipo, xpMin, xpMax)
-        VALUES (1, 1, 'Teste', 0, 100)
-        ON CONFLICT (id) DO NOTHING;
-    """)
-
-    # Inserir dados na tabela habMineracao
-    cursor.execute("""
-        INSERT INTO habMineracao (fk_Habilidade_id, reducaoEnergiaMinera, minerioBonus)
-        VALUES (1, 5, 10)
-        ON CONFLICT (fk_Habilidade_id) DO NOTHING;
-    """)
-
-    # Inserir dados na tabela habCombate
-    cursor.execute("""
-        INSERT INTO habCombate (fk_Habilidade_id, vidaBonus, danoBonus)
-        VALUES (1, 20, 10)
-        ON CONFLICT (fk_Habilidade_id) DO NOTHING;
-    """)
-
-    # Inserir dados na tabela habCultivo
-    cursor.execute("""
-        INSERT INTO habCultivo (fk_Habilidade_id, cultivoBonus, reducaoEnergiaCultiva)
-        VALUES (1, 15, 5)
-        ON CONFLICT (fk_Habilidade_id) DO NOTHING;
-    """)
-
 # Função para rodar o DDL no banco de dados
-def setup_database(ddl_file_path):
+def setup_database(ddl_file_path,dml_file_path):
     try:
         conn = get_connection()
         cursor = conn.cursor()
@@ -55,10 +26,14 @@ def setup_database(ddl_file_path):
         cursor.execute(ddl_script)
         conn.commit()
 
-
         print("Banco de dados configurado com sucesso.")
         
-        populate_data(cursor)
+         # Ler o arquivo DML
+        with open(dml_file_path, "r") as dml_file:
+            dml_script = dml_file.read()
+
+        # Executar o DML no banco de dados
+        cursor.execute(dml_script)
         conn.commit()
         print("Dados iniciais inseridos com sucesso.")
         

@@ -3,6 +3,7 @@ from setup.database import setup_database, get_connection
 import os
 
 DDL_FILE_PATH = os.path.join(os.path.dirname(__file__), "db/ddl.sql")
+DML_FILE_PATH = os.path.join(os.path.dirname(__file__), "db/dml.sql")
 
 def criar_personagem():
     nome = input("Digite o nome do seu personagem: ").strip()
@@ -127,7 +128,7 @@ def menu_inicial():
 
 if __name__ == "__main__":
     print("Inicializando o banco de dados...")
-    setup_database(DDL_FILE_PATH)  
+    setup_database(DDL_FILE_PATH,DML_FILE_PATH)  
 
     jogador = menu_inicial()
     if jogador:
