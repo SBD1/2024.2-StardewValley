@@ -193,6 +193,71 @@ INSERT INTO item (id_item, tipo_item, fk_estoque_produto, fk_inventario_id) VALU
 (55, 'mineral', 0, 0),
 (56, 'mineral', 0, 0);
 
+-- Ferramentas
+(701, 'enxada', 3, 601),
+(702, 'enxada', 3, 602),
+(703, 'enxada', 3, 603),
+(704, 'enxada', 3, 604),
+(705, 'enxada', 3, 605),
+
+(706, 'picareta', 3, 606),
+(707, 'picareta', 3, 607),
+(708, 'picareta', 3, 608),
+(709, 'picareta', 3, 609),
+(710, 'picareta', 3, 610),
+
+(711, 'machado', 3, 611),
+(712, 'machado', 3, 612),
+(713, 'machado', 3, 613),
+(714, 'machado', 3, 614),
+(715, 'machado', 3, 615),
+
+(716, 'regador', 3, 616),
+(717, 'regador', 3, 617),
+(718, 'regador', 3, 618),
+(719, 'regador', 3, 619),
+(720, 'regador', 3, 620),
+
+(721, 'lixeira', 3, 621),
+(722, 'lixeira', 3, 622),
+(723, 'lixeira', 3, 623),
+(724, 'lixeira', 3, 624),
+(725, 'lixeira', 3, 625),
+
+(726, 'balde', 3, 626),
+
+(727, 'mochila', 3, 627),
+(728, 'mochila', 3, 628),
+
+-- Armas
+(729, 'arma', 3, 629),
+(730, 'arma', 3, 630),
+(731, 'arma', 3, 631),
+(732, 'arma', 3, 632),
+(733, 'arma', 3, 633),
+(734, 'arma', 3, 634),
+(735, 'arma', 3, 635),
+(736, 'arma', 3, 636),
+(737, 'arma', 3, 637),
+(738, 'arma', 3, 638),
+(739, 'arma', 3, 639),
+(740, 'arma', 3, 640),
+(741, 'arma', 3, 641),
+(742, 'arma', 3, 642),
+(743, 'arma', 3, 643),
+(744, 'arma', 3, 644),
+(745, 'arma', 3, 645),
+(746, 'arma', 3, 646),
+(747, 'arma', 3, 647),
+(748, 'arma', 3, 648),
+(749, 'arma', 3, 649),
+(750, 'arma', 3, 650),
+(751, 'arma', 3, 651),
+(752, 'arma', 3, 652),
+(753, 'arma', 3, 653),
+(754, 'arma', 3, 654),
+(755, 'arma', 3, 655);
+
 INSERT INTO consumivel (fk_id_item, nome, descricao, efeito_vida) VALUES
 (1, 'Chirívia', 'Uma raiz crocante e ligeiramente doce.', 25),
 (2, 'Batata', 'Tubérculo redondo e versátil.', 30),
@@ -254,3 +319,199 @@ INSERT INTO recurso (fk_id_item, nome, descricao, preco) VALUES
 (51, 'Omnigeodo', 'Um geodo raro com diversos minerais.', 150.00),
 (52, 'Tecido', 'Material flexível usado em artesanato.', 50.00),
 (53, 'Ovo de dinossauro', 'Um ovo de um dinossauro pré histórico', 200.00);
+
+INSERT INTO estoque (id_estoque, fk_id_item, preco) VALUES
+-- Adicionar Estoque do Armazém do Pierre
+
+-- Ferreiro (Utensílios)
+-- (Ferramentas)
+-- Cobre
+(3, 602, 2000),
+(3, 607, 2000),
+(3, 612, 2000),
+(3, 617, 2000),
+(3, 622, 1000),
+
+-- Aço
+(3, 603, 5000),
+(3, 608, 5000),
+(3, 613, 5000),
+(3, 618, 5000),
+(3, 623, 2500),
+
+-- Ouro
+(3, 604, 10000),
+(3, 609, 10000),
+(3, 614, 10000),
+(3, 619, 10000),
+(3, 624, 5000),
+
+-- Irídio
+(3, 605, 25000),
+(3, 610, 25000),
+(3, 615, 25000),
+(3, 620, 25000),
+(3, 625, 12500);
+
+-- Utensílios
+(3, 626, 2000),
+(3, 627, 10000),
+(3, 628, 50000),
+
+-- (Armas)
+(3, 629, 2000),
+(3, 630, 2500),
+(3, 631, 3000),
+(3, 632, 3500),
+(3, 633, 4000),
+(3, 634, 4500),
+(3, 635, 5000),
+(3, 636, 5500),
+(3, 637, 6000),
+(3, 638, 6500),
+(3, 639, 7000),
+(3, 640, 7500),
+(3, 641, 8000),
+(3, 642, 8500),
+(3, 643, 9000),
+(3, 644, 9500),
+(3, 645, 10000),
+(3, 646, 10500),
+(3, 647, 11000),
+(3, 648, 11500),
+(3, 649, 12000),
+(3, 650, 12500),
+(3, 651, 13000),
+(3, 652, 13500),
+(3, 653, 14000),
+(3, 654, 14500),
+(3, 655, 15000);
+
+INSERT INTO utensilio (fk_id_item, tipo_utensilio) VALUES
+(601, 'enxada'),
+(602, 'enxada'),
+(603, 'enxada'),
+(604, 'enxada'),
+(605, 'enxada'),
+
+(606, 'picareta'),
+(607, 'picareta'),
+(608, 'picareta'),
+(609, 'picareta'),
+(610, 'picareta'),
+
+(611, 'machado'),
+(612, 'machado'),
+(613, 'machado'),
+(614, 'machado'),
+(615, 'machado'),
+
+(616, 'regador'),
+(617, 'regador'),
+(618, 'regador'),
+(619, 'regador'),
+(620, 'regador'),
+
+(621, 'lixeira'),
+(622, 'lixeira'),
+(623, 'lixeira'),
+(624, 'lixeira'),
+(625, 'lixeira'),
+
+(626, 'balde'),
+
+(627, 'mochila'),
+(628, 'mochila'),
+
+(629, 'espada'),
+(630, 'espada'),
+(631, 'espada'),
+(632, 'espada'),
+(633, 'espada'),
+(634, 'espada'),
+(635, 'espada'),
+(636, 'espada'),
+(637, 'espada'),
+(638, 'espada'),
+(639, 'espada'),
+(640, 'espada'),
+(641, 'espada'),
+(642, 'espada'),
+(643, 'espada'),
+(644, 'espada'),
+(645, 'espada'),
+(646, 'espada'),
+(647, 'espada'),
+(648, 'espada'),
+(649, 'espada'),
+(650, 'espada'),
+(651, 'espada'),
+(652, 'espada'),
+(653, 'espada'),
+(654, 'espada'),
+(655, 'espada');
+
+INSERT INTO ferramente (fk_id_item, fk_id_utensilio, nome, descricao, eficiencia, nivel) VALUES
+(701, 601, 'Enxada Comum', 'Cavar e arar o solo', 1, 1),
+(702, 602, 'Enxada de Cobre', 'Cavar e arar o solo', 2, 2),
+(703, 603, 'Enxada de Aço', 'Cavar e arar o solo', 3, 3),
+(704, 604, 'Enxada de Ouro', 'Cavar e arar o solo', 4, 4),
+(705, 605, 'Enxada de Irídio', 'Cavar e arar o solo', 5, 5),
+
+(706, 606, 'Picareta Comum', 'Quebrar pedras', 1, 1),
+(707, 607, 'Picareta de Cobre', 'Quebrar pedras', 2, 2),
+(708, 608, 'Picareta de Aço', 'Quebrar pedras', 3, 3),
+(709, 609, 'Picareta de Ouro', 'Quebrar pedras', 4, 4),
+(710, 610, 'Picareta de Irídio', 'Quebrar pedras', 5, 5),
+
+(711, 611, 'Machado Comum', 'Cortar madeira', 1, 1),
+(712, 612, 'Machado de Cobre', 'Cortar madeira', 2, 2),
+(713, 613, 'Machado de Aço', 'Cortar madeira', 3, 3),
+(714, 614, 'Machado de Ouro', 'Cortar madeira', 4, 4),
+(715, 615, 'Machado de Irídio', 'Cortar madeira', 5, 5),
+
+(716, 616, 'Regador Comum', 'Regar plantas', 1, 1),
+(717, 617, 'Regador de Cobre', 'Regar plantas', 2, 2),
+(718, 618, 'Regador de Aço', 'Regar plantas', 3, 3),
+(719, 619, 'Regador de Ouro', 'Regar plantas', 4, 4),
+(720, 620, 'Regador de Irídio', 'Regar plantas', 5, 5),
+
+(721, 621, 'Lixeira de Comum', 'Deletar itens do Inventário', 1, 1),
+(722, 622, 'Lixeira de Cobre', 'Deletar itens do Inventário', 2, 2),
+(723, 623, 'Lixeira de Aço', 'Deletar itens do Inventário', 2, 2),
+(724, 624, 'Lixeira de Ouro', 'Deletar itens do Inventário', 3, 3),
+(725, 625, 'Lixeira de Irídio', 'Deletar itens do Inventário', 4, 4);
+
+(726, 626, 'Balde de Leite', 'Coletar Leite de cabra ou vaca', 2, 1),
+
+(727, 627, 'Mochila tamanho 25', '12 espaços disponíveis', 12, 1),
+(728, 628, 'Mochila tamanho 36', '12 espaços disponíveis', 24, 2);
+
+INSERT INTO arma (fk_id_item, fk_id_utensilio, nome, descricao, dano) VALUES
+(729, 629, 'Espada enferrujada', 'Uma espada enferrujada e cega', 2),
+(730, 630, 'Espada de madeira', 'Nada mal para um pedaço de madeira.', 5),
+(731, 631, 'Espada de aço', 'Uma espada padrão.', 6),
+(732, 632, 'Sabre de prata', 'Folheado com prata para reduzir a ferrugem.', 11),
+(733, 633, 'Espada de pirata', 'Parece que um pirata a possuía.', 11),
+(734, 634, 'Sabre', 'Um sabre muito bem feito.', 10),
+(735, 635, 'Espada da Floresta', 'Feita poderosa mágica da floresta.', 13),
+(736, 636, 'Lâmina de ferro', 'Uma espada pesada.', 18),
+(737, 637, 'Cabeça de inseto', 'Não muito agradável de segurar.', 15),
+(738, 638, 'Gládio de Netuno', 'Herança de além do Mar de Joias.', 27),
+(739, 639, 'Espada Escocesa', 'É muito pesada.', 26),
+(740, 640, 'Espada do templário', 'Já pertenceu a um honrado cavaleiro.', 25),
+(741, 641, 'Espada de ossos', 'Muito leve. Feita de osso polido.', 25),
+(742, 642, 'Lâmina Ossificada', 'Uma lâmina grande e afiada formada por ossos.', 34),
+(743, 643, 'Espada de Obsidiana', 'Incrivelmente afiada.', 38),
+(744, 644, 'Dentes de iete', 'Muito frios ao toque.', 34),
+(745, 645, 'Espada temperada', 'Parece aguentar qualquer impacto.', 36),
+(746, 646, 'Cimitarra de metal', 'Leve e poderosa.', 37),
+(747, 647, 'Espada das trevas', 'Brilha com uma energia misteriosa.', 38),
+(748, 648, 'Katana de lava', 'Uma lâmina poderosa, forjada em uma piscina de lava.', 60),
+(749, 649, 'Espada Anã', 'É antiga, mas a lâmina nunca desgasta.', 70),
+(750, 650, 'Espada da galáxia', 'Diferente de tudo que você já viu.', 70),
+(751, 651, 'Espada de Dente de Dragão', 'A lâmina foi forjada de um dente mágico.', 83),
+(752, 652, 'Lâmina do Infinito', 'A verdadeira forma da Espada da Galáxia.', 90),
+(753, 653, 'Espada sagrada', 'Dá esperança ao segurar.', 23),
+(754, 654, 'Ferro de passar da Haley', 'Muito quente. Está com cheiro de cabelo da Haley.', 38),
+(755, 655, 'Cinzel da Leah', 'A ferramenta favorita da Leah para esculpir madeira.', 38);

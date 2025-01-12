@@ -144,7 +144,7 @@ CREATE TABLE IF NOT EXISTS loja (--popular Manuella
     FOREIGN KEY (fk_id_estoque) REFERENCES Estoque_produto(id_estoque)
 );
 
-CREATE TABLE IF NOT EXISTS estoque (--popular Isaac
+CREATE TABLE IF NOT EXISTS estoque (
     id_estoque SERIAL PRIMARY KEY,
     fk_id_item INT NOT NULL,
     preco DECIMAL NOT NULL,
@@ -174,13 +174,13 @@ CREATE TABLE IF NOT EXISTS consumivel (--popular Marcos
     FOREIGN KEY (fk_id_item) REFERENCES item(id_item)
 );
 
-CREATE TABLE IF NOT EXISTS utensilio (--popular Isaac 
+CREATE TABLE IF NOT EXISTS utensilio ( 
     fk_id_item INTEGER PRIMARY KEY,
     tipo_utensilio VARCHAR(100) NOT NULL,
     FOREIGN KEY (fk_id_item) REFERENCES item(id_item)
 );
 
-CREATE TABLE IF NOT EXISTS ferramenta (--popular isaac
+CREATE TABLE IF NOT EXISTS ferramenta (
     fk_id_item INTEGER PRIMARY KEY,
     nome VARCHAR(100) NOT NULL,
     descricao VARCHAR(100) NOT NULL,
@@ -191,7 +191,7 @@ CREATE TABLE IF NOT EXISTS ferramenta (--popular isaac
     FOREIGN KEY (fk_id_utensilio) REFERENCES utensilio(id_item)
 );
 
-CREATE TABLE IF NOT EXISTS arma (--popular Isaac
+CREATE TABLE IF NOT EXISTS arma (
     fk_id_item INTEGER PRIMARY KEY,
     nome VARCHAR(100) NOT NULL,
     descricao VARCHAR(100) NOT NULL,
