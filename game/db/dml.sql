@@ -241,6 +241,18 @@ INSERT INTO consumivel (id_item, nome, descricao, efeito_vida) VALUES
 (27, 'Cenoura subterrânea', 'Raiz nutritiva encontrada no subsolo.', 25),
 (28, 'Peixe', 'Fonte rica de proteínas.', 30);
 
+INSERT INTO Semente (id_semente, nome, descricao, diaAtual, prontoColher, id_item, fk_instancia_planta_id) VALUES
+(1, 'Semente de Chirívia', 'Semente que cresce em Chirívia.', 0, 0, 1, NULL),
+(2, 'Semente de Batata', 'Semente que cresce em Batata.', 0, 0, 2, NULL),
+(3, 'Semente de Couve', 'Semente que cresce em Couve.', 0, 0, 3, NULL),
+(4, 'Semente de Alho', 'Semente que cresce em Alho.', 0, 0, 4, NULL),
+(5, 'Semente de Tomate', 'Semente que cresce em Tomate.', 0, 0, 5, NULL),
+(6, 'Semente de Melão', 'Semente que cresce em Melão.', 0, 0, 6, NULL),
+(7, 'Semente de Mirtilo', 'Semente que cresce em Mirtilo.', 0, 0, 7, NULL),
+(8, 'Semente de Oxicoco', 'Semente que cresce em Oxicoco.', 0, 0, 8, NULL),
+(9, 'Semente de Abóbora', 'Semente que cresce em Abóbora.', 0, 0, 9, NULL),
+(10, 'Semente de Coco', 'Semente que cresce em Coco.', 0, 0, 10, NULL);
+
 INSERT INTO mineral (id_item, nome, descricao, resistencia, preco) VALUES
 (29, 'Pedra', 'Um material de construção básico.', 10, 2.00),
 (30, 'Bronze', 'Um metal utilizado em ferramentas.', 20, 15.00),
