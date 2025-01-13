@@ -81,8 +81,8 @@ VALUES
 
 INSERT INTO Animal (id_animal, nome_animal, diasTotalDropar, tipo_animal, itemDrop, preco)
 VALUES
-    (1, 'vaca', 7, 'vaca', 1, 50),--mudar o item drop para o id do leite!!!
-    (2, 'galinha', 3, 'galinha', 2, 30),--mudar o item drop para o id do ovo!!!
+    (1, 'vaca', 7, 'vaca', 14, 50),
+    (2, 'galinha', 3, 'galinha', 13, 30),
     (3, 'porco', 5, 'porco', 3, 40);--mudar o item  para o id do carne!!!
 
 INSERT INTO inimigo (id_inimigo, nome, tipo, vidaMax, dano) VALUES

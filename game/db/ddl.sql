@@ -89,7 +89,7 @@ CREATE TABLE IF NOT EXISTS inventario (
 
 -- Tabelas dependentes de outras tabelas
 
-CREATE TABLE IF NOT EXISTS Ambiente (--popular Manuella
+CREATE TABLE IF NOT EXISTS Ambiente (
     id_ambiente INT PRIMARY KEY,
     tipo VARCHAR(50),
     fk_id_mapa INT NOT NULL,
@@ -105,11 +105,11 @@ CREATE TABLE IF NOT EXISTS Ambiente (--popular Manuella
     FOREIGN KEY (fk_jogador_id) REFERENCES Jogador(id_jogador)
 );
 
-CREATE TABLE IF NOT EXISTS estoque(--popular Isaac
+CREATE TABLE IF NOT EXISTS estoque(
     id_estoque SERIAL PRIMARY KEY
 );
 
-CREATE TABLE IF NOT EXISTS item (--popular Marcos
+CREATE TABLE IF NOT EXISTS item (
     id_item SERIAL PRIMARY KEY,
     tipo_item VARCHAR(20) NOT NULL,
     fk_estoque INTEGER DEFAULT 0,
@@ -118,7 +118,7 @@ CREATE TABLE IF NOT EXISTS item (--popular Marcos
     FOREIGN KEY (fk_estoque) REFERENCES estoque(id_estoque)
 );
 
-CREATE TABLE IF NOT EXISTS mineral (--popular Marcos
+CREATE TABLE IF NOT EXISTS mineral (
     id_item INTEGER PRIMARY KEY,
     nome VARCHAR(100) NOT NULL,
     descricao VARCHAR(100) NOT NULL,
@@ -127,7 +127,7 @@ CREATE TABLE IF NOT EXISTS mineral (--popular Marcos
     FOREIGN KEY (id_item) REFERENCES item(id_item)
 );
 
-CREATE TABLE IF NOT EXISTS Caverna(--popular Manuella
+CREATE TABLE IF NOT EXISTS Caverna(
     andar SERIAL PRIMARY KEY,
     fk_id_ambiente INT NOT NULL,
     quantidade_mobs INT NOT NULL,
@@ -155,7 +155,7 @@ CREATE TABLE IF NOT EXISTS Plantacao (
     FOREIGN KEY (fk_id_ambiente) REFERENCES Ambiente(id_ambiente)
 );
 
-CREATE TABLE IF NOT EXISTS loja (--popular Manuella
+CREATE TABLE IF NOT EXISTS loja (
     id_loja INT PRIMARY KEY,
     nome VARCHAR(100) NOT NULL,
     proprietario VARCHAR(100) NOT NULL,
@@ -173,7 +173,7 @@ CREATE TABLE IF NOT EXISTS inventario (
     FOREIGN KEY (fk_id_jogador) REFERENCES Jogador(id_jogador)
 );
 
-CREATE TABLE IF NOT EXISTS consumivel (--popular Marcos
+CREATE TABLE IF NOT EXISTS consumivel (
     id_item INTEGER PRIMARY KEY,
     nome VARCHAR(100) NOT NULL,
     descricao TEXT NOT NULL, -- add
@@ -181,13 +181,13 @@ CREATE TABLE IF NOT EXISTS consumivel (--popular Marcos
     FOREIGN KEY (id_item) REFERENCES item(id_item)
 );
 
-CREATE TABLE IF NOT EXISTS utensilio (--popular Isaac 
+CREATE TABLE IF NOT EXISTS utensilio (
     id_item INTEGER PRIMARY KEY,
     tipo_utensilio VARCHAR(100) NOT NULL,
     FOREIGN KEY (id_item) REFERENCES item(id_item)
 );
 
-CREATE TABLE IF NOT EXISTS ferramenta (--popular isaac
+CREATE TABLE IF NOT EXISTS ferramenta (
     id_item INTEGER PRIMARY KEY,
     nome VARCHAR(100) NOT NULL,
     descricao VARCHAR(100) NOT NULL,
@@ -199,7 +199,7 @@ CREATE TABLE IF NOT EXISTS ferramenta (--popular isaac
 );
 
 
-CREATE TABLE IF NOT EXISTS arma (--popular Isaac
+CREATE TABLE IF NOT EXISTS arma (
     id_item INTEGER PRIMARY KEY,
     nome VARCHAR(100) NOT NULL,
     descricao VARCHAR(100) NOT NULL,
@@ -208,7 +208,7 @@ CREATE TABLE IF NOT EXISTS arma (--popular Isaac
     FOREIGN KEY (fk_id_utensilio) REFERENCES utensilio(id_item)
 );
 
-CREATE TABLE IF NOT EXISTS recurso (--popular Marcos
+CREATE TABLE IF NOT EXISTS recurso (
     id_item INTEGER PRIMARY KEY,
     nome VARCHAR(100) NOT NULL,
     descricao VARCHAR(100) NOT NULL,
@@ -246,7 +246,7 @@ CREATE TABLE IF NOT EXISTS Instancia_de_Planta (
     plantaDrop VARCHAR(50) NOT NULL
 );
 
-CREATE TABLE IF NOT EXISTS semente (--popular zaranza
+CREATE TABLE IF NOT EXISTS semente (
     id_semente INT PRIMARY KEY,
     nome VARCHAR(100) NOT NULL,
     descricao VARCHAR(100) NOT NULL,
@@ -258,7 +258,7 @@ CREATE TABLE IF NOT EXISTS semente (--popular zaranza
     FOREIGN KEY (id_item) REFERENCES item(id_item)
 );
 
-CREATE TABLE IF NOT EXISTS solo (--popular zaranza
+CREATE TABLE IF NOT EXISTS solo (
     id_solo SERIAL PRIMARY KEY,
     tipo_recurso VARCHAR(50) NOT NULL,
     fk_id_plantacao INT NOT NULL,
@@ -267,12 +267,12 @@ CREATE TABLE IF NOT EXISTS solo (--popular zaranza
     FOREIGN KEY (fk_id_plantacao) REFERENCES Plantacao(id_plantacao)
 );
 
-CREATE TABLE IF NOT EXISTS Missao (--popular Manuella
+CREATE TABLE IF NOT EXISTS Missao (
     id_missao SERIAL PRIMARY KEY, 
     tipo VARCHAR(50) NOT NULL
 );
 
-CREATE TABLE IF NOT EXISTS missao_combate (--popular
+CREATE TABLE IF NOT EXISTS missao_combate (
     fk_id_missao INT NOT NULL PRIMARY KEY,
     fk_id_Inimigo INT NOT NULL,
     nome VARCHAR(255) NOT NULL,
@@ -283,7 +283,7 @@ CREATE TABLE IF NOT EXISTS missao_combate (--popular
     FOREIGN KEY (fk_id_missao) REFERENCES Missao(id_missao)
 );
 
-CREATE TABLE IF NOT EXISTS missao_coleta (--popular
+CREATE TABLE IF NOT EXISTS missao_coleta (
     fk_id_missao INT NOT NULL PRIMARY KEY,
     fk_id_minerio INT NOT NULL,
     nome VARCHAR(255) NOT NULL,
@@ -304,7 +304,7 @@ CREATE TABLE IF NOT EXISTS Instancia_Missao (
 );
 
 
-CREATE TABLE IF NOT EXISTS Recompensa (--popular manuella
+CREATE TABLE IF NOT EXISTS Recompensa (
     id_Recompensa  SERIAL PRIMARY KEY,
     fk_Jogador_id INT NOT NULL,
     id_item INT NOT NULL,

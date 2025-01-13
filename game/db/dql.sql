@@ -54,3 +54,26 @@ SELECT
     xpMax 
 FROM habCultivo 
 WHERE fk_Habilidade_id = %s
+
+--Retornar estoque de uma loja específica.
+SELECT 
+    l.nome,
+    i.id_item,
+    i.tipo_item
+FROM 
+    loja l
+JOIN 
+    estoque e ON l.fk_id_estoque = e.id_estoque
+JOIN 
+    item i ON i.fk_estoque = e.id_estoque
+WHERE 
+    l.nome = 'Armazém do Pierre'; 
+
+--retornar os atributos de um inimigo pelo id(%s)
+SELECT *
+FROM inimigo
+WHERE nome = %s
+
+SELECT *
+FROM Animal
+WHERE id_animal = %s
