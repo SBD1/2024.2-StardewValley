@@ -4,7 +4,7 @@
 
 O Modelo Entidade Relacionamento para bancos de dados é um modelo que descreve os objetos (entidades) envolvidos em um negócio, com suas características (atributos) e como elas se relacionam entre si (relacionamentos).
 
-=== "Módulo 1"
+=== "<a href="#anchor-link-modulo1" tabindex="-1">Módulo 1</a>"
 
     ## 1. Entidades
 
@@ -252,7 +252,7 @@ O Modelo Entidade Relacionamento para bancos de dados é um modelo que descreve 
 
     -   Uma loja melhora nenhum ou vários untensílios (0, n) e um utensílio é melhorado apenas por uma loja (1, 1)
 
-=== "Módulo 2"
+=== "<a href="#anchor-link-modulo2" tabindex="-1">Módulo 2</a>"
 
     ## 1. Entidades
 

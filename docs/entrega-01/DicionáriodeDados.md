@@ -2,7 +2,7 @@
 
 É o conjunto dos vocábulos ou dos termos utilizados na descrição dos objetos modelados para o banco de dados. Os termos são dispostos com o seu respectivo significado para apresentar uma descrição textual da estrutura lógica e física do banco de dados.
 
-=== "Módulo 1"
+=== "<a href="#anchor-link-modulo1" tabindex="-1">Módulo 1</a>"
     ### Entidade: Jogador
     #### Descrição: Personagem principal, será manuseado pelo jogador.
 
@@ -434,7 +434,7 @@
 
     --- 
 
-=== "Módulo 2"
+=== "<a href="#anchor-link-modulo2" tabindex="-1">Módulo 2</a>"
     ### Entidade: Habilidade 
 
     #### Descrição: Representa as habilidades do jogador no jogo.
