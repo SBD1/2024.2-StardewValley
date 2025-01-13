@@ -29,6 +29,18 @@ Stardew Valley é um RPG sem fim da vida no campo! Você herdou a antiga fazenda
   - [Dicionário de Dados](./entrega-01/DicionáriodeDados.md)
   - [Modelo Entidade-Relacionamento](./entrega-01/MER.md)
   - [Modelo Relacional](./entrega-01/MREL.md)
+  - [Apresentação do Módulo 1](./entrega-01/apresentação_1.md)
+
+### Módulo 2
+
+  - [Diagrama Entidade-Relacionamento (Atualização)](./entrega-01/DER.md)
+  - [Dicionário de Dados (Atualização)](./entrega-01/DicionáriodeDados.md)
+  - [Modelo Entidade-Relacionamento (Atualização)](./entrega-01/MER.md)
+  - [Modelo Relacional (Atualização)](./entrega-01/MREL.md)
+  - [Queries DDL](https://github.com/SBD1/2024.2-StardewValley/blob/main/game/db/ddl.sql)
+  - [Queries DML](https://github.com/SBD1/2024.2-StardewValley/blob/main/game/db/dml.sql)
+  - [Apresentação do Módulo 2](./entrega-02/apresentação_2.md)
+  
 
 
 

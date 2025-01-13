@@ -1,4 +1,4 @@
-# Apresentação 01:
+# Apresentação 01
 
 ## Objetivo
 Esta página tem como foco o vídeo de apresentação do módulo do projeto. A gravação da apresentação ocorreu no dia 25/11/2024.
