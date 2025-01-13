@@ -102,20 +102,20 @@ INSERT INTO Mapa (id_mapa, nome) VALUES
 
 INSERT INTO Ambiente (id_ambiente, tipo, fk_id_mapa, fk_jogador_id, descricao, transitar_1, transitar_2, transitar_3, transitar_4, transitar_5, transitar_6) VALUES
     (1, 'Cabana', 1, 0, 'Casa de troncos herdada pelo seu avô. Um lugar aconchegante para descansar após um longo dia de trabalho.', 2, 3, 4, 5, NULL, NULL),
-    (2, 'Plantação', 1, 0, 'Uma vasta área de terra cercada por montanhas. Aqui, você pode plantar sementes.', 1, NULL, NULL, NULL, NULL, NULL),
-    (3, 'Celeiro', 1, 0, 'Um amplo celeiro de madeira com cheiro de feno fresco.', 1, NULL, NULL, NULL, NULL, NULL),
-    (4, 'Floresta', 1, 0, 'Uma floresta densa e vibrante, onde o som dos pássaros e o farfalhar das folhas criam uma melodia serena. Recursos valiosos e segredos aguardam entre as árvores sombrias.', 1, 6, 8, 15, NULL, NULL),
-    (5, 'Praça da Vila', 1, 0, 'O coração da vila, cercado por jardins coloridos e bancos confortáveis. É o lugar perfeito para festivais, encontros e compartilhar histórias com os moradores.', 1, 9, 13, 12, 11, 10),
-    (6, 'Guilda dos Aventureiros', 1, 0, 'Um refúgio para os bravos. Aqui, aventureiros se reúnem para relatar suas conquistas, comprar equipamentos e aceitar novos desafios.', 4, NULL, NULL, NULL, NULL, NULL),
-    (7, 'Comércio do Deserto', 1, 0, 'Um mercado exótico no meio do deserto, onde mercadores misteriosos vendem itens raros e valiosos.', 8, NULL, NULL, NULL, NULL, NULL),
-    (8, 'Deserto', 1, 0, 'Um vasto mar de areia escaldante, onde o vento sopra histórias antigas e tesouros esquecidos podem ser desenterrados.', 7, 4, NULL, NULL, NULL, NULL),
-    (9, 'Centro Comunitário', 1, 0, 'Um edifício abandonado com um charme nostálgico. Restaurá-lo trará benefícios para toda a vila.', 14, 5, NULL, NULL, NULL, NULL),
-    (10, 'Praia', 1, 0, 'Uma orla tranquila, onde as ondas acariciam a areia. É o lugar perfeito para pescar, relaxar ou encontrar tesouros marítimos.', 5, NULL, NULL, NULL, NULL, NULL),
-    (11, 'Armazém do Pierre', 1, 0, 'O local favorito dos moradores para adquirir sementes, alimentos frescos e outros suprimentos agrícolas.', 5, NULL, NULL, NULL, NULL, NULL),
-    (12, 'Clínica do Harvey', 1, 0, 'Um pequeno consultório médico onde Harvey cuida da saúde dos moradores com atenção e dedicação.', 5, NULL, NULL, NULL, NULL, NULL),
-    (13, 'Ferreiro', 1, 0, 'Um local quente e barulhento onde ferramentas ganham vida e minérios são transformados em itens essenciais.', 5, NULL, NULL, NULL, NULL, NULL),
-    (14, 'Mercado Joja', 1, 0, 'Uma megaloja moderna e impessoal, onde tudo está à venda... ao custo do espírito comunitário.', 9, NULL, NULL, NULL, NULL, NULL),
-    (15, 'Caverna', 1, 0, 'As paredes são cobertas por musgo e pequenas pedras brilham na escuridão. Um lugar ideal para começar a coletar minérios.', 4, NULL, NULL, NULL, NULL, NULL);
+    (2, 'Plantação', 1, NULL, 'Uma vasta área de terra cercada por montanhas. Aqui, você pode plantar sementes.', 1, NULL, NULL, NULL, NULL, NULL),
+    (3, 'Celeiro', 1, NULL, 'Um amplo celeiro de madeira com cheiro de feno fresco.', 1, NULL, NULL, NULL, NULL, NULL),
+    (4, 'Floresta', 1, NULL, 'Uma floresta densa e vibrante, onde o som dos pássaros e o farfalhar das folhas criam uma melodia serena. Recursos valiosos e segredos aguardam entre as árvores sombrias.', 1, 6, 8, 15, NULL, NULL),
+    (5, 'Praça da Vila', 1, NULL, 'O coração da vila, cercado por jardins coloridos e bancos confortáveis. É o lugar perfeito para festivais, encontros e compartilhar histórias com os moradores.', 1, 9, 13, 12, 11, 10),
+    (6, 'Guilda dos Aventureiros', 1, NULL, 'Um refúgio para os bravos. Aqui, aventureiros se reúnem para relatar suas conquistas, comprar equipamentos e aceitar novos desafios.', 4, NULL, NULL, NULL, NULL, NULL),
+    (7, 'Comércio do Deserto', 1, NULL, 'Um mercado exótico no meio do deserto, onde mercadores misteriosos vendem itens raros e valiosos.', 8, NULL, NULL, NULL, NULL, NULL),
+    (8, 'Deserto', 1, NULL, 'Um vasto mar de areia escaldante, onde o vento sopra histórias antigas e tesouros esquecidos podem ser desenterrados.', 7, 4, NULL, NULL, NULL, NULL),
+    (9, 'Centro Comunitário', 1, NULL, 'Um edifício abandonado com um charme nostálgico. Restaurá-lo trará benefícios para toda a vila.', 14, 5, NULL, NULL, NULL, NULL),
+    (10, 'Praia', 1, NULL, 'Uma orla tranquila, onde as ondas acariciam a areia. É o lugar perfeito para pescar, relaxar ou encontrar tesouros marítimos.', 5, NULL, NULL, NULL, NULL, NULL),
+    (11, 'Armazém do Pierre', 1, NULL, 'O local favorito dos moradores para adquirir sementes, alimentos frescos e outros suprimentos agrícolas.', 5, NULL, NULL, NULL, NULL, NULL),
+    (12, 'Clínica do Harvey', 1, NULL, 'Um pequeno consultório médico onde Harvey cuida da saúde dos moradores com atenção e dedicação.', 5, NULL, NULL, NULL, NULL, NULL),
+    (13, 'Ferreiro', 1, NULL, 'Um local quente e barulhento onde ferramentas ganham vida e minérios são transformados em itens essenciais.', 5, NULL, NULL, NULL, NULL, NULL),
+    (14, 'Mercado Joja', 1, NULL, 'Uma megaloja moderna e impessoal, onde tudo está à venda... ao custo do espírito comunitário.', 9, NULL, NULL, NULL, NULL, NULL),
+    (15, 'Caverna', 1, NULL, 'As paredes são cobertas por musgo e pequenas pedras brilham na escuridão. Um lugar ideal para começar a coletar minérios.', 4, NULL, NULL, NULL, NULL, NULL);
 
 INSERT INTO estoque(id_estoque) VALUES
     (1),
@@ -132,10 +132,26 @@ VALUES --fk_id_estoque com números aleatórios
 
 INSERT INTO Missao (id_missao, tipo)
 VALUES
-(1, 'Coleta de Recursos'), -- Missão para coletar itens específicos, como madeira ou minério
-(2, 'Derrotar Mobs'), -- Eliminar uma quantidade específica de inimigos
-(3, 'Cultivo de Plantas'), -- Plantar, cultivar e colher culturas específicas
-(4, 'Exploração de Caverna'); -- Explorar níveis da caverna e coletar recompensas
+-- (1, 'Coleta de Recursos'), -- Missão para coletar itens específicos, como madeira ou minério
+-- (2, 'Derrotar Mobs'), -- Eliminar uma quantidade específica de inimigos
+-- (3, 'Cultivo de Plantas'), -- Plantar, cultivar e colher culturas específicas
+-- (4, 'Exploração de Caverna'); -- Explorar níveis da caverna e coletar recompensas
+(1,'combate'),
+(2,'combate'),
+(3,'combate'),
+(4,'combate'),
+(5,'combate'),
+(6,'combate'),
+(7,'combate'),
+(8,'combate'),
+(9,'coleta'),
+(10,'coleta'),
+(11,'coleta'),
+(12,'coleta'),
+(13,'coleta'),
+(14,'coleta'),
+(15,'coleta'),
+(16,'coleta');
 
 INSERT INTO item (id_item, tipo_item, fk_estoque, fk_inventario_id) VALUES
 (1, 'consumivel', 1,NULL),

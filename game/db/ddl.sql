@@ -173,15 +173,6 @@ CREATE TABLE IF NOT EXISTS inventario (
     FOREIGN KEY (fk_id_jogador) REFERENCES Jogador(id_jogador)
 );
 
-CREATE TABLE IF NOT EXISTS item (--popular Marcos
-    id_item SERIAL PRIMARY KEY,
-    tipo_item VARCHAR(20) NOT NULL,
-    fk_estoque INTEGER DEFAULT 0,
-    fk_inventario_id INTEGER DEFAULT 0,
-    FOREIGN KEY (fk_inventario_id) REFERENCES inventario(id_inventario),
-    FOREIGN KEY (fk_estoque) REFERENCES estoque(id_estoque)
-);
-
 CREATE TABLE IF NOT EXISTS consumivel (--popular Marcos
     id_item INTEGER PRIMARY KEY,
     nome VARCHAR(100) NOT NULL,
