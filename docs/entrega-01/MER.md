@@ -4,249 +4,499 @@
 
 O Modelo Entidade Relacionamento para bancos de dados é um modelo que descreve os objetos (entidades) envolvidos em um negócio, com suas características (atributos) e como elas se relacionam entre si (relacionamentos).
 
-## 1. Entidades
+=== "Módulo 1"
 
-- **Ambiente**
-    - **caverna**
-    - **casaJogador**
-    - **celeiro**
+    ## 1. Entidades
 
-- **Animal**
+    - **Ambiente**
+        - **caverna**
+        - **casaJogador**
+        - **celeiro**
 
-- **Caixa de mensagem**
+    - **Animal**
 
-- **Estoque**
+    - **Caixa de mensagem**
 
-- **Inimigo**
+    - **Estoque**
 
-- **InstâciaAnimal**
+    - **Inimigo**
 
-- **InstânciaInimigo**
+    - **InstâciaAnimal**
 
-- **InstanciaMissão**
+    - **InstânciaInimigo**
 
-- **InstanciaPlanta**
+    - **InstanciaMissão**
 
-- **Inventário**
+    - **InstanciaPlanta**
 
-- **Jogador**
+    - **Inventário**
 
-- **Loja**
+    - **Jogador**
 
-- **Mapa**
+    - **Loja**
 
-- **Mineral**
+    - **Mapa**
 
-- **Plantação**
+    - **Minerio_bruto**
 
-- **Recompensa**
+    - **Plantação**
 
-- **Recurso**
+    - **Recompensa**
 
-- **Semente**
+    - **Recurso**
 
-- **Solo**
-
-- **Habilidade**
-    - **HabCombate**
-    - **HabCultivo**
-    - **HabMineração**
-
-- **Item**
-    - **Consumivel**
     - **Semente**
-    - **Utensilio**
-        - **arma**
-        - **Ferramenta**
 
-- **Missão**
-    - **Coleta**
-    - **Combate**
+    - **Solo**
 
-## 2. Atributos
+    - **Habilidade**
+        - **HabCombate**
+        - **HabCultivo**
+        - **HabMineração**
 
-**Ambiente**: <ins>id_ambiente</ins>, `tipo`, `fk_id_mapa`, `fk_jogador_id`, `descricao`, `transitar_1`, `transitar_2`, `transitar_3`, `transitar_4`, `transitar_5`, `transitar_6`
+    - **Item**
+        - **Consumivel**
+        - **Semente**
+        - **Utensilio**
+            - **arma**
+            - **Ferramenta**
 
-**Animal**: <ins>id_animal</ins>, `nome_animal`, `diasTotalDropar`, `tipo_animal`, `itemDrop`, `preco`
+    - **Missão**
+        - **Coleta**
+        - **Combate**
 
-**arma**: <ins>id_item</ins>, `nome`, `descricao`, `fk_id_utensilio`
+    ## 2. Atributos
 
-**Caixa de Mensagem**: <ins>id_Caixa_Mensagem</ins>, `fk_Jogador_id`, `fk_Instancia_Missao`
+    - **Ambiente**: <ins>id_ambiente</ins>, `tipo`
 
-**casaJJogador**: <ins> NÃO POSSUI CHAVE PRIMÁRIA (precisa ser adicionada)</ins>, `fk_id_ambiente`, `fk_id_caixa_mensagem`
+    - **Animal**: <ins>id</ins>, `nome`, `diasTotalDropar`, `tipo`, `itemDrop`, `preço`
 
-**caverna**: <ins>andar</ins>, `fk_id_ambiente`, `quantidade_mobs`, `qtd_minerio`, `fk_id_minerio_item`, `fk_id_item_recompensa`
+    - **Arma**: <ins>tipo_arma</ins>, `dano`
 
-**celeiro**: <ins>id_celeiro</ins>, `qtd_animais`, `qtd_max_animais`, `fk_id_ambiente`
+    - **Caixa de Mensagem**: <ins>id_caixa</ins>
 
-**Consumivel**: <ins>id_item</ins>, `nome`, `descricao`, `efeito_vida`
+    - **CasaJogador**: <ins>id</ins>, `id_jogador`
 
-**Estoque**: <ins>id_estoque</ins>
+    - **Caverna**: <ins>andar</ins>, `quantidade_mobs`, `minérios`, `item_recompensa`
 
-**Ferramenta**: <ins>id_item</ins>, `nome`, `descricao`, `fk_id_utensilio`, `eficiencia`, `nivel`
+    - **Celeiro**: <ins>id_celeiro</ins>, `qtd_animais`
 
-**Habilidade**: <ins>id_habilidade</ins>, `tipo`
+    - **Coleta**: <ins>tipoMaterial</ins>, `tipoMaterial`, `quantidade`, `valorTotal`
 
-**HabCombate**: <ins>fk_Habilidade_id</ins>, `nivel`, `xpMin`, `xpMax`, `vidaBonus`, `danoBonus`
+    - **Combate**: <ins>tipoInimigo</ins>, `tipoInimigo`, `quantidadeInimigo`
 
-**HabCultivo**: <ins>fk_Habilidade_id</ins>, `nivel`, `xpMin`, `xpMax`, `cultivoBonus`, `reducaoEnergiaCultiva`
+    - **Consumível**: <ins>tipo_consumível</ins>, `duração`, `efeito`
 
-**HabMineracao**: <ins>fk_Habilidade_id</ins>, `reducaoEnergiaMinera`, `minerioBonus`, `nivel`, `xpMin`, `xpMax`
+    - **Estoque**: <ins>produto</ins>, `preço`
 
-**Inimigo**: <ins>id_inimigo</ins>, `nome`, `tipo`, `vidaMax`, `dano`
+    - **Ferramenta**: <ins>tipo_ferramenta</ins>, `eficiência`
 
-**InstanciaAnimal**: <ins>id_instancia_de_animal</ins>, `prontoDropa`, `diaAtual`, `fk_Animal_id`, `fk_Jogador_id`, `fk_Celeiro_id`
+    - **HabCombate**: <ins>id</ins>, `vidaBonus`, `danoBonus`
 
-**InstanciaInimigo**: <ins>id_instancia_de_inimigo</ins>, `vidaAtual`, `fk_Caverna_andar`, `fk_inimigo_id`
+    - **HabCultivo**: <ins>id</ins>, `reducaoEnergiaCultivar`, `cultivoBonus`
 
-**InstanciaPlanta**: <ins>id_instancia_de_planta</ins>, `nome`, `diaDropar`, `plantaDrop`
+    - **Habilidade**: <ins>id</ins>, `nível`, `tipo`, `xpMin`, `xpMax`
 
-**InstanciaMissao**: <ins>id_Instancia_Missao</ins>, `fk_id_jogador`, `fk_Missao`, `missao_finalizada`
+    - **HabMineração**: <ins>id</ins>, `reducaoEnergiaMinerar`, `minerioBonus`
 
-**Inventário**: <ins>id_inventario</ins>, `fk_id_jogador`
+    - **Inimigo**: <ins>id</ins>, `nome`, `tipo`, `vida`, `dano`
 
-**Item**: <ins>id_item</ins>, `tipo_item`, `fk_estoque`, `fk_inventario_id`
+    - **InstânciaAnimal**: <ins>id</ins>, `diaAtual`, `prontoDropar`
 
-**Jogador**: <ins>id_jogador</ins>, `nome`, `dia`, `tempo`, `vidaMax`, `vidaAtual`, `xp_mineracao`, `xp_cultivo`, `xp_combate`, `dano_ataque`, `fk_habMineracao_fk_Habilidade_id`, `fk_habCombate_fk_Habilidade_id`, `fk_habCultivo_fk_Habilidade_id`
+    - **InstânciaInimigo**: <ins>id</ins>, `id_inimigo`, `vidaAtual`
 
-**Loja**: <ins>id_loja</ins>, `nome`, `proprietario`, `fk_id_ambiente`, `fk_id_estoque`
+    - **InstânciaMissão**: <ins>id</ins>, `dataInicio`, `dataFinalização`, `status`
 
-**Mapa**: <ins>id_mapa</ins>, `nome`
+    - **InstânciaPlanta**: <ins>id</ins>, `nome`, `diaDropar`, `plantaDrop`
 
-**Mineral**: <ins>id_item</ins>, `nome`, `descricao`, `resistencia`, `preco`
+    - **Inventário**: <ins>id</ins>, `quantidade_item`
 
-**MissaoCombate**: <ins>fk_id_missao</ins>, `fk_id_Inimigo`, `nome`, `descricao`, `dataInicio`, `dataFinalizacao`
+    - **Item**: <ins>id_item</ins>, `nome`, `descrição`, `id_categoria`, `tipo_item`, `quantidade`
 
-**MissaoColeta**: <ins>fk_id_missao</ins>, `fk_id_minerio`, `nome`, `descricao`, `dataInicio`, `dataFinalizacao`
+    - **Jogador**: <ins>id</ins>, `nome`, `vidaAtual`, `vidaMax`, `dano_ataque`, `tempo`, `xp_combate`, `dia`, `xp_cultivo`
 
-**Missao**: <ins>id_missao</ins>, `tipo`
+    - **Loja**: <ins>id_loja</ins>, `proprietário`, `nome`, `descrição`
 
-**Plantacao**: <ins>id_plantacao</ins>, `qtd_plantas`, `qtd_plantas_max`, `fk_id_ambiente`
+    - **Mapa**: <ins>idMapa</ins>, `nome`
 
-**Recurso**: <ins>id_item</ins>, `nome`, `descricao`, `preco`
+    - **Mineral**: <ins>tipo_minério</ins>, `preço`
 
-**Recompensa**: <ins>id_Recompensa</ins>, `fk_Jogador_id`, `id_item`, `fk_Instancia_Missao`, `quantidade`
+    - **Minério_Bruto**: <ins>id_minerio_bruto</ins>, ` bool_minerado`
 
-**Semente**: <ins>id_semente</ins>, `nome`, `descricao`, `diaAtual`, `prontoColher`, `id_item`, `fk_instancia_planta_id`
+    - **Missão**: <ins>tipo</ins>, `nome`, `descrição`, `tipo`
 
-**Solo**: <ins>id_solo</ins>, `tipo_recurso`, `fk_id_plantacao`, `bool_regou`, `bool_livre`
+    - **Plantação**: `qtd_plantas`
 
-**Utensilio**: <ins>id_item</ins>, `tipo_utensilio`
+    - **Recompensa**: <ins>id</ins>, `tipoItem`, `quantidade`
 
+    - **Recurso**: <ins>tipo_recurso</ins>
 
-## 3. Relacionamentos
+    - **Semente**: <ins>id</ins>, `bool_regou`, `bool_livre`,`diaAtual`, `diaDropar`, `prontoColher`
 
-**Missão possui InstânciaMissão**
+    - **Solo**: <ins>tipo_recurso</ins>
 
--   Uma missão pode possuir nenhuma ou várias instâncias (0, n), mas uma instância de missão está relacionada apenas a uma missão (1, 1)
+    - **Utensilio**: <ins>tipo_utensílio</ins>, `nível`
 
-**Animal possui InstâciaAnimal**
 
--   Um tipo de animal pode possuir nenhuma ou várias instâncias (0, n), mas uma instância de animal está relacionada a apenas um tipo de animal (1, 1).
+    ## 3. Relacionamentos
 
-**Inventario contém Item**
+    **Missão possui InstânciaMissão**
 
--   Um inventário pode conter nenhum ou vários itens (0, n), mas um item está contido em apenas um inventário por vez (1,1) 
+    -   Uma missão pode possuir nenhuma ou várias instâncias (0, n), mas uma instância de missão está relacionada apenas a uma missão (1, 1)
 
-**Minerio Bruto <ins>dropa</ins> Mineral**
+    **Animal possui InstâciaAnimal**
 
-- Um minério bruto <ins>dropa</ins> apenas um tipo de mineral (1, 1) e um mineral pode ser <ins>dropado</ins> por nenhum ou vários minérios brutos (0, n) 
+    -   Um tipo de animal pode possuir nenhuma ou várias instâncias (0, n), mas uma instância de animal está relacionada a apenas um tipo de animal (1, 1).
 
-**Instancia De Planta <ins>dropa</ins> Consumivel**
+    **Inventario contém Item**
 
-- Uma instância de planta <ins>dropa</ins> nenhum ou vários consumíveis (0, n) e um consumível pode ser <ins>dropado</ins> por nenhuma ou vários instâncias de planta(0, n).
+    -   Um inventário pode conter nenhum ou vários itens (0, n), mas um item está contido em apenas um inventário por vez (1,1) 
 
-**Jogador quebra Minerio Bruto**
+    **Minerio Bruto <ins>dropa</ins> Mineral**
 
-- Um jogador pode quebrar nenhum ou vários minérios brutos (0, n) e um minério bruto é quebrado apenas por um jogador (1, 1)
+    - Um minério bruto <ins>dropa</ins> apenas um tipo de mineral (1, 1) e um mineral pode ser <ins>dropado</ins> por nenhum ou vários minérios brutos (0, n) 
 
-**Jogador completa InstânciaMissão**
+    **Instancia De Planta <ins>dropa</ins> Consumivel**
 
-- Um jogador pode completar nenhuma ou várias instâncias de missões (0, n) e uma instância de missão é completada apenas por um jogador (1, 1) 
+    - Uma instância de planta <ins>dropa</ins> nenhum ou vários consumíveis (0, n) e um consumível pode ser <ins>dropado</ins> por nenhuma ou vários instâncias de planta(0, n).
 
-**Jogador possui Inventario**
+    **Jogador quebra Minerio Bruto**
 
-- Um jogador possui nenhum ou apenas um inventário (0, 1) e um inventário é possuído apenas por um um jogador (1, 1)
+    - Um jogador pode quebrar nenhum ou vários minérios brutos (0, n) e um minério bruto é quebrado apenas por um jogador (1, 1)
 
-**Jogador possui HabMineração**
+    **Jogador completa InstânciaMissão**
 
-- Um jogador possui apenas uma habilidade de mineração e uma habilidade de mineração é possuída apenas por um jogador (1, 1) - arrumar: cardinalidade no DER
+    - Um jogador pode completar nenhuma ou várias instâncias de missões (0, n) e uma instância de missão é completada apenas por um jogador (1, 1) 
 
-**Jogador possui Habcombate**
+    **Jogador possui Inventario**
 
-- Um jogador possui apenas uma habilidade de combate e uma habilidade de combate é possuída apenas por um jogador (1, 1)
+    - Um jogador possui nenhum ou apenas um inventário (0, 1) e um inventário é possuído apenas por um um jogador (1, 1)
 
-**Jogador possui Habcultivo**
+    **Jogador possui HabMineração**
 
-- Um jogador possui apenas uma habilidade de cultivo e uma habilidade de cultivo é possuída apenas por um jogador (1, 1)  
+    - Um jogador possui apenas uma habilidade de mineração e uma habilidade de mineração é possuída apenas por um jogador (1, 1) - arrumar: cardinalidade no DER
 
-**Jogador interage InstâciAanimal**
+    **Jogador possui Habcombate**
 
-- Um jogador pode interagir com nenhuma ou várias instâncias de animais (0, n) e uma instância de animal pode interagir apenas com um jogador (1, 1)
+    - Um jogador possui apenas uma habilidade de combate e uma habilidade de combate é possuída apenas por um jogador (1, 1)
 
-**Jogador está Ambiente**
+    **Jogador possui Habcultivo**
 
-- Um jogador pode estar em nenhum ou apenas um ambiente (0, 1) e um ambiente pode ter apenas um jogador (1, 1) 
+    - Um jogador possui apenas uma habilidade de cultivo e uma habilidade de cultivo é possuída apenas por um jogador (1, 1)  
 
-**Jogador ataca InstânciaInimigo**
+    **Jogador interage InstâciAanimal**
 
-- Um jogador pode atacar nenhuma ou várias instancias de um inimigo (0, n) e uma instância de inimigo pode ser atacada apenas por um jogador (1, 1)
+    - Um jogador pode interagir com nenhuma ou várias instâncias de animais (0, n) e uma instância de animal pode interagir apenas com um jogador (1, 1)
 
-**Jogador planta Semente**
+    **Jogador está Ambiente**
 
-- Um jogador pode plantar nenhuma ou várias sementes (0, n) e uma semente é plantada apenas por um jogador (1, 1)
+    - Um jogador pode estar em nenhum ou apenas um ambiente (0, 1) e um ambiente pode ter apenas um jogador (1, 1) 
 
-**Jogador rega Solo**
+    **Jogador ataca InstânciaInimigo**
 
-- Um jogador pode regar nenhum ou vários solos (0, n) e um solo é regado apenas por um jogador (1, 1) 
+    - Um jogador pode atacar nenhuma ou várias instancias de um inimigo (0, n) e uma instância de inimigo pode ser atacada apenas por um jogador (1, 1)
 
-**Inimigo possui InstânciaInimigo**
+    **Jogador planta Semente**
 
-- Um inimigo pode possuir nenhuma ou várias instâncias e uma instância de inimigo (0, n) é atreladada a apenas um tipo de inimigo (1, 1)
+    - Um jogador pode plantar nenhuma ou várias sementes (0, n) e uma semente é plantada apenas por um jogador (1, 1)
 
-**InstânciaInimigo pertence Caverna**
+    **Jogador rega Solo**
 
-- Uma instância de inimigo pertence a apenas uma caverna (1, 1) e uma caverna tem nenhuma ou várias instâncias de inimigo (0, n)  
+    - Um jogador pode regar nenhum ou vários solos (0, n) e um solo é regado apenas por um jogador (1, 1) 
 
-**Caixa De Mensagem contém InstânciaMissão**
+    **Inimigo possui InstânciaInimigo**
 
-- Uma caixa de mensagem contém nenhuma ou várias instãncias de missões (0, n) e uma instância de missão pode estar contida ou não em uma caixa de mensagem (0, 1) 
+    - Um inimigo pode possuir nenhuma ou várias instâncias e uma instância de inimigo (0, n) é atreladada a apenas um tipo de inimigo (1, 1)
 
-**Caverna contém Minerio Bruto**
+    **InstânciaInimigo pertence Caverna**
 
-- Uma caverna contém nenhum ou vários minérios brutos (0, n) e um minério bruto pode estar contido em nenhuma ou várias cavernas (0, n) 
+    - Uma instância de inimigo pertence a apenas uma caverna (1, 1) e uma caverna tem nenhuma ou várias instâncias de inimigo (0, n)  
 
-**Estoque possui Item**
+    **Caixa De Mensagem contém InstânciaMissão**
 
-- Um estoque possui nenhum ou vários itens (0, n) e um item está contido em apenas um estoque (1, 1)
+    - Uma caixa de mensagem contém nenhuma ou várias instãncias de missões (0, n) e uma instância de missão pode estar contida ou não em uma caixa de mensagem (0, 1) 
 
-**Semente gera InstanciaPlanta**
+    **Caverna contém Minerio Bruto**
 
-- Uma semente gera apenas uma instancia de planta (1, 1) e uma instancia de planta gerar por nenhuma ou várias sementes (0, n)
+    - Uma caverna contém nenhum ou vários minérios brutos (0, n) e um minério bruto pode estar contido em nenhuma ou várias cavernas (0, n) 
 
-**Mapa possui Ambiente**
+    **Estoque possui Item**
 
-- Um mapa possuí nenhum ou vários ambientes (0, n) e um ambiente é possuído por apenas um mapa (1, 1)  
+    - Um estoque possui nenhum ou vários itens (0, n) e um item está contido em apenas um estoque (1, 1)
 
-**Plantação possui Solo**
+    **Semente gera InstanciaPlanta**
 
-- Uma plantação possui nenhum ou vários solos (0, n) e um solo é possído apenas por uma plantação (1, 1)  
+    - Uma semente gera apenas uma instancia de planta (1, 1) e uma instancia de planta gerar por nenhuma ou várias sementes (0, n)
 
-**CasaJogador possui Caixa De Mensagem**
+    **Mapa possui Ambiente**
 
-- Uma casa do jogador possui nenhuma ou apenas uma (0, 1) caixa de mensagem e uma caixa de mensagem é possuida apenas por uma casa do jogador (1, 1)
+    - Um mapa possuí nenhum ou vários ambientes (0, n) e um ambiente é possuído por apenas um mapa (1, 1)  
 
-**InstâciaAnimal está Celeiro**
+    **Plantação possui Solo**
 
-- Uma instância de animal pode estar apenas em um celeiro (1, 1) e um celeiro pode ter nenhuma oou várias instâncias de animais (0, n)   
+    - Uma plantação possui nenhum ou vários solos (0, n) e um solo é possído apenas por uma plantação (1, 1)  
 
-**Loja possui Estoque**
+    **CasaJogador possui Caixa De Mensagem**
 
-- Uma loja possui nenhum ou apenas um estoque (0, 1) e um estoque é possuido por apenas uma loja (1, 1)
+    - Uma casa do jogador possui nenhuma ou apenas uma (0, 1) caixa de mensagem e uma caixa de mensagem é possuida apenas por uma casa do jogador (1, 1)
 
-**Loja melhora Utensílio**
+    **InstâciaAnimal está Celeiro**
 
--   Uma loja melhora nenhum ou vários untensílios (0, n) e um utensílio é melhorado apenas por uma loja (1, 1)
+    - Uma instância de animal pode estar apenas em um celeiro (1, 1) e um celeiro pode ter nenhuma oou várias instâncias de animais (0, n)   
+
+    **Loja possui Estoque**
+
+    - Uma loja possui nenhum ou apenas um estoque (0, 1) e um estoque é possuido por apenas uma loja (1, 1)
+
+    **Loja melhora Utensílio**
+
+    -   Uma loja melhora nenhum ou vários untensílios (0, n) e um utensílio é melhorado apenas por uma loja (1, 1)
+
+=== "Módulo 2"
+
+    ## 1. Entidades
+
+    - **Ambiente**
+        - **caverna**
+        - **casaJogador**
+        - **celeiro**
+
+    - **Animal**
+
+    - **Caixa de mensagem**
+
+    - **Estoque**
+
+    - **Inimigo**
+
+    - **InstâciaAnimal**
+
+    - **InstânciaInimigo**
+
+    - **InstanciaMissão**
+
+    - **InstanciaPlanta**
+
+    - **Inventário**
+
+    - **Jogador**
+
+    - **Loja**
+
+    - **Mapa**
+
+    - **Mineral**
+
+    - **Plantação**
+
+    - **Recompensa**
+
+    - **Recurso**
+
+    - **Semente**
+
+    - **Solo**
+
+    - **Habilidade**
+        - **HabCombate**
+        - **HabCultivo**
+        - **HabMineração**
+
+    - **Item**
+        - **Consumivel**
+        - **Semente**
+        - **Utensilio**
+            - **arma**
+            - **Ferramenta**
+
+    - **Missão**
+        - **Coleta**
+        - **Combate**
+
+    ## 2. Atributos
+
+    **Ambiente**: <ins>id_ambiente</ins>, `tipo`, `fk_id_mapa`, `fk_jogador_id`, `descricao`, `transitar_1`, `transitar_2`, `transitar_3`, `transitar_4`, `transitar_5`, `transitar_6`
+
+    **Animal**: <ins>id_animal</ins>, `nome_animal`, `diasTotalDropar`, `tipo_animal`, `itemDrop`, `preco`
+
+    **arma**: <ins>id_item</ins>, `nome`, `descricao`, `fk_id_utensilio`
+
+    **Caixa de Mensagem**: <ins>id_Caixa_Mensagem</ins>, `fk_Jogador_id`, `fk_Instancia_Missao`
+
+    **casaJJogador**: <ins> NÃO POSSUI CHAVE PRIMÁRIA (precisa ser adicionada)</ins>, `fk_id_ambiente`, `fk_id_caixa_mensagem`
+
+    **caverna**: <ins>andar</ins>, `fk_id_ambiente`, `quantidade_mobs`, `qtd_minerio`, `fk_id_minerio_item`, `fk_id_item_recompensa`
+
+    **celeiro**: <ins>id_celeiro</ins>, `qtd_animais`, `qtd_max_animais`, `fk_id_ambiente`
+
+    **Consumivel**: <ins>id_item</ins>, `nome`, `descricao`, `efeito_vida`
+
+    **Estoque**: <ins>id_estoque</ins>
+
+    **Ferramenta**: <ins>id_item</ins>, `nome`, `descricao`, `fk_id_utensilio`, `eficiencia`, `nivel`
+
+    **Habilidade**: <ins>id_habilidade</ins>, `tipo`
+
+    **HabCombate**: <ins>fk_Habilidade_id</ins>, `nivel`, `xpMin`, `xpMax`, `vidaBonus`, `danoBonus`
+
+    **HabCultivo**: <ins>fk_Habilidade_id</ins>, `nivel`, `xpMin`, `xpMax`, `cultivoBonus`, `reducaoEnergiaCultiva`
+
+    **HabMineracao**: <ins>fk_Habilidade_id</ins>, `reducaoEnergiaMinera`, `minerioBonus`, `nivel`, `xpMin`, `xpMax`
+
+    **Inimigo**: <ins>id_inimigo</ins>, `nome`, `tipo`, `vidaMax`, `dano`
+
+    **InstanciaAnimal**: <ins>id_instancia_de_animal</ins>, `prontoDropa`, `diaAtual`, `fk_Animal_id`, `fk_Jogador_id`, `fk_Celeiro_id`
+
+    **InstanciaInimigo**: <ins>id_instancia_de_inimigo</ins>, `vidaAtual`, `fk_Caverna_andar`, `fk_inimigo_id`
+
+    **InstanciaPlanta**: <ins>id_instancia_de_planta</ins>, `nome`, `diaDropar`, `plantaDrop`
+
+    **InstanciaMissao**: <ins>id_Instancia_Missao</ins>, `fk_id_jogador`, `fk_Missao`, `missao_finalizada`
+
+    **Inventário**: <ins>id_inventario</ins>, `fk_id_jogador`
+
+    **Item**: <ins>id_item</ins>, `tipo_item`, `fk_estoque`, `fk_inventario_id`
+
+    **Jogador**: <ins>id_jogador</ins>, `nome`, `dia`, `tempo`, `vidaMax`, `vidaAtual`, `xp_mineracao`, `xp_cultivo`, `xp_combate`, `dano_ataque`, `fk_habMineracao_fk_Habilidade_id`, `fk_habCombate_fk_Habilidade_id`, `fk_habCultivo_fk_Habilidade_id`
+
+    **Loja**: <ins>id_loja</ins>, `nome`, `proprietario`, `fk_id_ambiente`, `fk_id_estoque`
+
+    **Mapa**: <ins>id_mapa</ins>, `nome`
+
+    **Mineral**: <ins>id_item</ins>, `nome`, `descricao`, `resistencia`, `preco`
+
+    **MissaoCombate**: <ins>fk_id_missao</ins>, `fk_id_Inimigo`, `nome`, `descricao`, `dataInicio`, `dataFinalizacao`
+
+    **MissaoColeta**: <ins>fk_id_missao</ins>, `fk_id_minerio`, `nome`, `descricao`, `dataInicio`, `dataFinalizacao`
+
+    **Missao**: <ins>id_missao</ins>, `tipo`
+
+    **Plantacao**: <ins>id_plantacao</ins>, `qtd_plantas`, `qtd_plantas_max`, `fk_id_ambiente`
+
+    **Recurso**: <ins>id_item</ins>, `nome`, `descricao`, `preco`
+
+    **Recompensa**: <ins>id_Recompensa</ins>, `fk_Jogador_id`, `id_item`, `fk_Instancia_Missao`, `quantidade`
+
+    **Semente**: <ins>id_semente</ins>, `nome`, `descricao`, `diaAtual`, `prontoColher`, `id_item`, `fk_instancia_planta_id`
+
+    **Solo**: <ins>id_solo</ins>, `tipo_recurso`, `fk_id_plantacao`, `bool_regou`, `bool_livre`
+
+    **Utensilio**: <ins>id_item</ins>, `tipo_utensilio`
+
+
+    ## 3. Relacionamentos
+
+    **Missão possui InstânciaMissão**
+
+    -   Uma missão pode possuir nenhuma ou várias instâncias (0, n), mas uma instância de missão está relacionada apenas a uma missão (1, 1)
+
+    **Animal possui InstâciaAnimal**
+
+    -   Um tipo de animal pode possuir nenhuma ou várias instâncias (0, n), mas uma instância de animal está relacionada a apenas um tipo de animal (1, 1).
+
+    **Inventario contém Item**
+
+    -   Um inventário pode conter nenhum ou vários itens (0, n), mas um item está contido em apenas um inventário por vez (1,1) 
+
+    **Minerio Bruto <ins>dropa</ins> Mineral**
+
+    - Um minério bruto <ins>dropa</ins> apenas um tipo de mineral (1, 1) e um mineral pode ser <ins>dropado</ins> por nenhum ou vários minérios brutos (0, n) 
+
+    **Instancia De Planta <ins>dropa</ins> Consumivel**
+
+    - Uma instância de planta <ins>dropa</ins> nenhum ou vários consumíveis (0, n) e um consumível pode ser <ins>dropado</ins> por nenhuma ou vários instâncias de planta(0, n).
+
+    **Jogador quebra Minerio Bruto**
+
+    - Um jogador pode quebrar nenhum ou vários minérios brutos (0, n) e um minério bruto é quebrado apenas por um jogador (1, 1)
+
+    **Jogador completa InstânciaMissão**
+
+    - Um jogador pode completar nenhuma ou várias instâncias de missões (0, n) e uma instância de missão é completada apenas por um jogador (1, 1) 
+
+    **Jogador possui Inventario**
+
+    - Um jogador possui nenhum ou apenas um inventário (0, 1) e um inventário é possuído apenas por um um jogador (1, 1)
+
+    **Jogador possui HabMineração**
+
+    - Um jogador possui apenas uma habilidade de mineração e uma habilidade de mineração é possuída apenas por um jogador (1, 1) - arrumar: cardinalidade no DER
+
+    **Jogador possui Habcombate**
+
+    - Um jogador possui apenas uma habilidade de combate e uma habilidade de combate é possuída apenas por um jogador (1, 1)
+
+    **Jogador possui Habcultivo**
+
+    - Um jogador possui apenas uma habilidade de cultivo e uma habilidade de cultivo é possuída apenas por um jogador (1, 1)  
+
+    **Jogador interage InstâciAanimal**
+
+    - Um jogador pode interagir com nenhuma ou várias instâncias de animais (0, n) e uma instância de animal pode interagir apenas com um jogador (1, 1)
+
+    **Jogador está Ambiente**
+
+    - Um jogador pode estar em nenhum ou apenas um ambiente (0, 1) e um ambiente pode ter apenas um jogador (1, 1) 
+
+    **Jogador ataca InstânciaInimigo**
+
+    - Um jogador pode atacar nenhuma ou várias instancias de um inimigo (0, n) e uma instância de inimigo pode ser atacada apenas por um jogador (1, 1)
+
+    **Jogador planta Semente**
+
+    - Um jogador pode plantar nenhuma ou várias sementes (0, n) e uma semente é plantada apenas por um jogador (1, 1)
+
+    **Jogador rega Solo**
+
+    - Um jogador pode regar nenhum ou vários solos (0, n) e um solo é regado apenas por um jogador (1, 1) 
+
+    **Inimigo possui InstânciaInimigo**
+
+    - Um inimigo pode possuir nenhuma ou várias instâncias e uma instância de inimigo (0, n) é atreladada a apenas um tipo de inimigo (1, 1)
+
+    **InstânciaInimigo pertence Caverna**
+
+    - Uma instância de inimigo pertence a apenas uma caverna (1, 1) e uma caverna tem nenhuma ou várias instâncias de inimigo (0, n)  
+
+    **Caixa De Mensagem contém InstânciaMissão**
+
+    - Uma caixa de mensagem contém nenhuma ou várias instãncias de missões (0, n) e uma instância de missão pode estar contida ou não em uma caixa de mensagem (0, 1) 
+
+    **Caverna contém Minerio Bruto**
+
+    - Uma caverna contém nenhum ou vários minérios brutos (0, n) e um minério bruto pode estar contido em nenhuma ou várias cavernas (0, n) 
+
+    **Estoque possui Item**
+
+    - Um estoque possui nenhum ou vários itens (0, n) e um item está contido em apenas um estoque (1, 1)
+
+    **Semente gera InstanciaPlanta**
+
+    - Uma semente gera apenas uma instancia de planta (1, 1) e uma instancia de planta gerar por nenhuma ou várias sementes (0, n)
+
+    **Mapa possui Ambiente**
+
+    - Um mapa possuí nenhum ou vários ambientes (0, n) e um ambiente é possuído por apenas um mapa (1, 1)  
+
+    **Plantação possui Solo**
+
+    - Uma plantação possui nenhum ou vários solos (0, n) e um solo é possído apenas por uma plantação (1, 1)  
+
+    **CasaJogador possui Caixa De Mensagem**
+
+    - Uma casa do jogador possui nenhuma ou apenas uma (0, 1) caixa de mensagem e uma caixa de mensagem é possuida apenas por uma casa do jogador (1, 1)
+
+    **InstâciaAnimal está Celeiro**
+
+    - Uma instância de animal pode estar apenas em um celeiro (1, 1) e um celeiro pode ter nenhuma oou várias instâncias de animais (0, n)   
+
+    **Loja possui Estoque**
+
+    - Uma loja possui nenhum ou apenas um estoque (0, 1) e um estoque é possuido por apenas uma loja (1, 1)
+
+    **Loja melhora Utensílio**
+
+    -   Uma loja melhora nenhum ou vários untensílios (0, n) e um utensílio é melhorado apenas por uma loja (1, 1)
 
 ## Versionamento
 
