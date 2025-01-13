@@ -203,7 +203,8 @@ CREATE TABLE IF NOT EXISTS arma (--popular Isaac
     id_item INTEGER PRIMARY KEY,
     nome VARCHAR(100) NOT NULL,
     descricao VARCHAR(100) NOT NULL,
-    fk_id_utensilio INTEGER NOT NULL,    
+    fk_id_utensilio INTEGER NOT NULL, 
+    FOREIGN KEY (id_item) REFERENCES item(id_item),
     FOREIGN KEY (fk_id_utensilio) REFERENCES utensilio(id_item)
 );
 
