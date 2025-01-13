@@ -24,7 +24,7 @@ O diagrama fornece uma visão lógica do banco de dados, fornecendo um conceito 
     <font size="2"><p style="text-align: center">Figura 1: DER versão 2</p></font>
 
     <center>
-        ![imagem](../img/DER_v1.png)
+        ![imagem](../img/DER_v2.png)
     </center>
 
     <font size="2"><p style="text-align: center">Fonte: Elaboração própria</p></font>
@@ -34,3 +34,4 @@ O diagrama fornece uma visão lógica do banco de dados, fornecendo um conceito 
 | Data | Versão | Autor | Alterações | 
 | :--: | :----: | ----- | ---------- | 
 |23/11/2024|  `1.0`   | [Manuella Valadares](https://github.com/manuvaladares)| Criação do documento DER |
+|13/01/2024|  `1.1`   | [Marcos Marinho](https://github.com/devMarcosVM)| Criação do documento DER |
