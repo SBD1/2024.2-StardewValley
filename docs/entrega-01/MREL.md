@@ -8,7 +8,7 @@ O Modelo Relacional(MREL) apresenta um diagrama lógico de como as entidades e s
 <font size="2"><p style="text-align: center">Figura 1: MREL versão 1</p></font>
 
 <center>
-    ![imagem](../img/MERL_v1.png)
+    ![imagem](../img/MERL_v2.png)
 </center>
 
 <font size="2"><p style="text-align: center">Fonte: Elaboração própria</p></font>
@@ -17,4 +17,5 @@ O Modelo Relacional(MREL) apresenta um diagrama lógico de como as entidades e s
 
 | Data | Versão | Autor | Alterações | 
 | :--: | :----: | ----- | ---------- | 
-|23/11/2024| `1.0`| [Manuella Valadares](https://github.com/manuvaladares)| Versão Inicial do Modelo relacional(MREL)|
+| 23/11/2024 | `1.0`| [Manuella Valadares](https://github.com/manuvaladares)| Versão Inicial do Modelo relacional (MREL)|
+| 12/01/2025 | `1.1`| [Gabriel Fernando de Jesus Silva](https://github.com/MMcLovin)| Versão atualizada do Modelo relacional (MREL)|
