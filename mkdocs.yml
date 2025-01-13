@@ -8,10 +8,14 @@ nav:
   - Apresentações: 
     - Módulo 1: entrega-01/apresentação_1.md
     - Módulo 2: entrega-02/apresentação_2.md
-  - Diagrama Entidade-Relacionamento: entrega-01/DER.md
-  - Dicionário de Dados: entrega-01/DicionáriodeDados.md
-  - Modelo Entidade-Relacionamento: entrega-01/MER.md
-  - Modelo Relacional: entrega-01/MREL.md
+  - Módulo 1:
+    - Diagrama Entidade-Relacionamento: entrega-01/DER.md
+    - Dicionário de Dados: entrega-01/DicionáriodeDados.md
+    - Modelo Entidade-Relacionamento: entrega-01/MER.md
+    - Modelo Relacional: entrega-01/MREL.md
+  - Módulo 2:
+    - DDL: entrega-02/ddl.md
+    - DML: entrega-02/dml.md
 
 extra_css:
   - stylesheets/stardew.css
