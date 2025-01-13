@@ -67,7 +67,7 @@ JOIN
 JOIN 
     item i ON i.fk_estoque = e.id_estoque
 WHERE 
-    l.nome = 'Armazém do Pierre'; 
+    l.nome = 'Armazém do Pierre' AND i.tipo_item = 'recurso'; 
 
 --retornar os atributos de um inimigo pelo id(%s)
 SELECT *
@@ -77,3 +77,24 @@ WHERE nome = %s
 SELECT *
 FROM Animal
 WHERE id_animal = %s
+
+-- Listar os itens de um inventário específico
+SELECT i.id_item, i.tipo_item, i.fk_inventario_id
+FROM item i
+JOIN inventario inv ON i.fk_inventario_id = inv.id_inventario
+WHERE inv.fk_id_jogador = 0
+
+-- Esta consulta SQL seleciona o nome do jogador e os níveis de habilidades de mineração, combate e cultivo.
+SELECT 
+    j.nome AS jogador_nome,
+    hm.nivel AS nivel_mineracao,
+    hc.nivel AS nivel_combate,
+    hcu.nivel AS nivel_cultivo
+FROM 
+    Jogador j
+JOIN 
+    habMineracao hm ON j.fk_habMineracao_fk_Habilidade_id = hm.fk_Habilidade_id
+JOIN 
+    habCombate hc ON j.fk_habCombate_fk_Habilidade_id = hc.fk_Habilidade_id
+JOIN 
+    habCultivo hcu ON j.fk_habCultivo_fk_Habilidade_id = hcu.fk_Habilidade_id;
