@@ -49,6 +49,62 @@ def listar_personagens():
         cursor.close()
         conn.close()
 
+def exibir_habilidades_jogador(jogador):
+    clear_terminal()
+    
+    try:
+        conn = get_connection()
+        cursor = conn.cursor()
+        cursor.execute("SELECT * FROM Habilidade WHERE id_habilidade in (%s,%s,%s)", (jogador[10],jogador[11],jogador[12]))
+        
+        habilidades = cursor.fetchall()
+        
+
+       #habilidade mineracao
+        conn = get_connection()
+        cursor = conn.cursor()
+        cursor.execute("SELECT fk_Habilidade_id, nivel, reducaoEnergiaMinera,minerioBonus,xpMin,xpMax FROM habMineracao WHERE fk_Habilidade_id = %s",(habilidades[0][0],))
+        habMineracao = cursor.fetchone()
+        
+        #habilidade combate
+        conn = get_connection()
+        cursor = conn.cursor()
+        cursor.execute("SELECT fk_Habilidade_id,nivel, vidaBonus,danoBonus,xpMin,xpMax FROM habCombate WHERE fk_Habilidade_id = %s",(int(habilidades[1][0]),))
+        habCombate = cursor.fetchone()
+        
+        #habilidade cultivo
+        conn = get_connection()
+        cursor = conn.cursor()
+        cursor.execute("SELECT fk_Habilidade_id,nivel, cultivoBonus,reducaoEnergiaCultiva,xpMin,xpMax FROM habCultivo WHERE fk_Habilidade_id = %s",(habilidades[2][0],))
+        habCultivo = cursor.fetchone()
+        
+        print("\n============= Habilidades do Jogador =============\n")
+        
+        print("-" * 50)
+        print(f"Habilidade Mineração: ")
+        print(f"  Nível: {habMineracao[1]}")    
+        print(f"  Redução de Energia ao Minerar: {habMineracao[2]}%")
+        print(f"  Bônus de Minérios: {habMineracao[3]}")
+        print("-" * 50)
+        
+        print(f"Habilidade Combate: ")
+        print(f"  Nível: {habCombate[1]}") 
+        print(f"  Vida Extra: {habCombate[2]}")
+        print(f"  Dano Extra: {habCombate[3]}")
+        print("-" * 50)
+        
+        print(f"Habilidade Cultivo: ")
+        print(f"  Nível: {habCultivo[1]}")
+        print(f"  Redução de Energia ao Cultivar: {habCultivo[3]}%")
+        print(f"  Bônus de Cultivo:: {habCultivo[2]}")
+        print("-" * 50)
+        
+        input("\nDigite 1 para retornar ao menu\n>")
+        
+    except Exception as e:
+        print(f"Erro ao carregar habilidades: {e}")
+
+
 def obter_localizacao_jogador(jogador):
     try:
         conn = get_connection()
@@ -152,6 +208,7 @@ def menu_jogo(jogador):
         print("Suas opções:")
         opcoes_menu = [
             "1 - Andar no mapa",
+            "2 - Mostrar Habilidades",
             "9 - Sair do jogo"
         ]
         
@@ -162,6 +219,8 @@ def menu_jogo(jogador):
 
         if escolha == 1:
             andar_no_mapa(jogador, localizacao_atual)
+        elif escolha == 2:
+            exibir_habilidades_jogador(jogador)
         elif escolha == 9:
             break
         # break
