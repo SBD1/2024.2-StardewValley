@@ -67,7 +67,7 @@ JOIN
 JOIN 
     item i ON i.fk_estoque = e.id_estoque
 WHERE 
-    l.nome = 'Armazém do Pierre' AND i.tipo_item = 'recurso'; 
+    l.nome = 'Armazém do Pierre' AND i.tipo_item = 'recurso' 
 
 --retornar os atributos de um inimigo pelo id(%s)
 SELECT *

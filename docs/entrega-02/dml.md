@@ -6,8 +6,6 @@ DML, ou **Data Manipulation Language** (Linguagem de Manipulação de Dados), é
 
 ---
 
-## Inserção de Habilidades e Dados Relacionados
-
 ## Inserir uma habilidade básica
 
 ```sql
