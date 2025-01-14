@@ -323,7 +323,7 @@ O Modelo Entidade Relacionamento para bancos de dados é um modelo que descreve 
 
     **Caixa de Mensagem**: <ins>id_Caixa_Mensagem</ins>, `fk_Jogador_id`, `fk_Instancia_Missao`
 
-    **casaJJogador**: <ins> NÃO POSSUI CHAVE PRIMÁRIA (precisa ser adicionada)</ins>, `fk_id_ambiente`, `fk_id_caixa_mensagem`
+    **casaJJogador**: `fk_id_ambiente`, `fk_id_caixa_mensagem`
 
     **caverna**: <ins>andar</ins>, `fk_id_ambiente`, `quantidade_mobs`, `qtd_minerio`, `fk_id_minerio_item`, `fk_id_item_recompensa`
 
