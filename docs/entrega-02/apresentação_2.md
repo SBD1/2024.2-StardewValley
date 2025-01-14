@@ -7,16 +7,16 @@ Esta página tem como foco o vídeo de apresentação do módulo 2 do projeto. A
 
 <!-- Para o iframe do vídeo, use width="560" height="315" -->. 
 <div style="text-align: center;">
-
+    <iframe width="560" height="315" src="https://youtu.be/c6Xt_laGxcM" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
 </div>
 
 <p style="text-align: center">
-    <a href="link do vídeo">Link para o vídeo</a>
+    <a href="https://youtu.be/c6Xt_laGxcM">Link para o vídeo</a>
 </p>
 
 ## Bibliografia
 
-> 1. YouTube. Disponível em: [YouTube](https://youtube.com/kU4T5trd2uM). Acesso em: 13 de Janeiro de 2025.
+> 1. YouTube. Disponível em: [YouTube](https://youtu.be/c6Xt_laGxcM"). Acesso em: 13 de Janeiro de 2025.
 
 | Data | Versão | Autor | Alterações | 
 | :--: | :----: | ----- | ---------- | 
