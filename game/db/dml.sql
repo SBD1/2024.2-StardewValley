@@ -100,22 +100,22 @@ INSERT INTO inimigo (id_inimigo, nome, tipo, vidaMax, dano) VALUES
 INSERT INTO Mapa (id_mapa, nome) VALUES
     (1, 'mundo');
 
-INSERT INTO Ambiente (id_ambiente, tipo, fk_id_mapa, fk_jogador_id, descricao, transitar_1, transitar_2, transitar_3, transitar_4, transitar_5, transitar_6) VALUES
-    (1, 'Cabana', 1, 0, 'Casa de troncos herdada pelo seu avô. Um lugar aconchegante para descansar após um longo dia de trabalho.', 2, 3, 4, 5, NULL, NULL),
-    (2, 'Plantação', 1, NULL, 'Uma vasta área de terra cercada por montanhas. Aqui, você pode plantar sementes.', 1, NULL, NULL, NULL, NULL, NULL),
-    (3, 'Celeiro', 1, NULL, 'Um amplo celeiro de madeira com cheiro de feno fresco.', 1, NULL, NULL, NULL, NULL, NULL),
-    (4, 'Floresta', 1, NULL, 'Uma floresta densa e vibrante, onde o som dos pássaros e o farfalhar das folhas criam uma melodia serena. Recursos valiosos e segredos aguardam entre as árvores sombrias.', 1, 6, 8, 15, NULL, NULL),
-    (5, 'Praça da Vila', 1, NULL, 'O coração da vila, cercado por jardins coloridos e bancos confortáveis. É o lugar perfeito para festivais, encontros e compartilhar histórias com os moradores.', 1, 9, 13, 12, 11, 10),
-    (6, 'Guilda dos Aventureiros', 1, NULL, 'Um refúgio para os bravos. Aqui, aventureiros se reúnem para relatar suas conquistas, comprar equipamentos e aceitar novos desafios.', 4, NULL, NULL, NULL, NULL, NULL),
-    (7, 'Comércio do Deserto', 1, NULL, 'Um mercado exótico no meio do deserto, onde mercadores misteriosos vendem itens raros e valiosos.', 8, NULL, NULL, NULL, NULL, NULL),
-    (8, 'Deserto', 1, NULL, 'Um vasto mar de areia escaldante, onde o vento sopra histórias antigas e tesouros esquecidos podem ser desenterrados.', 7, 4, NULL, NULL, NULL, NULL),
-    (9, 'Centro Comunitário', 1, NULL, 'Um edifício abandonado com um charme nostálgico. Restaurá-lo trará benefícios para toda a vila.', 14, 5, NULL, NULL, NULL, NULL),
-    (10, 'Praia', 1, NULL, 'Uma orla tranquila, onde as ondas acariciam a areia. É o lugar perfeito para pescar, relaxar ou encontrar tesouros marítimos.', 5, NULL, NULL, NULL, NULL, NULL),
-    (11, 'Armazém do Pierre', 1, NULL, 'O local favorito dos moradores para adquirir sementes, alimentos frescos e outros suprimentos agrícolas.', 5, NULL, NULL, NULL, NULL, NULL),
-    (12, 'Clínica do Harvey', 1, NULL, 'Um pequeno consultório médico onde Harvey cuida da saúde dos moradores com atenção e dedicação.', 5, NULL, NULL, NULL, NULL, NULL),
-    (13, 'Ferreiro', 1, NULL, 'Um local quente e barulhento onde ferramentas ganham vida e minérios são transformados em itens essenciais.', 5, NULL, NULL, NULL, NULL, NULL),
-    (14, 'Mercado Joja', 1, NULL, 'Uma megaloja moderna e impessoal, onde tudo está à venda... ao custo do espírito comunitário.', 9, NULL, NULL, NULL, NULL, NULL),
-    (15, 'Caverna', 1, NULL, 'As paredes são cobertas por musgo e pequenas pedras brilham na escuridão. Um lugar ideal para começar a coletar minérios.', 4, NULL, NULL, NULL, NULL, NULL);
+INSERT INTO Ambiente (id_ambiente, tipo, nome, fk_id_mapa, fk_jogador_id, descricao, transitar_1, transitar_2, transitar_3, transitar_4, transitar_5, transitar_6) VALUES
+    (1, 'CasaJogador','Cabana', 1, 0, 'Casa de troncos herdada pelo seu avô. Um lugar aconchegante para descansar após um longo dia de trabalho.', 2, 3, 4, 5, NULL, NULL),
+    (2, 'Plantação', 'Plantação', 1, NULL, 'Uma vasta área de terra cercada por montanhas. Aqui, você pode plantar sementes.', 1, NULL, NULL, NULL, NULL, NULL),
+    (3, 'Celeiro', 'Celeiro', 1, NULL, 'Um amplo celeiro de madeira com cheiro de feno fresco.', 1, NULL, NULL, NULL, NULL, NULL),
+    (4, 'Normal', 'Floresta', 1, NULL, 'Uma floresta densa e vibrante, onde o som dos pássaros e o farfalhar das folhas criam uma melodia serena. Recursos valiosos e segredos aguardam entre as árvores sombrias.', 1, 6, 8, 15, NULL, NULL),
+    (5, 'Normal','Praça da Vila', 1, NULL, 'O coração da vila, cercado por jardins coloridos e bancos confortáveis. É o lugar perfeito para festivais, encontros e compartilhar histórias com os moradores.', 1, 9, 13, 12, 11, 10),
+    (6, 'Loja','Guilda dos Aventureiros', 1, NULL, 'Um refúgio para os bravos. Aqui, aventureiros se reúnem para relatar suas conquistas, comprar equipamentos e aceitar novos desafios.', 4, NULL, NULL, NULL, NULL, NULL),
+    (7, 'Loja','Comércio do Deserto', 1, NULL, 'Um mercado exótico no meio do deserto, onde mercadores misteriosos vendem itens raros e valiosos.', 8, NULL, NULL, NULL, NULL, NULL),
+    (8, 'Normal','Deserto', 1, NULL, 'Um vasto mar de areia escaldante, onde o vento sopra histórias antigas e tesouros esquecidos podem ser desenterrados.', 7, 4, NULL, NULL, NULL, NULL),
+    (9, 'Normal','Centro Comunitário', 1, NULL, 'Um edifício abandonado com um charme nostálgico. Restaurá-lo trará benefícios para toda a vila.', 14, 5, NULL, NULL, NULL, NULL),
+    (10, 'Normal','Praia', 1, NULL, 'Uma orla tranquila, onde as ondas acariciam a areia. É o lugar perfeito para pescar, relaxar ou encontrar tesouros marítimos.', 5, NULL, NULL, NULL, NULL, NULL),
+    (11, 'Loja', 'Armazém do Pierre', 1, NULL, 'O local favorito dos moradores para adquirir sementes, alimentos frescos e outros suprimentos agrícolas.', 5, NULL, NULL, NULL, NULL, NULL),
+    (12, 'Normal', 'Clínica do Harvey', 1, NULL, 'Um pequeno consultório médico onde Harvey cuida da saúde dos moradores com atenção e dedicação.', 5, NULL, NULL, NULL, NULL, NULL),
+    (13, 'Loja', 'Ferreiro', 1, NULL, 'Um local quente e barulhento onde ferramentas ganham vida e minérios são transformados em itens essenciais.', 5, NULL, NULL, NULL, NULL, NULL),
+    (14, 'Loja', 'Mercado Joja', 1, NULL, 'Uma megaloja moderna e impessoal, onde tudo está à venda... ao custo do espírito comunitário.', 9, NULL, NULL, NULL, NULL, NULL),
+    (15, 'Caverna', 'Caverna', 1, NULL, 'As paredes são cobertas por musgo e pequenas pedras brilham na escuridão. Um lugar ideal para começar a coletar minérios.', 4, NULL, NULL, NULL, NULL, NULL);
 INSERT INTO estoque(id_estoque) VALUES
     (1),
     (2),

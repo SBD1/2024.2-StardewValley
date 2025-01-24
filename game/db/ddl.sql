@@ -92,6 +92,7 @@ CREATE TABLE IF NOT EXISTS inventario (
 CREATE TABLE IF NOT EXISTS Ambiente (
     id_ambiente INT PRIMARY KEY,
     tipo VARCHAR(50),
+    nome VARCHAR(50),
     fk_id_mapa INT NOT NULL,
     fk_jogador_id INT,
     descricao TEXT NOT NULL,
@@ -107,6 +108,8 @@ CREATE TABLE IF NOT EXISTS Ambiente (
 
 CREATE TABLE IF NOT EXISTS estoque(
     id_estoque SERIAL PRIMARY KEY
+    fk_id_loja INTEGER NOT NULL,
+    FOREIGN KEY (fk_id_loja) REFERENCES loja(id_loja)
 );
 
 CREATE TABLE IF NOT EXISTS item (
@@ -160,17 +163,13 @@ CREATE TABLE IF NOT EXISTS loja (
     nome VARCHAR(100) NOT NULL,
     proprietario VARCHAR(100) NOT NULL,
     fk_id_ambiente INT NOT NULL,
-    fk_id_estoque INT NOT NULL,
     FOREIGN KEY (fk_id_ambiente) REFERENCES Ambiente(id_ambiente),
-    FOREIGN KEY (fk_id_estoque) REFERENCES estoque(id_estoque)
 );
 
-
-
-CREATE TABLE IF NOT EXISTS inventario (
-    id_inventario SERIAL PRIMARY KEY,
-    fk_id_jogador INTEGER NOT NULL,
-    FOREIGN KEY (fk_id_jogador) REFERENCES Jogador(id_jogador)
+CREATE TABLE IF NOT EXISTS estoque(
+    id_estoque SERIAL PRIMARY KEY
+    fk_id_loja INTEGER NOT NULL,
+    FOREIGN KEY (fk_id_loja) REFERENCES loja(id_loja)
 );
 
 CREATE TABLE IF NOT EXISTS consumivel (
