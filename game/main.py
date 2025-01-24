@@ -1,5 +1,5 @@
 from setup.database import setup_database, get_connection
-
+from src.interacoes_mapa.interacao_caverna import interacao_caverna
 import os
 
 DDL_FILE_PATH = os.path.join(os.path.dirname(__file__), "db/ddl.sql")
@@ -176,7 +176,14 @@ def andar_no_mapa(jogador, localizacao_atual):
     finally:
         cursor.close()
         conn.close()
-    
+
+
+def interagir_ambiente(jogador, localizacao_atual):
+    if localizacao_atual[1] == 'Caverna':
+        interacao_caverna(jogador)
+    # elif localizacao_atual[1] == 'Floresta':
+    # elif localizacao_atual[1] == 'Praça da Vila':
+
 def menu_jogo(jogador):
     clear_terminal()
     while True:
@@ -209,6 +216,7 @@ def menu_jogo(jogador):
         opcoes_menu = [
             "1 - Andar no mapa",
             "2 - Mostrar Habilidades",
+            "3 - Interagir com o ambiente",
             "9 - Sair do jogo"
         ]
         
@@ -221,9 +229,10 @@ def menu_jogo(jogador):
             andar_no_mapa(jogador, localizacao_atual)
         elif escolha == 2:
             exibir_habilidades_jogador(jogador)
+        elif escolha == 3:
+            interagir_ambiente(jogador, localizacao_atual)
         elif escolha == 9:
             break
-        # break
     
     
 def carregar_personagem(jogador_id):
