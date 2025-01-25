@@ -106,19 +106,24 @@ CREATE TABLE IF NOT EXISTS Ambiente (
     FOREIGN KEY (fk_jogador_id) REFERENCES Jogador(id_jogador)
 );
 
+CREATE TABLE IF NOT EXISTS loja (
+    id_loja INT PRIMARY KEY,
+    nome VARCHAR(100) NOT NULL,
+    proprietario VARCHAR(100) NOT NULL,
+    fk_id_ambiente INTEGER NOT NULL,
+    fk_id_estoque INTEGER
+);
+
 CREATE TABLE IF NOT EXISTS estoque(
-    id_estoque SERIAL PRIMARY KEY
-    fk_id_loja INTEGER NOT NULL,
-    FOREIGN KEY (fk_id_loja) REFERENCES loja(id_loja)
+    id_estoque SERIAL PRIMARY KEY,
+    fk_id_loja INTEGER
 );
 
 CREATE TABLE IF NOT EXISTS item (
     id_item SERIAL PRIMARY KEY,
     tipo_item VARCHAR(20) NOT NULL,
     fk_estoque INTEGER DEFAULT 0,
-    fk_inventario_id INTEGER DEFAULT 0,
-    FOREIGN KEY (fk_inventario_id) REFERENCES inventario(id_inventario),
-    FOREIGN KEY (fk_estoque) REFERENCES estoque(id_estoque)
+    fk_inventario_id INTEGER DEFAULT 0
 );
 
 CREATE TABLE IF NOT EXISTS mineral (
@@ -158,16 +163,9 @@ CREATE TABLE IF NOT EXISTS Plantacao (
     FOREIGN KEY (fk_id_ambiente) REFERENCES Ambiente(id_ambiente)
 );
 
-CREATE TABLE IF NOT EXISTS loja (
-    id_loja INT PRIMARY KEY,
-    nome VARCHAR(100) NOT NULL,
-    proprietario VARCHAR(100) NOT NULL,
-    fk_id_ambiente INT NOT NULL,
-    FOREIGN KEY (fk_id_ambiente) REFERENCES Ambiente(id_ambiente),
-);
 
 CREATE TABLE IF NOT EXISTS estoque(
-    id_estoque SERIAL PRIMARY KEY
+    id_estoque SERIAL PRIMARY KEY,
     fk_id_loja INTEGER NOT NULL,
     FOREIGN KEY (fk_id_loja) REFERENCES loja(id_loja)
 );
