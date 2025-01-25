@@ -6,16 +6,17 @@ DDL_FILE_PATH = os.path.join(os.path.dirname(__file__), "db/ddl.sql")
 DML_FILE_PATH = os.path.join(os.path.dirname(__file__), "db/dml.sql")
 
 def interacao_caverna(jogador):
+    print("Você está no andar 1")
     try:
         connection = get_connection()
         cursor = connection.cursor()
         cursor.execute("SELECT * FROM caverna")
         andar = cursor.fetchall()
         print(andar)
+        barra_de_precisao()
     except Exception as error:
         print(f"Ocorreu um erro ao listar o andar: {error}")
-    print("Você está no andar 1")
-    barra_de_precisao()
+    
     # Antes minerar, você precisa 
     # Adicionar view para possiveis recompensas
     # assim que o jogador derrotar todos os mobs expecíficados em "quantidade_mobs"
