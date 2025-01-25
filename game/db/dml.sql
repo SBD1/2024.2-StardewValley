@@ -83,7 +83,7 @@ INSERT INTO Animal (id_animal, nome_animal, diasTotalDropar, tipo_animal, itemDr
 VALUES
     (1, 'vaca', 7, 'vaca', 14, 50),
     (2, 'galinha', 3, 'galinha', 13, 30),
-    (3, 'porco', 5, 'porco', 3, 40);--mudar o item  para o id do carne!!!
+    (3, 'porco', 5, 'porco', 3, 40);--mudar o item  para o id do carne!!! 
 
 INSERT INTO inimigo (id_inimigo, nome, tipo, vidaMax, dano) VALUES
     (1, 'Morcego da Caverna', 'caverna', 30, 5),
@@ -116,11 +116,33 @@ INSERT INTO Ambiente (id_ambiente, tipo, nome, fk_id_mapa, fk_jogador_id, descri
     (13, 'Loja', 'Ferreiro', 1, NULL, 'Um local quente e barulhento onde ferramentas ganham vida e minérios são transformados em itens essenciais.', 5, NULL, NULL, NULL, NULL, NULL),
     (14, 'Loja', 'Mercado Joja', 1, NULL, 'Uma megaloja moderna e impessoal, onde tudo está à venda... ao custo do espírito comunitário.', 9, NULL, NULL, NULL, NULL, NULL),
     (15, 'Caverna', 'Caverna', 1, NULL, 'As paredes são cobertas por musgo e pequenas pedras brilham na escuridão. Um lugar ideal para começar a coletar minérios.', 4, NULL, NULL, NULL, NULL, NULL);
-INSERT INTO estoque(id_estoque) VALUES
-    (1),
-    (2),
-    (3),
-    (5);
+
+INSERT INTO loja (id_loja, nome, proprietario, fk_id_ambiente)
+VALUES --fk_id_estoque com números aleatórios
+(1, 'Armazém do Pierre', 'Pierre', 11),
+(2, 'Mercado Joja', 'Gerente Joja', 14),
+(3, 'Ferreiro', 'Clint', 13), 
+(5, 'Comércio do Deserto', 'Sandy', 7);
+
+INSERT INTO estoque(id_estoque, fk_id_loja) VALUES
+    (1, 1),
+    (2, 2),
+    (3, 3),
+    (5, 5);
+
+UPDATE loja
+SET fk_id_estoque = (SELECT id_estoque FROM estoque WHERE fk_id_loja = loja.id_loja);
+
+-- Adicione as restrições de FK
+ALTER TABLE loja
+    ADD CONSTRAINT fk_loja_estoque FOREIGN KEY (fk_id_estoque) REFERENCES estoque(id_estoque);
+
+ALTER TABLE estoque
+    ADD CONSTRAINT fk_estoque_loja FOREIGN KEY (fk_id_loja) REFERENCES loja(id_loja);
+
+ALTER TABLE item
+    ADD CONSTRAINT fk_item_estoque FOREIGN KEY (fk_estoque) REFERENCES estoque(id_estoque),
+    ADD CONSTRAINT fk_item_inventario FOREIGN KEY (fk_inventario_id) REFERENCES inventario(id_inventario);
 
 INSERT INTO item (id_item, tipo_item, fk_estoque, fk_inventario_id) VALUES
 (1, 'consumivel', 1, NULL),
@@ -265,6 +287,7 @@ INSERT INTO item (id_item, tipo_item, fk_estoque, fk_inventario_id) VALUES
 (653, 'arma',3,NULL),
 (654, 'arma',3,NULL),
 (655, 'arma',3,NULL);   
+
 INSERT INTO utensilio (id_item, tipo_utensilio) VALUES
 (601, 'ferramenta'),
 (602, 'ferramenta'),
@@ -381,13 +404,6 @@ INSERT INTO utensilio (id_item, tipo_utensilio) VALUES
 -- (754, 654, 'Ferro de passar da Haley', 'Muito quente. Está com cheiro de cabelo da Haley.', 38),
 -- (755, 655, 'Cinzel da Leah', 'A ferramenta favorita da Leah para esculpir madeira.', 38);
 
-INSERT INTO loja (id_loja, nome, proprietario, fk_id_ambiente, fk_id_estoque)
-VALUES --fk_id_estoque com números aleatórios
-(1, 'Armazém do Pierre', 'Pierre', 11, 1),
-(2, 'Mercado Joja', 'Gerente Joja', 14, 2),
-(3, 'Ferreiro', 'Clint', 13, 3), 
-(5, 'Comércio do Deserto', 'Sandy', 7, 5);
-
 INSERT INTO Missao (id_missao, tipo)
 VALUES
 -- (1, 'Coleta de Recursos'), -- Missão para coletar itens específicos, como madeira ou minério
@@ -469,6 +485,9 @@ INSERT INTO mineral (id_item, nome, descricao, resistencia, preco) VALUES
 (54, 'Madeira', 'Material básico de construção.', 5, 2.00),
 (55, 'Diamante', 'Uma gema preciosa e brilhante.', 60, 300.00),
 (56, 'Madeira de Lei', 'Um tipo de madeira mais resistente.', 20, 20.00);
+
+INSERT INTO Caverna (andar, fk_id_ambiente, quantidade_mobs, qtd_minerio, fk_id_minerio_item, fk_id_item_recompensa) VALUES
+    (1, 15, 10, 5, 29, 10);
 
 INSERT INTO recurso (id_item, nome, descricao, preco) VALUES
 (40, 'Quartzo', 'Um cristal translúcido muito comum.', 25.00),
