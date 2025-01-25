@@ -115,7 +115,13 @@ INSERT INTO Ambiente (id_ambiente, tipo, nome, fk_id_mapa, fk_jogador_id, descri
     (12, 'Normal', 'Clínica do Harvey', 1, NULL, 'Um pequeno consultório médico onde Harvey cuida da saúde dos moradores com atenção e dedicação.', 5, NULL, NULL, NULL, NULL, NULL),
     (13, 'Loja', 'Ferreiro', 1, NULL, 'Um local quente e barulhento onde ferramentas ganham vida e minérios são transformados em itens essenciais.', 5, NULL, NULL, NULL, NULL, NULL),
     (14, 'Loja', 'Mercado Joja', 1, NULL, 'Uma megaloja moderna e impessoal, onde tudo está à venda... ao custo do espírito comunitário.', 9, NULL, NULL, NULL, NULL, NULL),
-    (15, 'Caverna', 'Caverna', 1, NULL, 'As paredes são cobertas por musgo e pequenas pedras brilham na escuridão. Um lugar ideal para começar a coletar minérios.', 4, NULL, NULL, NULL, NULL, NULL);
+    (15, 'Caverna', 'Caverna', 1, NULL, 'As paredes são cobertas por musgo e pequenas pedras brilham na escuridão. Um lugar ideal para começar a coletar minérios',  4, 16,   NULL, NULL, NULL, NULL),
+    (16, 'Caverna', 'Andar 1', 1, NULL, 'O ar torna-se mais úmido, com estalactites pendendo do teto e o som distante de gotas de água ecoando. Rochas raras começam a aparecer', 15, 17,   NULL, NULL, NULL, NULL),
+    (17, 'Caverna', 'Andar 2', 1, NULL, 'A iluminação natural diminui, revelando cristais luminescentes que iluminam o caminho. Inimigos mais desafiadores espreitam nas sombras.', 16, 18,   NULL, NULL, NULL, NULL),
+    (18, 'Caverna', 'Andar 3', 1, NULL, 'ma camada de gelo cobre o chão, e o ar é frio o suficiente para ver sua respiração. Inimigos gelados patrulham este nível.', 17, 19,   NULL, NULL, NULL, NULL),
+    (19, 'Caverna', 'Andar 4', 1, NULL, 'Formações rochosas complexas e minerais valiosos são abundantes aqui. O ambiente é silencioso, mas a sensação de ser observado é constante.', 18, 20,   NULL, NULL, NULL, NULL),
+    (20, 'Caverna', 'Andar 5', 1, NULL, 'Poças de lava iluminam o ambiente com um brilho avermelhado. O calor é intenso, e criaturas flamejantes guardam os tesouros deste andar.', 19, 21,   NULL, NULL, NULL, NULL),
+    (21, 'Caverna', 'Andar 6', 1, NULL, 'Uma escuridão profunda envolve tudo, quebrada apenas por minerais raros que emitem uma luz própria. Apenas os aventureiros mais corajosos chegam tão longe.', 20, NULL, NULL, NULL, NULL, NULL);
 
 INSERT INTO loja (id_loja, nome, proprietario, fk_id_ambiente)
 VALUES --fk_id_estoque com números aleatórios
@@ -488,6 +494,17 @@ INSERT INTO mineral (id_item, nome, descricao, resistencia, preco) VALUES
 
 INSERT INTO Caverna (andar, fk_id_ambiente, quantidade_mobs, qtd_minerio, fk_id_minerio_item, fk_id_item_recompensa) VALUES
     (1, 15, 10, 5, 29, 10);
+    (2, 16,  5, 5, 31, 2),
+    (3, 17,  2, 5, 32, 3),
+    (4, 18,  4, 5, 33, 4),
+    (5, 19,  3, 3, 34, 5),
+    (6, 20, 10, 5, 35, 6),
+    (7, 21,  8, 5, 36, 7);
+
+INSERT INTO Instancia_de_Inimigo (vidaAtual, fk_Caverna_andar, fk_inimigo_id) VALUES
+(100, 1, 1),
+(100, 2, 2),
+(100, 3, 4);
 
 INSERT INTO recurso (id_item, nome, descricao, preco) VALUES
 (40, 'Quartzo', 'Um cristal translúcido muito comum.', 25.00),
