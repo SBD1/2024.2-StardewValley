@@ -14,7 +14,7 @@ CREATE TABLE IF NOT EXISTS Inimigo (
     nome VARCHAR(100) NOT NULL,
     tipo VARCHAR(50) NOT NULL,
     vidaMax INT NOT NULL, 
-    dano INT NOT NULL
+    dano FLOAT NOT NULL
 );
 
 CREATE TABLE IF NOT EXISTS Animal (
@@ -64,8 +64,8 @@ CREATE TABLE IF NOT EXISTS Jogador (
     nome VARCHAR(100) NOT NULL,                  
     dia INT NOT NULL DEFAULT 0,                   
     tempo INT NOT NULL DEFAULT 0,                
-    vidaMax FLOAT NOT NULL DEFAULT 10.0,         
-    vidaAtual FLOAT NOT NULL DEFAULT 10.0,       
+    vidaMax FLOAT NOT NULL DEFAULT 100.0,         
+    vidaAtual FLOAT NOT NULL DEFAULT 100.0,       
     xp_mineracao FLOAT NOT NULL DEFAULT 0.0,     
     xp_cultivo FLOAT NOT NULL DEFAULT 0.0,       
     xp_combate FLOAT NOT NULL DEFAULT 0.0,       
