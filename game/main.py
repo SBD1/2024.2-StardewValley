@@ -59,7 +59,6 @@ def exibir_habilidades_jogador(jogador):
         
         habilidades = cursor.fetchall()
         
-
        #habilidade mineracao
         conn = get_connection()
         cursor = conn.cursor()
@@ -103,7 +102,6 @@ def exibir_habilidades_jogador(jogador):
         
     except Exception as e:
         print(f"Erro ao carregar habilidades: {e}")
-
 
 def obter_localizacao_jogador(jogador):
     try:
@@ -153,18 +151,28 @@ def andar_no_mapa(jogador, localizacao_atual):
     conn = None
     cursor = None
     try:
+        conn = get_connection()
+        cursor = conn.cursor()
+
         escolha = int(input("Para qual ambiente você deseja seguir?\n> "))
         if escolha not in ambiente_opcoes:
             print("Escolha inválida. Tente novamente.")
             return None
+
+        # verifica se há mobs no andar atual da caverna e se pode prosseguir para o próximo
+        if localizacao_atual[1] == 'Caverna' and escolha == 2:
+            cursor.execute("SELECT quantidade_mobs FROM Caverna WHERE fk_id_ambiente = %s", (localizacao_atual[0],))
+            quantidade_mobs = cursor.fetchone()
+            if quantidade_mobs[0] != 0 and localizacao_atual[0] > 15:
+                print("\nVocê não pode prosseguir para o próximo andar enquanto houver inimigos na caverna. Interaja com o ambiente para derrotá-los.")
+                input("\nPressione qualquer tecla para continuar...")
+                return None
 
         # Verifica se o usuário escolheu cancelar
         if ambiente_opcoes[escolha] is None:
             print("Ação cancelada.")
             return None
         
-        conn = get_connection()
-        cursor = conn.cursor()
         cursor.execute("UPDATE Ambiente SET fk_jogador_id = %s WHERE id_ambiente = %s",
                        (jogador[0],ambiente_opcoes[escolha]))
         conn.commit()
@@ -176,6 +184,7 @@ def andar_no_mapa(jogador, localizacao_atual):
         
     except Exception as e:
         print(f"Erro ao carregar ambiente: {e}")
+        input("\nPressione qualquer tecla para continuar...")
     
     finally:
         if cursor:
@@ -183,10 +192,11 @@ def andar_no_mapa(jogador, localizacao_atual):
         if conn:
             conn.close()
 
-
 def interagir_ambiente(jogador, localizacao_atual):
     if localizacao_atual[1] == 'Caverna':
-        interacao_caverna(jogador)
+        clear_terminal()
+        interacao_caverna(jogador, localizacao_atual)
+
     # elif localizacao_atual[1] == 'Floresta':
     # elif localizacao_atual[1] == 'Praça da Vila':
 
@@ -237,8 +247,7 @@ def menu_jogo(jogador):
             interagir_ambiente(jogador, localizacao_atual)
         elif escolha == 9:
             break
-    
-    
+       
 def carregar_personagem(jogador_id):
     try:
         conn = get_connection()
@@ -283,7 +292,6 @@ def menu_inicial():
             exit()
         else:
             print("Opção inválida. Tente novamente.")
-
 
 if __name__ == "__main__":
     print("Inicializando o banco de dados...")
