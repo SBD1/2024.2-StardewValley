@@ -86,16 +86,16 @@ VALUES
     (3, 'porco', 5, 'porco', 3, 40);--mudar o item  para o id do carne!!! 
 
 INSERT INTO inimigo (id_inimigo, nome, tipo, vidaMax, dano) VALUES
-    (1, 'Morcego da Caverna', 'caverna', 30, 5),
-    (2, 'Aranha das Sombras', 'caverna', 20, 7),
-    (3, 'Golem de Pedras', 'caverna', 50, 10),
-    (4, 'Rato Gigante', 'caverna', 15, 3),
-    (5, 'Fantasma Errante', 'caverna', 10, 8),
-    (6, 'Slime Escuro', 'caverna', 40, 6),
-    (7, 'Escorpião Caverneiro', 'caverna', 25, 4),
-    (8, 'Serpente Rochosa', 'caverna', 35, 9),
-    (9, 'Fungo Venenoso', 'caverna', 5, 2),
-    (10, 'Lagarto Albino', 'caverna', 45, 10);
+    (1, 'Morcego da Caverna',   'caverna', 20.0,  4),
+    (2, 'Aranha das Sombras',   'caverna', 20.0,  7),
+    (3, 'Golem de Pedras',      'caverna', 50.0, 16),
+    (4, 'Rato Gigante',         'caverna', 15.0,  3),
+    (5, 'Fantasma Errante',     'caverna', 20.0, 10),
+    (6, 'Slime Escuro',         'caverna', 30.0,  6),
+    (7, 'Escorpião Caverneiro', 'caverna', 25.0,  9),
+    (8, 'Serpente Rochosa',     'caverna', 45.0, 12),
+    (9, 'Fungo Venenoso',       'caverna',  5.0,  3),
+    (10, 'Lagarto Albino',      'caverna', 35.0,  7);
 
 INSERT INTO Mapa (id_mapa, nome) VALUES
     (1, 'mundo');
@@ -493,18 +493,58 @@ INSERT INTO mineral (id_item, nome, descricao, resistencia, preco) VALUES
 (56, 'Madeira de Lei', 'Um tipo de madeira mais resistente.', 20, 20.00);
 
 INSERT INTO Caverna (andar, fk_id_ambiente, quantidade_mobs, qtd_minerio, fk_id_minerio_item, fk_id_item_recompensa) VALUES
-    (1, 15, 10, 5, 29, 10);
-    (2, 16,  5, 5, 31, 2),
-    (3, 17,  2, 5, 32, 3),
-    (4, 18,  4, 5, 33, 4),
-    (5, 19,  3, 3, 34, 5),
-    (6, 20, 10, 5, 35, 6),
-    (7, 21,  8, 5, 36, 7);
+    (0, 15,  0, 0, 29, 10),
+    (1, 16,  5, 5, 31,  2),
+    (2, 17,  2, 5, 32,  3),
+    (3, 18,  4, 5, 33,  4),
+    (4, 19,  3, 3, 34,  5),
+    (5, 20, 10, 5, 35,  6),
+    (6, 21,  8, 5, 36,  7);
 
 INSERT INTO Instancia_de_Inimigo (vidaAtual, fk_Caverna_andar, fk_inimigo_id) VALUES
-(100, 1, 1),
-(100, 2, 2),
-(100, 3, 4);
+-- Andar 1: 5 mobs
+(30, 1, 1),  -- Morcego da Caverna
+(20, 1, 2),  -- Aranha das Sombras
+(15, 1, 4),  -- Rato Gigante
+(25, 1, 7),  -- Escorpião Caverneiro
+(35, 1, 8),  -- Serpente Rochosa
+
+-- Andar 2: 2 mobs
+(30, 2, 1),  -- Morcego da Caverna
+(20, 2, 2),  -- Aranha das Sombras
+
+-- Andar 3: 4 mobs
+(15, 3, 4),  -- Rato Gigante
+(25, 3, 7),  -- Escorpião Caverneiro
+(35, 3, 8),  -- Serpente Rochosa
+(10, 3, 5),  -- Fantasma Errante
+
+-- Andar 4: 3 mobs
+(50, 4, 3),  -- Golem de Pedras
+(40, 4, 6),  -- Slime Escuro
+(45, 4, 10), -- Lagarto Albino
+
+-- Andar 5: 10 mobs
+(30, 5, 1),  -- Morcego da Caverna
+(20, 5, 2),  -- Aranha das Sombras
+(15, 5, 4),  -- Rato Gigante
+(25, 5, 7),  -- Escorpião Caverneiro
+(35, 5, 8),  -- Serpente Rochosa
+(10, 5, 5),  -- Fantasma Errante
+(50, 5, 3),  -- Golem de Pedras
+(40, 5, 6),  -- Slime Escuro
+(45, 5, 10), -- Lagarto Albino
+(5, 5, 9),   -- Fungo Venenoso
+
+-- Andar 6: 8 mobs
+(30, 6, 1),  -- Morcego da Caverna
+(20, 6, 2),  -- Aranha das Sombras
+(15, 6, 4),  -- Rato Gigante
+(25, 6, 7),  -- Escorpião Caverneiro
+(35, 6, 8),  -- Serpente Rochosa
+(10, 6, 5),  -- Fantasma Errante
+(50, 6, 3),  -- Golem de Pedras
+(40, 6, 6);  -- Slime Escuro
 
 INSERT INTO recurso (id_item, nome, descricao, preco) VALUES
 (40, 'Quartzo', 'Um cristal translúcido muito comum.', 25.00),

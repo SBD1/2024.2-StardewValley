@@ -13,7 +13,7 @@ CREATE TABLE IF NOT EXISTS Inimigo (
     id_inimigo SERIAL PRIMARY KEY,
     nome VARCHAR(100) NOT NULL,
     tipo VARCHAR(50) NOT NULL,
-    vidaMax INT NOT NULL, 
+    vidaMax FLOAT NOT NULL, 
     dano FLOAT NOT NULL
 );
 
