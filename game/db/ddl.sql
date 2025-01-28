@@ -14,7 +14,8 @@ CREATE TABLE IF NOT EXISTS Inimigo (
     nome VARCHAR(100) NOT NULL,
     tipo VARCHAR(50) NOT NULL,
     vidaMax FLOAT NOT NULL, 
-    dano FLOAT NOT NULL
+    dano FLOAT NOT NULL,
+    xp_recompensa INT NOT NULL
 );
 
 CREATE TABLE IF NOT EXISTS Animal (
@@ -30,18 +31,18 @@ CREATE TABLE IF NOT EXISTS habMineracao (
     fk_Habilidade_id INT,
     reducaoEnergiaMinera INT NOT NULL,
     minerioBonus INT NOT NULL,
-    nivel INT NOT NULL,
-    xpMin INT NOT NULL,
-    xpMax INT NOT NULL,
+    nivel INT NOT NULL DEFAULT 1,
+    xpMin INT NOT NULL DEFAULT 0,
+    xpMax INT NOT NULL DEFAULT 10,
     PRIMARY KEY (fk_Habilidade_id),
     FOREIGN KEY (fk_Habilidade_id) REFERENCES Habilidade(id_habilidade)
 );
 
 CREATE TABLE IF NOT EXISTS habCombate (
     fk_Habilidade_id INT,
-    nivel INT NOT NULL,
-    xpMin INT NOT NULL,
-    xpMax INT NOT NULL,
+    nivel INT NOT NULL DEFAULT 1,
+    xpMin INT NOT NULL DEFAULT 0,
+    xpMax INT NOT NULL DEFAULT 10,
     vidaBonus INT NOT NULL,
     danoBonus INT NOT NULL,
     PRIMARY KEY (fk_Habilidade_id),
@@ -50,9 +51,9 @@ CREATE TABLE IF NOT EXISTS habCombate (
 
 CREATE TABLE IF NOT EXISTS habCultivo (
     fk_Habilidade_id INT,
-    nivel INT NOT NULL,
-    xpMin INT NOT NULL,
-    xpMax INT NOT NULL,
+    nivel INT NOT NULL DEFAULT 1,
+    xpMin INT NOT NULL DEFAULT 0,
+    xpMax INT NOT NULL DEFAULT 10,
     cultivoBonus INT NOT NULL,
     reducaoEnergiaCultiva INT NOT NULL,
     PRIMARY KEY (fk_Habilidade_id),

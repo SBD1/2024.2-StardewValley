@@ -50,15 +50,15 @@ VALUES
 -- Preencher habCombate com os valores correspondentes
 INSERT INTO habCombate (fk_Habilidade_id, vidaBonus, danoBonus, nivel, xpMin, xpMax)
 VALUES
-    (11, 0, 0, 1, 0, 100),
-    (12, 5, 1, 2, 101, 200),
-    (13, 10, 2, 3, 201, 300),
-    (14, 15, 3, 4, 301, 400),
-    (15, 20, 4, 5, 401, 500),
-    (16, 25, 5, 6, 501, 600),
-    (17, 30, 6, 7, 601, 700),
-    (18, 35, 7, 8, 701, 800),
-    (19, 40, 8, 9, 801, 900),
+    (11,  0, 0,  1,   0,  100),
+    (12,  5, 1,  2, 101,  200),
+    (13, 10, 2,  3, 201,  300),
+    (14, 15, 3,  4, 301,  400),
+    (15, 20, 4,  5, 401,  500),
+    (16, 25, 5,  6, 501,   600),
+    (17, 30, 6,  7, 601,  700),
+    (18, 35, 7,  8, 701,  800),
+    (19, 40, 8,  9, 801,  900),
     (20, 45, 9, 10, 901, 1000);
 
 -- Preencher habCultivo com os valores correspondentes
@@ -85,17 +85,17 @@ VALUES
     (2, 'galinha', 3, 'galinha', 13, 30),
     (3, 'porco', 5, 'porco', 3, 40);--mudar o item  para o id do carne!!! 
 
-INSERT INTO inimigo (id_inimigo, nome, tipo, vidaMax, dano) VALUES
-    (1, 'Morcego da Caverna',   'caverna', 20.0,  4),
-    (2, 'Aranha das Sombras',   'caverna', 20.0,  7),
-    (3, 'Golem de Pedras',      'caverna', 50.0, 16),
-    (4, 'Rato Gigante',         'caverna', 15.0,  3),
-    (5, 'Fantasma Errante',     'caverna', 20.0, 10),
-    (6, 'Slime Escuro',         'caverna', 30.0,  6),
-    (7, 'Escorpião Caverneiro', 'caverna', 25.0,  9),
-    (8, 'Serpente Rochosa',     'caverna', 45.0, 12),
-    (9, 'Fungo Venenoso',       'caverna',  5.0,  3),
-    (10, 'Lagarto Albino',      'caverna', 35.0,  7);
+INSERT INTO inimigo (id_inimigo, nome, tipo, vidaMax, dano, xp_recompensa) VALUES
+    (1, 'Morcego da Caverna',   'caverna', 20.0,  4, 120),
+    (2, 'Aranha das Sombras',   'caverna', 20.0,  7,   5),
+    (3, 'Golem de Pedras',      'caverna', 50.0, 16,  20),
+    (4, 'Rato Gigante',         'caverna', 15.0,  3,   7),
+    (5, 'Fantasma Errante',     'caverna', 20.0, 10,   8),
+    (6, 'Slime Escuro',         'caverna', 30.0,  6,   3),
+    (7, 'Escorpião Caverneiro', 'caverna', 25.0,  9,   9),
+    (8, 'Serpente Rochosa',     'caverna', 45.0, 12,  13),
+    (9, 'Fungo Venenoso',       'caverna',  5.0,  3,   4),
+    (10, 'Lagarto Albino',      'caverna', 35.0,  7,  10);
 
 INSERT INTO Mapa (id_mapa, nome) VALUES
     (1, 'mundo');
@@ -493,58 +493,60 @@ INSERT INTO mineral (id_item, nome, descricao, resistencia, preco) VALUES
 (56, 'Madeira de Lei', 'Um tipo de madeira mais resistente.', 20, 20.00);
 
 INSERT INTO Caverna (andar, fk_id_ambiente, quantidade_mobs, qtd_minerio, fk_id_minerio_item, fk_id_item_recompensa) VALUES
-    (0, 15,  0, 0, 29, 10),
-    (1, 16,  5, 5, 31,  2),
-    (2, 17,  2, 5, 32,  3),
-    (3, 18,  4, 5, 33,  4),
-    (4, 19,  3, 3, 34,  5),
-    (5, 20, 10, 5, 35,  6),
-    (6, 21,  8, 5, 36,  7);
+    (0, 15, 0, 0, 29, 10),
+    (1, 16, 0, 5, 31,  2),
+    (2, 17, 0, 5, 32,  3),
+    (3, 18, 0, 5, 33,  4),
+    (4, 19, 0, 3, 34,  5),
+    (5, 20, 0, 5, 35,  6),
+    (6, 21, 0, 5, 36,  7);
 
 INSERT INTO Instancia_de_Inimigo (vidaAtual, fk_Caverna_andar, fk_inimigo_id) VALUES
--- Andar 1: 5 mobs
-(30, 1, 1),  -- Morcego da Caverna
-(20, 1, 2),  -- Aranha das Sombras
-(15, 1, 4),  -- Rato Gigante
-(25, 1, 7),  -- Escorpião Caverneiro
-(35, 1, 8),  -- Serpente Rochosa
+-- Andar 1: 8 mobs
+(20.0, 1, 1),  -- Morcego da Caverna (vidaMax = 20.0)
+(20.0, 1, 1),  -- Morcego da Caverna (vidaMax = 20.0)
+(20.0, 1, 1),  -- Morcego da Caverna (vidaMax = 20.0)
+(20.0, 1, 2),  -- Aranha das Sombras (vidaMax = 20.0)
+(15.0, 1, 4),  -- Rato Gigante (vidaMax = 15.0)
+(25.0, 1, 7),  -- Escorpião Caverneiro (vidaMax = 25.0)
+(45.0, 1, 8),  -- Serpente Rochosa (vidaMax = 45.0)
 
 -- Andar 2: 2 mobs
-(30, 2, 1),  -- Morcego da Caverna
-(20, 2, 2),  -- Aranha das Sombras
+(20.0, 2, 1),  -- Morcego da Caverna (vidaMax = 20.0)
+(20.0, 2, 2),  -- Aranha das Sombras (vidaMax = 20.0)
 
 -- Andar 3: 4 mobs
-(15, 3, 4),  -- Rato Gigante
-(25, 3, 7),  -- Escorpião Caverneiro
-(35, 3, 8),  -- Serpente Rochosa
-(10, 3, 5),  -- Fantasma Errante
+(15.0, 3, 4),  -- Rato Gigante (vidaMax = 15.0)
+(25.0, 3, 7),  -- Escorpião Caverneiro (vidaMax = 25.0)
+(45.0, 3, 8),  -- Serpente Rochosa (vidaMax = 45.0)
+(20.0, 3, 5),  -- Fantasma Errante (vidaMax = 20.0)
 
 -- Andar 4: 3 mobs
-(50, 4, 3),  -- Golem de Pedras
-(40, 4, 6),  -- Slime Escuro
-(45, 4, 10), -- Lagarto Albino
+(50.0, 4, 3),  -- Golem de Pedras (vidaMax = 50.0)
+(30.0, 4, 6),  -- Slime Escuro (vidaMax = 30.0)
+(35.0, 4, 10), -- Lagarto Albino (vidaMax = 35.0)
 
 -- Andar 5: 10 mobs
-(30, 5, 1),  -- Morcego da Caverna
-(20, 5, 2),  -- Aranha das Sombras
-(15, 5, 4),  -- Rato Gigante
-(25, 5, 7),  -- Escorpião Caverneiro
-(35, 5, 8),  -- Serpente Rochosa
-(10, 5, 5),  -- Fantasma Errante
-(50, 5, 3),  -- Golem de Pedras
-(40, 5, 6),  -- Slime Escuro
-(45, 5, 10), -- Lagarto Albino
-(5, 5, 9),   -- Fungo Venenoso
+(20.0, 5, 1),  -- Morcego da Caverna (vidaMax = 20.0)
+(20.0, 5, 2),  -- Aranha das Sombras (vidaMax = 20.0)
+(15.0, 5, 4),  -- Rato Gigante (vidaMax = 15.0)
+(25.0, 5, 7),  -- Escorpião Caverneiro (vidaMax = 25.0)
+(45.0, 5, 8),  -- Serpente Rochosa (vidaMax = 45.0)
+(20.0, 5, 5),  -- Fantasma Errante (vidaMax = 20.0)
+(50.0, 5, 3),  -- Golem de Pedras (vidaMax = 50.0)
+(30.0, 5, 6),  -- Slime Escuro (vidaMax = 30.0)
+(35.0, 5, 10), -- Lagarto Albino (vidaMax = 35.0)
+(5.0, 5, 9),   -- Fungo Venenoso (vidaMax = 5.0)
 
 -- Andar 6: 8 mobs
-(30, 6, 1),  -- Morcego da Caverna
-(20, 6, 2),  -- Aranha das Sombras
-(15, 6, 4),  -- Rato Gigante
-(25, 6, 7),  -- Escorpião Caverneiro
-(35, 6, 8),  -- Serpente Rochosa
-(10, 6, 5),  -- Fantasma Errante
-(50, 6, 3),  -- Golem de Pedras
-(40, 6, 6);  -- Slime Escuro
+(20.0, 6, 1),  -- Morcego da Caverna (vidaMax = 20.0)
+(20.0, 6, 2),  -- Aranha das Sombras (vidaMax = 20.0)
+(15.0, 6, 4),  -- Rato Gigante (vidaMax = 15.0)
+(25.0, 6, 7),  -- Escorpião Caverneiro (vidaMax = 25.0)
+(45.0, 6, 8),  -- Serpente Rochosa (vidaMax = 45.0)
+(20.0, 6, 5),  -- Fantasma Errante (vidaMax = 20.0)
+(50.0, 6, 3),  -- Golem de Pedras (vidaMax = 50.0)
+(30.0, 6, 6);  -- Slime Escuro (vidaMax = 30.0)
 
 INSERT INTO recurso (id_item, nome, descricao, preco) VALUES
 (40, 'Quartzo', 'Um cristal translúcido muito comum.', 25.00),
