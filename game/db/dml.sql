@@ -1,39 +1,40 @@
 
--- Inserir uma habilidade básica
-INSERT INTO Habilidade (id_habilidade, tipo)
+-- Inserir uma habilidade básica (tem 10 de cada tipo)
+INSERT INTO Habilidade (tipo)
 VALUES
-    (1, 'mineracao'),
-    (2, 'mineracao'),
-    (3, 'mineracao'),
-    (4, 'mineracao'),
-    (5, 'mineracao'),
-    (6, 'mineracao'),
-    (7, 'mineracao'),
-    (8, 'mineracao'),
-    (9, 'mineracao'),
-    (10, 'mineracao'),
-    (11, 'combate'),
-    (12, 'combate'),
-    (13, 'combate'),
-    (14, 'combate'),
-    (15, 'combate'),
-    (16, 'combate'),
-    (17, 'combate'),
-    (18, 'combate'),
-    (19, 'combate'),
-    (20, 'combate'),
-    (21, 'cultivo'),
-    (22, 'cultivo'),
-    (23, 'cultivo'),
-    (24, 'cultivo'),
-    (25, 'cultivo'),
-    (26, 'cultivo'),
-    (27, 'cultivo'),
-    (28, 'cultivo'),
-    (29, 'cultivo'),
-    (30, 'cultivo');
+    ('mineracao'),
+    ('mineracao'),
+    ('mineracao'),
+    ('mineracao'),
+    ('mineracao'),
+    ('mineracao'),
+    ('mineracao'),
+    ('mineracao'),
+    ('mineracao'),
+    ('mineracao'),
+    ('combate'),
+    ('combate'),
+    ('combate'),
+    ('combate'),
+    ('combate'),
+    ('combate'),
+    ('combate'),
+    ('combate'),
+    ('combate'),
+    ('combate'),
+    ('cultivo'),
+    ('cultivo'),
+    ('cultivo'),
+    ('cultivo'),
+    ('cultivo'),
+    ('cultivo'),
+    ('cultivo'),
+    ('cultivo'),
+    ('cultivo'),
+    ('cultivo');
 
 -- Inserir registros relacionados nas tabelas habMineracao, habCombate e habCultivo
+-- TODO: Trigger pra inserir fk_Habilidade_id 
 INSERT INTO habMineracao (fk_Habilidade_id, reducaoEnergiaMinera, minerioBonus, nivel, xpMin, xpMax)
 VALUES
     (1, 0, 0, 1, 0, 100),
@@ -79,11 +80,11 @@ INSERT INTO Jogador (id_jogador, nome, fk_habMineracao_fk_Habilidade_id, fk_habC
 VALUES
     (0, 'teste', 1, 11, 21);
 
-INSERT INTO Animal (id_animal, nome_animal, diasTotalDropar, tipo_animal, itemDrop, preco)
+INSERT INTO Animal (nome_animal, diasTotalDropar, tipo_animal, itemDrop, preco)
 VALUES
-    (1, 'vaca', 7, 'vaca', 14, 50),
-    (2, 'galinha', 3, 'galinha', 13, 30),
-    (3, 'porco', 5, 'porco', 3, 40);--mudar o item  para o id do carne!!! 
+    ('vaca', 7, 'vaca', 14, 50),
+    ('galinha', 3, 'galinha', 13, 30),
+    ('porco', 5, 'porco', 3, 40);--mudar o item  para o id do carne!!! 
 
 INSERT INTO inimigo (id_inimigo, nome, tipo, vidaMax, dano) VALUES
     (1, 'Morcego da Caverna', 'caverna', 30, 5),
@@ -97,32 +98,90 @@ INSERT INTO inimigo (id_inimigo, nome, tipo, vidaMax, dano) VALUES
     (9, 'Fungo Venenoso', 'caverna', 5, 2),
     (10, 'Lagarto Albino', 'caverna', 45, 10);
 
-INSERT INTO Mapa (id_mapa, nome) VALUES
-    (1, 'mundo');
+INSERT INTO Ambiente(id_ambiente,tipo,nome,descricao,eh_casa,transitar_1,transitar_2,transitar_3,transitar_4,transitar_5,transitar_6)
+VALUES
+(1, 'CasaJogador','Cabana',
+ 'Casa de troncos herdada pelo seu avô. Um lugar aconchegante para descansar após um longo dia de trabalho.',
+ TRUE,  -- É a casa do jogador
+ 2, 3, 4, 5, NULL, NULL),
 
-INSERT INTO Ambiente (id_ambiente, tipo, nome, fk_id_mapa, fk_jogador_id, descricao, transitar_1, transitar_2, transitar_3, transitar_4, transitar_5, transitar_6) VALUES
-    (1, 'CasaJogador','Cabana', 1, 0, 'Casa de troncos herdada pelo seu avô. Um lugar aconchegante para descansar após um longo dia de trabalho.', 2, 3, 4, 5, NULL, NULL),
-    (2, 'Plantação', 'Plantação', 1, NULL, 'Uma vasta área de terra cercada por montanhas. Aqui, você pode plantar sementes.', 1, NULL, NULL, NULL, NULL, NULL),
-    (3, 'Celeiro', 'Celeiro', 1, NULL, 'Um amplo celeiro de madeira com cheiro de feno fresco.', 1, NULL, NULL, NULL, NULL, NULL),
-    (4, 'Normal', 'Floresta', 1, NULL, 'Uma floresta densa e vibrante, onde o som dos pássaros e o farfalhar das folhas criam uma melodia serena. Recursos valiosos e segredos aguardam entre as árvores sombrias.', 1, 6, 8, 15, NULL, NULL),
-    (5, 'Normal','Praça da Vila', 1, NULL, 'O coração da vila, cercado por jardins coloridos e bancos confortáveis. É o lugar perfeito para festivais, encontros e compartilhar histórias com os moradores.', 1, 9, 13, 12, 11, 10),
-    (6, 'Loja','Guilda dos Aventureiros', 1, NULL, 'Um refúgio para os bravos. Aqui, aventureiros se reúnem para relatar suas conquistas, comprar equipamentos e aceitar novos desafios.', 4, NULL, NULL, NULL, NULL, NULL),
-    (7, 'Loja','Comércio do Deserto', 1, NULL, 'Um mercado exótico no meio do deserto, onde mercadores misteriosos vendem itens raros e valiosos.', 8, NULL, NULL, NULL, NULL, NULL),
-    (8, 'Normal','Deserto', 1, NULL, 'Um vasto mar de areia escaldante, onde o vento sopra histórias antigas e tesouros esquecidos podem ser desenterrados.', 7, 4, NULL, NULL, NULL, NULL),
-    (9, 'Normal','Centro Comunitário', 1, NULL, 'Um edifício abandonado com um charme nostálgico. Restaurá-lo trará benefícios para toda a vila.', 14, 5, NULL, NULL, NULL, NULL),
-    (10, 'Normal','Praia', 1, NULL, 'Uma orla tranquila, onde as ondas acariciam a areia. É o lugar perfeito para pescar, relaxar ou encontrar tesouros marítimos.', 5, NULL, NULL, NULL, NULL, NULL),
-    (11, 'Loja', 'Armazém do Pierre', 1, NULL, 'O local favorito dos moradores para adquirir sementes, alimentos frescos e outros suprimentos agrícolas.', 5, NULL, NULL, NULL, NULL, NULL),
-    (12, 'Normal', 'Clínica do Harvey', 1, NULL, 'Um pequeno consultório médico onde Harvey cuida da saúde dos moradores com atenção e dedicação.', 5, NULL, NULL, NULL, NULL, NULL),
-    (13, 'Loja', 'Ferreiro', 1, NULL, 'Um local quente e barulhento onde ferramentas ganham vida e minérios são transformados em itens essenciais.', 5, NULL, NULL, NULL, NULL, NULL),
-    (14, 'Loja', 'Mercado Joja', 1, NULL, 'Uma megaloja moderna e impessoal, onde tudo está à venda... ao custo do espírito comunitário.', 9, NULL, NULL, NULL, NULL, NULL),
-    (15, 'Caverna', 'Caverna', 1, NULL, 'As paredes são cobertas por musgo e pequenas pedras brilham na escuridão. Um lugar ideal para começar a coletar minérios.', 4, NULL, NULL, NULL, NULL, NULL);
+(2, 'Plantação','Plantação',
+ 'Uma vasta área de terra cercada por montanhas. Aqui, você pode plantar sementes.',
+ FALSE,
+ 1, NULL, NULL, NULL, NULL, NULL),
 
-INSERT INTO loja (id_loja, nome, proprietario, fk_id_ambiente)
+(3, 'Celeiro','Celeiro',
+ 'Um amplo celeiro de madeira com cheiro de feno fresco.',
+ FALSE,
+ 1, NULL, NULL, NULL, NULL, NULL),
+
+(4, 'Normal','Floresta',
+ 'Uma floresta densa e vibrante, onde o som dos pássaros e o farfalhar das folhas criam uma melodia serena. Recursos valiosos e segredos aguardam entre as árvores sombrias.',
+ FALSE,
+ 1, 6, 8, 15, NULL, NULL),
+
+(5, 'Normal','Praça da Vila',
+ 'O coração da vila, cercado por jardins coloridos e bancos confortáveis. É o lugar perfeito para festivais, encontros e compartilhar histórias com os moradores.',
+ FALSE,
+ 1, 9, 13, 12, 11, 10),
+
+(6, 'Loja','Guilda dos Aventureiros',
+ 'Um refúgio para os bravos. Aqui, aventureiros se reúnem para relatar suas conquistas, comprar equipamentos e aceitar novos desafios.',
+ FALSE,
+ 4, NULL, NULL, NULL, NULL, NULL),
+
+(7, 'Loja','Comércio do Deserto',
+ 'Um mercado exótico no meio do deserto, onde mercadores misteriosos vendem itens raros e valiosos.',
+ FALSE,
+ 8, NULL, NULL, NULL, NULL, NULL),
+
+(8, 'Normal','Deserto',
+ 'Um vasto mar de areia escaldante, onde o vento sopra histórias antigas e tesouros esquecidos podem ser desenterrados.',
+ FALSE,
+ 7, 4, NULL, NULL, NULL, NULL),
+
+(9, 'Normal','Centro Comunitário',
+ 'Um edifício abandonado com um charme nostálgico. Restaurá-lo trará benefícios para toda a vila.',
+ FALSE,
+ 14, 5, NULL, NULL, NULL, NULL),
+
+(10, 'Normal','Praia',
+ 'Uma orla tranquila, onde as ondas acariciam a areia. É o lugar perfeito para pescar, relaxar ou encontrar tesouros marítimos.',
+ FALSE,
+ 5, NULL, NULL, NULL, NULL, NULL),
+
+(11, 'Loja','Armazém do Pierre',
+ 'O local favorito dos moradores para adquirir sementes, alimentos frescos e outros suprimentos agrícolas.',
+ FALSE,
+ 5, NULL, NULL, NULL, NULL, NULL),
+
+(12, 'Normal','Clínica do Harvey',
+ 'Um pequeno consultório médico onde Harvey cuida da saúde dos moradores com atenção e dedicação.',
+ FALSE,
+ 5, NULL, NULL, NULL, NULL, NULL),
+
+(13, 'Loja','Ferreiro',
+ 'Um local quente e barulhento onde ferramentas ganham vida e minérios são transformados em itens essenciais.',
+ FALSE,
+ 5, NULL, NULL, NULL, NULL, NULL),
+
+(14, 'Loja','Mercado Joja',
+ 'Uma megaloja moderna e impessoal, onde tudo está à venda... ao custo do espírito comunitário.',
+ FALSE,
+ 9, NULL, NULL, NULL, NULL, NULL),
+
+(15, 'Caverna','Caverna',
+ 'As paredes são cobertas por musgo e pequenas pedras brilham na escuridão. Um lugar ideal para começar a coletar minérios.',
+ FALSE,
+ 4, NULL, NULL, NULL, NULL, NULL);
+-- adicionar todos os andares das cavernas
+
+INSERT INTO loja (fk_id_ambiente, nome, proprietario)
 VALUES --fk_id_estoque com números aleatórios
-(1, 'Armazém do Pierre', 'Pierre', 11),
-(2, 'Mercado Joja', 'Gerente Joja', 14),
-(3, 'Ferreiro', 'Clint', 13), 
-(5, 'Comércio do Deserto', 'Sandy', 7);
+(1, 'Armazém do Pierre', 'Pierre'),
+(2, 'Mercado Joja', 'Gerente Joja'),
+(3, 'Ferreiro', 'Clint'), 
+(5, 'Comércio do Deserto', 'Sandy');
 
 INSERT INTO estoque(id_estoque, fk_id_loja) VALUES
     (1, 1),
@@ -130,8 +189,6 @@ INSERT INTO estoque(id_estoque, fk_id_loja) VALUES
     (3, 3),
     (5, 5);
 
-UPDATE loja
-SET fk_id_estoque = (SELECT id_estoque FROM estoque WHERE fk_id_loja = loja.id_loja);
 
 -- Adicione as restrições de FK
 ALTER TABLE loja
@@ -144,151 +201,64 @@ ALTER TABLE item
     ADD CONSTRAINT fk_item_estoque FOREIGN KEY (fk_estoque) REFERENCES estoque(id_estoque),
     ADD CONSTRAINT fk_item_inventario FOREIGN KEY (fk_inventario_id) REFERENCES inventario(id_inventario);
 
-INSERT INTO item (id_item, tipo_item, fk_estoque, fk_inventario_id) VALUES
-(1, 'consumivel', 1, NULL),
-(2, 'consumivel', 1, NULL),
-(3, 'consumivel', 1, NULL),
-(4, 'consumivel', 1, NULL),
-(5, 'consumivel', 1, NULL),
-(6, 'consumivel', 1, NULL),
-(7, 'consumivel', 1, NULL),
-(8, 'consumivel', 1, NULL),
-(9, 'consumivel', 1, NULL),
-(10, 'consumivel', 1, NULL),
-(11, 'consumivel', 1, NULL),
-(12, 'consumivel', 1, NULL),
-(13, 'consumivel', 1, NULL),
-(14, 'consumivel', 1, NULL),
-(15, 'consumivel', 1, NULL),
-(16, 'consumivel', 1, NULL),
-(17, 'consumivel', 1, NULL),
-(18, 'consumivel', 1, NULL),
-(19, 'consumivel', 1, NULL),
-(20, 'consumivel', 1, NULL),
-(21, 'consumivel', 1, NULL),
-(22, 'consumivel', 1, NULL),
-(23, 'consumivel', 1, NULL),
-(24, 'consumivel', 1, NULL),
-(25, 'consumivel', 1, NULL),
-(26, 'consumivel', 1, NULL),
-(27, 'consumivel', 1, NULL),
-(28, 'consumivel', 1, NULL),
-(29, 'mineral', 1, NULL),
-(30, 'mineral', 1, NULL),
-(31, 'mineral', 1, NULL),
-(32, 'mineral', 1, NULL),
-(33, 'mineral', 1, NULL),
-(34, 'mineral', 1, NULL),
-(35, 'mineral', 1, NULL),
-(36, 'mineral', 1, NULL),
-(37, 'mineral', 1, NULL),
-(38, 'mineral', 1, NULL),
-(39, 'mineral', 1, NULL),
-(40, 'mineral', 1, NULL),
-(41, 'mineral', 1, NULL),
-(42, 'mineral', 1, NULL),
-(43, 'mineral', 1, NULL),
-(44, 'mineral', 1, NULL),
-(45, 'recurso', 1, NULL),
-(46, 'recurso', 1, NULL),
-(47, 'recurso', 1, NULL),
-(48, 'recurso', 1, NULL),
-(49, 'recurso', 1, NULL),
-(50, 'recurso', 1, NULL),
-(51, 'recurso', 1, NULL),
-(52, 'recurso', 1, NULL),
-(53, 'recurso', 1, NULL),
-(54, 'mineral', 1, NULL),
-(55, 'mineral', 1, NULL),
-(56, 'mineral', 1, NULL),
+INSERT INTO item (id_item, tipo_item) VALUES
+(1, 'consumivel'),
+(2, 'consumivel'),
+(3, 'consumivel'),
+(4, 'consumivel'),
+(5, 'consumivel'),
+(6, 'consumivel'),
+(7, 'consumivel'),
+(8, 'consumivel'),
+(9, 'consumivel'),
+(10, 'consumivel'),
+(11, 'consumivel'),
+(12, 'consumivel'),
+(13, 'consumivel'),
+(14, 'consumivel'),
+(15, 'consumivel'),
+(16, 'consumivel'),
+(17, 'consumivel'),
+(18, 'consumivel'),
+(19, 'consumivel'),
+(20, 'consumivel'),
+(21, 'consumivel'),
+(22, 'consumivel'),
+(23, 'consumivel'),
+(24, 'consumivel'),
+(25, 'consumivel'),
+(26, 'consumivel'),
+(27, 'consumivel'),
+(28, 'consumivel'),
+(29, 'mineral'),
+(30, 'mineral'),
+(31, 'mineral'),
+(32, 'mineral'),
+(33, 'mineral'),
+(34, 'mineral'),
+(35, 'mineral'),
+(36, 'mineral'),
+(37, 'mineral'),
+(38, 'mineral'),
+(39, 'mineral'),
+(40, 'mineral'),
+(41, 'mineral'),
+(42, 'mineral'),
+(43, 'mineral'),
+(44, 'mineral'),
+(45, 'recurso'),
+(46, 'recurso'),
+(47, 'recurso'),
+(48, 'recurso'),
+(49, 'recurso'),
+(50, 'recurso'),
+(51, 'recurso'),
+(52, 'recurso'),
+(53, 'recurso'),
+(54, 'mineral'),
+(55, 'mineral'),
+(56, 'mineral'),
 
--- Armas
-(729, 'arma', 3, NULL),
-(730, 'arma', 3, NULL),
-(731, 'arma', 3, NULL),
-(732, 'arma', 3, NULL),
-(733, 'arma', 3, NULL),
-(734, 'arma', 3, NULL),
-(735, 'arma', 3, NULL),
-(736, 'arma', 3, NULL),
-(737, 'arma', 3, NULL),
-(738, 'arma', 3, NULL),
-(739, 'arma', 3, NULL),
-(740, 'arma', 3, NULL),
-(741, 'arma', 3, NULL),
-(742, 'arma', 3, NULL),
-(743, 'arma', 3, NULL),
-(744, 'arma', 3, NULL),
-(745, 'arma', 3, NULL),
-(746, 'arma', 3, NULL),
-(747, 'arma', 3, NULL),
-(748, 'arma', 3, NULL),
-(749, 'arma', 3, NULL),
-(750, 'arma', 3, NULL),
-(751, 'arma', 3, NULL),
-(752, 'arma', 3, NULL),
-(753, 'arma', 3, NULL),
-(754, 'arma', 3, NULL),
-(755, 'arma', 3, NULL),
-
-(601, 'ferramenta',3,NULL),
-(602, 'ferramenta',3,NULL),
-(603, 'ferramenta',3,NULL),
-(604, 'ferramenta',3,NULL),
-(605, 'ferramenta',3,NULL),
-(606, 'ferramenta',3,NULL),
-(607, 'ferramenta',3,NULL),
-(608, 'ferramenta',3,NULL),
-(609, 'ferramenta',3,NULL),
-(610, 'ferramenta',3,NULL),
-(611, 'ferramenta',3,NULL),
-(612, 'ferramenta',3,NULL),
-(613, 'ferramenta',3,NULL),
-(614, 'ferramenta',3,NULL),
-(615, 'ferramenta',3,NULL),
-(616, 'ferramenta',3,NULL),
-(617, 'ferramenta',3,NULL),
-(618, 'ferramenta',3,NULL),
-(619, 'ferramenta',3,NULL),
-(620, 'ferramenta',3,NULL),
-(621, 'ferramenta',3,NULL),
-(622, 'ferramenta',3,NULL),
-(623, 'ferramenta',3,NULL),
-(624, 'ferramenta',3,NULL),
-(625, 'ferramenta',3,NULL),
-(626, 'ferramenta',3,NULL),
-(627, 'ferramenta',3,NULL),
-(628, 'ferramenta',3,NULL),
-
-(629, 'arma',3,NULL),
-(630, 'arma',3,NULL),
-(631, 'arma',3,NULL),
-(632, 'arma',3,NULL),
-(633, 'arma',3,NULL),
-(634, 'arma',3,NULL),
-(635, 'arma',3,NULL),
-(636, 'arma',3,NULL),
-(637, 'arma',3,NULL),
-(638, 'arma',3,NULL),
-(639, 'arma',3,NULL),
-(640, 'arma',3,NULL),
-(641, 'arma',3,NULL),
-(642, 'arma',3,NULL),
-(643, 'arma',3,NULL),
-(644, 'arma',3,NULL),
-(645, 'arma',3,NULL),
-(646, 'arma',3,NULL),
-(647, 'arma',3,NULL),
-(648, 'arma',3,NULL),
-(649, 'arma',3,NULL),
-(650, 'arma',3,NULL),
-(651, 'arma',3,NULL),
-(652, 'arma',3,NULL),
-(653, 'arma',3,NULL),
-(654, 'arma',3,NULL),
-(655, 'arma',3,NULL);   
-
-INSERT INTO utensilio (id_item, tipo_utensilio) VALUES
 (601, 'ferramenta'),
 (602, 'ferramenta'),
 (603, 'ferramenta'),
@@ -343,37 +313,8 @@ INSERT INTO utensilio (id_item, tipo_utensilio) VALUES
 (652, 'arma'),
 (653, 'arma'),
 (654, 'arma'),
-(655, 'arma');
+(655, 'arma');   
 
--- INSERT INTO ferramenta (id_item, fk_id_utensilio, nome, descricao, eficiencia, nivel) VALUES
--- (701, 601, 'Enxada Comum', 'Cavar e arar o solo', 1, 1),
--- (702, 602, 'Enxada de Cobre', 'Cavar e arar o solo', 2, 2),
--- (703, 603, 'Enxada de Aço', 'Cavar e arar o solo', 3, 3),
--- (704, 604, 'Enxada de Ouro', 'Cavar e arar o solo', 4, 4),
--- (705, 605, 'Enxada de Irídio', 'Cavar e arar o solo', 5, 5),
--- (706, 606, 'Picareta Comum', 'Quebrar pedras', 1, 1),
--- (707, 607, 'Picareta de Cobre', 'Quebrar pedras', 2, 2),
--- (708, 608, 'Picareta de Aço', 'Quebrar pedras', 3, 3),
--- (709, 609, 'Picareta de Ouro', 'Quebrar pedras', 4, 4),
--- (710, 610, 'Picareta de Irídio', 'Quebrar pedras', 5, 5),
--- (711, 611, 'Machado Comum', 'Cortar madeira', 1, 1),
--- (712, 612, 'Machado de Cobre', 'Cortar madeira', 2, 2),
--- (713, 613, 'Machado de Aço', 'Cortar madeira', 3, 3),
--- (714, 614, 'Machado de Ouro', 'Cortar madeira', 4, 4),
--- (715, 615, 'Machado de Irídio', 'Cortar madeira', 5, 5),
--- (716, 616, 'Regador Comum', 'Regar plantas', 1, 1),
--- (717, 617, 'Regador de Cobre', 'Regar plantas', 2, 2),
--- (718, 618, 'Regador de Aço', 'Regar plantas', 3, 3),
--- (719, 619, 'Regador de Ouro', 'Regar plantas', 4, 4),
--- (720, 620, 'Regador de Irídio', 'Regar plantas', 5, 5),
--- (721, 621, 'Lixeira de Comum', 'Deletar itens do Inventário', 1, 1),
--- (722, 622, 'Lixeira de Cobre', 'Deletar itens do Inventário', 2, 2),
--- (723, 623, 'Lixeira de Aço', 'Deletar itens do Inventário', 2, 2),
--- (724, 624, 'Lixeira de Ouro', 'Deletar itens do Inventário', 3, 3),
--- (725, 625, 'Lixeira de Irídio', 'Deletar itens do Inventário', 4, 4);
--- (726, 626, 'Balde de Leite', 'Coletar Leite de cabra ou vaca', 2, 1),
--- (727, 627, 'Mochila tamanho 25', '12 espaços disponíveis', 12, 1),
--- (728, 628, 'Mochila tamanho 36', '12 espaços disponíveis', 24, 2);
 
 -- INSERT INTO arma (id_item, fk_id_utensilio, nome, descricao, dano) VALUES
 -- (729, 629, 'Espada enferrujada', 'Uma espada enferrujada e cega', 2),
@@ -458,17 +399,6 @@ INSERT INTO consumivel (id_item, nome, descricao, efeito_vida) VALUES
 (27, 'Cenoura subterrânea', 'Raiz nutritiva encontrada no subsolo.', 25),
 (28, 'Peixe', 'Fonte rica de proteínas.', 30);
 
--- INSERT INTO Semente (id_semente, nome, descricao, diaAtual, prontoColher, id_item, fk_instancia_planta_id) VALUES
--- (1, 'Semente de Chirívia', 'Semente que cresce em Chirívia.', 0, FALSE, 1, NULL),
--- (2, 'Semente de Batata', 'Semente que cresce em Batata.', 0, FALSE, 2, NULL),
--- (3, 'Semente de Couve', 'Semente que cresce em Couve.', 0, FALSE, 3, NULL),
--- (4, 'Semente de Alho', 'Semente que cresce em Alho.', 0, FALSE, 4, NULL),
--- (5, 'Semente de Tomate', 'Semente que cresce em Tomate.', 0, FALSE, 5, NULL),
--- (6, 'Semente de Melão', 'Semente que cresce em Melão.', 0, FALSE, 6, NULL),
--- (7, 'Semente de Mirtilo', 'Semente que cresce em Mirtilo.', 0, FALSE, 7, NULL),
--- (8, 'Semente de Oxicoco', 'Semente que cresce em Oxicoco.', 0, FALSE, 8, NULL),
--- (9, 'Semente de Abóbora', 'Semente que cresce em Abóbora.', 0, FALSE, 9, NULL),
--- (10, 'Semente de Coco', 'Semente que cresce em Coco.', 0, FALSE, 10, NULL);
 
 INSERT INTO mineral (id_item, nome, descricao, resistencia, preco) VALUES
 (29, 'Pedra', 'Um material de construção básico.', 10, 2.00),
@@ -526,3 +456,16 @@ VALUES
 (14, 35, 'Precisa-se de Ajuda: Carvão', 'Colete 25 unidades de Carvão para Clint.', 85), 
 (15, 54, 'Precisa-se de Ajuda: Madeira', 'Colete 100 unidades de Madeira para Robin.', 105), 
 (16, 55, 'Precisa-se de Ajuda: Diamante', 'Colete 10 Diamantes para Clint.', 135); 
+
+INSERT INTO Planta (nome, descricao, diaDropar)
+VALUES
+('Melão', 'Uma fruta doce e suculenta típica do verão.', 10),
+('Abóbora', 'Um vegetal grande e alaranjado, cresce melhor no outono.', 15),
+('Couve-Flor', 'Um vegetal branco e nutritivo, cresce bem na primavera.', 8),
+('Milho', 'Cresce durante o verão e outono, produzindo várias colheitas.', 20),
+('Morangos', 'Uma fruta doce da primavera, muito lucrativa.', 13),
+('Batata', 'Um tubérculo robusto e nutritivo, colhido na primavera.', 5),
+('Girassol', 'Uma flor brilhante que também pode ser usada para produzir óleo.', 12),
+('Trigo', 'Uma cultura essencial para fabricação de farinha e cerveja.', 18),
+('Rabanete', 'Um vegetal picante e crocante que cresce no verão.', 7),
+('Uva', 'Frutas roxas deliciosas, crescem em vinhedos no outono.', 16);
