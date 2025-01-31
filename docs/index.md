@@ -20,9 +20,11 @@ Maurício Serrano
 
 ## Sobre o Jogo
 
-Stardew Valley é um RPG sem fim da vida no campo! Você herdou a antiga fazenda de seu avô no Vale do Orvalho. Equipado com ferramentas de segunda mão e algumas moedas, você irá começar sua nova vida. Será que você consegue aprender a viver da terra? Não vai ser fácil. Você pode completar missões, criar uma plantação e cuidar de animais, evoluindo suas habilidades e vivendo numa simples fazenda.
+Stardew Valley é um RPG sem fim da vida no campo! Você herdou a antiga fazenda de seu avô no Vale do Orvalho. Equipado com ferramentas de segunda mão e algumas moedas, você irá começar sua nova vida. Será que você consegue aprender a viver da terra? Não vai ser fácil. Você pode completar missões, criar uma plantação e cuidar de animais, evoluindo suas habilidades e vivendo numa simples fazenda. Clique na imagem a seguir para descobrir o mundo mágico de Stardew Valley.
 
-<div align="center"> <img src="img/capa.jpg" height="230" width="auto"/> </div>
+<div align="center">
+<a href="https://www.youtube.com/watch?v=FjJx6u_5RdU" target="_blank"> <img src="img/capa.jpg" height="230" width="auto"/> </a>
+</div>
 
 # Guia para Rodar o Jogo
 

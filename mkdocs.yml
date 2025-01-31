@@ -4,7 +4,7 @@ repo_url: https://github.com/SBD1/2024.2-StardewValley
 repo_name: 2024.2-StardewValley
 
 nav:
-  - Equipe: index.md
+  - Visão Geral: index.md
   - Apresentações: 
     - Módulo 1: entrega-01/apresentação_1.md
     - Módulo 2: entrega-02/apresentação_2.md
