@@ -84,7 +84,9 @@ CREATE TABLE IF NOT EXISTS Jogador (
 CREATE TABLE IF NOT EXISTS inventario (
     id_inventario SERIAL PRIMARY KEY,
     fk_id_jogador INTEGER NOT NULL,
+    fk_id_item INTEGER NOT NULL,
     FOREIGN KEY (fk_id_jogador) REFERENCES Jogador(id_jogador)
+    FOREIGN KEY (fk_id_item) REFERENCES item(id_item)
 );
 
 -- Tabelas dependentes de outras tabelas
