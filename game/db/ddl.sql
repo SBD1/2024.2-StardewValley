@@ -4,11 +4,6 @@ CREATE TABLE IF NOT EXISTS Habilidade (
     tipo VARCHAR(50) NOT NULL
 );
 
-CREATE TABLE IF NOT EXISTS Mapa (
-    id_mapa SERIAL PRIMARY KEY,
-    nome VARCHAR(100) NOT NULL
-);
-
 CREATE TABLE IF NOT EXISTS Inimigo (
     id_inimigo SERIAL PRIMARY KEY,
     nome VARCHAR(100) NOT NULL,
@@ -281,11 +276,11 @@ CREATE TABLE IF NOT EXISTS Instancia_Missao (
 CREATE TABLE IF NOT EXISTS Recompensa (
     id_Recompensa  SERIAL PRIMARY KEY,
     fk_Jogador_id INT NOT NULL,
-    id_item INT NOT NULL,
+    fk_id_item INT NOT NULL,
     fk_Instancia_Missao INT NOT NULL,
     quantidade INT NOT NULL,
     FOREIGN KEY (fk_Jogador_id) REFERENCES Jogador(id_jogador),
-    FOREIGN KEY (id_item) REFERENCES item(id_item),
+    FOREIGN KEY (fk_id_item) REFERENCES item(id_item),
     FOREIGN KEY (fk_Instancia_Missao) REFERENCES Instancia_Missao(id_Instancia_Missao)
 );
 
