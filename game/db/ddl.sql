@@ -147,7 +147,7 @@ CREATE TABLE IF NOT EXISTS mineral (
 CREATE TABLE IF NOT EXISTS Caverna(
     fk_id_ambiente INT NOT NULL PRIMARY KEY,
     andar INT NOT NULL,
-    quantidade_mobs INT NOT NULL,
+    quantidade_mobs INT DEFAULT 0,
     qtd_minerio INT NOT NULL,
     fk_id_minerio_item INT NOT NULL,
     fk_id_item_recompensa INT NOT NULL,
@@ -210,8 +210,10 @@ CREATE TABLE IF NOT EXISTS Instancia_de_Inimigo (
     vidaAtual FLOAT NOT NULL,
     fk_id_ambiente INT,
     fk_inimigo_id INT NOT NULL,
+    fk_jogador_id INT NOT NULL,
     FOREIGN KEY (fk_inimigo_id) REFERENCES Inimigo(id_inimigo),
-    FOREIGN KEY (fk_id_ambiente) REFERENCES Caverna(fk_id_ambiente)
+    FOREIGN KEY (fk_id_ambiente) REFERENCES Caverna(fk_id_ambiente),
+    FOREIGN KEY (fk_jogador_id) REFERENCES Jogador(id_jogador)
 );
 
 
