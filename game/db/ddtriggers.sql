@@ -1,6 +1,6 @@
------------------------------- Triggers na tabela Instancia_de_Inimigo ------------------------------
+------------------ Triggers na tabela Instancia_de_Inimigo ------------------
 
-  -- Tabela afetada: Instancia_de_Inimigo
+  -- Tabelas afetadas: Instancia_de_Inimigo
     CREATE OR REPLACE FUNCTION excluir_inimigos_mortos()
     RETURNS TRIGGER AS $excluir_inimigos_mortos$
     BEGIN
@@ -20,7 +20,7 @@
     FOR EACH ROW
     EXECUTE FUNCTION excluir_inimigos_mortos();
 
-  -- Tabela afetada: Caverna
+ -- Tabelas afetadas: Caverna
     CREATE OR REPLACE FUNCTION atualizar_quantidade_mobs()
     RETURNS TRIGGER AS $atualizar_quantidade_mobs$
     BEGIN
@@ -28,12 +28,17 @@
         -- Decrementa a quantidade de mobs na caverna, garantindo que seja no mínimo 0
         UPDATE Caverna
         SET quantidade_mobs = GREATEST(quantidade_mobs - 1, 0)
-        WHERE andar = OLD.fk_Caverna_andar;
+        WHERE fk_id_ambiente = OLD.fk_id_ambiente;
       ELSIF TG_OP = 'INSERT' THEN
         -- Incrementa a quantidade de mobs na caverna
+        RAISE NOTICE 'Incrementando quantidade de mobs na caverna de id %', NEW.fk_id_ambiente;
+        RAISE NOTICE 'Quantidade de mobs atual: %', (SELECT quantidade_mobs FROM Caverna WHERE fk_id_ambiente = NEW.fk_id_ambiente);
+
         UPDATE Caverna
         SET quantidade_mobs = quantidade_mobs + 1
-        WHERE andar = NEW.fk_Caverna_andar;
+        WHERE fk_id_ambiente = NEW.fk_id_ambiente;
+
+        RAISE NOTICE 'Quantidade de mobs após incremento: %', (SELECT quantidade_mobs FROM Caverna WHERE fk_id_ambiente = NEW.fk_id_ambiente);
       END IF;
 
       RETURN OLD; -- Retorna a linha deletada para operações AFTER DELETE
@@ -46,7 +51,7 @@
     FOR EACH ROW
     EXECUTE FUNCTION atualizar_quantidade_mobs();
 
-  -- Tabela afetada: Jogador, tá grande pra krl, mas fdse, FUNCIONA
+ -- Tabelas afetadas: Jogador, tá grande pra krl, mas fdse, FUNCIONA
   CREATE OR REPLACE FUNCTION adiciona_xp_combate()
   RETURNS TRIGGER AS $adiciona_xp$
   DECLARE
@@ -57,8 +62,8 @@
   BEGIN
       -- Pega o id do jogador
       SELECT fk_jogador_id INTO jogador_id
-      FROM Ambiente
-      WHERE fk_jogador_id IS NOT NULL;
+      FROM Instancia_de_Inimigo
+      WHERE fk_jogador_id = OLD.fk_jogador_id;
 
       -- Atualiza o xp_combate do jogador
       UPDATE Jogador
