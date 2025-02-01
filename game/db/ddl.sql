@@ -63,7 +63,8 @@ CREATE TABLE IF NOT EXISTS Jogador (
     id_jogador SERIAL PRIMARY KEY,
     nome VARCHAR(100) NOT NULL,                  
     dia INT NOT NULL DEFAULT 0,                   
-    tempo INT NOT NULL DEFAULT 0,                
+    tempo INT NOT NULL DEFAULT 0,
+    localizacao_atual INT NOT NULL DEFAULT 1,                
     vidaMax FLOAT NOT NULL DEFAULT 10.0,         
     vidaAtual FLOAT NOT NULL DEFAULT 10.0,       
     xp_mineracao FLOAT NOT NULL DEFAULT 0.0,     
@@ -134,12 +135,12 @@ CREATE TABLE IF NOT EXISTS instancia_de_item(
 );
 
 CREATE TABLE IF NOT EXISTS mineral (
-    id_item INTEGER PRIMARY KEY,
+    fk_id_item INTEGER PRIMARY KEY,
     nome VARCHAR(100) NOT NULL,
     descricao VARCHAR(100) NOT NULL,
     resistencia INTEGER NOT NULL,
     preco DECIMAL NOT NULL,
-    FOREIGN KEY (id_item) REFERENCES item(id_item)
+    FOREIGN KEY (fk_id_item) REFERENCES item(id_item)
 );
 
 CREATE TABLE IF NOT EXISTS Caverna(
@@ -150,7 +151,7 @@ CREATE TABLE IF NOT EXISTS Caverna(
     fk_id_minerio_item INT NOT NULL,
     fk_id_item_recompensa INT NOT NULL,
     FOREIGN KEY (fk_id_ambiente) REFERENCES Ambiente(id_ambiente),
-    FOREIGN KEY (fk_id_minerio_item) REFERENCES mineral(id_item),
+    FOREIGN KEY (fk_id_minerio_item) REFERENCES mineral(fk_id_item),
     FOREIGN KEY (fk_id_item_recompensa) REFERENCES item(id_item)
 );
 
@@ -188,19 +189,19 @@ CREATE TABLE IF NOT EXISTS ferramenta (
 
 
 CREATE TABLE IF NOT EXISTS arma (
-    id_item INTEGER PRIMARY KEY,
+    fk_id_item INTEGER PRIMARY KEY,
     nome VARCHAR(100) NOT NULL,
     descricao VARCHAR(100) NOT NULL,
     dano_arma INTEGER,
-    FOREIGN KEY (id_item) REFERENCES item(id_item)
+    FOREIGN KEY (fk_id_item) REFERENCES item(id_item)
 );
 
 CREATE TABLE IF NOT EXISTS recurso (
-    id_item INTEGER PRIMARY KEY,
+    fk_id_item INTEGER PRIMARY KEY,
     nome VARCHAR(100) NOT NULL,
     descricao VARCHAR(100) NOT NULL,
     preco DECIMAL NOT NULL,
-    FOREIGN KEY (id_item) REFERENCES item(id_item)
+    FOREIGN KEY (fk_id_item) REFERENCES item(id_item)
 );
 
 CREATE TABLE IF NOT EXISTS Instancia_de_Inimigo (
@@ -264,7 +265,7 @@ CREATE TABLE IF NOT EXISTS missao_coleta (
     descricao TEXT NOT NULL,
     dataInicio INT NOT NULL,
     dataFinalizacao INT,
-    FOREIGN KEY (fk_id_minerio) REFERENCES mineral(id_item),
+    FOREIGN KEY (fk_id_minerio) REFERENCES mineral(fk_id_item),
     FOREIGN KEY (fk_id_missao) REFERENCES Missao(id_missao)
 );
 

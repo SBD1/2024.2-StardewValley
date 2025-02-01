@@ -189,18 +189,6 @@ INSERT INTO estoque(id_estoque, fk_id_loja) VALUES
     (3, 3),
     (5, 5);
 
-
--- Adicione as restrições de FK
-ALTER TABLE loja
-    ADD CONSTRAINT fk_loja_estoque FOREIGN KEY (fk_id_estoque) REFERENCES estoque(id_estoque);
-
-ALTER TABLE estoque
-    ADD CONSTRAINT fk_estoque_loja FOREIGN KEY (fk_id_loja) REFERENCES loja(id_loja);
-
-ALTER TABLE item
-    ADD CONSTRAINT fk_item_estoque FOREIGN KEY (fk_estoque) REFERENCES estoque(id_estoque),
-    ADD CONSTRAINT fk_item_inventario FOREIGN KEY (fk_inventario_id) REFERENCES inventario(id_inventario);
-
 INSERT INTO item (id_item, tipo_item) VALUES
 (1, 'consumivel'),
 (2, 'consumivel'),
@@ -369,7 +357,7 @@ VALUES
 (16,'coleta');
 
 
-INSERT INTO consumivel (id_item, nome, descricao, efeito_vida) VALUES
+INSERT INTO consumivel (fk_id_item, nome, descricao, efeito_vida) VALUES
 (1, 'Chirívia', 'Uma raiz crocante e ligeiramente doce.', 25),
 (2, 'Batata', 'Tubérculo redondo e versátil.', 30),
 (3, 'Couve', 'Vegetal verde e rico em nutrientes.', 35),
@@ -400,7 +388,7 @@ INSERT INTO consumivel (id_item, nome, descricao, efeito_vida) VALUES
 (28, 'Peixe', 'Fonte rica de proteínas.', 30);
 
 
-INSERT INTO mineral (id_item, nome, descricao, resistencia, preco) VALUES
+INSERT INTO mineral (fk_id_item, nome, descricao, resistencia, preco) VALUES
 (29, 'Pedra', 'Um material de construção básico.', 10, 2.00),
 (30, 'Bronze', 'Um metal utilizado em ferramentas.', 20, 15.00),
 (31, 'Ferro', 'Metal resistente e versátil.', 30, 25.00),
@@ -416,10 +404,10 @@ INSERT INTO mineral (id_item, nome, descricao, resistencia, preco) VALUES
 (55, 'Diamante', 'Uma gema preciosa e brilhante.', 60, 300.00),
 (56, 'Madeira de Lei', 'Um tipo de madeira mais resistente.', 20, 20.00);
 
-INSERT INTO Caverna (andar, fk_id_ambiente, quantidade_mobs, qtd_minerio, fk_id_minerio_item, fk_id_item_recompensa) VALUES
-    (1, 15, 10, 5, 29, 10);
+INSERT INTO Caverna (fk_id_ambiente, andar, quantidade_mobs, qtd_minerio, fk_id_minerio_item, fk_id_item_recompensa) VALUES
+    (15, 1, 10, 5, 29, 10);
 
-INSERT INTO recurso (id_item, nome, descricao, preco) VALUES
+INSERT INTO recurso (fk_id_item, nome, descricao, preco) VALUES
 (40, 'Quartzo', 'Um cristal translúcido muito comum.', 25.00),
 (41, 'Cristal de terra', 'Um cristal com impurezas de terra.', 40.00),
 (42, 'Lágrima congelada', 'Uma gema azul brilhante e gelada.', 75.00),
