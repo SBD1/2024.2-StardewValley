@@ -231,10 +231,12 @@ CREATE TABLE IF NOT EXISTS Planta (
 CREATE TABLE IF NOT EXISTS Instancia_de_Planta (
     id_instancia_de_planta SERIAL PRIMARY KEY,
     fk_id_planta INT NOT NULL,
+    fk_id_jogador INT NOT NULL,
     nome VARCHAR(50) NOT NULL,
     prontoColher BOOLEAN NOT NULL,
     diaAtual INT NOT NULL DEFAULT 0,
-    FOREIGN KEY (fk_id_planta) REFERENCES Planta(id_planta)
+    FOREIGN KEY (fk_id_planta) REFERENCES Planta(id_planta),
+    FOREIGN KEY (fk_id_jogador) REFERENCES Jogador(id_jogador)
 );
 
 CREATE TABLE IF NOT EXISTS Missao (
