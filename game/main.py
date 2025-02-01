@@ -55,7 +55,7 @@ def exibir_habilidades_jogador(jogador):
     try:
         conn = get_connection()
         cursor = conn.cursor()
-        cursor.execute("SELECT * FROM Habilidade WHERE id_habilidade in (%s,%s,%s)", (jogador[10],jogador[11],jogador[12]))
+        cursor.execute("SELECT * FROM Habilidade WHERE id_habilidade in (%s,%s,%s)", (jogador[11],jogador[12],jogador[13]))
         
         habilidades = cursor.fetchall()
         
@@ -138,7 +138,7 @@ def andar_no_mapa(jogador, localizacao_atual):
     
     ambiente_opcoes = {}
 
-    for ambiente in localizacao_atual[6:]:
+    for ambiente in localizacao_atual[5:]:
         if ambiente is not None:
             ambiente_dados = ambiente_info(ambiente)
             print(f'{index} - {ambiente_dados[2]}')
@@ -173,14 +173,18 @@ def andar_no_mapa(jogador, localizacao_atual):
             print("Ação cancelada.")
             return None
         
-        cursor.execute("UPDATE Ambiente SET fk_jogador_id = %s WHERE id_ambiente = %s",
-                       (jogador[0],ambiente_opcoes[escolha]))
+        #print(ambiente_opcoes[escolha])
+        
+        conn = get_connection()
+        cursor = conn.cursor()
+        cursor.execute("UPDATE Jogador SET localizacao_atual= %s WHERE id_jogador = %s",
+                       (ambiente_opcoes[escolha],jogador[0]))
         conn.commit()
         
-        id_loc_atual = localizacao_atual[0]
-        cursor.execute("UPDATE Ambiente SET fk_jogador_id = NULL WHERE id_ambiente = %s",
-                       (id_loc_atual,))
-        conn.commit()
+        #id_loc_atual = localizacao_atual[0]
+        #cursor.execute("UPDATE Ambiente SET fk_jogador_id = NULL WHERE id_ambiente = %s",
+        #               (id_loc_atual,))
+        #conn.commit()
         
     except Exception as e:
         print(f"Erro ao carregar ambiente: {e}")
@@ -203,28 +207,28 @@ def interagir_ambiente(jogador, localizacao_atual):
 def menu_jogo(jogador):
     clear_terminal()
     while True:
-        
+        id_jogador = jogador[0]
+        nome_jogador = jogador[1]
         dia_atual = jogador[2]
         tempo_atual = jogador[3]
-        vida_maxima = jogador[4]
-        vida_atual = jogador[5]
-        nome_player = jogador[1]
-        xp_mineracao = jogador[6]
-        xp_cultivo = jogador[7]
-        xp_combate = jogador[8]
-        dano_ataque = jogador[9]
-        localizacao_atual = obter_localizacao_jogador(jogador)
+        localizacao_atual =  ambiente_info(jogador[4])
+        vida_maxima = jogador[5]
+        vida_atual = jogador[6]
+        xp_mineracao = jogador[7]
+        xp_cultivo = jogador[8]
+        xp_combate = jogador[9]
+        dano_ataque = jogador[10]
 
         print(("\t"*10)+"\n##### Stardew Valley 🌾 #####\n")
         print(f"Dia: {dia_atual} | Tempo: {tempo_atual}")
-        print(f"Fazendeiro(a): {nome_player}")
+        print(f"Fazendeiro(a): {nome_jogador}")
         print(f"Vida 🖤: {vida_atual}/{vida_maxima}")
         print(f"Dano de Ataque ⚔️: {dano_ataque}")
         print(f"XP Mineração ⛏️ : {xp_mineracao}")
         print(f"XP Cultivo 🌱 : {xp_cultivo}")
         print(f"XP Combate 🛡️ : {xp_combate}\n")
         
-        print(f'Você está em {localizacao_atual[2]}\n{localizacao_atual[5]}\n')
+        print(f'Você está em {localizacao_atual[2]}\n{localizacao_atual[3]}\n')
 
         print("Suas opções:")
         opcoes_menu = [
@@ -247,7 +251,8 @@ def menu_jogo(jogador):
             interagir_ambiente(jogador, localizacao_atual)
         elif escolha == 9:
             break
-       
+        jogador = carregar_personagem(id_jogador)
+
 def carregar_personagem(jogador_id):
     try:
         conn = get_connection()
