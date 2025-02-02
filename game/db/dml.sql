@@ -80,7 +80,11 @@ INSERT INTO Jogador (id_jogador, nome, fk_habMineracao_fk_Habilidade_id, fk_habC
 VALUES
     (0, 'teste', 1, 11, 21);
 
-INSERT INTO Animal (id_animal, tipo_animal, diasTotalDropar, itemDrop, preco)
+INSERT INTO inventario(id_inventario, fk_id_jogador)
+VALUES
+    (0,0);--inventario do jogador 0
+
+INSERT INTO Animal (nome_animal, diasTotalDropar, tipo_animal, itemDrop, preco)
 VALUES
     (1, 'Vaca', 1, 14, 25.00),
     (2, 'Galinha', 1, 30, 15.00),
@@ -310,50 +314,51 @@ INSERT INTO item (id_item, tipo_item) VALUES
 (425, 'arma'),
 (426, 'arma');   
 
-INSERT INTO ferramenta(fk_id_item, nome, descricao, eficiencia) VALUES
-(300, 'Enxada', 'Ferramenta básica para arar a terra.', 1),
-(301, 'Regador', 'Ferramenta essencial para regar plantações.', 1),
-(302, 'Machado', 'Ferramenta para cortar árvores e coletar madeira.', 1),
-(303, 'Machado de Cobre', 'Ferramenta para cortar árvores e coletar madeira.', 2),
-(304, 'Machado de Aço', 'Ferramenta para cortar árvores e coletar madeira.', 3),
-(305, 'Machado de Ouro', 'Ferramenta para cortar árvores e coletar madeira.', 4),
-(306, 'Machado de Irídio', 'Ferramenta para cortar árvores e coletar madeira.', 5),
-(307, 'Picareta', 'Ferramenta para quebrar pedras e coletar minérios.', 1),
-(308, 'Picareta de Cobre', 'Ferramenta para quebrar pedras e coletar minérios.', 2),
-(309, 'Picareta de Aço', 'Ferramenta para quebrar pedras e coletar minérios.', 3),
-(310, 'Picareta de Ouro', 'Ferramenta para quebrar pedras e coletar minérios.', 4),
-(311, 'Picareta de Irídio', 'Ferramenta para quebrar pedras e coletar minérios.', 5),
-(312, 'Foice', 'Ferramenta para colher plantas e cortar grama.', 1),
-(313, 'Tesoura', 'Ferramenta para cortar arbustos e colher frutas.', 1),
-(314, 'Martelo', 'Ferramenta para consertar equipamentos e construir estruturas.', 1),
-(315, 'Pá de Jardineiro', 'Ferramenta para cavar buracos e plantar flores.', 1);
+INSERT INTO ferramenta (fk_id_item, nome, descricao, eficiencia, preco) VALUES
+(300, 'Enxada', 'Ferramenta básica para arar a terra.', 1, 100),
+(301, 'Regador', 'Ferramenta essencial para regar plantações.', 1, 150),
+(302, 'Machado', 'Ferramenta para cortar árvores e coletar madeira.', 1, 200),
+(303, 'Machado de Cobre', 'Ferramenta para cortar árvores e coletar madeira.', 2, 500),
+(304, 'Machado de Aço', 'Ferramenta para cortar árvores e coletar madeira.', 3, 1000),
+(305, 'Machado de Ouro', 'Ferramenta para cortar árvores e coletar madeira.', 4, 2500),
+(306, 'Machado de Irídio', 'Ferramenta para cortar árvores e coletar madeira.', 5, 5000),
+(307, 'Picareta', 'Ferramenta para quebrar pedras e coletar minérios.', 1, 200),
+(308, 'Picareta de Cobre', 'Ferramenta para quebrar pedras e coletar minérios.', 2, 500),
+(309, 'Picareta de Aço', 'Ferramenta para quebrar pedras e coletar minérios.', 3, 1000),
+(310, 'Picareta de Ouro', 'Ferramenta para quebrar pedras e coletar minérios.', 4, 2500),
+(311, 'Picareta de Irídio', 'Ferramenta para quebrar pedras e coletar minérios.', 5, 5000),
+(312, 'Foice', 'Ferramenta para colher plantas e cortar grama.', 1, 100),
+(313, 'Tesoura', 'Ferramenta para cortar arbustos e colher frutas.', 1, 150),
+(314, 'Martelo', 'Ferramenta para consertar equipamentos e construir estruturas.', 1, 300),
+(315, 'Pá de Jardineiro', 'Ferramenta para cavar buracos e plantar flores.', 1, 120);
 
-INSERT INTO arma (fk_id_item, nome, descricao, dano_arma) VALUES
-(400, 'Espada enferrujada', 'Uma espada enferrujada e cega', 2),
-(401, 'Espada de madeira', 'Nada mal para um pedaço de madeira.', 5),
-(402, 'Espada de aço', 'Uma espada padrão.', 6),
-(403, 'Sabre de prata', 'Folheado com prata para reduzir a ferrugem.', 11),
-(404, 'Espada de pirata', 'Parece que um pirata a possuía.', 11),
-(405, 'Sabre', 'Um sabre muito bem feito.', 10),
-(406, 'Espada da Floresta', 'Feita poderosa mágica da floresta.', 13),
-(407, 'Lâmina de ferro', 'Uma espada pesada.', 18),
-(408, 'Cabeça de inseto', 'Não muito agradável de segurar.', 15),
-(409, 'Gládio de Netuno', 'Herança de além do Mar de Joias.', 27),
-(410, 'Espada Escocesa', 'É muito pesada.', 26),
-(411, 'Espada do templário', 'Já pertenceu a um honrado cavaleiro.', 25),
-(412, 'Espada de ossos', 'Muito leve. Feita de osso polido.', 25),
-(413, 'Lâmina Ossificada', 'Uma lâmina grande e afiada formada por ossos.', 34),
-(414, 'Espada de Obsidiana', 'Incrivelmente afiada.', 38),
-(415, 'Dentes de iete', 'Muito frios ao toque.', 34),
-(416, 'Espada temperada', 'Parece aguentar qualquer impacto.', 36),
-(417, 'Cimitarra de metal', 'Leve e poderosa.', 37),
-(418, 'Espada das trevas', 'Brilha com uma energia misteriosa.', 38),
-(419, 'Katana de lava', 'Uma lâmina poderosa, forjada em uma piscina de lava.', 60),
-(420, 'Espada Anã', 'É antiga, mas a lâmina nunca desgasta.', 70),
-(421, 'Espada da galáxia', 'Diferente de tudo que você já viu.', 70),
-(422, 'Espada de Dente de Dragão', 'A lâmina foi forjada de um dente mágico.', 83),
-(423, 'Lâmina do Infinito', 'A verdadeira forma da Espada da Galáxia.', 90),
-(424, 'Espada sagrada', 'Dá esperança ao segurar.', 23);
+
+INSERT INTO arma (fk_id_item, nome, descricao, dano_arma, preco) VALUES
+(400, 'Espada enferrujada', 'Uma espada enferrujada e cega', 2, 10),
+(401, 'Espada de madeira', 'Nada mal para um pedaço de madeira.', 5, 50),
+(402, 'Espada de aço', 'Uma espada padrão.', 6, 150),
+(403, 'Sabre de prata', 'Folheado com prata para reduzir a ferrugem.', 11, 400),
+(404, 'Espada de pirata', 'Parece que um pirata a possuía.', 11, 420),
+(405, 'Sabre', 'Um sabre muito bem feito.', 10, 380),
+(406, 'Espada da Floresta', 'Feita com poderosa mágica da floresta.', 13, 600),
+(407, 'Lâmina de ferro', 'Uma espada pesada.', 18, 900),
+(408, 'Cabeça de inseto', 'Não muito agradável de segurar.', 15, 750),
+(409, 'Gládio de Netuno', 'Herança de além do Mar de Joias.', 27, 1500),
+(410, 'Espada Escocesa', 'É muito pesada.', 26, 1400),
+(411, 'Espada do templário', 'Já pertenceu a um honrado cavaleiro.', 25, 1300),
+(412, 'Espada de ossos', 'Muito leve. Feita de osso polido.', 25, 1200),
+(413, 'Lâmina Ossificada', 'Uma lâmina grande e afiada formada por ossos.', 34, 1800),
+(414, 'Espada de Obsidiana', 'Incrivelmente afiada.', 38, 2200),
+(415, 'Dentes de iete', 'Muito frios ao toque.', 34, 2000),
+(416, 'Espada temperada', 'Parece aguentar qualquer impacto.', 36, 2100),
+(417, 'Cimitarra de metal', 'Leve e poderosa.', 37, 2300),
+(418, 'Espada das trevas', 'Brilha com uma energia misteriosa.', 38, 2400),
+(419, 'Katana de lava', 'Uma lâmina poderosa, forjada em uma piscina de lava.', 60, 4000),
+(420, 'Espada Anã', 'É antiga, mas a lâmina nunca desgasta.', 70, 5000),
+(421, 'Espada da galáxia', 'Diferente de tudo que você já viu.', 70, 6000),
+(422, 'Espada de Dente de Dragão', 'A lâmina foi forjada de um dente mágico.', 83, 7500),
+(423, 'Lâmina do Infinito', 'A verdadeira forma da Espada da Galáxia.', 90, 10000),
+(424, 'Espada sagrada', 'Dá esperança ao segurar.', 23, 1100);
 
 INSERT INTO Missao (id_missao, tipo)
 VALUES
@@ -375,37 +380,35 @@ VALUES
 (16,'coleta');
 
 
-INSERT INTO consumivel (fk_id_item, nome, descricao, efeito_vida) VALUES
-(1, 'Chirívia', 'Uma raiz crocante e ligeiramente doce.', 25),
-(2, 'Batata', 'Tubérculo redondo e versátil.', 30),
-(3, 'Couve', 'Vegetal verde e rico em nutrientes.', 35),
-(4, 'Alho', 'Bulbo picante com diversos usos.', 20),
-(5, 'Tomate', 'Fruta vermelha suculenta.', 25),
-(6, 'Melão', 'Fruta grande e doce.', 50),
-(7, 'Mirtilo', 'Pequena baga azul cheia de sabor.', 15),
-(8, 'Oxicoco', 'Fruta vermelha ácida e rara.', 20),
-(9, 'Abóbora', 'Grande vegetal laranja.', 40),
-(10, 'Coco', 'Fruta tropical com polpa cremosa.', 35),
-(11, 'Maçã', 'Fruta crocante e doce.', 25),
-(12, 'Damasco', 'Fruta laranja e macia.', 20),
-(13, 'Ovo', 'Fonte básica de proteína.', 15),
-(14, 'Leite', 'Líquido cremoso e nutritivo.', 25),
-(15, 'Queijo', 'Laticínio envelhecido e saboroso.', 35),
-(16, 'Maionese', 'Condimento cremoso.', 20),
-(17, 'Café', 'Bebida energizante.', 10),
-(18, 'Pão', 'Carboidrato assado e básico.', 20),
-(19, 'Ovo frito', 'Ovo cozido na frigideira.', 25),
-(20, 'Panquecas', 'Prato doce e macio.', 35),
-(21, 'Tortilha', 'Pão achatado e simples.', 20),
-(22, 'Omelete', 'Mistura de ovos e outros ingredientes.', 30),
-(23, 'Sorvete', 'Sobremesa gelada e doce.', 25),
-(24, 'Hambúrguer de Sobrevivência', 'Refeição nutritiva para emergências.', 50),
-(25, 'Refeição de Mineiro', 'Alimento energético para mineradores.', 45),
-(26, 'Café Expresso Triplo', 'Café mais forte para energia extra.', 30),
-(27, 'Cenoura subterrânea', 'Raiz nutritiva encontrada no subsolo.', 25),
-(28, 'Peixe', 'Fonte rica de proteínas.', 30),
-(29, 'Ovo de Pato', 'Ovo de pato fresco e nutritivo.', 20),
-(30, 'Ovo de Galinha', 'Ovo de galinha fresco e nutritivo', 50);
+INSERT INTO consumivel (fk_id_item, nome, descricao, efeito_vida, preco) VALUES
+(1, 'Chirívia', 'Uma raiz crocante e ligeiramente doce.', 25, 10),
+(2, 'Batata', 'Tubérculo redondo e versátil.', 30, 12),
+(3, 'Couve', 'Vegetal verde e rico em nutrientes.', 35, 15),
+(4, 'Alho', 'Bulbo picante com diversos usos.', 20, 8),
+(5, 'Tomate', 'Fruta vermelha suculenta.', 25, 10),
+(6, 'Melão', 'Fruta grande e doce.', 50, 25),
+(7, 'Mirtilo', 'Pequena baga azul cheia de sabor.', 15, 7),
+(8, 'Oxicoco', 'Fruta vermelha ácida e rara.', 20, 12),
+(9, 'Abóbora', 'Grande vegetal laranja.', 40, 30),
+(10, 'Coco', 'Fruta tropical com polpa cremosa.', 35, 20),
+(11, 'Maçã', 'Fruta crocante e doce.', 25, 12),
+(12, 'Damasco', 'Fruta laranja e macia.', 20, 9),
+(13, 'Ovo', 'Fonte básica de proteína.', 15, 5),
+(14, 'Leite', 'Líquido cremoso e nutritivo.', 25, 15),
+(15, 'Queijo', 'Laticínio envelhecido e saboroso.', 35, 30),
+(16, 'Maionese', 'Condimento cremoso.', 20, 10),
+(17, 'Café', 'Bebida energizante.', 10, 6),
+(18, 'Pão', 'Carboidrato assado e básico.', 20, 12),
+(19, 'Ovo frito', 'Ovo cozido na frigideira.', 25, 15),
+(20, 'Panquecas', 'Prato doce e macio.', 35, 20),
+(21, 'Tortilha', 'Pão achatado e simples.', 20, 10),
+(22, 'Omelete', 'Mistura de ovos e outros ingredientes.', 30, 18),
+(23, 'Sorvete', 'Sobremesa gelada e doce.', 25, 20),
+(24, 'Hambúrguer de Sobrevivência', 'Refeição nutritiva para emergências.', 50, 50),
+(25, 'Refeição de Mineiro', 'Alimento energético para mineradores.', 45, 45),
+(26, 'Café Expresso Triplo', 'Café mais forte para energia extra.', 30, 30),
+(27, 'Cenoura subterrânea', 'Raiz nutritiva encontrada no subsolo.', 25, 12),
+(28, 'Peixe', 'Fonte rica de proteínas.', 30, 20);
 
 
 INSERT INTO mineral (fk_id_item, nome, descricao, resistencia, preco) VALUES
@@ -446,37 +449,51 @@ INSERT INTO recurso (fk_id_item, nome, descricao, preco) VALUES
 (216, 'Lã', 'Fibra macia e quente obtida de ovelhas.', 60.00),
 (217, 'Pele', 'Material resistente e flexível obtido de coelhos.', 55.00);
 
-INSERT INTO missao_combate (fk_id_missao, fk_id_Inimigo, nome, descricao, dataInicio)
+INSERT INTO missao_combate (fk_id_missao, fk_id_Inimigo, nome, descricao, dataInicio, fk_id_item_recompensa)
 VALUES 
-(1, 6, 'Iniciação', 'Derrote 10 Slimes Escuros para entrar na Guilda dos Aventureiros.', 1),  
-(2, 6, 'Precisa-se de Ajuda: Slimes Escuros', 'Elimine 20 Slimes Escuros.', 10), 
-(3, 5, 'Precisa-se de Ajuda: Fantasmas Errantes', 'Derrote 15 Fantasmas Errantes nas cavernas.', 25), 
-(4, 5, 'Precisa-se de Ajuda: Fantasmas Errantes', 'Elimine 5 Fantasmas Errantes.', 42), 
-(5, 2, 'Precisa-se de Ajuda: Aranhas das Sombras', 'Derrote 30 Aranhas das Sombras.', 78), 
-(6, 6, 'Precisa-se de Ajuda: Slimes Escuros', 'Elimine 10 Slimes Escuros.', 91), 
-(7, 1, 'Precisa-se de Ajuda: Morcegos da Caverna', 'Derrote 25 Morcegos da Caverna na caverna.', 120), 
-(8,  5, 'Precisa-se de Ajuda: Fantasmas Errantes', 'Elimine 40 Fantasmas Errantes no deserto.', 155); 
+(1, 6, 'Iniciação', 'Derrote 10 Slimes Escuros para entrar na Guilda dos Aventureiros.', 1, 101),  
+(2, 6, 'Precisa-se de Ajuda: Slimes Escuros', 'Elimine 20 Slimes Escuros.', 10, 102), 
+(3, 5, 'Precisa-se de Ajuda: Fantasmas Errantes', 'Derrote 15 Fantasmas Errantes nas cavernas.', 25, 103), 
+(4, 5, 'Precisa-se de Ajuda: Fantasmas Errantes', 'Elimine 5 Fantasmas Errantes.', 42, 104), 
+(5, 2, 'Precisa-se de Ajuda: Aranhas das Sombras', 'Derrote 30 Aranhas das Sombras.', 78, 105), 
+(6, 6, 'Precisa-se de Ajuda: Slimes Escuros', 'Elimine 10 Slimes Escuros.', 91, 106), 
+(7, 1, 'Precisa-se de Ajuda: Morcegos da Caverna', 'Derrote 25 Morcegos da Caverna na caverna.', 120, 107), 
+(8, 5, 'Precisa-se de Ajuda: Fantasmas Errantes', 'Elimine 40 Fantasmas Errantes no deserto.', 155, 108); 
 
-INSERT INTO missao_coleta (fk_id_missao, fk_id_minerio, nome, descricao, dataInicio)
+INSERT INTO missao_coleta (fk_id_missao, fk_id_minerio, nome, descricao, dataInicio, fk_id_item_recompensa)
 VALUES 
-(9, 102, 'Precisa-se de Ajuda: Bronze', 'Colete 20 unidades de Bronze para Clint.', 5), 
-(10, 103, 'Precisa-se de Ajuda: Ferro', 'Colete 40 unidades de Ferro para Clint.', 18), 
-(11, 104, 'Precisa-se de Ajuda: Ouro', 'Colete 30 unidades de Ouro para Clint.', 33), 
-(12, 112, 'Precisa-se de Ajuda: Madeira', 'Colete 50 unidades de Madeira para Robin.', 48), 
-(13, 101, 'Precisa-se de Ajuda: Pedra', 'Colete 75 unidades de Pedra para Robin.', 62), 
-(14, 107, 'Precisa-se de Ajuda: Carvão', 'Colete 25 unidades de Carvão para Clint.', 85), 
-(15, 112, 'Precisa-se de Ajuda: Madeira', 'Colete 100 unidades de Madeira para Robin.', 105), 
-(16, 113, 'Precisa-se de Ajuda: Diamante', 'Colete 10 Diamantes para Clint.', 135); 
+(9, 102, 'Precisa-se de Ajuda: Bronze', 'Colete 20 unidades de Bronze para Clint.', 5, 109), 
+(10, 103, 'Precisa-se de Ajuda: Ferro', 'Colete 40 unidades de Ferro para Clint.', 18, 110), 
+(11, 104, 'Precisa-se de Ajuda: Ouro', 'Colete 30 unidades de Ouro para Clint.', 33, 111), 
+(12, 112, 'Precisa-se de Ajuda: Madeira', 'Colete 50 unidades de Madeira para Robin.', 48, 112), 
+(13, 101, 'Precisa-se de Ajuda: Pedra', 'Colete 75 unidades de Pedra para Robin.', 62, 113), 
+(14, 107, 'Precisa-se de Ajuda: Carvão', 'Colete 25 unidades de Carvão para Clint.', 85, 114), 
+(15, 112, 'Precisa-se de Ajuda: Madeira', 'Colete 100 unidades de Madeira para Robin.', 105, 400), 
+(16, 113, 'Precisa-se de Ajuda: Diamante', 'Colete 10 Diamantes para Clint.', 135, 401); 
 
-INSERT INTO Planta (nome, descricao, diaDropar)
+INSERT INTO Planta (nome, descricao, diaDropar, preco)
 VALUES
-('Melão', 'Uma fruta doce e suculenta típica do verão.', 10),
-('Abóbora', 'Um vegetal grande e alaranjado, cresce melhor no outono.', 15),
-('Couve-Flor', 'Um vegetal branco e nutritivo, cresce bem na primavera.', 8),
-('Milho', 'Cresce durante o verão e outono, produzindo várias colheitas.', 20),
-('Morangos', 'Uma fruta doce da primavera, muito lucrativa.', 13),
-('Batata', 'Um tubérculo robusto e nutritivo, colhido na primavera.', 5),
-('Girassol', 'Uma flor brilhante que também pode ser usada para produzir óleo.', 12),
-('Trigo', 'Uma cultura essencial para fabricação de farinha e cerveja.', 18),
-('Rabanete', 'Um vegetal picante e crocante que cresce no verão.', 7),
-('Uva', 'Frutas roxas deliciosas, crescem em vinhedos no outono.', 16);
+('Melão', 'Uma fruta doce e suculenta típica do verão.', 10, 30),
+('Alface', 'Uma folha verde e crocante, ideal para saladas.', 5, 10),
+('Cenoura', 'Um vegetal alaranjado e nutritivo, cresce bem na primavera.', 12, 20),
+('Cebola', 'Um bulbo picante e saboroso, colhido no verão.', 8, 15),
+('Pimentão', 'Uma fruta colorida e suculenta, cresce bem no verão.', 10, 25),
+('Berinjela', 'Um vegetal roxo e saboroso, colhido no outono.', 15, 30),
+('Tomate', 'Fruta vermelha suculenta, cresce bem no verão.', 10, 20),
+('Batata', 'Um tubérculo robusto e nutritivo, colhido na primavera.', 5, 10),
+('Morango', 'Uma fruta doce da primavera, muito lucrativa.', 13, 35),
+('Girassol', 'Uma flor brilhante que também pode ser usada para produzir óleo.', 12, 30),
+('Trigo', 'Uma cultura essencial para fabricação de farinha e cerveja.', 18, 40),
+('Rabanete', 'Um vegetal picante e crocante que cresce no verão.', 7, 15),
+('Uva', 'Frutas roxas deliciosas, crescem em vinhedos no outono.', 16, 45);
+
+INSERT INTO instancia_de_item(fk_id_jogador, fk_id_item, fk_id_estoque, fk_id_inventario)
+VALUES
+    (0,101,NULL,0),
+    (0,101,NULL,0),
+    (0,101,NULL,0),
+    (0,400,NULL,0),
+    (0,202,NULL,0),
+    (0,22,NULL,0),
+    (0,301,NULL,0),
+    (0,102,NULL,0);
