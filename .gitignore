@@ -1,5 +1,5 @@
 # Arquivos compilados do Python
-__pycache__/
+*/__pycache__/
 *.py[cod]
 *.so
 *.pyo
