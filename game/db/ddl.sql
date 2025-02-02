@@ -157,8 +157,7 @@ CREATE TABLE IF NOT EXISTS Celeiro (
 
 CREATE TABLE IF NOT EXISTS Plantacao (
     fk_id_ambiente INT NOT NULL PRIMARY KEY,
-    qtd_plantas INT NOT NULL DEFAULT 0,
-    qtd_plantas_max INT NOT NULL DEFAULT 10,
+    qtd_plantas_max INT NOT NULL DEFAULT 15,
     FOREIGN KEY (fk_id_ambiente) REFERENCES Ambiente(id_ambiente)
 );
 

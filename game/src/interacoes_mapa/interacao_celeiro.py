@@ -25,7 +25,7 @@ def carregar_personagem(jogador_id):
         conn.close()
 
 def interacao_celeiro(jogador):
-    clear_terminal() 
+
     while True:
         clear_terminal() 
         try:
@@ -166,7 +166,7 @@ def excluir_animal_do_celeiro(jogador):
         fk_id_ambiente = celeiro[0]
         
         # Obter os animais no celeiro
-        cursor.execute("SELECT id_instancia_de_animal, nome_animal FROM Instancia_de_Animal WHERE fk_Jogador_id = %s", (jogador[0],))
+        cursor.execute("SELECT ins.id_instancia_de_animal, ins.nome_animal, hpp.preco FROM Instancia_de_Animal ins INNER JOIN Animal hpp ON ins.fk_animal_id = hpp.id_animal WHERE fk_jogador_id = %s", (jogador[0],))
         animais = cursor.fetchall()
         
         if not animais:
@@ -175,7 +175,7 @@ def excluir_animal_do_celeiro(jogador):
         
         print("\nAnimais no celeiro:")
         for animal in animais:
-            print(f"{animal[0]} - {animal[1]}")
+            print(f"{animal[0]} - {animal[1]} - Preço: {animal[2]} moedas")
         
         escolha = int(input("Digite o ID do animal que você deseja vender (ou 0 para cancelar): "))
         if escolha == 0:

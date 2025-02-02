@@ -186,6 +186,10 @@ VALUES --fk_id_estoque com números aleatórios
 INSERT INTO Celeiro(fk_id_ambiente, qtd_max_animais)
 VALUES
 (3, 10);
+
+INSERT INTO Plantacao(fk_id_ambiente, qtd_plantas_max)
+VALUES
+(2, 15);
 INSERT INTO estoque(id_estoque, fk_id_loja) VALUES
     (1, 1),
     (2, 2),

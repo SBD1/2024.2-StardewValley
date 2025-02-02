@@ -2,6 +2,7 @@ from setup.database import get_connection
 from src.interacoes_mapa.interacao_caverna import interacao_caverna
 from src.interacoes_mapa.interacao_celeiro import interacao_celeiro
 from src.avancar_tempo import avancar_tempo
+from src.interacoes_mapa.interacao_plantacao import interacao_plantacao
 import os
 
 DDL_FILE_PATH = os.path.join(os.path.dirname(__file__), "db/ddl.sql")
@@ -218,6 +219,8 @@ def interagir_ambiente(jogador, localizacao_atual):
         interacao_caverna(jogador)
     elif localizacao_atual[1] == 'Celeiro':
         interacao_celeiro(jogador)
+    elif localizacao_atual[1] == 'Plantação':
+        interacao_plantacao(jogador)
 
 def menu_jogo(jogador):
     while True:
@@ -293,8 +296,8 @@ def carregar_personagem(jogador_id):
         conn.close()
 
 def menu_inicial():
-    clear_terminal()
     while True:
+        clear_terminal()
         print("\n##### Stardew Valley 🌾 #####\n")
         print("1. Criar novo personagem")
         print("2. Continuar com um personagem existente")
