@@ -1,5 +1,6 @@
 from setup.database import setup_database, get_connection
 from src.interacoes_mapa.interacao_caverna import interacao_caverna
+from src.interacoes_mapa.interacao_celeiro import interacao_celeiro
 import os
 
 DDL_FILE_PATH = os.path.join(os.path.dirname(__file__), "db/ddl.sql")
@@ -185,12 +186,11 @@ def andar_no_mapa(jogador, localizacao_atual):
         if conn:
             conn.close()
 
-
 def interagir_ambiente(jogador, localizacao_atual):
     if localizacao_atual[1] == 'Caverna':
         interacao_caverna(jogador)
-    # elif localizacao_atual[1] == 'Floresta':
-    # elif localizacao_atual[1] == 'Praça da Vila':
+    elif localizacao_atual[1] == 'Celeiro':
+        interacao_celeiro(jogador)
 
 def menu_jogo(jogador):
     clear_terminal()

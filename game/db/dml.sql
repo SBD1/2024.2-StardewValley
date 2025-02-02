@@ -82,15 +82,15 @@ VALUES
 
 INSERT INTO Animal (id_animal, tipo_animal, diasTotalDropar, itemDrop, preco)
 VALUES
-    (1, 'Vaca', 1, 'Leite', 25.00),
-    (2, 'Galinha', 1, 'Ovo de Galinha', 15.00),
+    (1, 'Vaca', 1, 14, 25.00),
+    (2, 'Galinha', 1, 30, 15.00),
     (3, 'Cachorro', 0, NULL, 0.00),
     (4, 'Gato', 0, NULL, 0.00),
     (5, 'Cavalo', 0, NULL, 100.00),
-    (6, 'Ovelha', 3, 'Lã', 20.00),
-    (7, 'Porco', 3, 'Trufa', 30.00),
-    (8, 'Coelho', 2, 'Pele', 10.00),
-    (9, 'Pato', 2, 'Ovo de Pato', 15.00),
+    (6, 'Ovelha', 3, 216, 20.00),
+    (7, 'Porco', 3, 215, 30.00),
+    (8, 'Coelho', 2, 217, 10.00),
+    (9, 'Pato', 2, 29, 15.00),
     (10, 'Cavalo', 0, NULL, 100.00);
 
 INSERT INTO inimigo (id_inimigo, nome, tipo, vidaMax, dano) VALUES
@@ -190,6 +190,9 @@ VALUES --fk_id_estoque com números aleatórios
 (3, 'Ferreiro', 'Clint'), 
 (5, 'Comércio do Deserto', 'Sandy');
 
+INSERT INTO Celeiro(fk_id_ambiente, qtd_max_animais)
+VALUES
+(3, 10);
 INSERT INTO estoque(id_estoque, fk_id_loja) VALUES
     (1, 1),
     (2, 2),

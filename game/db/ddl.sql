@@ -17,7 +17,8 @@ CREATE TABLE IF NOT EXISTS Animal (
     tipo_animal VARCHAR(50) NOT NULL,
     diasTotalDropar INT NOT NULL,
     itemDrop VARCHAR(100),
-    preco FLOAT NOT NULL
+    preco FLOAT NOT NULL,
+    FOREIGN KEY (itemDrop) REFERENCES Item(id_item)
 );
 
 CREATE TABLE IF NOT EXISTS habMineracao (
@@ -65,7 +66,7 @@ CREATE TABLE IF NOT EXISTS Jogador (
     xp_cultivo FLOAT NOT NULL DEFAULT 0.0,       
     xp_combate FLOAT NOT NULL DEFAULT 0.0,       
     dano_ataque FLOAT NOT NULL DEFAULT 10.0,
-    moeda DECIMAL NOT NULL DEFAULT 100.0,       
+    moedas DECIMAL NOT NULL DEFAULT 100.0,       
     fk_habMineracao_fk_Habilidade_id INT DEFAULT 1, 
     fk_habCombate_fk_Habilidade_id INT DEFAULT 11,   
     fk_habCultivo_fk_Habilidade_id INT DEFAULT 21, 
@@ -152,7 +153,6 @@ CREATE TABLE IF NOT EXISTS Caverna(
 
 CREATE TABLE IF NOT EXISTS Celeiro (
     fk_id_ambiente INT NOT NULL PRIMARY KEY,
-    qtd_animais INT NOT NULL DEFAULT 0,
     qtd_max_animais INT NOT NULL DEFAULT 10,
     FOREIGN KEY (fk_id_ambiente) REFERENCES Ambiente(id_ambiente)
 );
