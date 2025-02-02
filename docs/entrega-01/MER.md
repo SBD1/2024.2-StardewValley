@@ -1,7 +1,5 @@
 
 
-# Modelo Entidade-Relacionamento
-
 O Modelo Entidade Relacionamento para bancos de dados é um modelo que descreve os objetos (entidades) envolvidos em um negócio, com suas características (atributos) e como elas se relacionam entre si (relacionamentos).
 
 === "<a href="#anchor-link-modulo1" tabindex="-1">Módulo 1</a>"
