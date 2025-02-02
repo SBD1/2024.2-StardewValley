@@ -158,8 +158,7 @@ CREATE TABLE IF NOT EXISTS Celeiro (
 
 CREATE TABLE IF NOT EXISTS Plantacao (
     fk_id_ambiente INT NOT NULL PRIMARY KEY,
-    qtd_plantas INT NOT NULL DEFAULT 0,
-    qtd_plantas_max INT NOT NULL DEFAULT 10,
+    qtd_plantas_max INT NOT NULL DEFAULT 15,
     FOREIGN KEY (fk_id_ambiente) REFERENCES Ambiente(id_ambiente)
 );
 
@@ -396,3 +395,42 @@ BEFORE UPDATE ON Jogador
 FOR EACH ROW
 WHEN (NEW.tempo > '02:00')
 EXECUTE FUNCTION forcar_jogador_a_dormir();
+
+CREATE OR REPLACE FUNCTION animal_avancar_dia()
+RETURNS TRIGGER AS $$
+DECLARE
+    cursor_inst_animal CURSOR FOR 
+    SELECT i.id_instancia_de_animal, i.diaAtual, a.diasTotalDropar
+    FROM Instancia_de_Animal i 
+    JOIN Animal a ON i.fk_Animal_id = a.id_animal 
+    WHERE i.fk_Jogador_id = NEW.id_jogador;
+    
+    animal_row RECORD;
+BEGIN
+    OPEN cursor_inst_animal;
+    
+    LOOP
+        FETCH cursor_inst_animal INTO animal_row;
+        EXIT WHEN NOT FOUND; -- 🔹 Evita loop infinito
+
+        -- Atualizar os dias do animal
+        UPDATE Instancia_de_Animal
+        SET 
+            diaAtual = diaAtual + 1,
+            prontoDropa = (diaAtual + 1 >= animal_row.diasTotalDropar)
+        WHERE id_instancia_de_animal = animal_row.id_instancia_de_animal;
+    
+    END LOOP;
+
+    CLOSE cursor_inst_animal;
+    
+    RETURN NEW; -- 🔹 Em triggers, sempre retorne NEW
+END;
+$$ LANGUAGE plpgsql;
+
+
+CREATE TRIGGER trigger_animal_avancar_dia
+BEFORE UPDATE ON Jogador
+FOR EACH ROW
+WHEN (NEW.tempo = '06:00')
+EXECUTE FUNCTION animal_avancar_dia();
