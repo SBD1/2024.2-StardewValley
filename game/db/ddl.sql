@@ -134,7 +134,7 @@ CREATE TABLE IF NOT EXISTS mineral (
     nome VARCHAR(100) NOT NULL,
     descricao VARCHAR(100) NOT NULL,
     resistencia INTEGER NOT NULL,
-    preco DECIMAL NOT NULL,
+    preco DECIMAL(10,2) NOT NULL,
     FOREIGN KEY (fk_id_item) REFERENCES item(id_item)
 );
 
@@ -169,6 +169,7 @@ CREATE TABLE IF NOT EXISTS consumivel (
     nome VARCHAR(100) NOT NULL,
     descricao TEXT NOT NULL, -- add
     efeito_vida INT NOT NULL,
+    preco DECIMAL(10,2) NOT NULL,
     FOREIGN KEY (fk_id_item) REFERENCES item(id_item)
 );
 
@@ -178,6 +179,7 @@ CREATE TABLE IF NOT EXISTS ferramenta (
     nome VARCHAR(100) NOT NULL,
     descricao VARCHAR(100) NOT NULL,
     eficiencia INTEGER NOT NULL,
+    preco DECIMAL(10,2) NOT NULL,
     FOREIGN KEY (fk_id_item) REFERENCES item(id_item)
 );
 
@@ -187,6 +189,7 @@ CREATE TABLE IF NOT EXISTS arma (
     nome VARCHAR(100) NOT NULL,
     descricao VARCHAR(100) NOT NULL,
     dano_arma INTEGER,
+    preco DECIMAL(10,2) NOT NULL,
     FOREIGN KEY (fk_id_item) REFERENCES item(id_item)
 );
 
@@ -194,7 +197,7 @@ CREATE TABLE IF NOT EXISTS recurso (
     fk_id_item INTEGER PRIMARY KEY,
     nome VARCHAR(100) NOT NULL,
     descricao VARCHAR(100) NOT NULL,
-    preco DECIMAL NOT NULL,
+    preco DECIMAL(10,2) NOT NULL,
     FOREIGN KEY (fk_id_item) REFERENCES item(id_item)
 );
 
@@ -224,7 +227,8 @@ CREATE TABLE IF NOT EXISTS Planta (
     id_planta SERIAL PRIMARY KEY,
     nome VARCHAR(100) NOT NULL,
     descricao VARCHAR(100) NOT NULL,
-    diaDropar INT NOT NULL
+    diaDropar INT NOT NULL,
+    preco DECIMAL(10,2) NOT NULL
 );
 
 CREATE TABLE IF NOT EXISTS Instancia_de_Planta (
