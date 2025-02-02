@@ -1,5 +1,7 @@
-from setup.database import setup_database, get_connection
+from setup.database import get_connection
 from src.interacoes_mapa.interacao_caverna import interacao_caverna
+from src.interacoes_mapa.interacao_celeiro import interacao_celeiro
+from src.avancar_tempo import avancar_tempo
 import os
 
 DDL_FILE_PATH = os.path.join(os.path.dirname(__file__), "db/ddl.sql")
@@ -23,7 +25,7 @@ def criar_personagem():
         jogador_id = cursor.fetchone()[0]
         conn.commit()
         print(f"Personagem '{nome}' criado com sucesso!")
-        return jogador_id
+        return carregar_personagem(jogador_id)  # Retorna o jogador completo
     except Exception as e:
         print(f"Erro ao criar personagem: {e}")
     finally:
@@ -237,15 +239,13 @@ def andar_no_mapa(jogador, localizacao_atual):
 
 def interagir_ambiente(jogador, localizacao_atual):
     if localizacao_atual[1] == 'Caverna':
-        clear_terminal()
         interacao_caverna(jogador, localizacao_atual)
-
-    # elif localizacao_atual[1] == 'Floresta':
-    # elif localizacao_atual[1] == 'Praça da Vila':
+    elif localizacao_atual[1] == 'Celeiro':
+        interacao_celeiro(jogador)
 
 def menu_jogo(jogador):
-    clear_terminal()
     while True:
+        clear_terminal() 
         id_jogador = jogador[0]
         nome_jogador = jogador[1]
         dia_atual = jogador[2]
@@ -257,10 +257,10 @@ def menu_jogo(jogador):
         xp_cultivo = jogador[8]
         xp_combate = jogador[9]
         dano_ataque = jogador[10]
-
+        moeda = jogador[11]
         print(("\t"*10)+"\n##### Stardew Valley 🌾 #####\n")
         print(f"Dia: {dia_atual} | Tempo: {tempo_atual}")
-        print(f"Fazendeiro(a): {nome_jogador}")
+        print(f"Fazendeiro(a): {nome_jogador} | Moedas 💰: {moeda}\n")
         print(f"Vida 🖤: {vida_atual}/{vida_maxima}")
         print(f"Dano de Ataque ⚔️: {dano_ataque}")
         print(f"XP Mineração ⛏️ : {xp_mineracao}")
@@ -297,6 +297,19 @@ def menu_jogo(jogador):
             input("Pressione qualquer tecla para continuar...")
             continue
 
+        if escolha == 1:
+            andar_no_mapa(jogador, localizacao_atual)
+            avancar_tempo(jogador, 61)
+        elif escolha == 2:
+            exibir_habilidades_jogador(jogador)
+        elif escolha == 3:
+            interagir_ambiente(jogador, localizacao_atual)
+        elif escolha == 9:
+            break
+        jogador = carregar_personagem(id_jogador)
+        
+    
+    
 def carregar_personagem(jogador_id):
     try:
         conn = get_connection()
