@@ -138,7 +138,11 @@ def conferir_caverna(jogador, localizacao_atual, escolha=None):
         
         # jogador está tentando ir para o próximo andar
         if escolha == 2:
-            cursor.execute("SELECT quantidade_mobs FROM Caverna WHERE fk_id_ambiente = %s", (localizacao_atual[0],))
+            cursor.execute("""
+                SELECT COUNT(*)
+                FROM instancia_de_inimigo 
+                WHERE fk_id_ambiente = %s AND fk_jogador_id = %s;""",
+            (localizacao_atual[0], jogador[0]))
             mobs_andar_atual = cursor.fetchone()
 
             if mobs_andar_atual[0] != 0 and localizacao_atual[0] > 15:
@@ -146,12 +150,14 @@ def conferir_caverna(jogador, localizacao_atual, escolha=None):
                 input("\nPressione qualquer tecla para continuar...")
                 return True
         elif escolha is None:
-            cursor.execute("SELECT SUM(quantidade_mobs) FROM Caverna")
+            cursor.execute("SELECT COUNT(*) FROM instancia_de_inimigo WHERE fk_jogador_id = %s;", (jogador[0],))
             mobs_totais = cursor.fetchone()
 
             if mobs_totais[0] == 0 and localizacao_atual[0] == 15:
                 cursor.execute("SELECT spawnar_inimigos(%s);", (jogador[0],))
                 conn.commit()
+                print("\n Você ouve sons abafados ecoando pelas paredes da caverna... algo está se movendo nas sombras. Cuidado ao tentar avançar pelos andares da caverna!")
+                input("\nPressione enter para continuar...")
         else:
             return False
     except Exception as e:
@@ -274,17 +280,22 @@ def menu_jogo(jogador):
         for op in opcoes_menu:
             print(op)
 
-        escolha = int(input("\nO que você deseja fazer? (Digite o número da opção desejada)\n> "))
+        try:
+            escolha = int(input("\nO que você deseja fazer? (Digite o número da opção desejada)\n> "))
 
-        if escolha == 1:
-            andar_no_mapa(jogador, localizacao_atual)
-        elif escolha == 2:
-            exibir_habilidades_jogador(jogador)
-        elif escolha == 3:
-            interagir_ambiente(jogador, localizacao_atual)
-        elif escolha == 9:
-            break
-        jogador = carregar_personagem(id_jogador)
+            if escolha == 1:
+                andar_no_mapa(jogador, localizacao_atual)
+            elif escolha == 2:
+                exibir_habilidades_jogador(jogador)
+            elif escolha == 3:
+                interagir_ambiente(jogador, localizacao_atual)
+            elif escolha == 9:
+                break
+            jogador = carregar_personagem(id_jogador)
+        except ValueError:
+            print("\nOpção inválida. Tente novamente.")
+            input("Pressione qualquer tecla para continuar...")
+            continue
 
 def carregar_personagem(jogador_id):
     try:
@@ -314,7 +325,8 @@ def menu_inicial():
 
         if escolha == "1":
             player_id = criar_personagem()
-            return player_id
+            jogador = carregar_personagem(player_id)
+            return jogador
         elif escolha == "2":
             personagens = listar_personagens()
             if personagens:
@@ -338,5 +350,6 @@ if __name__ == "__main__":
     jogador = menu_inicial()
     if jogador:
         print(f"\nVocê está pronto para começar, {jogador[1]}!")
+        input("\nPressione enter para continuar...")
         clear_terminal()
         menu_jogo(jogador)

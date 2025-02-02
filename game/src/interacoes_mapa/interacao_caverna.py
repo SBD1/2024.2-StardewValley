@@ -35,14 +35,14 @@ def exibir_status_combate(jogador_dict, inimigo_dict):
     print(f"\nStatus do {inimigo_dict['tipo'][1]}")
     barra_status_vida(vida_inimigo, inimigo_dict['tipo'][3])  
 
-def get_instancia_inimigo(id_instancia_inimigo):
+def get_instancia_inimigo(id_inimigo, id_jogador):
     try:
         connection = get_connection()
         cursor = connection.cursor()
 
         cursor.execute("""SELECT * FROM Instancia_de_Inimigo 
-                    WHERE fk_inimigo_id = %s 
-                    ORDER BY id_instancia_de_inimigo""", (id_instancia_inimigo,))
+                    WHERE fk_inimigo_id = %s AND fk_jogador_id = %s  
+                    ORDER BY id_instancia_de_inimigo""", (id_inimigo, id_jogador,))
         instancia_inimigo = cursor.fetchone()
 
         return instancia_inimigo
@@ -58,13 +58,12 @@ def info_andar(ambiente, caverna_andar, jogador_dict):
     print(f"\n{ambiente[3]}")  # Exibe a descrição do ambiente
 
     lista_instancias_inimigos = None
-    quantidade_mobs = None
+    quantidade_mobs_andar_atual = None
 
     try:
         connection = get_connection()
         cursor = connection.cursor()
 
-        # TODO: listar apenas os inimigos do "save" do jogador, ou seja, filtrar pelo fk_jogador_id e fk_id_ambiente (andar da caverna)
         cursor.execute("""
             SELECT i.*, COUNT(*) AS quantidade
             FROM Instancia_de_Inimigo ii
@@ -72,20 +71,20 @@ def info_andar(ambiente, caverna_andar, jogador_dict):
             WHERE ii.fk_id_ambiente = %s AND ii.fk_jogador_id = %s
             GROUP BY i.id_inimigo, i.nome, i.vidamax, i.dano
             ORDER BY quantidade DESC
-        """, (caverna_andar[0], jogador_dict['id_jogador']))
-        # lista_instancias_inimigos[x] = (nome, id_instancia_de_inimigo, vidaMax, quantidade)
+        """, (caverna_andar[0], jogador_dict['id_jogador'],))
+        # lista_instancias_inimigos retorna (nome, id_instancia_de_inimigo, vidaMax, quantidade_tipo_inimigo)
         lista_instancias_inimigos = cursor.fetchall()
 
         cursor.execute("""
-            SELECT quantidade_mobs
-            FROM Caverna
-            WHERE fk_id_ambiente = %s
-        """, (ambiente[0],))
-        quantidade_mobs = cursor.fetchone()
+            SELECT COUNT(*)
+            FROM instancia_de_inimigo 
+            WHERE fk_id_ambiente = %s AND fk_jogador_id = %s;""",
+            (ambiente[0], jogador_dict['id_jogador'],))
+        quantidade_mobs_andar_atual = cursor.fetchone()
 
         inimigos_dict = {
             "lista_instancias_inimigos": lista_instancias_inimigos,
-            "quantidade_mobs": quantidade_mobs[0] if quantidade_mobs else None
+            "quantidade_mobs": quantidade_mobs_andar_atual[0] if quantidade_mobs_andar_atual else None
         }
         # TODO:  fazer o mesmo para minerios
         
@@ -119,7 +118,7 @@ def verificar_nivel_habilidade(jogador_dict, habilidade_antiga):
             cursor.close()
             connection.close()
 
-def commit_vidaAtual(jogador_dict, inimigo_dict):
+def commit_vidaAtual(jogador_dict, inimigo_dict=None):
     try:
         connection = get_connection()
         cursor = connection.cursor()
@@ -127,8 +126,9 @@ def commit_vidaAtual(jogador_dict, inimigo_dict):
         cursor.execute("UPDATE Jogador SET vidaAtual = %s WHERE id_jogador = %s", (jogador_dict['vidaAtual'], jogador_dict['id_jogador']))
         connection.commit()
 
-        cursor.execute("UPDATE Instancia_de_Inimigo SET vidaAtual = %s WHERE id_instancia_de_inimigo = %s", (inimigo_dict['vida'], inimigo_dict['instancia'][0]))
-        connection.commit()
+        if inimigo_dict is not None:
+            cursor.execute("UPDATE Instancia_de_Inimigo SET vidaAtual = %s WHERE id_instancia_de_inimigo = %s", (inimigo_dict['vida'], inimigo_dict['instancia'][0]))
+            connection.commit()
 
         return 
     except Exception as error:
@@ -154,7 +154,6 @@ def resultado_combate(inimigo_dict, jogador_dict):
         
         # neste ponto, uma trigger no banco de dados é acionada para:
         # remover inimigos mortos
-        # atualizar a quantidade de mobs do andar
         # atualizar o xp de combate do jogador e atualizar stats relacionados a habCombate
 
         if jogador_dict['vidaAtual'] <= 0:
@@ -182,16 +181,16 @@ def iniciar_combate(jogador_dict, inimigos_dict, ambiente):
         connection = get_connection()
         cursor = connection.cursor()
 
-        id_inimigo = int(input(f"\nQual inimigo deseja combater (digite o ID correspondente)?\n > "))
+        id_tipo_inimigo = int(input(f"\nQual inimigo deseja combater (digite o ID correspondente)?\n > "))
         
-        if id_inimigo not in [inimigo[0] for inimigo in inimigos_dict["lista_instancias_inimigos"]]:
+        if id_tipo_inimigo not in [inimigo[0] for inimigo in inimigos_dict["lista_instancias_inimigos"]]:
             input("\nID inválido. Pressione enter para tentar novamente...")
             return 
 
-        instancia_inimigo = get_instancia_inimigo(id_inimigo) # será a tupla da instancia do inimigo com o menor id_instancia_de_inimigo
+        instancia_inimigo = get_instancia_inimigo(id_tipo_inimigo, jogador_dict["id_jogador"]) # será a tupla da instancia do inimigo com o menor id_instancia_de_inimigo
 
         for inimigo in inimigos_dict["lista_instancias_inimigos"]:
-            if inimigo[0] == id_inimigo:
+            if inimigo[0] == id_tipo_inimigo:
                 tipo_inimigo = inimigo
                 break
 
@@ -204,8 +203,8 @@ def iniciar_combate(jogador_dict, inimigos_dict, ambiente):
 
             opcao = int(input("\n O que deseja fazer?\n 1 - Atacar\n 2 - Usar poção de vida\n 3 - Fugir\n> """))
 
-            match opcao:
-                case 1:
+            try:
+                if opcao == 1:
                     inimigo_dict["vida"] -= jogador_dict['dano_ataque']
                     dano_inimigo = ataque_inimigo(ambiente, tipo_inimigo)
 
@@ -220,17 +219,18 @@ def iniciar_combate(jogador_dict, inimigos_dict, ambiente):
                         print(f"O {inimigo_dict['tipo'][1]} tentou te atacar, mas você desviou do ataque!")
 
                     input("\nPressione enter para continuar...")
-                case 2:
+                if opcao == 2:
                     #TODO: Usar uma poção de vida do inventário
                     # só para motivos de teste
                     jogador_dict['vidaAtual'] = jogador_dict['vidaMax']
                     inimigo_dict["vida"] = inimigo_dict["tipo"][3] 
-                case 3:
+                if opcao == 3:
                     commit_vidaAtual(jogador_dict, inimigo_dict)
 
                     return
-                case _:
-                    pass
+            except ValueError:
+                print("\nOpção inválida. Tente novamente.")
+                input("Pressione enter para continuar...")
 
         return resultado_combate(inimigo_dict, jogador_dict)
     except Exception as error:
@@ -274,6 +274,40 @@ def atualizar_jogador(jogador):
             cursor.close()
             connection.close()
 
+def voltar_para_cabana(jogador):
+    try:
+        connection = get_connection()
+        cursor = connection.cursor()
+        cursor.execute("""
+                    UPDATE jogador
+                    SET localizacao_atual = 1, vidaAtual = vidaMax 
+                    WHERE id_jogador = %s""", (jogador[0],))
+        connection.commit()
+
+        clear_terminal()
+        print("\nUm dos moradores da cidade estava explorando a caverna quando lhe encontra descordado em um dos andares e te leva para casa...")
+        input("\nPressione enter para continuar...")
+    except Exception as error:
+        print(f"Ocorreu um erro ao voltar para a cabana: {error}")
+        input("\nPressione enter para continuar...")
+    finally:
+        if connection:
+            cursor.close()
+            connection.close()
+
+def selecionar_opcao_caverna(inimigos_dict):
+    if inimigos_dict["quantidade_mobs"] == 0:
+        print("\nNão há inimigos neste andar.")
+        opcao = int(input("\nO que deseja fazer?\n 2 - Coletar Minérios\n 3 - Voltar\n> "))
+        return opcao
+    else:
+        print(f"\nVocê olha ao seu redor e enxerga {inimigos_dict['quantidade_mobs']} inimigos:")
+        for inimigo in inimigos_dict["lista_instancias_inimigos"]:
+            print(f"- {inimigo[6]}x {inimigo[1]} (ID: {inimigo[0]})")
+        
+        opcao = int(input("\n O que deseja fazer?\n 1 - Iniciar combate\n 2 - Coletar Minérios\n 3 - Voltar\n> "))
+        return opcao
+            
 def interacao_caverna(jogador, ambiente):
     try:
         connection = get_connection()
@@ -287,7 +321,6 @@ def interacao_caverna(jogador, ambiente):
             jogador_dict = atualizar_jogador(jogador)
 
             if ambiente[0] == 15:
-                # TODO: spwanar mobs nos andares da caverna
                 print("Não há nada para fazer na entrada da caverna.")
                 input("\nPressione enter para voltar ao menu...")
                 return
@@ -297,37 +330,26 @@ def interacao_caverna(jogador, ambiente):
 
             inimigos_dict = info_andar(ambiente, caverna_andar, jogador_dict)
 
-            if inimigos_dict["quantidade_mobs"] == 0:
-                print("\nNão há inimigos neste andar.")
-                opcao = int(input("\nO que deseja fazer?\n 2 - Coletar Minérios\n 3 - Voltar\n> "))
-            else:
-                print(f"\nVocê olha ao seu redor e enxerga {inimigos_dict['quantidade_mobs']} inimigos:")
-                for inimigo in inimigos_dict["lista_instancias_inimigos"]:
-                    print(f"- {inimigo[6]}x {inimigo[1]} (ID: {inimigo[0]})")
-                
-                opcao = int(input("\n O que deseja fazer?\n 1 - Iniciar combate\n 2 - Coletar Minérios\n 3 - Voltar\n> "))
+            opcao = selecionar_opcao_caverna(inimigos_dict)
 
-            if opcao == 1:
-                if inimigos_dict["quantidade_mobs"] == 0:
-                    print("\nNão há inimigos para combater neste andar.")
-                    input("Pressione enter para continuar...")
-                    continue
-                
-                resultado = iniciar_combate(jogador_dict, inimigos_dict, ambiente)
-
-                if resultado == "derrota":
+            try:
+                if opcao == 1:
+                    if inimigos_dict["quantidade_mobs"] == 0:
+                        print("\nNão há inimigos para combater neste andar.")
+                        input("Pressione enter para continuar...")
+                        continue
                     
-                    # TODO: O que fazer em caso de derrota 
-                    #cursor.execute("UPDATE Ambiente SET fk_jogador_id = %s WHERE id_ambiente = %s",
-                    #(jogador[0], ambiente[0])) # Trocar pelo ambiente de respawn
-                    #connection.commit()
-                    return
-            elif opcao == 2:
-                print("\nFuncionalidade de coleta de minérios ainda não implementada.")
-                input("Pressione enter para continuar...")
-            elif opcao == 3:
-                return  
-            else:
+                    resultado = iniciar_combate(jogador_dict, inimigos_dict, ambiente)
+
+                    if resultado == "derrota":
+                        voltar_para_cabana(jogador)
+                        return
+                elif opcao == 2:
+                    print("\nFuncionalidade de coleta de minérios ainda não implementada.")
+                    input("Pressione enter para continuar...")
+                elif opcao == 3:
+                    return  
+            except ValueError:
                 print("\nOpção inválida. Tente novamente.")
                 input("Pressione enter para continuar...")
 
