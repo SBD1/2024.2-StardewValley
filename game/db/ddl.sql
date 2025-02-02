@@ -183,7 +183,6 @@ CREATE TABLE IF NOT EXISTS ferramenta (
     nome VARCHAR(100) NOT NULL,
     descricao VARCHAR(100) NOT NULL,
     eficiencia INTEGER NOT NULL,
-    nivel INTEGER NOT NULL,
     FOREIGN KEY (fk_id_item) REFERENCES item(id_item)
 );
 
@@ -290,3 +289,69 @@ CREATE TABLE IF NOT EXISTS Recompensa (
 );
 
 
+-- Triggers e Stored procedures
+
+-- Trigger para garantir exclusividade entre ferramenta, arma, consumivel, mineral e recurso
+-- Função para inserção automática
+CREATE FUNCTION inserir_item(
+    tipo_item_param VARCHAR(20),
+    nome_param VARCHAR(100),
+    descricao_param TEXT,
+    eficiencia_param INTEGER DEFAULT NULL,
+    dano_arma_param INTEGER DEFAULT NULL,
+    efeito_vida_param INTEGER DEFAULT NULL,
+    resistencia_param INTEGER DEFAULT NULL,
+    preco_param DECIMAL DEFAULT NULL
+)
+RETURNS INTEGER AS $$
+DECLARE
+    item_id_result INTEGER;
+BEGIN
+    -- Inserir na tabela Item
+    INSERT INTO item (tipo_item) VALUES (tipo_item_param) RETURNING id_item INTO item_id_result;
+
+    -- Inserir na tabela correspondente
+    IF tipo_item_param = 'ferramenta' THEN
+        INSERT INTO ferramenta (fk_id_item, nome, descricao, eficiencia, nivel)
+        VALUES (item_id_result, nome_param, descricao_param, eficiencia_param);
+    ELSIF tipo_item_param = 'arma' THEN
+        INSERT INTO arma (fk_id_item, nome, descricao, dano_arma)
+        VALUES (item_id_result, nome_param, descricao_param, dano_arma_param);
+    ELSIF tipo_item_param = 'consumivel' THEN
+        INSERT INTO consumivel (fk_id_item, nome, descricao, efeito_vida)
+        VALUES (item_id_result, nome_param, descricao_param, efeito_vida_param);
+    ELSIF tipo_item_param = 'mineral' THEN
+        INSERT INTO mineral (fk_id_item, nome, descricao, resistencia, preco)
+        VALUES (item_id_result, nome_param, descricao_param, resistencia_param, preco_param);
+    ELSIF tipo_item_param = 'recurso' THEN
+        INSERT INTO recurso (fk_id_item, nome, descricao, preco)
+        VALUES (item_id_result, nome_param, descricao_param, preco_param);
+    END IF;
+
+    RETURN item_id_result;
+END;
+$$ LANGUAGE plpgsql;
+
+-- Trigger para garantir exclusividade entre ferramenta, arma, consumivel, mineral e recurso
+
+CREATE OR REPLACE FUNCTION exclusividade_tipo_item()
+RETURNS TRIGGER AS $$
+BEGIN
+    IF NEW.tipo_item = 'ferramenta' AND EXISTS (SELECT 1 FROM ferramenta WHERE fk_id_item = NEW.id_item) THEN
+        RAISE EXCEPTION 'O item já está associado a uma ferramenta.';
+    ELSIF NEW.tipo_item = 'arma' AND EXISTS (SELECT 1 FROM arma WHERE fk_id_item = NEW.id_item) THEN
+        RAISE EXCEPTION 'O item já está associado a uma arma.';
+    ELSIF NEW.tipo_item = 'consumivel' AND EXISTS (SELECT 1 FROM consumivel WHERE fk_id_item = NEW.id_item) THEN
+        RAISE EXCEPTION 'O item já está associado a um consumível.';
+    ELSIF NEW.tipo_item = 'mineral' AND EXISTS (SELECT 1 FROM mineral WHERE fk_id_item = NEW.id_item) THEN
+        RAISE EXCEPTION 'O item já está associado a um mineral.';
+    ELSIF NEW.tipo_item = 'recurso' AND EXISTS (SELECT 1 FROM recurso WHERE fk_id_item = NEW.id_item) THEN
+        RAISE EXCEPTION 'O item já está associado a um recurso.';
+    END IF;
+    RETURN NEW;
+END;
+$$ LANGUAGE plpgsql;
+
+CREATE TRIGGER exclusividade_tipo_item_trigger
+BEFORE INSERT ON item
+FOR EACH ROW EXECUTE FUNCTION exclusividade_tipo_item();
