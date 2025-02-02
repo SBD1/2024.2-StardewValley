@@ -80,6 +80,10 @@ INSERT INTO Jogador (id_jogador, nome, fk_habMineracao_fk_Habilidade_id, fk_habC
 VALUES
     (0, 'teste', 1, 11, 21);
 
+INSERT INTO inventario(id_inventario, fk_id_jogador)
+VALUES
+    (0,0);--inventario do jogador 0
+
 INSERT INTO Animal (nome_animal, diasTotalDropar, tipo_animal, itemDrop, preco)
 VALUES
     ('vaca', 7, 'vaca', 14, 50),
@@ -463,3 +467,14 @@ VALUES
 ('Trigo', 'Uma cultura essencial para fabricação de farinha e cerveja.', 18, 40),
 ('Rabanete', 'Um vegetal picante e crocante que cresce no verão.', 7, 15),
 ('Uva', 'Frutas roxas deliciosas, crescem em vinhedos no outono.', 16, 45);
+
+INSERT INTO instancia_de_item(fk_id_jogador, fk_id_item, fk_id_estoque, fk_id_inventario)
+VALUES
+    (0,101,NULL,0),
+    (0,101,NULL,0),
+    (0,101,NULL,0),
+    (0,400,NULL,0),
+    (0,202,NULL,0),
+    (0,22,NULL,0),
+    (0,301,NULL,0),
+    (0,102,NULL,0);
