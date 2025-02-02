@@ -250,6 +250,8 @@ CREATE TABLE IF NOT EXISTS missao_combate (
     descricao TEXT NOT NULL,
     dataInicio INT NOT NULL,
     dataFinalizacao INT,
+    fk_id_item_recompensa INT NOT NULL,
+    FOREIGN KEY (fk_id_item_recompensa) REFERENCES item(id_item),
     FOREIGN KEY (fk_id_Inimigo) REFERENCES Inimigo(id_inimigo),
     FOREIGN KEY (fk_id_missao) REFERENCES Missao(id_missao)
 );
@@ -261,6 +263,8 @@ CREATE TABLE IF NOT EXISTS missao_coleta (
     descricao TEXT NOT NULL,
     dataInicio INT NOT NULL,
     dataFinalizacao INT,
+    fk_id_item_recompensa INT NOT NULL,
+    FOREIGN KEY (fk_id_item_recompensa) REFERENCES item(id_item),
     FOREIGN KEY (fk_id_minerio) REFERENCES mineral(fk_id_item),
     FOREIGN KEY (fk_id_missao) REFERENCES Missao(id_missao)
 );
@@ -272,17 +276,6 @@ CREATE TABLE IF NOT EXISTS Instancia_Missao (
     missao_finalizada BOOLEAN NOT NULL DEFAULT false,
     FOREIGN KEY (fk_Missao) REFERENCES Missao(id_missao),
     FOREIGN KEY (fk_id_jogador) REFERENCES Jogador(id_jogador)
-);
-
-CREATE TABLE IF NOT EXISTS Recompensa (
-    id_Recompensa  SERIAL PRIMARY KEY,
-    fk_Jogador_id INT NOT NULL,
-    fk_id_item INT NOT NULL,
-    fk_Instancia_Missao INT NOT NULL,
-    quantidade INT NOT NULL,
-    FOREIGN KEY (fk_Jogador_id) REFERENCES Jogador(id_jogador),
-    FOREIGN KEY (fk_id_item) REFERENCES item(id_item),
-    FOREIGN KEY (fk_Instancia_Missao) REFERENCES Instancia_Missao(id_Instancia_Missao)
 );
 
 

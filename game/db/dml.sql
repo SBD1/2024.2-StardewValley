@@ -341,7 +341,7 @@ INSERT INTO arma (fk_id_item, nome, descricao, dano_arma) VALUES
 
 INSERT INTO Missao (id_missao, tipo)
 VALUES
-(1,'combate'),
+(1,'combate',),
 (2,'combate'),
 (3,'combate'),
 (4,'combate'),
@@ -425,27 +425,27 @@ INSERT INTO recurso (fk_id_item, nome, descricao, preco) VALUES
 (213, 'Tecido', 'Material flexível usado em artesanato.', 50.00),
 (214, 'Ovo de dinossauro', 'Um ovo de um dinossauro pré histórico', 200.00);
 
-INSERT INTO missao_combate (fk_id_missao, fk_id_Inimigo, nome, descricao, dataInicio)
+INSERT INTO missao_combate (fk_id_missao, fk_id_Inimigo, nome, descricao, dataInicio, fk_id_item_recompensa)
 VALUES 
-(1, 6, 'Iniciação', 'Derrote 10 Slimes Escuros para entrar na Guilda dos Aventureiros.', 1),  
-(2, 6, 'Precisa-se de Ajuda: Slimes Escuros', 'Elimine 20 Slimes Escuros.', 10), 
-(3, 5, 'Precisa-se de Ajuda: Fantasmas Errantes', 'Derrote 15 Fantasmas Errantes nas cavernas.', 25), 
-(4, 5, 'Precisa-se de Ajuda: Fantasmas Errantes', 'Elimine 5 Fantasmas Errantes.', 42), 
-(5, 2, 'Precisa-se de Ajuda: Aranhas das Sombras', 'Derrote 30 Aranhas das Sombras.', 78), 
-(6, 6, 'Precisa-se de Ajuda: Slimes Escuros', 'Elimine 10 Slimes Escuros.', 91), 
-(7, 1, 'Precisa-se de Ajuda: Morcegos da Caverna', 'Derrote 25 Morcegos da Caverna na caverna.', 120), 
-(8,  5, 'Precisa-se de Ajuda: Fantasmas Errantes', 'Elimine 40 Fantasmas Errantes no deserto.', 155); 
+(1, 6, 'Iniciação', 'Derrote 10 Slimes Escuros para entrar na Guilda dos Aventureiros.', 1, 101),  
+(2, 6, 'Precisa-se de Ajuda: Slimes Escuros', 'Elimine 20 Slimes Escuros.', 10, 102), 
+(3, 5, 'Precisa-se de Ajuda: Fantasmas Errantes', 'Derrote 15 Fantasmas Errantes nas cavernas.', 25, 103), 
+(4, 5, 'Precisa-se de Ajuda: Fantasmas Errantes', 'Elimine 5 Fantasmas Errantes.', 42, 104), 
+(5, 2, 'Precisa-se de Ajuda: Aranhas das Sombras', 'Derrote 30 Aranhas das Sombras.', 78, 105), 
+(6, 6, 'Precisa-se de Ajuda: Slimes Escuros', 'Elimine 10 Slimes Escuros.', 91, 106), 
+(7, 1, 'Precisa-se de Ajuda: Morcegos da Caverna', 'Derrote 25 Morcegos da Caverna na caverna.', 120, 107), 
+(8, 5, 'Precisa-se de Ajuda: Fantasmas Errantes', 'Elimine 40 Fantasmas Errantes no deserto.', 155, 108); 
 
-INSERT INTO missao_coleta (fk_id_missao, fk_id_minerio, nome, descricao, dataInicio)
+INSERT INTO missao_coleta (fk_id_missao, fk_id_minerio, nome, descricao, dataInicio, fk_id_item_recompensa)
 VALUES 
-(9, 102, 'Precisa-se de Ajuda: Bronze', 'Colete 20 unidades de Bronze para Clint.', 5), 
-(10, 103, 'Precisa-se de Ajuda: Ferro', 'Colete 40 unidades de Ferro para Clint.', 18), 
-(11, 104, 'Precisa-se de Ajuda: Ouro', 'Colete 30 unidades de Ouro para Clint.', 33), 
-(12, 112, 'Precisa-se de Ajuda: Madeira', 'Colete 50 unidades de Madeira para Robin.', 48), 
-(13, 101, 'Precisa-se de Ajuda: Pedra', 'Colete 75 unidades de Pedra para Robin.', 62), 
-(14, 107, 'Precisa-se de Ajuda: Carvão', 'Colete 25 unidades de Carvão para Clint.', 85), 
-(15, 112, 'Precisa-se de Ajuda: Madeira', 'Colete 100 unidades de Madeira para Robin.', 105), 
-(16, 113, 'Precisa-se de Ajuda: Diamante', 'Colete 10 Diamantes para Clint.', 135); 
+(9, 102, 'Precisa-se de Ajuda: Bronze', 'Colete 20 unidades de Bronze para Clint.', 5, 109), 
+(10, 103, 'Precisa-se de Ajuda: Ferro', 'Colete 40 unidades de Ferro para Clint.', 18, 110), 
+(11, 104, 'Precisa-se de Ajuda: Ouro', 'Colete 30 unidades de Ouro para Clint.', 33, 111), 
+(12, 112, 'Precisa-se de Ajuda: Madeira', 'Colete 50 unidades de Madeira para Robin.', 48, 112), 
+(13, 101, 'Precisa-se de Ajuda: Pedra', 'Colete 75 unidades de Pedra para Robin.', 62, 113), 
+(14, 107, 'Precisa-se de Ajuda: Carvão', 'Colete 25 unidades de Carvão para Clint.', 85, 114), 
+(15, 112, 'Precisa-se de Ajuda: Madeira', 'Colete 100 unidades de Madeira para Robin.', 105, 400), 
+(16, 113, 'Precisa-se de Ajuda: Diamante', 'Colete 10 Diamantes para Clint.', 135, 401); 
 
 INSERT INTO Planta (nome, descricao, diaDropar)
 VALUES
