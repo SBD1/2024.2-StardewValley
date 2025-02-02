@@ -18,8 +18,13 @@ def avancar_tempo(jogador, minutos):
         
         for notice in conn.notices:
             print("💤", notice.strip())
+<<<<<<< HEAD
             input("\nDigite 1 para retornar ao menu\n> ")
         
+=======
+        
+        input("\nDigite 1 para retornar ao menu\n> ")
+>>>>>>> 44b69ef (criando opção de exibir inventario do jogador no menu do jogo)
         
     except Exception as e:
         print(f"Erro ao passar o tempo: {e}")
