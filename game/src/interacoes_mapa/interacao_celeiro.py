@@ -7,56 +7,75 @@ DML_FILE_PATH = os.path.join(os.path.dirname(__file__), "db/dml.sql")
 def clear_terminal():
     os.system('cls' if os.name == 'nt' else 'clear')
 
+def carregar_personagem(jogador_id):
+    try:
+        conn = get_connection()
+        cursor = conn.cursor()
+        cursor.execute("SELECT * FROM Jogador WHERE id_jogador = %s", (jogador_id,))
+        jogador = cursor.fetchone()
+        if jogador:
+            return jogador
+        else:
+            print("Personagem não encontrado.")
+            return None
+    except Exception as e:
+        print(f"Erro ao carregar personagem: {e}")
+    finally:
+        cursor.close()
+        conn.close()
+
 def interacao_celeiro(jogador):
     clear_terminal() 
-    try:
-        connection = get_connection()
-        cursor = connection.cursor()
-        ambiente_atual = jogador[4]  
+    while True:
+        clear_terminal() 
+        try:
+            connection = get_connection()
+            cursor = connection.cursor()
+            ambiente_atual = jogador[4]  
+            jogador = carregar_personagem(jogador[0])
+            # Contar quantos animais o jogador tem no celeiro
+            cursor.execute("SELECT COUNT(*) FROM Instancia_de_Animal WHERE fk_Jogador_id = %s", (jogador[0],))
+            qtd_animais = cursor.fetchone()[0]  # Pega o primeiro elemento da tupla retornada
+            
+            # Obter o máximo de animais permitidos no celeiro
+            cursor.execute("SELECT qtd_max_animais FROM Celeiro WHERE fk_id_ambiente = %s", (ambiente_atual,))
+            qtd_max_animais = cursor.fetchone()
+            
+            if not qtd_max_animais:
+                print("Você não possui um celeiro neste ambiente.")
+                return
+            
+            qtd_max_animais = qtd_max_animais[0]  # Pega o primeiro elemento da tupla retornada
+            
+            print(f"Você tem {qtd_animais} animais no celeiro de um total máximo de {qtd_max_animais}.")
+            
+            # Adicionar opções de interação
+            print("\nO que você gostaria de fazer?")
+            print("1 - Comprar um animal")
+            print("2 - Ver animais no celeiro")
+            print("3 - Sair do celeiro")
+            
+            escolha = int(input("Digite o número da opção desejada: "))
+            
+            if escolha == 1:
+                comprar_animal(jogador)  # Chama a função para comprar um animal
+            elif escolha == 2:
+                ver_animais_no_celeiro(jogador)  # Chama a função para ver os animais no celeiro
+            elif escolha == 3:
+                print("Saindo do celeiro...")
+                break
+            else:
+                print("Opção inválida. Tente novamente.")
         
-        # Contar quantos animais o jogador tem no celeiro
-        cursor.execute("SELECT COUNT(*) FROM Instancia_de_Animal WHERE fk_Jogador_id = %s", (jogador[0],))
-        qtd_animais = cursor.fetchone()[0]  # Pega o primeiro elemento da tupla retornada
+        except Exception as error:
+            print(f"Ocorreu um erro ao interagir com o celeiro: {error}")
+        finally:
+            if cursor:
+                cursor.close()
+            if connection:
+                connection.close()
+        carregar_personagem(jogador[0])    
         
-        # Obter o máximo de animais permitidos no celeiro
-        cursor.execute("SELECT qtd_max_animais FROM Celeiro WHERE fk_id_ambiente = %s", (ambiente_atual,))
-        qtd_max_animais = cursor.fetchone()
-        
-        if not qtd_max_animais:
-            print("Você não possui um celeiro neste ambiente.")
-            return
-        
-        qtd_max_animais = qtd_max_animais[0]  # Pega o primeiro elemento da tupla retornada
-        
-        print(f"Você tem {qtd_animais} animais no celeiro de um total máximo de {qtd_max_animais}.")
-        
-        # Adicionar opções de interação
-        print("\nO que você gostaria de fazer?")
-        print("1 - Comprar um animal")
-        print("2 - Ver animais no celeiro")
-        print("3 - Sair do celeiro")
-        
-        escolha = int(input("Digite o número da opção desejada: "))
-        
-        if escolha == 1:
-            comprar_animal(jogador)  # Chama a função para comprar um animal
-        elif escolha == 2:
-            ver_animais_no_celeiro(jogador)  # Chama a função para ver os animais no celeiro
-        elif escolha == 3:
-            print("Saindo do celeiro...")
-            return
-        else:
-            print("Opção inválida. Tente novamente.")
-    
-    except Exception as error:
-        print(f"Ocorreu um erro ao interagir com o celeiro: {error}")
-    finally:
-        if cursor:
-            cursor.close()
-        if connection:
-            connection.close()
-
-
 def ver_animais_no_celeiro(jogador):
     clear_terminal()
     try:
@@ -69,6 +88,8 @@ def ver_animais_no_celeiro(jogador):
         
         if not animais:
             print("Não há animais no celeiro.")
+            input("Pressione Enter para continuar...")
+            interacao_celeiro(jogador)
             return
         
         print("\nAnimais no celeiro:")
@@ -124,7 +145,7 @@ def exibir_animais_disponiveis():
             cursor.close()
         if conn:
             conn.close()
-
+    
 def excluir_animal_do_celeiro(jogador):
     clear_terminal()
     cursor = None
@@ -135,7 +156,7 @@ def excluir_animal_do_celeiro(jogador):
         
         
         # Obter o celeiro do jogador
-        cursor.execute("SELECT fk_id_ambiente, qtd_animais FROM Celeiro WHERE fk_id_ambiente = %s", (jogador[4],))
+        cursor.execute("SELECT fk_id_ambiente FROM Celeiro WHERE fk_id_ambiente = %s", (jogador[4],))
         celeiro = cursor.fetchone()
         
         if not celeiro:
@@ -177,7 +198,6 @@ def excluir_animal_do_celeiro(jogador):
         
         # Excluir o animal
         cursor.execute("DELETE FROM Instancia_de_Animal WHERE id_instancia_de_animal = %s", (escolha,))
-        cursor.execute("UPDATE Celeiro SET qtd_animais = qtd_animais - 1 WHERE fk_id_ambiente = %s", (fk_id_ambiente,))
         conn.commit()
         
         # Atualiza as moedas do jogador
@@ -273,7 +293,6 @@ def adicionar_animal_ao_celeiro(jogador, fk_animal_id, nome_animal):
             INSERT INTO Instancia_de_Animal (nome_animal, prontoDropa, diaAtual, fk_Animal_id, fk_Jogador_id, fk_Celeiro_id)
             VALUES (%s, %s, %s, %s, %s, %s)
         """, (nome_animal, False, 0, fk_animal_id, jogador[0], celeiro[0]))  # Use índice inteiro
-        cursor.execute("UPDATE Celeiro SET qtd_animais = qtd_animais + 1 WHERE fk_id_ambiente = %s", (celeiro[0],))
         conn.commit()
         
         print("Animal adicionado ao celeiro com sucesso!")
@@ -288,11 +307,23 @@ def adicionar_animal_ao_celeiro(jogador, fk_animal_id, nome_animal):
 def comprar_animal(jogador):
     clear_terminal()
     animais = exibir_animais_disponiveis()
-    if not animais:
-        return  # Se não houver animais, sai da função
+    conn = None
+    cursor = None
 
     try:
+        conn = get_connection()
+        cursor = conn.cursor()
+        jogador = carregar_personagem(jogador[0])
+        # Obter as moedas do jogador
+        cursor.execute("SELECT moedas FROM Jogador WHERE id_jogador = %s", (jogador[0],))
+        moedas = cursor.fetchone()[0]  # Pega o primeiro elemento da tupla retornada
+        print(f"Você tem {moedas} moedas.")
+        
+        if not animais:
+            return  # Se não houver animais, sai da função
+
         escolha = int(input("Digite o ID do animal que você deseja comprar (ou 0 para cancelar): "))
+        
         if escolha == 0:
             print("Compra cancelada.")
             return
@@ -305,10 +336,10 @@ def comprar_animal(jogador):
         
         # Verifica se o jogador tem moedas suficientes
         preco_animal = animal_selecionado[2]
-        if jogador[11] < preco_animal:  # Use índice inteiro para acessar moedas
+        if moedas < preco_animal:  # Use a variável de moedas obtida
             print("Você não tem moedas suficientes para comprar este animal.")
             return
-        
+        jogador[0]
         # Solicita o nome do animal
         nome_animal = input("Digite o nome do animal: ").strip()
         
@@ -316,14 +347,14 @@ def comprar_animal(jogador):
         adicionar_animal_ao_celeiro(jogador, escolha, nome_animal)
         
         # Atualiza as moedas do jogador
-        conn = get_connection()
-        cursor = conn.cursor()
         cursor.execute("UPDATE Jogador SET moedas = moedas - %s WHERE id_jogador = %s", (preco_animal, jogador[0]))  # Use índice inteiro
         conn.commit()
         
         print(f"Você comprou um {animal_selecionado[1]} chamado {nome_animal} por {preco_animal} moedas!")
+    
     except Exception as e:
         print(f"Erro ao comprar animal: {e}")
+    
     finally:
         if cursor:  # Verifica se o cursor foi criado
             cursor.close()

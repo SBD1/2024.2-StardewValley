@@ -12,15 +12,6 @@ CREATE TABLE IF NOT EXISTS Inimigo (
     dano INT NOT NULL
 );
 
-CREATE TABLE IF NOT EXISTS Animal (
-    id_animal SERIAL PRIMARY KEY,
-    tipo_animal VARCHAR(50) NOT NULL,
-    diasTotalDropar INT NOT NULL,
-    itemDrop VARCHAR(100),
-    preco FLOAT NOT NULL,
-    FOREIGN KEY (itemDrop) REFERENCES Item(id_item)
-);
-
 CREATE TABLE IF NOT EXISTS habMineracao (
     fk_Habilidade_id INT,
     reducaoEnergiaMinera INT NOT NULL,
@@ -117,7 +108,14 @@ CREATE TABLE IF NOT EXISTS item (
     id_item SERIAL PRIMARY KEY,
     tipo_item VARCHAR(20) NOT NULL
 );
-
+CREATE TABLE IF NOT EXISTS Animal (
+    id_animal SERIAL PRIMARY KEY,
+    tipo_animal VARCHAR(50) NOT NULL,
+    diasTotalDropar INT NOT NULL,
+    itemDrop INTEGER,
+    preco FLOAT NOT NULL,
+    FOREIGN KEY (itemDrop) REFERENCES item(id_item)
+);
 CREATE TABLE IF NOT EXISTS instancia_de_item(
     id_instancia_de_item SERIAL PRIMARY KEY,
     fk_id_jogador INT NOT NULL,

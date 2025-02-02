@@ -193,8 +193,8 @@ def interagir_ambiente(jogador, localizacao_atual):
         interacao_celeiro(jogador)
 
 def menu_jogo(jogador):
-    clear_terminal()
     while True:
+        clear_terminal() 
         id_jogador = jogador[0]
         nome_jogador = jogador[1]
         dia_atual = jogador[2]
@@ -206,10 +206,10 @@ def menu_jogo(jogador):
         xp_cultivo = jogador[8]
         xp_combate = jogador[9]
         dano_ataque = jogador[10]
-
+        moeda = jogador[11]
         print(("\t"*10)+"\n##### Stardew Valley 🌾 #####\n")
         print(f"Dia: {dia_atual} | Tempo: {tempo_atual}")
-        print(f"Fazendeiro(a): {nome_jogador}")
+        print(f"Fazendeiro(a): {nome_jogador} | Moedas 💰: {moeda}\n")
         print(f"Vida 🖤: {vida_atual}/{vida_maxima}")
         print(f"Dano de Ataque ⚔️: {dano_ataque}")
         print(f"XP Mineração ⛏️ : {xp_mineracao}")
