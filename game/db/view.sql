@@ -13,7 +13,15 @@ SELECT
         WHEN it.tipo_item = 'arma'        THEN arma.nome
         WHEN it.tipo_item = 'consumivel'  THEN consumivel.nome
         WHEN it.tipo_item = 'recurso'     THEN recurso.nome
-    END AS nome_item
+    END AS nome_item,
+
+    CASE
+        WHEN it.tipo_item = 'mineral'     THEN mineral.preco
+        WHEN it.tipo_item = 'ferramenta'  THEN ferramenta.preco
+        WHEN it.tipo_item = 'arma'        THEN arma.preco
+        WHEN it.tipo_item = 'consumivel'  THEN consumivel.preco
+        WHEN it.tipo_item = 'recurso'     THEN recurso.preco
+    END AS preco_item
 
 FROM Jogador j
 JOIN inventario inv 
