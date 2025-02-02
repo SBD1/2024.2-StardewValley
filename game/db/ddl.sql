@@ -348,3 +348,48 @@ $$ LANGUAGE plpgsql;
 CREATE TRIGGER exclusividade_tipo_item_trigger
 BEFORE INSERT ON item
 FOR EACH ROW EXECUTE FUNCTION exclusividade_tipo_item();
+
+CREATE OR REPLACE FUNCTION avancar_dia_se_passar_meia_noite()
+RETURNS TRIGGER AS $$
+DECLARE
+    tempo_atual TIME;
+    novo_tempo TIME;
+BEGIN
+    SELECT tempo INTO tempo_atual FROM Jogador WHERE id_jogador = NEW.id_jogador;
+    
+    novo_tempo := NEW.tempo;
+
+    IF novo_tempo < tempo_atual THEN
+        NEW.dia := NEW.dia + 1;
+    END IF;
+
+    RETURN NEW;
+END;
+$$ LANGUAGE plpgsql;
+
+CREATE TRIGGER trigger_avancar_dia
+BEFORE UPDATE ON Jogador
+FOR EACH ROW
+WHEN (NEW.tempo < OLD.tempo)  
+EXECUTE FUNCTION avancar_dia_se_passar_meia_noite();
+
+CREATE OR REPLACE FUNCTION forcar_jogador_a_dormir()
+RETURNS TRIGGER AS $$
+BEGIN
+    IF NEW.tempo > '02:00' AND NEW.tempo < '06:00' THEN
+        NEW.localizacao_atual := 1;
+        NEW.tempo := '06:00';
+        NEW.dia := NEW.dia + 1;
+        NEW.moedas := NEW.moedas * 0.95;
+        RAISE NOTICE 'O jogador % foi forçado a dormir e acordou às 06:00!', NEW.id_jogador;
+    END IF;
+
+    RETURN NEW;
+END;
+$$ LANGUAGE plpgsql;
+
+CREATE TRIGGER trigger_forcar_dormir
+BEFORE UPDATE ON Jogador
+FOR EACH ROW
+WHEN (NEW.tempo > '02:00')
+EXECUTE FUNCTION forcar_jogador_a_dormir();
