@@ -16,7 +16,7 @@ CREATE TABLE IF NOT EXISTS Animal (
     id_animal SERIAL PRIMARY KEY,
     tipo_animal VARCHAR(50) NOT NULL,
     diasTotalDropar INT NOT NULL,
-    itemDrop VARCHAR(100) NOT NULL,
+    itemDrop VARCHAR(100),
     preco FLOAT NOT NULL
 );
 

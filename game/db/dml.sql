@@ -83,13 +83,13 @@ VALUES
 INSERT INTO Animal (id_animal, tipo_animal, diasTotalDropar, itemDrop, preco)
 VALUES
     (1, 'Vaca', 1, 'Leite', 25.00),
-    (2, 'Galinha', 1, 'Ovo', 15.00),
+    (2, 'Galinha', 1, 'Ovo de Galinha', 15.00),
     (3, 'Cachorro', 0, NULL, 0.00),
     (4, 'Gato', 0, NULL, 0.00),
     (5, 'Cavalo', 0, NULL, 100.00),
     (6, 'Ovelha', 3, 'Lã', 20.00),
     (7, 'Porco', 3, 'Trufa', 30.00),
-    (8, 'Coelho', 1, 'Pele', 10.00),
+    (8, 'Coelho', 2, 'Pele', 10.00),
     (9, 'Pato', 2, 'Ovo de Pato', 15.00),
     (10, 'Cavalo', 0, NULL, 100.00);
 
@@ -225,6 +225,8 @@ INSERT INTO item (id_item, tipo_item) VALUES
 (26, 'consumivel'),
 (27, 'consumivel'),
 (28, 'consumivel'),
+(29, 'consumivel'),
+(30, 'consumivel'),
 
 (101, 'mineral'),
 (102, 'mineral'),
@@ -255,6 +257,10 @@ INSERT INTO item (id_item, tipo_item) VALUES
 (212, 'recurso'),
 (213, 'recurso'),
 (214, 'recurso'),
+(215, 'recurso'),
+(216, 'recurso'),
+(217, 'recurso'),
+
 
 (300, 'ferramenta'),
 (301, 'ferramenta'),
@@ -394,7 +400,9 @@ INSERT INTO consumivel (fk_id_item, nome, descricao, efeito_vida) VALUES
 (25, 'Refeição de Mineiro', 'Alimento energético para mineradores.', 45),
 (26, 'Café Expresso Triplo', 'Café mais forte para energia extra.', 30),
 (27, 'Cenoura subterrânea', 'Raiz nutritiva encontrada no subsolo.', 25),
-(28, 'Peixe', 'Fonte rica de proteínas.', 30);
+(28, 'Peixe', 'Fonte rica de proteínas.', 30),
+(29, 'Ovo de Pato', 'Ovo de pato fresco e nutritivo.', 20),
+(30, 'Ovo de Galinha', 'Ovo de galinha fresco e nutritivo', 50);
 
 
 INSERT INTO mineral (fk_id_item, nome, descricao, resistencia, preco) VALUES
@@ -430,7 +438,10 @@ INSERT INTO recurso (fk_id_item, nome, descricao, preco) VALUES
 (211, 'Geodo de magma', 'Geodo encontrado em áreas vulcânicas.', 100.00),
 (212, 'Omnigeodo', 'Um geodo raro com diversos minerais.', 150.00),
 (213, 'Tecido', 'Material flexível usado em artesanato.', 50.00),
-(214, 'Ovo de dinossauro', 'Um ovo de um dinossauro pré histórico', 200.00);
+(214, 'Ovo de dinossauro', 'Um ovo de um dinossauro pré histórico', 200.00),
+(215, 'Trufa', 'Um fungo raro e valioso encontrado por porcos.', 80.00),
+(216, 'Lã', 'Fibra macia e quente obtida de ovelhas.', 60.00),
+(217, 'Pele', 'Material resistente e flexível obtido de coelhos.', 55.00);
 
 INSERT INTO missao_combate (fk_id_missao, fk_id_Inimigo, nome, descricao, dataInicio)
 VALUES 
