@@ -147,7 +147,7 @@ def resultado_combate(inimigo_dict, jogador_dict):
         exibir_status_combate(jogador_dict, inimigo_dict)
 
         # vamos precisar da habilidade antiga para comparar com a nova
-        cursor.execute("SELECT * FROM habCombate WHERE fk_Habilidade_id = %s", (jogador_dict['fk_habCombate_fk_Habilidade'],))
+        cursor.execute("SELECT * FROM habCombate WHERE fk_Habilidade_id = %s", (jogador_dict['fk_habCombate_fk_Habilidade_id'],))
         habCombate = cursor.fetchone()
 
         commit_vidaAtual(jogador_dict, inimigo_dict)
@@ -249,23 +249,24 @@ def atualizar_jogador(jogador):
         cursor.execute("SELECT * FROM jogador WHERE id_jogador = %s", (jogador[0],))
         jogador = cursor.fetchone()
         jogador_dict = {
-            'id_jogador'                    : jogador[0],
-            'nome'                          : jogador[1],  
-            'dia'                           : jogador[2],          
-            'tempo'                         : jogador[3],
-            'localizacao_atual'             : jogador[4],                
-            'vidaMax'                       : jogador[5],
-            'vidaAtual'                     : jogador[6], 
-            'xp_mineracao'                  : jogador[7], 
-            'xp_cultivo'                    : jogador[8], 
-            'xp_combate'                    : jogador[9],
-            'dano_ataque'                   : jogador[10],
-            'fk_habMineracao_fk_Habilidad'  : jogador[11], 
-            'fk_habCombate_fk_Habilidade'   : jogador[12],
-            'fk_habCultivo_fk_Habilidade'   : jogador[13],
+            'id_jogador'                        : jogador[0],
+            'nome'                              : jogador[1],                  
+            'dia'                               : jogador[2],                   
+            'tempo'                             : jogador[3],
+            'localizacao_atual'                 : jogador[4],                
+            'vidaMax'                           : jogador[5],         
+            'vidaAtual'                         : jogador[6],       
+            'xp_mineracao'                      : jogador[7],     
+            'xp_cultivo'                        : jogador[8],       
+            'xp_combate'                        : jogador[9],       
+            'dano_ataque'                       : jogador[10],
+            'moedas'                            : jogador[11],       
+            'fk_habMineracao_fk_Habilidade_id'  : jogador[12], 
+            'fk_habCombate_fk_Habilidade_id'    : jogador[13],   
+            'fk_habCultivo_fk_Habilidade_id'    : jogador[14], 
         }
-
         return jogador_dict
+
     except Exception as error:
         print(f"Ocorreu um erro ao atualizar o status do jogador: {error}")
         input("\nPressione enter para continuar...")

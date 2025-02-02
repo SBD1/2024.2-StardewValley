@@ -285,6 +285,7 @@ def menu_jogo(jogador):
 
             if escolha == 1:
                 andar_no_mapa(jogador, localizacao_atual)
+                avancar_tempo(jogador, 61)
             elif escolha == 2:
                 exibir_habilidades_jogador(jogador)
             elif escolha == 3:
@@ -292,21 +293,11 @@ def menu_jogo(jogador):
             elif escolha == 9:
                 break
             jogador = carregar_personagem(id_jogador)
+
         except ValueError:
             print("\nOpção inválida. Tente novamente.")
             input("Pressione qualquer tecla para continuar...")
             continue
-
-        if escolha == 1:
-            andar_no_mapa(jogador, localizacao_atual)
-            avancar_tempo(jogador, 61)
-        elif escolha == 2:
-            exibir_habilidades_jogador(jogador)
-        elif escolha == 3:
-            interagir_ambiente(jogador, localizacao_atual)
-        elif escolha == 9:
-            break
-        jogador = carregar_personagem(id_jogador)
         
     
     

@@ -446,13 +446,13 @@ INSERT INTO mineral (fk_id_item, nome, descricao, resistencia, preco) VALUES
 (114, 'Madeira de Lei', 'Um tipo de madeira mais resistente.', 20, 20.00);
 
 INSERT INTO Caverna (fk_id_ambiente, andar, qtd_minerio, fk_id_minerio_item, fk_id_item_recompensa) VALUES
-    (15, 0, 0, 29, 10),
-    (16, 1, 5, 31,  2),
-    (17, 2, 5, 32,  3),
-    (18, 3, 5, 33,  4),
-    (19, 4, 3, 34,  5),
-    (20, 5, 5, 35,  6),
-    (21, 6, 3, 36,  7);
+    (15, 0, 0, 101, 10),
+    (16, 1, 5, 102,  2),
+    (17, 2, 5, 103,  3),
+    (18, 3, 5, 104,  4),
+    (19, 4, 3, 105,  5),
+    (20, 5, 5, 106,  6),
+    (21, 6, 3, 107,  7);
 
 INSERT INTO recurso (fk_id_item, nome, descricao, preco) VALUES
 (201, 'Quartzo', 'Um cristal translúcido muito comum.', 25.00),
