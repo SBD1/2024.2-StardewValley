@@ -80,11 +80,18 @@ INSERT INTO Jogador (id_jogador, nome, fk_habMineracao_fk_Habilidade_id, fk_habC
 VALUES
     (0, 'teste', 1, 11, 21);
 
-INSERT INTO Animal (nome_animal, diasTotalDropar, tipo_animal, itemDrop, preco)
+INSERT INTO Animal (id_animal, tipo_animal, diasTotalDropar, itemDrop, preco)
 VALUES
-    ('vaca', 7, 'vaca', 14, 50),
-    ('galinha', 3, 'galinha', 13, 30),
-    ('porco', 5, 'porco', 3, 40);--mudar o item  para o id do carne!!! 
+    (1, 'Vaca', 1, 'Leite', 25.00),
+    (2, 'Galinha', 1, 'Ovo', 15.00),
+    (3, 'Cachorro', 0, NULL, 0.00),
+    (4, 'Gato', 0, NULL, 0.00),
+    (5, 'Cavalo', 0, NULL, 100.00),
+    (6, 'Ovelha', 3, 'Lã', 20.00),
+    (7, 'Porco', 3, 'Trufa', 30.00),
+    (8, 'Coelho', 1, 'Pele', 10.00),
+    (9, 'Pato', 2, 'Ovo de Pato', 15.00),
+    (10, 'Cavalo', 0, NULL, 100.00);
 
 INSERT INTO inimigo (id_inimigo, nome, tipo, vidaMax, dano) VALUES
     (1, 'Morcego da Caverna', 'caverna', 30, 5),

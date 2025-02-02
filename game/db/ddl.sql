@@ -14,9 +14,8 @@ CREATE TABLE IF NOT EXISTS Inimigo (
 
 CREATE TABLE IF NOT EXISTS Animal (
     id_animal SERIAL PRIMARY KEY,
-    nome_animal VARCHAR(100),
-    diasTotalDropar INT NOT NULL,
     tipo_animal VARCHAR(50) NOT NULL,
+    diasTotalDropar INT NOT NULL,
     itemDrop VARCHAR(100) NOT NULL,
     preco FLOAT NOT NULL
 );
@@ -65,10 +64,11 @@ CREATE TABLE IF NOT EXISTS Jogador (
     xp_mineracao FLOAT NOT NULL DEFAULT 0.0,     
     xp_cultivo FLOAT NOT NULL DEFAULT 0.0,       
     xp_combate FLOAT NOT NULL DEFAULT 0.0,       
-    dano_ataque FLOAT NOT NULL DEFAULT 10.0,     
+    dano_ataque FLOAT NOT NULL DEFAULT 10.0,
+    moeda DECIMAL NOT NULL DEFAULT 100.0,       
     fk_habMineracao_fk_Habilidade_id INT DEFAULT 1, 
     fk_habCombate_fk_Habilidade_id INT DEFAULT 11,   
-    fk_habCultivo_fk_Habilidade_id INT DEFAULT 21,   
+    fk_habCultivo_fk_Habilidade_id INT DEFAULT 21, 
     CONSTRAINT fk_Jogador_habMineracao FOREIGN KEY (fk_habMineracao_fk_Habilidade_id)
         REFERENCES habMineracao (fk_Habilidade_id),
     CONSTRAINT fk_Jogador_habCombate FOREIGN KEY (fk_habCombate_fk_Habilidade_id)
@@ -210,6 +210,7 @@ CREATE TABLE IF NOT EXISTS Instancia_de_Inimigo (
 
 CREATE TABLE IF NOT EXISTS Instancia_de_Animal (
     id_instancia_de_animal SERIAL PRIMARY KEY,
+    nome_animal VARCHAR(100) NOT NULL,
     prontoDropa BOOLEAN NOT NULL,
     diaAtual INT NOT NULL,
     fk_Animal_id INT NOT NULL,
