@@ -49,7 +49,7 @@ CREATE TABLE IF NOT EXISTS Jogador (
     id_jogador SERIAL PRIMARY KEY,
     nome VARCHAR(100) NOT NULL,                  
     dia INT NOT NULL DEFAULT 0,                   
-    tempo INT NOT NULL DEFAULT 0,
+    tempo TIME NOT NULL DEFAULT '06:00',
     localizacao_atual INT NOT NULL DEFAULT 1,                
     vidaMax FLOAT NOT NULL DEFAULT 10.0,         
     vidaAtual FLOAT NOT NULL DEFAULT 10.0,       

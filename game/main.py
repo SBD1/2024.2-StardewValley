@@ -1,6 +1,7 @@
-from setup.database import setup_database, get_connection
+from setup.database import get_connection
 from src.interacoes_mapa.interacao_caverna import interacao_caverna
 from src.interacoes_mapa.interacao_celeiro import interacao_celeiro
+from game.src.avancar_tempo import avancar_tempo
 import os
 
 DDL_FILE_PATH = os.path.join(os.path.dirname(__file__), "db/ddl.sql")
@@ -233,6 +234,7 @@ def menu_jogo(jogador):
 
         if escolha == 1:
             andar_no_mapa(jogador, localizacao_atual)
+            avancar_tempo(jogador, 5)
         elif escolha == 2:
             exibir_habilidades_jogador(jogador)
         elif escolha == 3:
