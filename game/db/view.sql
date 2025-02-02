@@ -1,12 +1,9 @@
 CREATE OR REPLACE VIEW vw_inventario_jogador AS
 SELECT
     j.id_jogador,
-    j.nome                  AS nome_jogador,
-    inv.id_inventario,
     inst.fk_id_item,
     it.tipo_item,
 
-    -- Aqui, usamos CASE para decidir de qual tabela especializada pegamos o nome
     CASE
         WHEN it.tipo_item = 'mineral'     THEN mineral.nome
         WHEN it.tipo_item = 'ferramenta'  THEN ferramenta.nome
@@ -14,6 +11,8 @@ SELECT
         WHEN it.tipo_item = 'consumivel'  THEN consumivel.nome
         WHEN it.tipo_item = 'recurso'     THEN recurso.nome
     END AS nome_item,
+
+    COUNT(inst.fk_id_item) AS quantidade,
 
     CASE
         WHEN it.tipo_item = 'mineral'     THEN mineral.preco
@@ -50,4 +49,9 @@ LEFT JOIN consumivel
 
 LEFT JOIN recurso
     ON recurso.fk_id_item = it.id_item
-   AND it.tipo_item = 'recurso';
+   AND it.tipo_item = 'recurso'
+
+GROUP BY j.id_jogador,  inst.fk_id_item, it.tipo_item, 
+         mineral.nome, ferramenta.nome, arma.nome, consumivel.nome, recurso.nome,
+         mineral.preco, ferramenta.preco, arma.preco, consumivel.preco, recurso.preco;
+
