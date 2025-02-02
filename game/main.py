@@ -23,7 +23,7 @@ def criar_personagem():
         jogador_id = cursor.fetchone()[0]
         conn.commit()
         print(f"Personagem '{nome}' criado com sucesso!")
-        return jogador_id
+        return carregar_personagem(jogador_id)  # Retorna o jogador completo
     except Exception as e:
         print(f"Erro ao criar personagem: {e}")
     finally:
@@ -295,6 +295,6 @@ if __name__ == "__main__":
 
     jogador = menu_inicial()
     if jogador:
-        print(f"\nVocê está pronto para começar, {jogador[1]}!")
+        print(f"\nVocê está pronto para começar, {jogador[1]}!")  # Agora jogador é uma tupla
         clear_terminal()
         menu_jogo(jogador)
