@@ -221,7 +221,7 @@ def interagir_ambiente(jogador, localizacao_atual):
 
 def menu_jogo(jogador):
     while True:
-        clear_terminal() 
+        #clear_terminal() 
         id_jogador = jogador[0]
         nome_jogador = jogador[1]
         dia_atual = jogador[2]
@@ -262,7 +262,7 @@ def menu_jogo(jogador):
 
         if escolha == 1:
             andar_no_mapa(jogador, localizacao_atual)
-            avancar_tempo(jogador, 61)
+            avancar_tempo(jogador, 180)
         elif escolha == 2:
             exibir_habilidades_jogador(jogador)
         elif escolha == 3:
