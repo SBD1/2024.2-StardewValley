@@ -1,4 +1,97 @@
------------------- Triggers na tabela Instancia_de_Inimigo ------------------
+------------------ Triggers/Funções da tabela Instancia_de_Inimigo ------------------
+
+  -- Tabelas afetadas: Instancia_de_Inimigo
+    CREATE OR REPLACE FUNCTION spawnar_inimigos(jogador_id INT)
+    RETURNS VOID AS $spawnar_inimigos$
+    DECLARE
+        vida_morcego FLOAT;
+        vida_aranha FLOAT;
+        vida_rato FLOAT;
+        vida_escorpiao FLOAT;
+        vida_serpente FLOAT;
+        vida_fantasma FLOAT;
+        vida_golem FLOAT;
+        vida_slime FLOAT;
+        vida_lagarto FLOAT;
+        vida_fungo FLOAT;
+    BEGIN
+      RAISE NOTICE 'Spawnando inimigos para o jogador %', jogador_id;
+        -- Valida se o jogador existe
+        IF NOT EXISTS (SELECT 1 FROM Jogador WHERE id_jogador = jogador_id) THEN
+            RAISE EXCEPTION 'Jogador com id % não encontrado.', jogador_id;
+        END IF;
+
+        -- Busca os valores de vidaMax dos inimigos
+        SELECT vidaMax INTO vida_morcego FROM Inimigo WHERE id_inimigo = 1;
+        SELECT vidaMax INTO vida_aranha FROM Inimigo WHERE id_inimigo = 2;
+        SELECT vidaMax INTO vida_golem FROM Inimigo WHERE id_inimigo = 3;
+        SELECT vidaMax INTO vida_rato FROM Inimigo WHERE id_inimigo = 4;
+        SELECT vidaMax INTO vida_fantasma FROM Inimigo WHERE id_inimigo = 5;
+        SELECT vidaMax INTO vida_slime FROM Inimigo WHERE id_inimigo = 6;
+        SELECT vidaMax INTO vida_escorpiao FROM Inimigo WHERE id_inimigo = 7;
+        SELECT vidaMax INTO vida_serpente FROM Inimigo WHERE id_inimigo = 8;
+        SELECT vidaMax INTO vida_fungo FROM Inimigo WHERE id_inimigo = 9;
+        SELECT vidaMax INTO vida_lagarto FROM Inimigo WHERE id_inimigo = 10;
+
+        -- Inicia uma transação
+        BEGIN
+          RAISE NOTICE 'Spawnando inimigos para o jogador %', jogador_id;
+            -- Andar 1: 8 mobs
+            INSERT INTO Instancia_de_Inimigo (vidaAtual, fk_id_ambiente, fk_inimigo_id, fk_jogador_id) VALUES
+            (vida_morcego, 16, 1, jogador_id),  -- Morcego da Caverna
+            (vida_morcego, 16, 1, jogador_id),  -- Morcego da Caverna
+            (vida_morcego, 16, 1, jogador_id),  -- Morcego da Caverna
+            (vida_morcego, 16, 1, jogador_id),  -- Morcego da Caverna
+            (vida_aranha, 16, 2, jogador_id),   -- Aranha das Sombras
+            (vida_rato, 16, 4, jogador_id),     -- Rato Gigante
+            (vida_escorpiao, 16, 7, jogador_id),-- Escorpião Caverneiro
+            (vida_serpente, 16, 8, jogador_id); -- Serpente Rochosa
+
+            -- Andar 2: 2 mobs
+            INSERT INTO Instancia_de_Inimigo (vidaAtual, fk_id_ambiente, fk_inimigo_id, fk_jogador_id) VALUES
+            (vida_morcego, 17, 1, jogador_id),  -- Morcego da Caverna
+            (vida_aranha, 17, 2, jogador_id);   -- Aranha das Sombras
+
+            -- Andar 3: 4 mobs
+            INSERT INTO Instancia_de_Inimigo (vidaAtual, fk_id_ambiente, fk_inimigo_id, fk_jogador_id) VALUES
+            (vida_rato, 18, 4, jogador_id),     -- Rato Gigante
+            (vida_escorpiao, 18, 7, jogador_id),-- Escorpião Caverneiro
+            (vida_serpente, 18, 8, jogador_id), -- Serpente Rochosa
+            (vida_fantasma, 18, 5, jogador_id); -- Fantasma Errante
+
+            -- Andar 4: 3 mobs
+            INSERT INTO Instancia_de_Inimigo (vidaAtual, fk_id_ambiente, fk_inimigo_id, fk_jogador_id) VALUES
+            (vida_golem, 19, 3, jogador_id),    -- Golem de Pedras
+            (vida_slime, 19, 6, jogador_id),    -- Slime Escuro
+            (vida_lagarto, 19, 10, jogador_id); -- Lagarto Albino
+
+            -- Andar 5: 10 mobs
+            INSERT INTO Instancia_de_Inimigo (vidaAtual, fk_id_ambiente, fk_inimigo_id, fk_jogador_id) VALUES
+            (vida_morcego, 20, 1, jogador_id),  -- Morcego da Caverna
+            (vida_aranha, 20, 2, jogador_id),   -- Aranha das Sombras
+            (vida_rato, 20, 4, jogador_id),     -- Rato Gigante
+            (vida_escorpiao, 20, 7, jogador_id),-- Escorpião Caverneiro
+            (vida_serpente, 20, 8, jogador_id), -- Serpente Rochosa
+            (vida_fantasma, 20, 5, jogador_id), -- Fantasma Errante
+            (vida_golem, 20, 3, jogador_id),    -- Golem de Pedras
+            (vida_slime, 20, 6, jogador_id),    -- Slime Escuro
+            (vida_lagarto, 20, 10, jogador_id), -- Lagarto Albino
+            (vida_fungo, 20, 9, jogador_id);    -- Fungo Venenoso
+
+            -- Andar 6: 8 mobs
+            INSERT INTO Instancia_de_Inimigo (vidaAtual, fk_id_ambiente, fk_inimigo_id, fk_jogador_id) VALUES
+            (vida_morcego, 21, 1, jogador_id),  -- Morcego da Caverna
+            (vida_aranha, 21, 2, jogador_id),   -- Aranha das Sombras
+            (vida_rato, 21, 4, jogador_id),     -- Rato Gigante
+            (vida_escorpiao, 21, 7, jogador_id),-- Escorpião Caverneiro
+            (vida_serpente, 21, 8, jogador_id), -- Serpente Rochosa
+            (vida_fantasma, 21, 5, jogador_id), -- Fantasma Errante
+            (vida_golem, 21, 3, jogador_id),    -- Golem de Pedras
+            (vida_slime, 21, 6, jogador_id);    -- Slime Escuro
+
+        END;
+    END;
+    $spawnar_inimigos$ LANGUAGE plpgsql;
 
   -- Tabelas afetadas: Instancia_de_Inimigo
     CREATE OR REPLACE FUNCTION excluir_inimigos_mortos()
@@ -31,14 +124,9 @@
         WHERE fk_id_ambiente = OLD.fk_id_ambiente;
       ELSIF TG_OP = 'INSERT' THEN
         -- Incrementa a quantidade de mobs na caverna
-        RAISE NOTICE 'Incrementando quantidade de mobs na caverna de id %', NEW.fk_id_ambiente;
-        RAISE NOTICE 'Quantidade de mobs atual: %', (SELECT quantidade_mobs FROM Caverna WHERE fk_id_ambiente = NEW.fk_id_ambiente);
-
         UPDATE Caverna
         SET quantidade_mobs = quantidade_mobs + 1
         WHERE fk_id_ambiente = NEW.fk_id_ambiente;
-
-        RAISE NOTICE 'Quantidade de mobs após incremento: %', (SELECT quantidade_mobs FROM Caverna WHERE fk_id_ambiente = NEW.fk_id_ambiente);
       END IF;
 
       RETURN OLD; -- Retorna a linha deletada para operações AFTER DELETE

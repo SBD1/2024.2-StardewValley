@@ -131,6 +131,38 @@ def ambiente_info(id_ambiente):
     except Exception as e:
         print(f"Erro ao carregar ambiente: {e}")
 
+def conferir_caverna(jogador, localizacao_atual, escolha=None):
+    try:
+        conn = get_connection()
+        cursor = conn.cursor()
+        
+        # jogador está tentando ir para o próximo andar
+        if escolha == 2:
+            cursor.execute("SELECT quantidade_mobs FROM Caverna WHERE fk_id_ambiente = %s", (localizacao_atual[0],))
+            mobs_andar_atual = cursor.fetchone()
+
+            if mobs_andar_atual[0] != 0 and localizacao_atual[0] > 15:
+                print("\nVocê não pode prosseguir para o próximo andar enquanto houver inimigos no andar atual. Interaja com o ambiente para derrotá-los.")
+                input("\nPressione qualquer tecla para continuar...")
+                return True
+        elif escolha is None:
+            cursor.execute("SELECT SUM(quantidade_mobs) FROM Caverna")
+            mobs_totais = cursor.fetchone()
+
+            if mobs_totais[0] == 0 and localizacao_atual[0] == 15:
+                cursor.execute("SELECT spawnar_inimigos(%s);", (jogador[0],))
+                conn.commit()
+        else:
+            return False
+    except Exception as e:
+        print(f"Erro ao conferir a caverna: {e}")
+        input("\nPressione qualquer tecla para continuar...")
+    finally:
+        if cursor:
+            cursor.close()
+        if conn:
+            conn.close()
+
 def andar_no_mapa(jogador, localizacao_atual):
     clear_terminal()
     print(f"Você está em {localizacao_atual[2]}\nAs opções para andar são:\n")
@@ -159,14 +191,9 @@ def andar_no_mapa(jogador, localizacao_atual):
             print("Escolha inválida. Tente novamente.")
             return None
 
-        # verifica se há mobs no andar atual da caverna e se pode prosseguir para o próximo
-        if localizacao_atual[1] == 'Caverna' and escolha == 2:
-            cursor.execute("SELECT quantidade_mobs FROM Caverna WHERE fk_id_ambiente = %s", (localizacao_atual[0],))
-            quantidade_mobs = cursor.fetchone()
-            if quantidade_mobs[0] != 0 and localizacao_atual[0] > 15:
-                print("\nVocê não pode prosseguir para o próximo andar enquanto houver inimigos na caverna. Interaja com o ambiente para derrotá-los.")
-                input("\nPressione qualquer tecla para continuar...")
-                return None
+        # verifica se pode prosseguir para o próximo andar 
+        if localizacao_atual[1] == 'Caverna' and conferir_caverna(jogador, localizacao_atual, escolha):
+            return None
 
         # Verifica se o usuário escolheu cancelar
         if ambiente_opcoes[escolha] is None:
@@ -177,10 +204,16 @@ def andar_no_mapa(jogador, localizacao_atual):
         
         conn = get_connection()
         cursor = conn.cursor()
-        cursor.execute("UPDATE Jogador SET localizacao_atual= %s WHERE id_jogador = %s",
+        cursor.execute("""UPDATE Jogador SET localizacao_atual= %s WHERE id_jogador = %s
+                        RETURNING localizacao_atual""",
                        (ambiente_opcoes[escolha],jogador[0]))
         conn.commit()
+        localizacao_atual = cursor.fetchone()
         
+        # verifica se é necessário spawnar inimigos
+        if localizacao_atual[0] == 15:
+            conferir_caverna(jogador, localizacao_atual)
+
         #id_loc_atual = localizacao_atual[0]
         #cursor.execute("UPDATE Ambiente SET fk_jogador_id = NULL WHERE id_ambiente = %s",
         #               (id_loc_atual,))

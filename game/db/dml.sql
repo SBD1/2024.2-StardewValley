@@ -442,54 +442,6 @@ INSERT INTO Caverna (fk_id_ambiente, andar, qtd_minerio, fk_id_minerio_item, fk_
     (20, 5, 5, 35,  6),
     (21, 6, 3, 36,  7);
 
-INSERT INTO Instancia_de_Inimigo (vidaAtual, fk_id_ambiente, fk_inimigo_id, fk_jogador_id) VALUES
--- TODO: descobrir como passar o id do jogador
--- Andar 1: 8 mobs
-(20.0, 16, 1, 0),  -- Morcego da Caverna (vidaMax = 20.0)
-(20.0, 16, 1, 0),  -- Morcego da Caverna (vidaMax = 20.0)
-(20.0, 16, 1, 0),  -- Morcego da Caverna (vidaMax = 20.0)
-(20.0, 16, 2, 0),  -- Aranha das Sombras (vidaMax = 20.0)
-(15.0, 16, 4, 0),  -- Rato Gigante (vidaMax = 15.0)
-(25.0, 16, 7, 0),  -- Escorpião Caverneiro (vidaMax = 25.0)
-(45.0, 16, 8, 0),  -- Serpente Rochosa (vidaMax = 45.0)
-
--- Andar 2: 2 mobs
-(20.0, 17, 1, 0),  -- Morcego da Caverna (vidaMax = 20.0)
-(20.0, 17, 2, 0),  -- Aranha das Sombras (vidaMax = 20.0)
-
--- Andar 3: 4 mobs
-(15.0, 18, 4, 0),  -- Rato Gigante (vidaMax = 15.0)
-(25.0, 18, 7, 0),  -- Escorpião Caverneiro (vidaMax = 25.0)
-(45.0, 18, 8, 0),  -- Serpente Rochosa (vidaMax = 45.0)
-(20.0, 18, 5, 0),  -- Fantasma Errante (vidaMax = 20.0)
-
--- Andar 4: 3 mobs
-(50.0, 19, 3, 0),  -- Golem de Pedras (vidaMax = 50.0)
-(30.0, 19, 6, 0),  -- Slime Escuro (vidaMax = 30.0)
-(35.0, 19, 10, 0), -- Lagarto Albino (vidaMax = 35.0)
-
--- Andar 5: 10 mobs
-(20.0, 20,  1, 0),  -- Morcego da Caverna (vidaMax = 20.0)
-(20.0, 20,  2, 0),  -- Aranha das Sombras (vidaMax = 20.0)
-(15.0, 20,  4, 0),  -- Rato Gigante (vidaMax = 15.0)
-(25.0, 20,  7, 0),  -- Escorpião Caverneiro (vidaMax = 25.0)
-(45.0, 20,  8, 0),  -- Serpente Rochosa (vidaMax = 45.0)
-(20.0, 20,  5, 0),  -- Fantasma Errante (vidaMax = 20.0)
-(50.0, 20,  3, 0),  -- Golem de Pedras (vidaMax = 50.0)
-(30.0, 20,  6, 0),  -- Slime Escuro (vidaMax = 30.0)
-(35.0, 20, 10, 0), -- Lagarto Albino (vidaMax = 35.0)
-(5.0,  20,  9, 0),   -- Fungo Venenoso (vidaMax = 5.0)
-
--- Andar 6: 8 mobs
-(20.0, 21, 1, 0),  -- Morcego da Caverna (vidaMax = 20.0)
-(20.0, 21, 2, 0),  -- Aranha das Sombras (vidaMax = 20.0)
-(15.0, 21, 4, 0),  -- Rato Gigante (vidaMax = 15.0)
-(25.0, 21, 7, 0),  -- Escorpião Caverneiro (vidaMax = 25.0)
-(45.0, 21, 8, 0),  -- Serpente Rochosa (vidaMax = 45.0)
-(20.0, 21, 5, 0),  -- Fantasma Errante (vidaMax = 20.0)
-(50.0, 21, 3, 0),  -- Golem de Pedras (vidaMax = 50.0)
-(30.0, 21, 6, 0);  -- Slime Escuro (vidaMax = 30.0)
-
 INSERT INTO recurso (fk_id_item, nome, descricao, preco) VALUES
 (40, 'Quartzo', 'Um cristal translúcido muito comum.', 25.00),
 (41, 'Cristal de terra', 'Um cristal com impurezas de terra.', 40.00),
