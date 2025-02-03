@@ -300,33 +300,48 @@ def colher_planta(jogador):
         conn = get_connection()
         cursor = conn.cursor()
         
+        # Obter o inventário do jogador
+        cursor.execute("SELECT id_inventario FROM inventario WHERE fk_id_jogador = %s", (jogador[0],))
+        inventario = cursor.fetchone()
+        
+        if not inventario:
+            print("O jogador não possui um inventário.")
+            input("Pressione Enter para continuar...")
+            return
+        
+        id_inventario = inventario[0]
+        
         # Obter as plantas do jogador
         cursor.execute("""
-            SELECT ins.id_instancia_de_planta, ins.nome, ins.prontoColher 
+            SELECT ins.id_instancia_de_planta, ins.nome, ins.prontoColher, pp.id_planta, pp.itemDrop 
             FROM Instancia_de_Planta ins 
+            INNER JOIN Planta pp ON ins.fk_id_planta = pp.id_planta 
             WHERE ins.fk_id_jogador = %s
         """, (jogador[0],))
         plantas = cursor.fetchall()
         
         if not plantas:
             print("Você não possui plantas na plantação.")
+            input("Pressione Enter para continuar...")
             return
         
         print("\nPlantas na plantação:")
         for planta in plantas:
-            id_planta, nome_planta, pronto_colher = planta
+            id_planta, nome_planta, pronto_colher, id_planta_ref, item_drop = planta
             estado = "pronta para colher" if pronto_colher else "não está pronta para colher"
             print(f"{id_planta} - {nome_planta} - {estado}")
         
         escolha = int(input("Digite o ID da planta que você deseja colher (ou 0 para cancelar): "))
         if escolha == 0:
             print("Coleta cancelada.")
+            input("Pressione Enter para continuar...")
             return
         
         # Verifica se a planta escolhida existe e está pronta para colher
         planta_selecionada = next((planta for planta in plantas if planta[0] == escolha), None)
         if not planta_selecionada:
             print("Planta inválida. Tente novamente.")
+            input("Pressione Enter para continuar...")
             return
         
         if not planta_selecionada[2]:  # Se não estiver pronta para colher
@@ -334,16 +349,28 @@ def colher_planta(jogador):
             input("Pressione Enter para continuar...")
             return
         
-        # Aqui você pode adicionar a lógica para coletar o item da planta
-        # Por exemplo, você pode adicionar um item ao inventário do jogador ou aumentar a quantidade de um recurso
+        # Adiciona o item ao inventário do jogador
+        cursor.execute("""
+            INSERT INTO instancia_de_item (fk_id_jogador, fk_id_item, fk_id_inventario, nome) 
+            VALUES (%s, %s, %s, %s)
+        """, (jogador[0], planta_selecionada[4], id_inventario, planta_selecionada[1]))
+
+        # Atualiza o estado da planta para não pronta para colher e reseta o diaAtual
+        try:
+            cursor.execute("UPDATE Instancia_de_Planta SET prontoColher = FALSE, diaAtual = 0 WHERE id_instancia_de_planta = %s", (escolha,))
+            conn.commit()
+            print("O estado da planta foi atualizado com sucesso.")
+        except Exception as e:
+            print(f"Erro ao atualizar o estado da planta: {e}")
+
+        clear_terminal()
         print(f"Você colheu a planta {planta_selecionada[1]}!")
-        
-        # Atualiza o estado da planta para não pronta para colher
-        cursor.execute("UPDATE Instancia_de_Planta SET prontoColher = FALSE WHERE id_instancia_de_planta = %s", (escolha,))
-        conn.commit()
+        print(f"O item foi adicionado ao seu inventário!\n")
+        input("Pressione Enter para continuar...")
         
     except Exception as e:
         print(f"Erro ao colher planta: {e}")
+        input("Pressione Enter para continuar...")
     
     finally:
         if cursor:

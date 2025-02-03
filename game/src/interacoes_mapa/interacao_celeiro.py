@@ -215,49 +215,90 @@ def excluir_animal_do_celeiro(jogador):
 
 def coletar_item_do_animal(jogador):
     clear_terminal()
-    cursor = None
     conn = None
+    cursor = None
     try:
         conn = get_connection()
         cursor = conn.cursor()
         
         # Obter os animais no celeiro
-        cursor.execute("SELECT id_instancia_de_animal , nome_animal, prontoDropa FROM Instancia_de_Animal WHERE fk_Jogador_id = %s", (jogador[0],))
+        cursor.execute("""
+            SELECT id_instancia_de_animal, nome_animal, prontoDropa, fk_animal_id 
+            FROM Instancia_de_Animal 
+            WHERE fk_Jogador_id = %s
+        """, (jogador[0],))
         animais = cursor.fetchall()
         
         if not animais:
             print("Não há animais no celeiro.")
+            input("Pressione Enter para continuar...")
             return
+        
+        # Obter o inventário do jogador
+        cursor.execute("SELECT id_inventario FROM inventario WHERE fk_id_jogador = %s", (jogador[0],))
+        inventario = cursor.fetchone()
+        
+        if not inventario:
+            print("O jogador não possui um inventário.")
+            input("Pressione Enter para continuar...")
+            return
+        
+        id_inventario = inventario[0]
         
         print("\nAnimais no celeiro:")
         for animal in animais:
-            print(f"{animal[0]} - {animal[1]} - {'pronto para dropar' if animal[2] else 'não está pronto para dropar'}")
+            estado = 'pronto para dropar' if animal[2] else 'não está pronto para dropar'
+            print(f"{animal[0]} - {animal[1]} - {estado}")
         
         escolha = int(input("Digite o ID do animal do qual você deseja coletar itens (ou 0 para cancelar): "))
         if escolha == 0:
             print("Coleta cancelada.")
+            input("Pressione Enter para continuar...")
             return
         
         # Verifica se o animal escolhido existe e está pronto para dropar
         animal_selecionado = next((animal for animal in animais if animal[0] == escolha), None)
         if not animal_selecionado:
             print("Animal inválido. Tente novamente.")
+            input("Pressione Enter para continuar...")
             return
         
         if not animal_selecionado[2]:  # Se não estiver pronto para dropar
             print(f"O animal {animal_selecionado[1]} não está pronto para dropar.")
+            input("Pressione Enter para continuar...")
             return
         
-        # Aqui você pode adicionar a lógica para coletar o item do animal
-        # Por exemplo, você pode adicionar um item ao inventário do jogador ou aumentar a quantidade de um recurso
-        print(f"Você coletou um item do animal {animal_selecionado[1]}!")
+        # Obter o item que o animal pode dropar
+        cursor.execute("""
+            SELECT itemDrop 
+            FROM Animal 
+            WHERE id_animal = %s
+        """, (animal_selecionado[3],))  # Use o índice 3 para fk_animal_id
+        itemDrop = cursor.fetchone()
+        
+        if not itemDrop or itemDrop[0] is None:
+            print("Erro ao obter o item do animal.")
+            input("Pressione Enter para continuar...")
+            return
+        
+        # Adiciona o item ao inventário do jogador
+        cursor.execute("""
+            INSERT INTO instancia_de_item (fk_id_jogador, fk_id_item, fk_id_inventario) 
+            VALUES (%s, %s, %s)
+        """, (jogador[0], itemDrop[0], id_inventario))
+
         
         # Atualiza o estado do animal para não pronto para dropar
-        cursor.execute("UPDATE Instancia_de_Animal SET prontoDropa = FALSE WHERE id_instancia_de_animal  = %s", (escolha,))
+        cursor.execute("UPDATE Instancia_de_Animal SET prontoDropa = FALSE, diaAtual = 0 WHERE id_instancia_de_animal = %s", (escolha,))
         conn.commit()
+        clear_terminal()
+        print(f"Você coletou um item do animal {animal_selecionado[1]} !")
+        print(f"O item foi adicionado ao seu inventário !\n")
+        input("Pressione Enter para continuar...")
         
     except Exception as e:
         print(f"Erro ao coletar item do animal: {e}")
+        input("Pressione Enter para continuar...")
     finally:
         if cursor:
             cursor.close()

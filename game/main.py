@@ -26,6 +26,16 @@ def criar_personagem():
         )
         jogador_id = cursor.fetchone()[0]
         conn.commit()
+
+        # Criar um inventário para o novo jogador
+        cursor.execute(
+            """
+            INSERT INTO inventario (fk_id_jogador) VALUES (%s);
+            """,
+            (jogador_id,)
+        )
+        conn.commit()
+
         print(f"Personagem '{nome}' criado com sucesso!")
         return carregar_personagem(jogador_id)  # Retorna o jogador completo
     except Exception as e:
@@ -113,7 +123,7 @@ def exibir_inventario_jogador(jogador):
     try:
         conn = get_connection()
         cursor = conn.cursor()
-        cursor.execute("SELECT nome_item, tipo_item ,quantidade, preco_item FROM vw_inventario_jogador WHERE id_jogador = %s ", (jogador[0],))
+        cursor.execute("SELECT nome_item, tipo_item, quantidade, preco_item FROM vw_inventario_jogador WHERE id_jogador = %s", (jogador[0],))
         
         inventario = cursor.fetchall()
 
@@ -126,12 +136,16 @@ def exibir_inventario_jogador(jogador):
 
             for item in inventario:
                 nome, tipo, quantidade, preco = item
+                # Verifica se quantidade e preco não são None antes de formatar
+                quantidade = quantidade if quantidade is not None else 0
+                preco = preco if preco is not None else 0.0
                 print(f"{nome:<20} {tipo:<15} {quantidade:<5} {preco:<8.2f}")
 
         input("\nDigite 1 para retornar ao menu\n> ")
         
     except Exception as e:
         print(f"❌ Erro ao carregar inventário: {e}")
+        input("\nPressione Enter para continuar...\n> ")
 
 
 def obter_localizacao_jogador(jogador):
@@ -276,7 +290,7 @@ def interagir_ambiente(jogador, localizacao_atual):
 
 def menu_jogo(jogador):
     while True:
-        #clear_terminal() 
+        clear_terminal() 
         id_jogador = jogador[0]
         nome_jogador = jogador[1]
         dia_atual = jogador[2]
