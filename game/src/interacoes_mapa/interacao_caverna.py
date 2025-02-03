@@ -484,6 +484,50 @@ def selecionar_opcao_caverna(inimigos_dict):
         opcao = int(input("\n O que deseja fazer?\n 1 - Iniciar combate\n 2 - Coletar Minérios\n 3 - Voltar\n> "))
         return opcao
             
+def conferir_recompensa(jogador_dict, ambiente, caverna_andar):
+    try:
+        connection = get_connection()
+        cursor = connection.cursor()
+
+        quantidade_mobs_andar_atual = info_andar(ambiente, caverna_andar, jogador_dict)["quantidade_mobs"]
+
+        if quantidade_mobs_andar_atual == 0:
+            cursor.execute("""
+                SELECT Consumivel.*
+                FROM Caverna
+                Join Consumivel ON fk_id_item_recompensa = fk_id_item
+                WHERE Caverna.fk_id_ambiente = %s""",
+            (ambiente[0],))
+            recompensas = cursor.fetchall()
+
+            if recompensa:
+                print("\nParabéns! Você derrotou todos os inimigos deste andar e encontrou:")
+                for recompensa in recompensas:
+                    print(f"- {recompensa[1]}")
+                    opcao = int(input("\nPressione 1 para coletar a recompensa e 0 para deixá-la para trás.\n> "))
+                    if opcao:
+                        cursor.execute("""
+                            INSERT INTO instancia_de_item (fk_id_jogador, fk_id_item, fk_id_estoque, fk_id_inventario)
+                            VALUES
+                            (%s, %s, NULL, (
+                                            SELECT id_inventario FROM Inventario WHERE fk_id_jogador = %s
+                                    )
+                            );""",
+                        (jogador_dict['id_jogador'], recompensa[0], jogador_dict['id_jogador']))
+                        connection.commit()
+                        print("\nVocê coletou a recompensa com sucesso!")
+                        input("\nPressione enter para continuar...")
+            else:
+                print("\nVocê derrotou todos os inimigos deste andar, mas não encontrou nenhuma recompensa.")
+                input("\nPressione enter para continuar...")
+    except Exception as error:
+        print(f"\nOcorreu um erro ao conferir a recompensa: {error}")
+        input("Pressione enter para continuar...")
+    finally:
+        if connection:
+            cursor.close()
+            connection.close()
+            
 def interacao_caverna(jogador, ambiente):
     try:
         connection = get_connection()
@@ -519,9 +563,12 @@ def interacao_caverna(jogador, ambiente):
                     
                     resultado, jogador_dict = iniciar_combate(jogador_dict, inimigos_dict, ambiente)
                     avancar_tempo.avancar_tempo(jogador, 10)
+                    
                     if resultado == "derrota":
                         voltar_para_cabana(jogador)
                         return
+                    
+                    conferir_recompensa(jogador_dict, ambiente, caverna_andar)
                 elif opcao == 2:
                     print("\nFuncionalidade de coleta de minérios ainda não implementada.")
                     input("Pressione enter para continuar...")
