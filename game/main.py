@@ -3,7 +3,7 @@ from src.interacoes_mapa.interacao_caverna import interacao_caverna
 from src.interacoes_mapa.interacao_celeiro import interacao_celeiro
 from src.interacoes_mapa.interacao_plantacao import interacao_plantacao
 from src.avancar_tempo import avancar_tempo
-from src.interacoes_mapa.interacao_plantacao import interacao_plantacao
+from src.interacoes_mapa.interacao_floresta import interacao_floresta
 from src.utils.animacao_escrita import print_animado
 import os
 import pygame
@@ -17,7 +17,7 @@ def clear_terminal():
 def iniciar_musica():
     pygame.mixer.init()
     pygame.mixer.music.load("src/music-stardew.mp3")  # Altere para o caminho correto
-    pygame.mixer.music.set_volume(1.0)  # Ajusta o volume (0.0 a 1.0)
+    pygame.mixer.music.set_volume(0.3)  # Ajusta o volume (0.0 a 1.0)
     pygame.mixer.music.play(-1)  # "-1" faz a música tocar em loop
 
 def criar_personagem():
@@ -265,6 +265,8 @@ def interagir_ambiente(jogador, localizacao_atual):
         interacao_celeiro(jogador)
     elif localizacao_atual[1] == 'Plantação':
         interacao_plantacao(jogador)
+    elif localizacao_atual[2] == 'Floresta':
+        interacao_floresta(jogador)
 
 def abrir_mapa():
     clear_terminal()
@@ -307,7 +309,7 @@ def menu_jogo(jogador):
         print(f"XP Cultivo 🌱 : {xp_cultivo}")
         print(f"XP Combate 🛡️ : {xp_combate}\n")
         
-        print_animado(f'Você está em {localizacao_atual[2]}\n{localizacao_atual[3]}\n')
+        print(f'Você está em {localizacao_atual[2]}\n{localizacao_atual[3]}\n')
 
         print("Suas opções:")
         opcoes_menu = [
@@ -315,7 +317,7 @@ def menu_jogo(jogador):
             "2 - Mostrar Habilidades",
             "3 - Interagir com o ambiente",
             "4 - Abrir inventário",
-            "5 - Abrir mapa da Vila"
+            "5 - Abrir mapa da Vila",
             "9 - Sair do jogo"
         ]
         
