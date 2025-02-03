@@ -98,11 +98,6 @@ CREATE TABLE IF NOT EXISTS loja (
     FOREIGN KEY (fk_id_ambiente) REFERENCES Ambiente(id_ambiente)
 );
 
-CREATE TABLE IF NOT EXISTS estoque(
-    id_estoque SERIAL PRIMARY KEY,
-    fk_id_loja INTEGER NOT NULL,
-    FOREIGN KEY (fk_id_loja) REFERENCES loja(fk_id_ambiente)
-);
 
 CREATE TABLE IF NOT EXISTS item (
     id_item SERIAL PRIMARY KEY,
@@ -120,10 +115,8 @@ CREATE TABLE IF NOT EXISTS instancia_de_item(
     id_instancia_de_item SERIAL PRIMARY KEY,
     fk_id_jogador INT NOT NULL,
     fk_id_item INT NOT NULL,
-    fk_id_estoque INTEGER,
     fk_id_inventario INTEGER, 
     FOREIGN KEY (fk_id_item) REFERENCES item(id_item),
-    FOREIGN KEY (fk_id_estoque) REFERENCES estoque(id_estoque),
     FOREIGN KEY (fk_id_inventario) REFERENCES inventario(id_inventario),
     FOREIGN KEY (fk_id_jogador) REFERENCES jogador(id_jogador)
 );
@@ -280,6 +273,13 @@ CREATE TABLE IF NOT EXISTS Instancia_Missao (
     missao_finalizada BOOLEAN NOT NULL DEFAULT false,
     FOREIGN KEY (fk_Missao) REFERENCES Missao(id_missao),
     FOREIGN KEY (fk_id_jogador) REFERENCES Jogador(id_jogador)
+);
+
+CREATE TABLE IF NOT EXISTS estoque(
+    fk_id_loja INTEGER NOT NULL,
+    fk_id_item INTEGER NOT NULL,
+    FOREIGN KEY (fk_id_loja) REFERENCES loja(fk_id_ambiente),
+    FOREIGN KEY (fk_id_item) REFERENCES Item(id_item)
 );
 
 

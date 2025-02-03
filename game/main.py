@@ -5,6 +5,7 @@ from src.interacoes_mapa.interacao_plantacao import interacao_plantacao
 from src.avancar_tempo import avancar_tempo
 from src.interacoes_mapa.interacao_floresta import interacao_floresta
 from src.utils.animacao_escrita import print_animado
+from src.interacoes_mapa.interacao_loja import interacao_loja
 import os
 import pygame
 
@@ -267,6 +268,8 @@ def interagir_ambiente(jogador, localizacao_atual):
         interacao_plantacao(jogador)
     elif localizacao_atual[2] == 'Floresta':
         interacao_floresta(jogador)
+    elif localizacao_atual[1] == 'Loja':
+        interacao_loja(jogador)
 
 def abrir_mapa():
     clear_terminal()
