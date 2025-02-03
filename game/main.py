@@ -103,7 +103,6 @@ def exibir_habilidades_jogador(jogador):
         
         habilidades = cursor.fetchall()
         
-
        #habilidade mineracao
         conn = get_connection()
         cursor = conn.cursor()
@@ -207,6 +206,44 @@ def ambiente_info(id_ambiente):
     except Exception as e:
         print_animado(f"Erro ao carregar ambiente: {e}")
 
+def conferir_caverna(jogador, localizacao_atual, escolha=None):
+    try:
+        conn = get_connection()
+        cursor = conn.cursor()
+        
+        # jogador está tentando ir para o próximo andar
+        if escolha == 2:
+            cursor.execute("""
+                SELECT COUNT(*)
+                FROM instancia_de_inimigo 
+                WHERE fk_id_ambiente = %s AND fk_jogador_id = %s;""",
+            (localizacao_atual[0], jogador[0]))
+            mobs_andar_atual = cursor.fetchone()
+
+            if mobs_andar_atual[0] != 0 and localizacao_atual[0] > 15:
+                print("\nVocê não pode prosseguir para o próximo andar enquanto houver inimigos no andar atual. Interaja com o ambiente para derrotá-los.")
+                input("\nPressione qualquer tecla para continuar...")
+                return True
+        elif escolha is None:
+            cursor.execute("SELECT COUNT(*) FROM instancia_de_inimigo WHERE fk_jogador_id = %s;", (jogador[0],))
+            mobs_totais = cursor.fetchone()
+
+            if mobs_totais[0] == 0 and localizacao_atual[0] == 15:
+                cursor.execute("SELECT spawnar_inimigos(%s);", (jogador[0],))
+                conn.commit()
+                print("\n Você ouve sons abafados ecoando pelas paredes da caverna... algo está se movendo nas sombras. Cuidado ao tentar avançar pelos andares da caverna!")
+                input("\nPressione enter para continuar...")
+        else:
+            return False
+    except Exception as e:
+        print(f"Erro ao conferir a caverna: {e}")
+        input("\nPressione qualquer tecla para continuar...")
+    finally:
+        if cursor:
+            cursor.close()
+        if conn:
+            conn.close()
+
 def andar_no_mapa(jogador, localizacao_atual):
     clear_terminal()
     print(f"Você está em {localizacao_atual[2]}\nAs opções para andar são:\n")
@@ -227,9 +264,16 @@ def andar_no_mapa(jogador, localizacao_atual):
     conn = None
     cursor = None
     try:
+        conn = get_connection()
+        cursor = conn.cursor()
+
         escolha = int(input("Para qual ambiente você deseja seguir?\n> "))
         if escolha not in ambiente_opcoes:
             print_animado("Escolha inválida. Tente novamente.")
+            return None
+
+        # verifica se pode prosseguir para o próximo andar 
+        if localizacao_atual[1] == 'Caverna' and conferir_caverna(jogador, localizacao_atual, escolha):
             return None
 
         # Verifica se o usuário escolheu cancelar
@@ -241,10 +285,16 @@ def andar_no_mapa(jogador, localizacao_atual):
         
         conn = get_connection()
         cursor = conn.cursor()
-        cursor.execute("UPDATE Jogador SET localizacao_atual= %s WHERE id_jogador = %s",
+        cursor.execute("""UPDATE Jogador SET localizacao_atual= %s WHERE id_jogador = %s
+                        RETURNING localizacao_atual""",
                        (ambiente_opcoes[escolha],jogador[0]))
         conn.commit()
+        localizacao_atual = cursor.fetchone()
         
+        # verifica se é necessário spawnar inimigos
+        if localizacao_atual[0] == 15:
+            conferir_caverna(jogador, localizacao_atual)
+
         #id_loc_atual = localizacao_atual[0]
         #cursor.execute("UPDATE Ambiente SET fk_jogador_id = NULL WHERE id_ambiente = %s",
         #               (id_loc_atual,))
@@ -261,7 +311,7 @@ def andar_no_mapa(jogador, localizacao_atual):
 
 def interagir_ambiente(jogador, localizacao_atual):
     if localizacao_atual[1] == 'Caverna':
-        interacao_caverna(jogador)
+        interacao_caverna(jogador, localizacao_atual)
     elif localizacao_atual[1] == 'Celeiro':
         interacao_celeiro(jogador)
     elif localizacao_atual[1] == 'Plantação':
@@ -327,22 +377,26 @@ def menu_jogo(jogador):
         for op in opcoes_menu:
             print(op)
 
-        escolha = int(input("\nO que você deseja fazer? (Digite o número da opção desejada)\n> "))
+        try:
+            escolha = int(input("\nO que você deseja fazer? (Digite o número da opção desejada)\n> "))
 
-        if escolha == 1:
-            andar_no_mapa(jogador, localizacao_atual)
-            avancar_tempo(jogador, 180)
-        elif escolha == 2:
-            exibir_habilidades_jogador(jogador)
-        elif escolha == 3:
-            interagir_ambiente(jogador, localizacao_atual)
-        elif escolha == 4:
-            exibir_inventario_jogador(jogador)
-        elif escolha == 5:
-            abrir_mapa()
-        elif escolha == 9:
-            break
-        jogador = carregar_personagem(id_jogador)
+            if escolha == 1:
+                andar_no_mapa(jogador, localizacao_atual)
+                avancar_tempo(jogador, 61)
+            elif escolha == 2:
+                exibir_habilidades_jogador(jogador)
+            elif escolha == 3:
+                interagir_ambiente(jogador, localizacao_atual)
+            elif escolha == 4:
+                exibir_inventario_jogador(jogador)
+            elif escolha == 9:
+                break
+            jogador = carregar_personagem(id_jogador)
+
+        except ValueError:
+            print("\nOpção inválida. Tente novamente.")
+            input("Pressione qualquer tecla para continuar...")
+            continue
         
     
     
@@ -373,8 +427,8 @@ def menu_inicial():
         escolha = input("Escolha uma opção: ").strip()
 
         if escolha == "1":
-            player_id = criar_personagem()
-            return player_id
+            jogador = criar_personagem()
+            return jogador
         elif escolha == "2":
             personagens = listar_personagens()
             if personagens:
@@ -391,7 +445,6 @@ def menu_inicial():
         else:
             print("Opção inválida. Tente novamente.")
 
-
 if __name__ == "__main__":
     print("Inicializando o banco de dados...")
     iniciar_musica()
@@ -399,6 +452,7 @@ if __name__ == "__main__":
 
     jogador = menu_inicial()
     if jogador:
-        print_animado(f"\nVocê está pronto para começar, {jogador[1]}!")  # Agora jogador é uma tupla
+        print(f"\nVocê está pronto para começar, {jogador[1]}!")
+        input("\nPressione enter para continuar...")
         clear_terminal()
         menu_jogo(jogador)

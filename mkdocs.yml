@@ -4,19 +4,21 @@ repo_url: https://github.com/SBD1/2024.2-StardewValley
 repo_name: 2024.2-StardewValley
 
 nav:
-  - Equipe: index.md
-  - Apresentações: 
-    - Módulo 1: entrega-01/apresentação_1.md
-    - Módulo 2: entrega-02/apresentação_2.md
+  - Visão Geral: index.md
   - Módulo 1:
     - Diagrama Entidade-Relacionamento: entrega-01/DER.md
     - Dicionário de Dados: entrega-01/DicionáriodeDados.md
     - Modelo Entidade-Relacionamento: entrega-01/MER.md
     - Modelo Relacional: entrega-01/MREL.md
+    - Apresentação: entrega-01/apresentação_1.md
   - Módulo 2:
     - DDL: entrega-02/ddl.md
     - DML: entrega-02/dml.md
     - DQL: entrega-02/dql.md
+    - Apresentação: entrega-02/apresentação_2.md
+  - Módulo 3:
+    - Módulo 3: entrega-03/mudancas-mod3.md
+  - Manual do Jogador: manual.md
 
 extra_css:
   - stylesheets/stardew.css

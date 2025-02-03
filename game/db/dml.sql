@@ -59,16 +59,16 @@ VALUES
 -- Preencher habCombate com os valores correspondentes
 INSERT INTO habCombate (fk_Habilidade_id, vidaBonus, danoBonus, nivel, xpMin, xpMax)
 VALUES
-    (11, 0, 0, 1, 0, 100),
-    (12, 5, 1, 2, 101, 200),
-    (13, 10, 2, 3, 201, 300),
-    (14, 15, 3, 4, 301, 400),
-    (15, 20, 4, 5, 401, 500),
-    (16, 25, 5, 6, 501, 600),
-    (17, 30, 6, 7, 601, 700),
-    (18, 35, 7, 8, 701, 800),
-    (19, 40, 8, 9, 801, 900),
-    (20, 45, 9, 10, 901, 1000);
+    (11,  0, 0,  1,   0,   100),
+    (12,  5, 1,  2, 101,   200),
+    (13,  6, 2,  3, 201,   300),
+    (14,  8, 2,  4, 301,   400),
+    (15, 10, 3,  5, 401,   500),
+    (16, 12, 3,  6, 501,   600),
+    (17, 14, 4,  7, 601,   700),
+    (18, 18, 4,  8, 701,   800),
+    (19, 22, 6,  9, 801,   900),
+    (20, 26, 7, 10, 901, 90000);
 
 -- Preencher habCultivo com os valores correspondentes
 INSERT INTO habCultivo (fk_Habilidade_id, cultivoBonus, reducaoEnergiaCultiva, nivel, xpMin, xpMax)
@@ -94,17 +94,17 @@ VALUES
 
 
 
-INSERT INTO inimigo (id_inimigo, nome, tipo, vidaMax, dano) VALUES
-    (1, 'Morcego da Caverna', 'caverna', 30, 5),
-    (2, 'Aranha das Sombras', 'caverna', 20, 7),
-    (3, 'Golem de Pedras', 'caverna', 50, 10),
-    (4, 'Rato Gigante', 'caverna', 15, 3),
-    (5, 'Fantasma Errante', 'caverna', 10, 8),
-    (6, 'Slime Escuro', 'caverna', 40, 6),
-    (7, 'Escorpião Caverneiro', 'caverna', 25, 4),
-    (8, 'Serpente Rochosa', 'caverna', 35, 9),
-    (9, 'Fungo Venenoso', 'caverna', 5, 2),
-    (10, 'Lagarto Albino', 'caverna', 45, 10);
+INSERT INTO inimigo (id_inimigo, nome, tipo, vidaMax, dano, xp_recompensa) VALUES
+    (1, 'Morcego da Caverna',   'caverna', 20.0,  4, 120),
+    (2, 'Aranha das Sombras',   'caverna', 20.0,  7,   5),
+    (3, 'Golem de Pedras',      'caverna', 50.0, 16,  20),
+    (4, 'Rato Gigante',         'caverna', 15.0,  3,   7),
+    (5, 'Fantasma Errante',     'caverna', 20.0, 10,   8),
+    (6, 'Slime Escuro',         'caverna', 30.0,  6,   3),
+    (7, 'Escorpião Caverneiro', 'caverna', 25.0,  9,   9),
+    (8, 'Serpente Rochosa',     'caverna', 45.0, 12,  13),
+    (9, 'Fungo Venenoso',       'caverna',  5.0,  3,   4),
+    (10, 'Lagarto Albino',      'caverna', 35.0,  7,  10);
 
 INSERT INTO Ambiente(id_ambiente,tipo,nome,descricao,eh_casa,transitar_1,transitar_2,transitar_3,transitar_4,transitar_5,transitar_6)
 VALUES
@@ -178,11 +178,40 @@ VALUES
  FALSE,
  9, NULL, NULL, NULL, NULL, NULL),
 
-(15, 'Caverna','Caverna',
- 'As paredes são cobertas por musgo e pequenas pedras brilham na escuridão. Um lugar ideal para começar a coletar minérios.',
+(15, 'Caverna', 'Caverna',
+ 'As paredes são cobertas por musgo e pequenas pedras brilham na escuridão. Um lugar ideal para começar a coletar minérios',  
  FALSE,
- 4, NULL, NULL, NULL, NULL, NULL);
--- adicionar todos os andares das cavernas
+ 4, 16,   NULL, NULL, NULL, NULL),
+
+(16, 'Caverna', 'Andar 1',
+ 'O ar torna-se mais úmido, com estalactites pendendo do teto e o som distante de gotas de água ecoando. Rochas raras começam a aparecer',
+ FALSE,
+ 15, 17,   NULL, NULL, NULL, NULL),
+
+(17, 'Caverna', 'Andar 2',
+ 'A iluminação natural diminui, revelando cristais luminescentes que iluminam o caminho. Inimigos mais desafiadores espreitam nas sombras.',
+ FALSE,
+ 16, 18,   NULL, NULL, NULL, NULL),
+
+(18, 'Caverna', 'Andar 3',
+ 'ma camada de gelo cobre o chão, e o ar é frio o suficiente para ver sua respiração. Inimigos gelados patrulham este nível.',
+ FALSE,
+ 17, 19,   NULL, NULL, NULL, NULL),
+
+(19, 'Caverna', 'Andar 4',
+ 'Formações rochosas complexas e minerais valiosos são abundantes aqui. O ambiente é silencioso, mas a sensação de ser observado é constante.',
+ FALSE,
+ 18, 20,   NULL, NULL, NULL, NULL),
+
+(20, 'Caverna', 'Andar 5',
+ 'Poças de lava iluminam o ambiente com um brilho avermelhado. O calor é intenso, e criaturas flamejantes guardam os tesouros deste andar.', 
+ FALSE,
+ 19, 21,   NULL, NULL, NULL, NULL),
+
+(21, 'Caverna', 'Andar 6',
+ 'Uma escuridão profunda envolve tudo, quebrada apenas por minerais raros que emitem uma luz própria. Apenas os aventureiros mais corajosos chegam tão longe.',
+ FALSE,
+ 20, NULL, NULL, NULL, NULL, NULL);
 
 INSERT INTO loja (fk_id_ambiente, nome, proprietario)
 VALUES --fk_id_estoque com números aleatórios
@@ -443,8 +472,14 @@ INSERT INTO mineral (fk_id_item, nome, descricao, resistencia, preco) VALUES
 (113, 'Diamante', 'Uma gema preciosa e brilhante.', 60, 1500.00),
 (114, 'Madeira de Lei', 'Um tipo de madeira mais resistente.', 20, 80.00);
 
-INSERT INTO Caverna (fk_id_ambiente, andar, quantidade_mobs, qtd_minerio, fk_id_minerio_item, fk_id_item_recompensa) VALUES
-    (15, 1, 10, 5, 101, 10);
+INSERT INTO Caverna (fk_id_ambiente, andar, qtd_minerio, fk_id_minerio_item, fk_id_item_recompensa) VALUES
+    (15, 0, 0, 101, 10),
+    (16, 1, 5, 102,  2),
+    (17, 2, 5, 103,  3),
+    (18, 3, 5, 104,  4),
+    (19, 4, 3, 105,  5),
+    (20, 5, 5, 106,  6),
+    (21, 6, 3, 107,  7);
 
 INSERT INTO recurso (fk_id_item, nome, descricao, preco) VALUES
 (201, 'Quartzo', 'Um cristal translúcido muito comum.', 250.00),
@@ -528,5 +563,4 @@ INSERT INTO estoque(fk_id_loja,fk_id_item) VALUES
     (11, 1),
     (11, 2),
     (11, 3);
-
 COMMIT;
