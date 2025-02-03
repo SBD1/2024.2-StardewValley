@@ -6,12 +6,19 @@ from src.avancar_tempo import avancar_tempo
 from src.interacoes_mapa.interacao_plantacao import interacao_plantacao
 from src.utils.animacao_escrita import print_animado
 import os
+import pygame
 
 DDL_FILE_PATH = os.path.join(os.path.dirname(_file_), "db/ddl.sql")
 DML_FILE_PATH = os.path.join(os.path.dirname(_file_), "db/dml.sql")
 
 def clear_terminal():
     os.system('cls' if os.name == 'nt' else 'clear')
+
+def iniciar_musica():
+    pygame.mixer.init()
+    pygame.mixer.music.load("src/music-stardew.mp3")  # Altere para o caminho correto
+    pygame.mixer.music.set_volume(0.5)  # Ajusta o volume (0.0 a 1.0)
+    pygame.mixer.music.play(-1)  # "-1" faz a música tocar em loop
 
 def criar_personagem():
     nome = input("Digite o nome do seu personagem: ").strip()
@@ -37,6 +44,7 @@ def criar_personagem():
         )
         conn.commit()
         clear_terminal()
+        iniciar_musica()
         print_animado(f"Personagem '{nome}' criado com sucesso!")
         input("Pressione Enter para continuar...")
         clear_terminal()
