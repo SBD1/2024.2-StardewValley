@@ -57,7 +57,7 @@ CREATE TABLE IF NOT EXISTS Jogador (
     xp_cultivo FLOAT NOT NULL DEFAULT 0.0,       
     xp_combate FLOAT NOT NULL DEFAULT 0.0,       
     dano_ataque FLOAT NOT NULL DEFAULT 10.0,
-    moedas DECIMAL NOT NULL DEFAULT 100.0,       
+    moedas DECIMAL NOT NULL DEFAULT 1000.0,       
     fk_habMineracao_fk_Habilidade_id INT DEFAULT 1, 
     fk_habCombate_fk_Habilidade_id INT DEFAULT 11,   
     fk_habCultivo_fk_Habilidade_id INT DEFAULT 21, 
@@ -226,7 +226,9 @@ CREATE TABLE IF NOT EXISTS Planta (
     nome VARCHAR(100) NOT NULL,
     descricao VARCHAR(100) NOT NULL,
     diaDropar INT NOT NULL,
-    preco DECIMAL(10,2) NOT NULL
+    preco DECIMAL(10,2) NOT NULL,
+    itemDrop INTEGER,
+    FOREIGN KEY (itemDrop) REFERENCES item(id_item)
 );
 
 CREATE TABLE IF NOT EXISTS Instancia_de_Planta (
@@ -421,13 +423,49 @@ BEGIN
 
     CLOSE cursor_inst_animal;
     
-    RETURN NEW; -- 🔹 Em triggers, sempre retorne NEW
+    RETURN NEW; 
 END;
 $$ LANGUAGE plpgsql;
-
 
 CREATE TRIGGER trigger_animal_avancar_dia
 BEFORE UPDATE ON Jogador
 FOR EACH ROW
 WHEN (NEW.tempo = '06:00')
 EXECUTE FUNCTION animal_avancar_dia();
+
+CREATE OR REPLACE FUNCTION planta_avancar_dia()
+RETURNS TRIGGER AS $$
+DECLARE
+    cursor_inst_planta CURSOR FOR 
+    SELECT i.id_instancia_de_planta, i.diaAtual, a.diaDropar
+    FROM Instancia_de_Planta i 
+    JOIN Planta a ON i.fk_id_planta = a.id_planta 
+    WHERE i.fk_id_jogador = NEW.id_jogador; 
+    
+    planta_row RECORD;
+BEGIN
+    OPEN cursor_inst_planta;
+    
+    LOOP
+        FETCH cursor_inst_planta INTO planta_row;
+        EXIT WHEN NOT FOUND; -- 🔹 Evita loop infinito
+
+        UPDATE Instancia_de_Planta
+        SET 
+            diaAtual = diaAtual + 1,
+            prontoColher = (diaAtual + 1 >= planta_row.diaDropar)
+        WHERE id_instancia_de_planta = planta_row.id_instancia_de_planta;
+    
+    END LOOP;
+
+    CLOSE cursor_inst_planta;
+    
+    RETURN NEW; 
+END;
+$$ LANGUAGE plpgsql;
+
+CREATE TRIGGER trigger_planta_avancar_dia
+BEFORE UPDATE ON Jogador
+FOR EACH ROW
+WHEN (NEW.tempo = '06:00')
+EXECUTE FUNCTION planta_avancar_dia();

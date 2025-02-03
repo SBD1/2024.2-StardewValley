@@ -227,6 +227,15 @@ INSERT INTO item (id_item, tipo_item) VALUES
 (28, 'consumivel'),
 (29, 'consumivel'),
 (30, 'consumivel'),
+(31, 'consumivel'),
+(32, 'consumivel'),
+(33, 'consumivel'),
+(34, 'consumivel'),
+(35, 'consumivel'),
+(36, 'consumivel'),
+(37, 'consumivel'),
+(38, 'consumivel'),
+(39, 'consumivel'),
 
 (101, 'mineral'),
 (102, 'mineral'),
@@ -401,8 +410,18 @@ INSERT INTO consumivel (fk_id_item, nome, descricao, efeito_vida, preco) VALUES
 (25, 'Refeição de Mineiro', 'Alimento energético para mineradores.', 45, 45),
 (26, 'Café Expresso Triplo', 'Café mais forte para energia extra.', 30, 30),
 (27, 'Cenoura subterrânea', 'Raiz nutritiva encontrada no subsolo.', 25, 120),
-(28, 'Peixe', 'Fonte rica de proteínas.', 30, 20);
-
+(28, 'Peixe', 'Fonte rica de proteínas.', 30, 20),
+(29, 'Ovo de Pato', 'Fonte rica de proteínas.', 30, 20),
+(30, 'Alface', 'Uma folha verde e crocante, ideal para saladas.', 30, 20),
+(31, 'Cenoura', 'Um vegetal alaranjado e nutritivo.', 30, 20),
+(32, 'Cebola', 'Um bulbo picante e saboroso.', 30, 20),
+(33, 'Pimentão', 'Uma fruta colorida e suculenta.', 30, 20),
+(34, 'Berinjela', 'Um vegetal roxo e saboroso.', 30, 20),
+(35, 'Morango', 'Uma fruta doce e suculenta.', 30, 20),
+(36, 'Girassol', 'Uma flor brilhante e alegre.', 30, 20),
+(37, 'Trigo', 'Um grão essencial para diversas receitas.', 30, 20),
+(38, 'Rabanete', 'Um vegetal picante e crocante.', 30, 20),
+(39, 'Uva', 'Frutas roxas deliciosas.', 30, 20);
 
 INSERT INTO mineral (fk_id_item, nome, descricao, resistencia, preco) VALUES
 (101, 'Pedra', 'Um material de construção básico.', 10, 20.00),
@@ -464,25 +483,25 @@ VALUES
 (15, 112, 'Precisa-se de Ajuda: Madeira', 'Colete 100 unidades de Madeira para Robin.', 105, 400), 
 (16, 113, 'Precisa-se de Ajuda: Diamante', 'Colete 10 Diamantes para Clint.', 135, 401); 
 
-INSERT INTO Planta (nome, descricao, diaDropar, preco)
+INSERT INTO Planta (nome, descricao, diaDropar, preco, itemDrop)
 VALUES
-('Melão', 'Uma fruta doce e suculenta típica do verão.', 10, 300),
-('Alface', 'Uma folha verde e crocante, ideal para saladas.', 5, 100),
-('Cenoura', 'Um vegetal alaranjado e nutritivo, cresce bem na primavera.', 12, 200),
-('Cebola', 'Um bulbo picante e saboroso, colhido no verão.', 8, 150),
-('Pimentão', 'Uma fruta colorida e suculenta, cresce bem no verão.', 10, 250),
-('Berinjela', 'Um vegetal roxo e saboroso, colhido no outono.', 15, 300),
-('Tomate', 'Fruta vermelha suculenta, cresce bem no verão.', 10, 200),
-('Batata', 'Um tubérculo robusto e nutritivo, colhido na primavera.', 5, 100),
-('Morango', 'Uma fruta doce da primavera, muito lucrativa.', 13, 350),
-('Girassol', 'Uma flor brilhante que também pode ser usada para produzir óleo.', 12, 300),
-('Trigo', 'Uma cultura essencial para fabricação de farinha e cerveja.', 18, 400),
-('Rabanete', 'Um vegetal picante e crocante que cresce no verão.', 7, 150),
-('Uva', 'Frutas roxas deliciosas, crescem em vinhedos no outono.', 16, 450);
+('Melão', 'Uma fruta doce e suculenta típica do verão.', 10, 300, 6),
+('Alface', 'Uma folha verde e crocante, ideal para saladas.', 5, 100,30),
+('Cenoura', 'Um vegetal alaranjado e nutritivo, cresce bem na primavera.', 12, 200,31),
+('Cebola', 'Um bulbo picante e saboroso, colhido no verão.', 8, 150,32),
+('Pimentão', 'Uma fruta colorida e suculenta, cresce bem no verão.', 10, 250,33),
+('Berinjela', 'Um vegetal roxo e saboroso, colhido no outono.', 15, 300,34),
+('Tomate', 'Fruta vermelha suculenta, cresce bem no verão.', 10, 200,5),
+('Batata', 'Um tubérculo robusto e nutritivo, colhido na primavera.', 5, 100,2),
+('Morango', 'Uma fruta doce da primavera, muito lucrativa.', 13, 350,35),
+('Girassol', 'Uma flor brilhante que também pode ser usada para produzir óleo.', 12, 300,36),
+('Trigo', 'Uma cultura essencial para fabricação de farinha e cerveja.', 18, 400,37),
+('Rabanete', 'Um vegetal picante e crocante que cresce no verão.', 7, 150,38),
+('Uva', 'Frutas roxas deliciosas, crescem em vinhedos no outono.', 16, 450,39);
 INSERT INTO Animal (id_animal,tipo_animal, diasTotalDropar, itemDrop, preco)
 VALUES
     (1, 'Vaca', 1, 14, 2500.00),
-    (2, 'Galinha', 1, 30, 150.00),
+    (2, 'Galinha', 1, 13, 150.00),
     (3, 'Cachorro', 0, NULL, 30.00),
     (4, 'Gato', 0, NULL, 30.00),
     (5, 'Cavalo', 0, NULL, 1000.00),
