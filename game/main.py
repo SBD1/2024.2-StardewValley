@@ -1,6 +1,7 @@
 from setup.database import get_connection
 from src.interacoes_mapa.interacao_caverna import interacao_caverna
 from src.interacoes_mapa.interacao_celeiro import interacao_celeiro
+from src.interacoes_mapa.interacao_plantacao import interacao_plantacao
 from src.avancar_tempo import avancar_tempo
 from src.interacoes_mapa.interacao_plantacao import interacao_plantacao
 import os
