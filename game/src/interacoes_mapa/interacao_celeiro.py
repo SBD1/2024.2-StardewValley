@@ -190,16 +190,13 @@ def excluir_animal_do_celeiro(jogador):
         if escolha == 0:
             print("Venda cancelada.")
             return
-        
-        # Verifica se o animal escolhido existe
+
         animal_selecionado = next((animal for animal in animais if animal[0] == escolha), None)
         if not animal_selecionado:
             print("Animal inválido. Tente novamente.")
             return
-        
-        # Obter o preço do animal
-        cursor.execute("SELECT preco FROM Animal WHERE id_animal = %s", (escolha,))
-        preco_animal = cursor.fetchone()
+
+        preco_animal = animal[2]
         
         if not preco_animal:
             print("Erro ao obter o preço do animal.")
@@ -210,10 +207,10 @@ def excluir_animal_do_celeiro(jogador):
         conn.commit()
         
         # Atualiza as moedas do jogador
-        cursor.execute("UPDATE Jogador SET moedas = moedas + %s WHERE id_jogador = %s", (preco_animal[0], jogador[0]))
+        cursor.execute("UPDATE Jogador SET moedas = moedas + %s WHERE id_jogador = %s", (preco_animal, jogador[0]))
         conn.commit()
         
-        print(f"Animal {animal_selecionado[1]} vendido com sucesso! Você recebeu {preco_animal[0]} moedas.")
+        print(f"Animal {animal_selecionado[1]} vendido com sucesso! Você recebeu {preco_animal} moedas.")
     except Exception as e:
         print(f"Erro ao vender animal: {e}")
     finally:
@@ -221,6 +218,7 @@ def excluir_animal_do_celeiro(jogador):
             cursor.close()
         if conn:
             conn.close()
+
 def coletar_item_do_animal(jogador):
     clear_terminal()
     conn = None
