@@ -51,16 +51,16 @@ VALUES
 -- Preencher habCombate com os valores correspondentes
 INSERT INTO habCombate (fk_Habilidade_id, vidaBonus, danoBonus, nivel, xpMin, xpMax)
 VALUES
-    (11,  0, 0,  1,   0,  100),
-    (12,  5, 1,  2, 101,  200),
-    (13, 10, 2,  3, 201,  300),
-    (14, 15, 3,  4, 301,  400),
-    (15, 20, 4,  5, 401,  500),
-    (16, 25, 5,  6, 501,  600),
-    (17, 30, 6,  7, 601,  700),
-    (18, 35, 7,  8, 701,  800),
-    (19, 40, 8,  9, 801,  900),
-    (20, 45, 9, 10, 901, 1000);
+    (11,  0, 0,  1,   0,   100),
+    (12,  5, 1,  2, 101,   200),
+    (13,  6, 2,  3, 201,   300),
+    (14,  8, 2,  4, 301,   400),
+    (15, 10, 3,  5, 401,   500),
+    (16, 12, 3,  6, 501,   600),
+    (17, 14, 4,  7, 601,   700),
+    (18, 18, 4,  8, 701,   800),
+    (19, 22, 6,  9, 801,   900),
+    (20, 26, 7, 10, 901, 90000);
 
 -- Preencher habCultivo com os valores correspondentes
 INSERT INTO habCultivo (fk_Habilidade_id, cultivoBonus, reducaoEnergiaCultiva, nivel, xpMin, xpMax)
@@ -514,6 +514,7 @@ VALUES
 ('Trigo', 'Uma cultura essencial para fabricação de farinha e cerveja.', 18, 400),
 ('Rabanete', 'Um vegetal picante e crocante que cresce no verão.', 7, 150),
 ('Uva', 'Frutas roxas deliciosas, crescem em vinhedos no outono.', 16, 450);
+
 INSERT INTO Animal (id_animal,tipo_animal, diasTotalDropar, itemDrop, preco)
 VALUES
     (1, 'Vaca', 1, 14, 2500.00),
@@ -525,13 +526,18 @@ VALUES
     (7, 'Porco', 3, 215, 3000.00),
     (8, 'Coelho', 2, 217, 100.00),
     (9, 'Pato', 2, 29, 150.00);
+
 INSERT INTO instancia_de_item(fk_id_jogador, fk_id_item, fk_id_estoque, fk_id_inventario)
 VALUES
-    (0,101,NULL,0),
-    (0,101,NULL,0),
-    (0,101,NULL,0),
-    (0,400,NULL,0),
-    (0,202,NULL,0),
-    (0,22,NULL,0),
-    (0,301,NULL,0),
-    (0,102,NULL,0);
+    (0, 101, NULL, 0),
+    (0, 101, NULL, 0),
+    (0, 101, NULL, 0),
+    (0, 400, NULL, 0),
+    (0, 401, NULL, 0),
+    (0, 402, NULL, 0),
+    (0, 202, NULL, 0),
+    (0,  22, NULL, 0),
+    (0,  22, NULL, 0),
+    (0,  22, NULL, 0),
+    (0, 301, NULL, 0),
+    (0, 102, NULL, 0);

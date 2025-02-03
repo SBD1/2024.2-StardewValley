@@ -21,6 +21,31 @@ def ataque_inimigo(ambiente, tipo_inimigo):
         return dano
     return  0
 
+def contar_consumiveis(jogador_dict):
+    try:
+        connection = get_connection()
+        cursor = connection.cursor()
+
+        cursor.execute(""" 
+            SELECT c.fk_id_item, c.nome, c.descricao, c.efeito_vida, c.preco, ii.fk_id_jogador, COUNT(*)
+            FROM Consumivel c
+            JOIN Instancia_de_item ii ON c.fk_id_item = ii.fk_id_item
+            WHERE ii.fk_id_jogador = %s
+            GROUP BY c.fk_id_item, c.nome, c.descricao, c.efeito_vida, c.preco, ii.fk_id_jogador;""",
+        (jogador_dict['id_jogador'],))
+        pocoes = cursor.fetchall()
+
+        quantidade_pocoes = sum([pocao[6] for pocao in pocoes])
+
+        return quantidade_pocoes
+    except Exception as error:
+        print(f"\nOcorreu um erro ao contar os consumíveis: {error}")
+        input("Pressione enter para continuar...")
+    finally:
+        if connection:
+            cursor.close()
+            connection.close()
+
 def exibir_status_combate(jogador_dict, inimigo_dict):
     clear_terminal()
 
@@ -28,10 +53,12 @@ def exibir_status_combate(jogador_dict, inimigo_dict):
     vida_jogador = max(jogador_dict['vidaAtual'], 0)
     vida_inimigo = max(inimigo_dict['vida'], 0)
 
+    quantidade_pocoes = contar_consumiveis(jogador_dict)
+
     print("⚔️  " * 7, " COMBATE ", "⚔️  " * 7)
     print(f"\nStatus do jogador {jogador_dict['nome']}")
     barra_status_vida(vida_jogador, jogador_dict['vidaMax'])  
-    print(f"\nPoções de vida: x (implementar consulta) ")
+    print(f"\nItens consumíveis: {quantidade_pocoes} ")
     print(f"\nStatus do {inimigo_dict['tipo'][1]}")
     barra_status_vida(vida_inimigo, inimigo_dict['tipo'][3])  
 
@@ -122,6 +149,9 @@ def commit_vidaAtual(jogador_dict, inimigo_dict=None):
     try:
         connection = get_connection()
         cursor = connection.cursor()
+        
+        if jogador_dict['vidaAtual'] > jogador_dict['vidaMax']:
+            jogador_dict['vidaAtual'] = jogador_dict['vidaMax']
 
         cursor.execute("UPDATE Jogador SET vidaAtual = %s WHERE id_jogador = %s", (jogador_dict['vidaAtual'], jogador_dict['id_jogador']))
         connection.commit()
@@ -176,6 +206,73 @@ def resultado_combate(inimigo_dict, jogador_dict):
             cursor.close()
             connection.close()
 
+def usar_consumivel(jogador_dict):
+    try:
+        connection = get_connection()
+        cursor = connection.cursor()
+
+        cursor.execute(""" 
+            SELECT c.fk_id_item, c.nome, c.descricao, c.efeito_vida, c.preco, ii.fk_id_jogador, COUNT(*)
+            FROM Consumivel c
+            JOIN Instancia_de_item ii ON c.fk_id_item = ii.fk_id_item
+            WHERE ii.fk_id_jogador = %s
+            GROUP BY c.fk_id_item, c.nome, c.descricao, c.efeito_vida, c.preco, ii.fk_id_jogador;""",
+        (jogador_dict['id_jogador'],))
+        pocoes = cursor.fetchall()
+
+        quantidade_pocoes = sum([pocao[6] for pocao in pocoes])
+
+
+        while True and quantidade_pocoes > 0:
+            # listando poções no inventário do jogador
+            #(fk_id_item, nome, descricao, efeito_vida, preco, fk_id_jogador, quantidade)
+            clear_terminal()
+            for item in pocoes:
+                print(f"-" * 60)
+                print(f"Consumível: {item[1]}")
+                print(f"Descrição: {item[2]}")
+                print(f"Efeito de vida: {'+' + str(item[3]) if item[3] >= 0 else item[3]}")
+                print(f"Preço Unitário: {item[4]}")
+                print(f"Quantidade: {item[6]}\n")
+            
+            nomes_pocoes = [pocao[1].lower() for pocao in pocoes]
+
+            nome_pocao = (input("\nQual item deseja usar (digite o nome do consumível ou digite 0 para cancelar)?\n > "))
+            if nome_pocao == "0":
+                return jogador_dict
+            elif nome_pocao.lower() in nomes_pocoes:
+                for item in pocoes:
+                    if item[1].lower() == nome_pocao.lower():
+                        pocao = item
+                        cursor.execute("""
+                            DELETE FROM Instancia_de_Item 
+                            WHERE ctid = (
+                                SELECT ctid FROM Instancia_de_Item 
+                                WHERE fk_id_item = %s AND fk_id_jogador = %s 
+                                LIMIT 1
+                            );""", 
+                        (pocao[0], jogador_dict['id_jogador']))
+                        connection.commit()
+                        jogador_dict['vidaAtual'] = min(pocao[3] + jogador_dict['vidaAtual'], jogador_dict['vidaMax']) 
+                        commit_vidaAtual(jogador_dict)
+                        return jogador_dict
+            else:
+                print("\nNome inválido. Tente novamente.")
+                input("Pressione enter para continuar...")
+                continue
+            break
+        print("\nVocê não possui consumíveis para usar.")
+        input("Pressione enter para continuar...")
+        return jogador_dict
+
+    except Exception as error:
+        print(f"\nOcorreu um erro ao listar as poções: {error}")
+        input("Pressione enter para continuar...")
+    finally:
+        if connection:
+            cursor.close()
+            connection.close()
+
 def iniciar_combate(jogador_dict, inimigos_dict, ambiente):
     try:
         connection = get_connection()
@@ -222,8 +319,7 @@ def iniciar_combate(jogador_dict, inimigos_dict, ambiente):
                 if opcao == 2:
                     #TODO: Usar uma poção de vida do inventário
                     # só para motivos de teste
-                    jogador_dict['vidaAtual'] = jogador_dict['vidaMax']
-                    inimigo_dict["vida"] = inimigo_dict["tipo"][3] 
+                    jogador_dict = usar_consumivel(jogador_dict)
                 if opcao == 3:
                     commit_vidaAtual(jogador_dict, inimigo_dict)
 
@@ -248,6 +344,16 @@ def atualizar_jogador(jogador):
 
         cursor.execute("SELECT * FROM jogador WHERE id_jogador = %s", (jogador[0],))
         jogador = cursor.fetchone()
+        
+        cursor.execute("""
+            SELECT vw.*, a.descricao, a.dano_arma
+            FROM vw_inventario_jogador vw
+            JOIN Arma a ON a.fk_id_item = vw.fk_id_item
+            WHERE tipo_item = 'arma' AND id_jogador = 0
+            ORDER BY dano_arma;
+        """, (jogador[0],))
+        arma = cursor.fetchone()
+
         jogador_dict = {
             'id_jogador'                        : jogador[0],
             'nome'                              : jogador[1],                  
@@ -264,6 +370,7 @@ def atualizar_jogador(jogador):
             'fk_habMineracao_fk_Habilidade_id'  : jogador[12], 
             'fk_habCombate_fk_Habilidade_id'    : jogador[13],   
             'fk_habCultivo_fk_Habilidade_id'    : jogador[14], 
+            'arma'                              : arma
         }
         return jogador_dict
 

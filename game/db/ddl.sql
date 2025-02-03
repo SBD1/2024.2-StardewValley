@@ -57,7 +57,7 @@ CREATE TABLE IF NOT EXISTS Jogador (
     xp_mineracao FLOAT NOT NULL DEFAULT 0.0,     
     xp_cultivo FLOAT NOT NULL DEFAULT 0.0,       
     xp_combate FLOAT NOT NULL DEFAULT 0.0,       
-    dano_ataque FLOAT NOT NULL DEFAULT 10.0,
+    dano_ataque FLOAT NOT NULL DEFAULT 3.0,
     moedas DECIMAL NOT NULL DEFAULT 100.0,       
     fk_habMineracao_fk_Habilidade_id INT DEFAULT 1, 
     fk_habCombate_fk_Habilidade_id INT DEFAULT 11,   
