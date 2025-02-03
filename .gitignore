@@ -1,9 +1,11 @@
-# Arquivos compilados do Python
-*/__pycache__/
+# Ignorar todos os diretórios __pycache__ em qualquer nível
+__pycache__/
+
+# Ignorar arquivos compilados do Python
 *.py[cod]
 *.so
 *.pyo
 *.pyd
 
-# Arquivos de ambiente virtual
+# Ignorar ambientes virtuais
 venv/

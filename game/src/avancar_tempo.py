@@ -18,7 +18,7 @@ def avancar_tempo(jogador, minutos):
         
         for notice in conn.notices:
             print("💤", notice.strip())
-            time.sleep(7)
+            input("\nDigite 1 para retornar ao menu\n> ")
         
     except Exception as e:
         print(f"Erro ao passar o tempo: {e}")

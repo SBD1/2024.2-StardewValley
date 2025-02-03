@@ -3,6 +3,7 @@ from src.interacoes_mapa.interacao_caverna import interacao_caverna
 from src.interacoes_mapa.interacao_celeiro import interacao_celeiro
 from src.interacoes_mapa.interacao_plantacao import interacao_plantacao
 from src.avancar_tempo import avancar_tempo
+from src.interacoes_mapa.interacao_plantacao import interacao_plantacao
 import os
 
 DDL_FILE_PATH = os.path.join(os.path.dirname(__file__), "db/ddl.sql")
@@ -108,6 +109,32 @@ def exibir_habilidades_jogador(jogador):
         print(f"Erro ao carregar habilidades: {e}")
 
 
+def exibir_inventario_jogador(jogador):
+    clear_terminal()
+    try:
+        conn = get_connection()
+        cursor = conn.cursor()
+        cursor.execute("SELECT nome_item, tipo_item ,quantidade, preco_item FROM vw_inventario_jogador WHERE id_jogador = %s ", (jogador[0],))
+        
+        inventario = cursor.fetchall()
+
+        if not inventario:
+            print("\n📦 O inventário está vazio!\n")
+        else:
+            print("\n🎒 Inventário do Jogador 🎒\n")
+            print(f"{'Nome do Item':<20} {'Tipo':<15} {'Qtd':<5} {'Preço':<8}")
+            print("=" * 50)
+
+            for item in inventario:
+                nome, tipo, quantidade, preco = item
+                print(f"{nome:<20} {tipo:<15} {quantidade:<5} {preco:<8.2f}")
+
+        input("\nDigite 1 para retornar ao menu\n> ")
+        
+    except Exception as e:
+        print(f"❌ Erro ao carregar inventário: {e}")
+
+
 def obter_localizacao_jogador(jogador):
     try:
         conn = get_connection()
@@ -198,7 +225,7 @@ def interagir_ambiente(jogador, localizacao_atual):
 
 def menu_jogo(jogador):
     while True:
-        clear_terminal() 
+        #clear_terminal() 
         id_jogador = jogador[0]
         nome_jogador = jogador[1]
         dia_atual = jogador[2]
@@ -212,8 +239,9 @@ def menu_jogo(jogador):
         dano_ataque = jogador[10]
         moeda = jogador[11]
         print(("\t"*10)+"\n##### Stardew Valley 🌾 #####\n")
-        print(f"Dia: {dia_atual} | Tempo: {tempo_atual}")
-        print(f"Fazendeiro(a): {nome_jogador} | Moedas 💰: {moeda}\n")
+        print(f"📅 Dia: {dia_atual} | 🕠 Tempo: {tempo_atual}")
+        print(f"Fazendeiro(a): {nome_jogador}\n")
+        print(f"Moedas 💰: {moeda}")
         print(f"Vida 🖤: {vida_atual}/{vida_maxima}")
         print(f"Dano de Ataque ⚔️: {dano_ataque}")
         print(f"XP Mineração ⛏️ : {xp_mineracao}")
@@ -227,6 +255,7 @@ def menu_jogo(jogador):
             "1 - Andar no mapa",
             "2 - Mostrar Habilidades",
             "3 - Interagir com o ambiente",
+            "4 - Abrir inventário",
             "9 - Sair do jogo"
         ]
         
@@ -237,11 +266,13 @@ def menu_jogo(jogador):
 
         if escolha == 1:
             andar_no_mapa(jogador, localizacao_atual)
-            avancar_tempo(jogador, 61)
+            avancar_tempo(jogador, 180)
         elif escolha == 2:
             exibir_habilidades_jogador(jogador)
         elif escolha == 3:
             interagir_ambiente(jogador, localizacao_atual)
+        elif escolha == 4:
+            exibir_inventario_jogador(jogador)
         elif escolha == 9:
             break
         jogador = carregar_personagem(id_jogador)
