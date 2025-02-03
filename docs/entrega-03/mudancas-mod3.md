@@ -24,3 +24,5 @@ Anteriormente, o **inventário** estava ligado à **instância de inimigo**. No 
 Inicialmente, o **mapa** seria criado individualmente para cada jogador. Porém, seguindo a orientação do professor, optamos por manter um único mapa onde todos os jogadores interagem, separando apenas as instâncias de cada um.
 
 ---
+
+![DER Atualizado](../img/DER_v4.png)
