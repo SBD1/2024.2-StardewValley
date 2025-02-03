@@ -76,9 +76,9 @@ VALUES
     (29, 1, 16, 9, 801, 900),
     (30, 2, 18, 10, 901, 1000);
 
-INSERT INTO Jogador (id_jogador, nome, fk_habMineracao_fk_Habilidade_id, fk_habCombate_fk_Habilidade_id, fk_habCultivo_fk_Habilidade_id)
+INSERT INTO Jogador (id_jogador, nome, fk_habMineracao_fk_Habilidade_id, fk_habCombate_fk_Habilidade_id, fk_habCultivo_fk_Habilidade_id,moedas)
 VALUES
-    (0, 'teste', 1, 11, 21);
+    (0, 'teste', 1, 11, 21,100000);
 
 INSERT INTO inventario(id_inventario, fk_id_jogador)
 VALUES
@@ -207,10 +207,10 @@ VALUES
 
 INSERT INTO loja (fk_id_ambiente, nome, proprietario)
 VALUES --fk_id_estoque com números aleatórios
-(1, 'Armazém do Pierre', 'Pierre'),
-(2, 'Mercado Joja', 'Gerente Joja'),
-(3, 'Ferreiro', 'Clint'), 
-(5, 'Comércio do Deserto', 'Sandy');
+(11, 'Armazém do Pierre', 'Pierre'),
+(14, 'Mercado Joja', 'Gerente Joja'),
+(13, 'Ferreiro', 'Clint'), 
+(7, 'Comércio do Deserto', 'Sandy');
 
 INSERT INTO Celeiro(fk_id_ambiente, qtd_max_animais)
 VALUES
@@ -219,12 +219,8 @@ VALUES
 INSERT INTO Plantacao(fk_id_ambiente, qtd_plantas_max)
 VALUES
 (2, 15);
-INSERT INTO estoque(id_estoque, fk_id_loja) VALUES
-    (1, 1),
-    (2, 2),
-    (3, 3),
-    (5, 5);
 
+    
 INSERT INTO item (id_item, tipo_item) VALUES
 (1, 'consumivel'),
 (2, 'consumivel'),
@@ -544,18 +540,18 @@ VALUES
     (7, 'Porco', 3, 215, 3000.00),
     (8, 'Coelho', 2, 217, 100.00),
     (9, 'Pato', 2, 29, 150.00);
-
-INSERT INTO instancia_de_item(fk_id_jogador, fk_id_item, fk_id_estoque, fk_id_inventario)
+INSERT INTO instancia_de_item(fk_id_jogador, fk_id_item, fk_id_inventario)
 VALUES
-    (0, 101, NULL, 0),
-    (0, 101, NULL, 0),
-    (0, 101, NULL, 0),
-    (0, 400, NULL, 0),
-    (0, 401, NULL, 0),
-    (0, 402, NULL, 0),
-    (0, 202, NULL, 0),
-    (0,  22, NULL, 0),
-    (0,  22, NULL, 0),
-    (0,  22, NULL, 0),
-    (0, 301, NULL, 0),
-    (0, 102, NULL, 0);
+    (0,101,0),
+    (0,101,0),
+    (0,101,0),
+    (0,400,0),
+    (0,202,0),
+    (0,22,0),
+    (0,301,0),
+    (0,102,0);
+
+INSERT INTO estoque(fk_id_loja,fk_id_item) VALUES
+    (11, 1),
+    (11, 2),
+    (11, 3);

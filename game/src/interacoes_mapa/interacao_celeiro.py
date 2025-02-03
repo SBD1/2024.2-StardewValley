@@ -83,7 +83,12 @@ def ver_animais_no_celeiro(jogador):
         cursor = connection.cursor()
         
         # Obter os animais no celeiro do jogador
-        cursor.execute("SELECT id_instancia_de_animal, nome_animal, prontoDropa FROM Instancia_de_Animal WHERE fk_Jogador_id = %s", (jogador[0],))  # Corrigido para usar jogador[0]
+        cursor.execute("""
+            SELECT ia.id_instancia_de_animal, ia.nome_animal, a.diasTotalDropar, ia.prontoDropa 
+            FROM Instancia_de_Animal ia
+            JOIN Animal a ON ia.fk_Animal_id = a.id_animal
+            WHERE ia.fk_Jogador_id = %s
+        """, (jogador[0],))  # Corrigido para usar jogador[0]
         animais = cursor.fetchall()
         
         if not animais:
@@ -94,9 +99,13 @@ def ver_animais_no_celeiro(jogador):
         
         print("\nAnimais no celeiro:")
         for animal in animais:
-            id_instancia_de_animal, nome_animal, pronto_dropar = animal
-            estado = "pronto para dropar" if pronto_dropar else "não está pronto para dropar"
-            print(f"{nome_animal} - {estado}")
+            id_instancia_de_animal, nome_animal, dias_total_dropar, pronto_dropar = animal
+            
+            if dias_total_dropar == 0:
+                print(f"{nome_animal} - O animal está muito feliz hoje!")  # Mensagem para animais que não droparam
+            else:
+                estado = "pronto para dropar" if pronto_dropar else "não está pronto para dropar"
+                print(f"{nome_animal} - {estado}")
 
         print("\nO que você gostaria de fazer?")
         print("1 - Coletar item de animal")
@@ -212,7 +221,6 @@ def excluir_animal_do_celeiro(jogador):
             cursor.close()
         if conn:
             conn.close()
-
 def coletar_item_do_animal(jogador):
     clear_terminal()
     conn = None
@@ -221,16 +229,17 @@ def coletar_item_do_animal(jogador):
         conn = get_connection()
         cursor = conn.cursor()
         
-        # Obter os animais no celeiro
+        # Obter os animais no celeiro que estão prontos para dropar
         cursor.execute("""
-            SELECT id_instancia_de_animal, nome_animal, prontoDropa, fk_animal_id 
-            FROM Instancia_de_Animal 
-            WHERE fk_Jogador_id = %s
+            SELECT ia.id_instancia_de_animal, ia.nome_animal, ia.prontoDropa, a.diasTotalDropar, ia.fk_animal_id 
+            FROM Instancia_de_Animal ia
+            JOIN Animal a ON ia.fk_animal_id = a.id_animal
+            WHERE ia.fk_Jogador_id = %s AND a.diasTotalDropar > 0
         """, (jogador[0],))
         animais = cursor.fetchall()
         
         if not animais:
-            print("Não há animais no celeiro.")
+            print("Não há animais prontos para dropar no celeiro.")
             input("Pressione Enter para continuar...")
             return
         
@@ -245,7 +254,7 @@ def coletar_item_do_animal(jogador):
         
         id_inventario = inventario[0]
         
-        print("\nAnimais no celeiro:")
+        print("\nAnimais prontos para dropar:")
         for animal in animais:
             estado = 'pronto para dropar' if animal[2] else 'não está pronto para dropar'
             print(f"{animal[0]} - {animal[1]} - {estado}")
@@ -273,7 +282,7 @@ def coletar_item_do_animal(jogador):
             SELECT itemDrop 
             FROM Animal 
             WHERE id_animal = %s
-        """, (animal_selecionado[3],))  # Use o índice 3 para fk_animal_id
+        """, (animal_selecionado[4],))  # Use o índice 4 para fk_animal_id
         itemDrop = cursor.fetchone()
         
         if not itemDrop or itemDrop[0] is None:
@@ -287,13 +296,12 @@ def coletar_item_do_animal(jogador):
             VALUES (%s, %s, %s)
         """, (jogador[0], itemDrop[0], id_inventario))
 
-        
         # Atualiza o estado do animal para não pronto para dropar
         cursor.execute("UPDATE Instancia_de_Animal SET prontoDropa = FALSE, diaAtual = 0 WHERE id_instancia_de_animal = %s", (escolha,))
         conn.commit()
         clear_terminal()
-        print(f"Você coletou um item do animal {animal_selecionado[1]} !")
-        print(f"O item foi adicionado ao seu inventário !\n")
+        print(f"Você coletou um item do animal {animal_selecionado[1]}!")
+        print(f"O item foi adicionado ao seu inventário!\n")
         input("Pressione Enter para continuar...")
         
     except Exception as e:

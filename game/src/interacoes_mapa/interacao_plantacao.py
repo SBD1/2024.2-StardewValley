@@ -73,6 +73,7 @@ def interacao_plantacao(jogador):
                 cursor.close()
             if connection:
                 connection.close()
+        carregar_personagem(jogador[0])
 
 def comprar_planta(jogador):
     clear_terminal()
@@ -351,9 +352,9 @@ def colher_planta(jogador):
         
         # Adiciona o item ao inventário do jogador
         cursor.execute("""
-            INSERT INTO instancia_de_item (fk_id_jogador, fk_id_item, fk_id_inventario, nome) 
-            VALUES (%s, %s, %s, %s)
-        """, (jogador[0], planta_selecionada[4], id_inventario, planta_selecionada[1]))
+            INSERT INTO instancia_de_item (fk_id_jogador, fk_id_item, fk_id_inventario) 
+            VALUES (%s, %s, %s)
+        """, (jogador[0], planta_selecionada[4], id_inventario))
 
         # Atualiza o estado da planta para não pronta para colher e reseta o diaAtual
         try:

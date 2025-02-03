@@ -3,14 +3,23 @@ from src.interacoes_mapa.interacao_caverna import interacao_caverna
 from src.interacoes_mapa.interacao_celeiro import interacao_celeiro
 from src.interacoes_mapa.interacao_plantacao import interacao_plantacao
 from src.avancar_tempo import avancar_tempo
-from src.interacoes_mapa.interacao_plantacao import interacao_plantacao
+from src.interacoes_mapa.interacao_floresta import interacao_floresta
+from src.utils.animacao_escrita import print_animado
+from src.interacoes_mapa.interacao_loja import interacao_loja
 import os
+import pygame
 
 DDL_FILE_PATH = os.path.join(os.path.dirname(__file__), "db/ddl.sql")
 DML_FILE_PATH = os.path.join(os.path.dirname(__file__), "db/dml.sql")
 
 def clear_terminal():
     os.system('cls' if os.name == 'nt' else 'clear')
+
+def iniciar_musica():
+    pygame.mixer.init()
+    pygame.mixer.music.load(os.path.join(os.path.dirname(__file__), "src/music-stardew.mp3"))
+    pygame.mixer.music.set_volume(0.3)  # Ajusta o volume (0.0 a 1.0)
+    pygame.mixer.music.play(-1)  # "-1" faz a música tocar em loop
 
 def criar_personagem():
     nome = input("Digite o nome do seu personagem: ").strip()
@@ -35,11 +44,32 @@ def criar_personagem():
             (jogador_id,)
         )
         conn.commit()
+        clear_terminal()
+        print_animado(f"Personagem '{nome}' criado com sucesso!")
+        input("Pressione Enter para continuar...")
+        clear_terminal()
+        print_animado(f"Olá, {nome}! Bem-vindo ao Stardew Valley! 🌾\n")
+        input("Pressione Enter para continuar...")
 
-        print(f"Personagem '{nome}' criado com sucesso!")
+        ## História do jogo
+        clear_terminal()
+        print_animado("Após anos vivendo a rotina exaustiva da cidade grande, onde os dias se confundiam em uma monotonia cinzenta, você finalmente decidiu seguir o chamado de seu destino.\n")
+        input("Pressione Enter para continuar...")
+        print_animado("Um antigo envelope, deixado por seu avô em seu leito de morte, continha palavras que ecoavam em sua mente até hoje:")
+        input("Pressione Enter para continuar...")
+        print_animado("\"Querido(a) neto(a),\n Um dia você sentirá que a vida moderna já não lhe traz satisfação. Quando esse momento chegar, pegue esta carta... Ela guarda a chave para um novo começo.\"\n")
+
+        clear_terminal()
+        print_animado("Com as mãos trêmulas, você abriu o envelope e descobriu a herança deixada por ele: uma pequena fazenda em um vale distante, um lugar onde a terra é fértil, o ar é puro e a vida segue o ritmo das estações. Era sua chance de recomeçar, de deixar para trás o peso da cidade e encontrar um propósito na simplicidade do campo.\n")
+        input("Pressione Enter para continuar...")
+
+        clear_terminal()
+        print_animado("E assim, com uma mochila leve, mas um coração cheio de esperança, você embarcou na jornada até Stardew Valley. \n Agora, de pé diante da porteira desgastada, observa a paisagem à sua frente: campos selvagens tomados pelo tempo, uma casa modesta mas acolhedora, e ao fundo, o som das árvores balançando ao vento. \n Sua nova vida começa agora.\n")
+        input("Pressione Enter para continuar...")
+
         return carregar_personagem(jogador_id)  # Retorna o jogador completo
     except Exception as e:
-        print(f"Erro ao criar personagem: {e}")
+        print_animado(f"Erro ao criar personagem: {e}")
     finally:
         cursor.close()
         conn.close()
@@ -53,12 +83,12 @@ def listar_personagens():
         if not personagens:
             print("Nenhum personagem encontrado. Você precisa criar um novo.")
             return None
-        print("\nPersonagens disponíveis:")
+        print_animado("\nPersonagens disponíveis:")
         for personagem in personagens:
             print(f"{personagem[0]} - {personagem[1]}")
         return personagens
     except Exception as e:
-        print(f"Erro ao listar personagens: {e}")
+        print_animado(f"Erro ao listar personagens: {e}")
     finally:
         cursor.close()
         conn.close()
@@ -115,7 +145,7 @@ def exibir_habilidades_jogador(jogador):
         input("\nDigite 1 para retornar ao menu\n>")
         
     except Exception as e:
-        print(f"Erro ao carregar habilidades: {e}")
+        print_animado(f"Erro ao carregar habilidades: {e}")
 
 
 def exibir_inventario_jogador(jogador):
@@ -128,11 +158,11 @@ def exibir_inventario_jogador(jogador):
         inventario = cursor.fetchall()
 
         if not inventario:
-            print("\n📦 O inventário está vazio!\n")
+            print_animado("\n📦 O inventário está vazio!\n")
         else:
-            print("\n🎒 Inventário do Jogador 🎒\n")
-            print(f"{'Nome do Item':<20} {'Tipo':<15} {'Qtd':<5} {'Preço':<8}")
-            print("=" * 50)
+            print_animado("\n🎒 Inventário do Jogador 🎒\n")
+            print_animado(f"{'Nome do Item':<20} {'Tipo':<15} {'Qtd':<5} {'Preço':<8}")
+            print_animado("=" * 50)
 
             for item in inventario:
                 nome, tipo, quantidade, preco = item
@@ -144,7 +174,7 @@ def exibir_inventario_jogador(jogador):
         input("\nDigite 1 para retornar ao menu\n> ")
         
     except Exception as e:
-        print(f"❌ Erro ao carregar inventário: {e}")
+        print_animado(f"❌ Erro ao carregar inventário: {e}")
         input("\nPressione Enter para continuar...\n> ")
 
 
@@ -157,10 +187,10 @@ def obter_localizacao_jogador(jogador):
         if localizacao: 
             return localizacao
         else:
-            print("Localizacao não encontrado.")
+            print_animado("Localizacao não encontrada.")
             return None
     except Exception as e:
-        print(f"Erro ao carregar localizacao: {e}")
+        print_animado(f"Erro ao carregar localizacao: {e}")
 
 def ambiente_info(id_ambiente):
     try:
@@ -171,10 +201,10 @@ def ambiente_info(id_ambiente):
         if infos: 
             return infos
         else:
-            print("Ambiente não encontrado.")
+            print_animado("Ambiente não encontrado.")
             return None
     except Exception as e:
-        print(f"Erro ao carregar ambiente: {e}")
+        print_animado(f"Erro ao carregar ambiente: {e}")
 
 def conferir_caverna(jogador, localizacao_atual, escolha=None):
     try:
@@ -216,7 +246,7 @@ def conferir_caverna(jogador, localizacao_atual, escolha=None):
 
 def andar_no_mapa(jogador, localizacao_atual):
     clear_terminal()
-    print(f"Você está em {localizacao_atual[2]}\nAs opções para andar são:\n")
+    print_animado(f"Você está em {localizacao_atual[2]}\nAs opções para andar são:\n")
     index=1
     
     ambiente_opcoes = {}
@@ -239,7 +269,7 @@ def andar_no_mapa(jogador, localizacao_atual):
 
         escolha = int(input("Para qual ambiente você deseja seguir?\n> "))
         if escolha not in ambiente_opcoes:
-            print("Escolha inválida. Tente novamente.")
+            print_animado("Escolha inválida. Tente novamente.")
             return None
 
         # verifica se pode prosseguir para o próximo andar 
@@ -248,7 +278,7 @@ def andar_no_mapa(jogador, localizacao_atual):
 
         # Verifica se o usuário escolheu cancelar
         if ambiente_opcoes[escolha] is None:
-            print("Ação cancelada.")
+            print_animado("Ação cancelada.")
             return None
         
         #print(ambiente_opcoes[escolha])
@@ -271,8 +301,7 @@ def andar_no_mapa(jogador, localizacao_atual):
         #conn.commit()
         
     except Exception as e:
-        print(f"Erro ao carregar ambiente: {e}")
-        input("\nPressione qualquer tecla para continuar...")
+        print_animado(f"Erro ao carregar ambiente: {e}")
     
     finally:
         if cursor:
@@ -287,6 +316,26 @@ def interagir_ambiente(jogador, localizacao_atual):
         interacao_celeiro(jogador)
     elif localizacao_atual[1] == 'Plantação':
         interacao_plantacao(jogador)
+    elif localizacao_atual[2] == 'Floresta':
+        interacao_floresta(jogador)
+    elif localizacao_atual[1] == 'Loja':
+        interacao_loja(jogador)
+
+def abrir_mapa():
+    clear_terminal()
+    print(""" 
+    [Comércio do Deserto]     [Caverna]
+                \              /
+            [Deserto]───[Floresta]───[Guilda dos Aventureiros]
+                             │                          
+            [Plantação]──[Cabana]───[Celeiro]     [Ferreiro]
+                             │                       /
+[Armazém do Pierre]──[Praça da Vila]───[Centro Comunitário]───[Mercado Joja]
+                            │                     │
+                         [Praia]        [Clínica do Harvey]
+                                        
+          """)
+    input("\nDigite 1 para retornar ao menu\n>")
 
 def menu_jogo(jogador):
     while True:
@@ -321,6 +370,7 @@ def menu_jogo(jogador):
             "2 - Mostrar Habilidades",
             "3 - Interagir com o ambiente",
             "4 - Abrir inventário",
+            "5 - Abrir mapa da Vila",
             "9 - Sair do jogo"
         ]
         
@@ -359,10 +409,10 @@ def carregar_personagem(jogador_id):
         if jogador:
             return jogador
         else:
-            print("Personagem não encontrado.")
+            print_animado("Personagem não encontrado.")
             return None
     except Exception as e:
-        print(f"Erro ao carregar personagem: {e}")
+        print_animado(f"Erro ao carregar personagem: {e}")
     finally:
         cursor.close()
         conn.close()
@@ -370,7 +420,7 @@ def carregar_personagem(jogador_id):
 def menu_inicial():
     while True:
         clear_terminal()
-        print("\n##### Stardew Valley 🌾 #####\n")
+        print_animado("\n##### Stardew Valley 🌾 #####\n")
         print("1. Criar novo personagem")
         print("2. Continuar com um personagem existente")
         print("3. Sair")
@@ -397,6 +447,7 @@ def menu_inicial():
 
 if __name__ == "__main__":
     print("Inicializando o banco de dados...")
+    iniciar_musica()
     #setup_database(DDL_FILE_PATH,DML_FILE_PATH)  
 
     jogador = menu_inicial()
