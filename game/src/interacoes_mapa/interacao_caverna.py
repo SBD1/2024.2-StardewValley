@@ -245,9 +245,10 @@ def escolher_arma(jogador_dict):
             GROUP BY a.fk_id_item, a.nome, a.descricao, a.dano_arma, a.preco, ii.fk_id_jogador;""",
         (jogador_dict['id_jogador'],))
         armas = cursor.fetchall()
+        quantidade_armas = sum([arma[6] for arma in armas])
         # listando armas no inventário do jogador
         #(fk_id_item, nome, descricao, dano_arma, preco, fk_id_jogador, quantidade)
-        while True and armas is not None:
+        while True and quantidade_armas > 0:
             # listando poções no inventário do jogador
             #(fk_id_item, nome, descricao, efeito_vida, preco, fk_id_jogador, quantidade)
             clear_terminal()
@@ -335,8 +336,7 @@ def iniciar_combate(jogador_dict, inimigos_dict, ambiente):
                     jogador_dict = escolher_arma(jogador_dict)
                 if opcao == 4:
                     commit_vidaAtual(jogador_dict, inimigo_dict)
-
-                    return
+                    return "fuga", jogador_dict
             except ValueError:
                 print("\nOpção inválida. Tente novamente.")
                 input("Pressione enter para continuar...")
@@ -351,7 +351,6 @@ def iniciar_combate(jogador_dict, inimigos_dict, ambiente):
             connection.close()
 
 def info_andar(ambiente, caverna_andar, jogador_dict):
-    print(f"\n{ambiente[3]}")  # Exibe a descrição do ambiente
 
     lista_instancias_inimigos = None
     quantidade_mobs_andar_atual = None
@@ -500,7 +499,7 @@ def conferir_recompensa(jogador_dict, ambiente, caverna_andar):
             (ambiente[0],))
             recompensas = cursor.fetchall()
 
-            if recompensa:
+            if recompensas != []:
                 print("\nParabéns! Você derrotou todos os inimigos deste andar e encontrou:")
                 for recompensa in recompensas:
                     print(f"- {recompensa[1]}")
@@ -527,7 +526,7 @@ def conferir_recompensa(jogador_dict, ambiente, caverna_andar):
         if connection:
             cursor.close()
             connection.close()
-            
+
 def interacao_caverna(jogador, ambiente):
     try:
         connection = get_connection()
@@ -549,6 +548,7 @@ def interacao_caverna(jogador, ambiente):
 
             # Exibe o cabeçalho do andar
             print(f"{'=' * 32} {ambiente[1]}: {ambiente[0] - 15}º andar {'=' * 32}")
+            print(f"\n{ambiente[3]}")  
 
             inimigos_dict = info_andar(ambiente, caverna_andar, jogador_dict)
 
@@ -567,6 +567,8 @@ def interacao_caverna(jogador, ambiente):
                     if resultado == "derrota":
                         voltar_para_cabana(jogador)
                         return
+                    elif resultado == "fuga":
+                        continue
                     
                     conferir_recompensa(jogador_dict, ambiente, caverna_andar)
                 elif opcao == 2:
