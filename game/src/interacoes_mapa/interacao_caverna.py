@@ -495,6 +495,7 @@ def interacao_caverna(jogador, ambiente):
 
         while True:
             clear_terminal()
+            # POG: Progranação Orientada a Gambiarra :)
             jogador_dict = atualizar_jogador(jogador, jogador_dict["arma"])
 
             if ambiente[0] == 15:
@@ -517,7 +518,7 @@ def interacao_caverna(jogador, ambiente):
                         continue
                     
                     resultado, jogador_dict = iniciar_combate(jogador_dict, inimigos_dict, ambiente)
-
+                    avancar_tempo.avancar_tempo(jogador, 10)
                     if resultado == "derrota":
                         voltar_para_cabana(jogador)
                         return
