@@ -266,6 +266,22 @@ def interagir_ambiente(jogador, localizacao_atual):
     elif localizacao_atual[1] == 'Plantação':
         interacao_plantacao(jogador)
 
+def abrir_mapa():
+    clear_terminal()
+    print(""" 
+    [Comércio do Deserto]     [Caverna]
+                \              /
+            [Deserto]───[Floresta]───[Guilda dos Aventureiros]
+                             │                          
+            [Plantação]──[Cabana]───[Celeiro]     [Ferreiro]
+                             │                       /
+[Armazém do Pierre]──[Praça da Vila]───[Centro Comunitário]───[Mercado Joja]
+                            │                     │
+                         [Praia]        [Clínica do Harvey]
+                                        
+          """)
+    input("\nDigite 1 para retornar ao menu\n>")
+
 def menu_jogo(jogador):
     while True:
         clear_terminal() 
@@ -299,6 +315,7 @@ def menu_jogo(jogador):
             "2 - Mostrar Habilidades",
             "3 - Interagir com o ambiente",
             "4 - Abrir inventário",
+            "5 - Abrir mapa da Vila"
             "9 - Sair do jogo"
         ]
         
@@ -316,6 +333,8 @@ def menu_jogo(jogador):
             interagir_ambiente(jogador, localizacao_atual)
         elif escolha == 4:
             exibir_inventario_jogador(jogador)
+        elif escolha == 5:
+            abrir_mapa()
         elif escolha == 9:
             break
         jogador = carregar_personagem(id_jogador)
