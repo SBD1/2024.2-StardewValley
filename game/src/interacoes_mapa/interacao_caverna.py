@@ -59,8 +59,8 @@ def exibir_status_combate(jogador_dict, inimigo_dict):
     print(f"\nStatus do jogador {jogador_dict['nome']}")
     barra_status_vida(vida_jogador, jogador_dict['vidaMax'])
     print(f"\nDano de ataque: {jogador_dict['dano_ataque']} ")  
-    print(f"Arma equipada: {jogador_dict["arma"][1]} ")
-    print(f"Dano da arma: {jogador_dict["arma"][3]} ") if jogador_dict["arma"][3] is not None else None
+    print(f"Arma equipada: {jogador_dict['arma'][1]} ")
+    print(f"Dano da arma: {jogador_dict['arma'][3]} ") if jogador_dict['arma'][3] is not None else None
     print(f"Itens consumíveis: {quantidade_pocoes} ")
     print(f"\nStatus do(a) {inimigo_dict['tipo'][1]}")
     barra_status_vida(vida_inimigo, inimigo_dict['tipo'][3])  
