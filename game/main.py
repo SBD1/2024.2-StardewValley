@@ -377,8 +377,7 @@ def menu_inicial():
         escolha = input("Escolha uma opção: ").strip()
 
         if escolha == "1":
-            player_id = criar_personagem()
-            jogador = carregar_personagem(player_id)
+            jogador = criar_personagem()
             return jogador
         elif escolha == "2":
             personagens = listar_personagens()
