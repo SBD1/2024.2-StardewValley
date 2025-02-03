@@ -1,5 +1,13 @@
+-- ---------------------------------------------------------------------------------------------------------------
+-- Data de Criação ........: 03/02/2025                                                                         --
+-- Autor(es) ..............: Gabriel Silva, Gabriel Zaranza, Isaac Batista, Manuella Valadares, Marcos Marinho  --
+-- Versão .................: 1.9                                                                                --
+-- Banco de Dados .........: PostgreSQL                                                                         --
+-- Descrição ..............: Popula as tabelas para o jogo Stardew Valley                                       --
+-- ---------------------------------------------------------------------------------------------------------------
 
--- Inserir uma habilidade básica (tem 10 de cada tipo)
+BEGIN TRANSACTION;
+
 INSERT INTO Habilidade (tipo)
 VALUES
     ('mineracao'),
@@ -520,3 +528,5 @@ INSERT INTO estoque(fk_id_loja,fk_id_item) VALUES
     (11, 1),
     (11, 2),
     (11, 3);
+
+COMMIT;

@@ -18,7 +18,7 @@ def clear_terminal():
 def iniciar_musica():
     pygame.mixer.init()
     pygame.mixer.music.load(os.path.join(os.path.dirname(__file__), "src/music-stardew.mp3"))
-    pygame.mixer.music.set_volume(0.3)  # Ajusta o volume (0.0 a 1.0)
+    pygame.mixer.music.set_volume(0.1)  # Ajusta o volume (0.0 a 1.0)
     pygame.mixer.music.play(-1)  # "-1" faz a música tocar em loop
 
 def criar_personagem():
@@ -161,9 +161,9 @@ def exibir_inventario_jogador(jogador):
         if not inventario:
             print_animado("\n📦 O inventário está vazio!\n")
         else:
-            print_animado("\n🎒 Inventário do Jogador 🎒\n")
-            print_animado(f"{'Nome do Item':<20} {'Tipo':<15} {'Qtd':<5} {'Preço':<8}")
-            print_animado("=" * 50)
+            print("\n🎒 Inventário do Jogador 🎒\n")
+            print(f"{'Nome do Item':<20} {'Tipo':<15} {'Qtd':<5} {'Preço':<8}")
+            print("=" * 50)
 
             for item in inventario:
                 nome, tipo, quantidade, preco = item
@@ -209,7 +209,7 @@ def ambiente_info(id_ambiente):
 
 def andar_no_mapa(jogador, localizacao_atual):
     clear_terminal()
-    print_animado(f"Você está em {localizacao_atual[2]}\nAs opções para andar são:\n")
+    print(f"Você está em {localizacao_atual[2]}\nAs opções para andar são:\n")
     index=1
     
     ambiente_opcoes = {}
