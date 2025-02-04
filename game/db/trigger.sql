@@ -89,6 +89,36 @@ BEGIN
 END;
 $$ LANGUAGE plpgsql;
 
+CREATE OR REPLACE FUNCTION excluir_item_relacionado()
+RETURNS TRIGGER AS $$
+BEGIN
+    DELETE FROM ferramenta WHERE fk_id_item = OLD.id_item;
+    DELETE FROM arma WHERE fk_id_item = OLD.id_item;
+    DELETE FROM consumivel WHERE fk_id_item = OLD.id_item;
+    DELETE FROM mineral WHERE fk_id_item = OLD.id_item;
+    DELETE FROM recurso WHERE fk_id_item = OLD.id_item;
+    RETURN OLD;
+END;
+$$ LANGUAGE plpgsql;
+
+CREATE TRIGGER excluir_item_trigger
+BEFORE DELETE ON item
+FOR EACH ROW EXECUTE FUNCTION excluir_item_relacionado();
+
+CREATE OR REPLACE FUNCTION impedir_update_tipo_item()
+RETURNS TRIGGER AS $$
+BEGIN
+    IF NEW.tipo_item <> OLD.tipo_item THEN
+        RAISE EXCEPTION 'Não é permitido alterar o tipo do item.';
+    END IF;
+    RETURN NEW;
+END;
+$$ LANGUAGE plpgsql;
+
+CREATE TRIGGER impedir_update_tipo_item_trigger
+BEFORE UPDATE ON item
+FOR EACH ROW EXECUTE FUNCTION impedir_update_tipo_item();
+
 CREATE TRIGGER trigger_avancar_dia
 BEFORE UPDATE ON Jogador
 FOR EACH ROW

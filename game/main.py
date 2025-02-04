@@ -18,7 +18,7 @@ def clear_terminal():
 def iniciar_musica():
     pygame.mixer.init()
     pygame.mixer.music.load(os.path.join(os.path.dirname(__file__), "src/music-stardew.mp3"))
-    pygame.mixer.music.set_volume(0.1)  # Ajusta o volume (0.0 a 1.0)
+    pygame.mixer.music.set_volume(0)  # Ajusta o volume (0.0 a 1.0)
     pygame.mixer.music.play(-1)  # "-1" faz a música tocar em loop
 
 def criar_personagem():
@@ -55,8 +55,10 @@ def criar_personagem():
         clear_terminal()
         print_animado("Após anos vivendo a rotina exaustiva da cidade grande, onde os dias se confundiam em uma monotonia cinzenta, você finalmente decidiu seguir o chamado de seu destino.\n")
         input("Pressione Enter para continuar...")
+        clear_terminal()
         print_animado("Um antigo envelope, deixado por seu avô em seu leito de morte, continha palavras que ecoavam em sua mente até hoje:")
         input("Pressione Enter para continuar...")
+        clear_terminal()
         print_animado("\"Querido(a) neto(a),\n Um dia você sentirá que a vida moderna já não lhe traz satisfação. Quando esse momento chegar, pegue esta carta... Ela guarda a chave para um novo começo.\"\n")
 
         clear_terminal()
@@ -389,6 +391,8 @@ def menu_jogo(jogador):
                 interagir_ambiente(jogador, localizacao_atual)
             elif escolha == 4:
                 exibir_inventario_jogador(jogador)
+            elif escolha == 5:
+                abrir_mapa()
             elif escolha == 9:
                 break
             jogador = carregar_personagem(id_jogador)

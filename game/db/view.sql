@@ -1,3 +1,5 @@
+
+
 CREATE OR REPLACE VIEW vw_inventario_jogador AS
 SELECT
     j.id_jogador,
@@ -99,6 +101,4 @@ LEFT JOIN consumivel
 LEFT JOIN recurso
     ON recurso.fk_id_item = it.id_item
    AND it.tipo_item = 'recurso'
-
-
 

@@ -50,7 +50,14 @@ Acesse o diretório do jogo usando o comando:
 cd 2024.2-StardewValley/game
 ```
 
-### 3. Inicializar o Docker
+### 3. Instalar dependências
+
+```bash
+pip install pygame
+pip install psycopg2
+```
+
+### 4. Inicializar o Docker
 
 Inicie o contêiner Docker no modo em segundo plano (background) com o comando:
 
@@ -58,7 +65,7 @@ Inicie o contêiner Docker no modo em segundo plano (background) com o comando:
 docker compose up -d
 ```
 
-### 4. Rodar o Jogo
+### 5. Rodar o Jogo
 
 Por fim, execute o seguinte comando para iniciar o jogo:
 
