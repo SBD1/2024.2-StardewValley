@@ -39,7 +39,6 @@ def barra_de_precisao():
 
     print("\n")
     if acerto:
-        print("Parabéns! Você conseguiu minerar com precisão!")
         return True
     else:
         print("Você errou! Tente novamente!")
