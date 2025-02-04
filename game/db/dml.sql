@@ -217,7 +217,8 @@ INSERT INTO loja (fk_id_ambiente, nome, proprietario)
 VALUES --fk_id_estoque com números aleatórios
 (11, 'Armazém do Pierre', 'Pierre'),
 (14, 'Mercado Joja', 'Gerente Joja'),
-(13, 'Ferreiro', 'Clint'), 
+(13, 'Ferreiro', 'Clint'),
+(6, 'Guilda dos Aventureiros', 'Marlon'), 
 (7, 'Comércio do Deserto', 'Sandy');
 
 INSERT INTO Celeiro(fk_id_ambiente, qtd_max_animais)
@@ -558,6 +559,7 @@ VALUES
     (0,22,0),
     (0,301,0),
     (0,102,0);
+
 INSERT INTO estoque(fk_id_loja, fk_id_item) VALUES
     (11, 1),
     (11, 2),
