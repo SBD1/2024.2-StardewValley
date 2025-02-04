@@ -1,12 +1,9 @@
 
 
 
-# Diagrama Entidade-Relacionamento
+O Diagrama Entidade-Relacionamento (DER) é uma representação gráfica que descreve a estrutura lógica do banco de dados do jogo. Ele ilustra as principais entidades do sistema, seus atributos, chaves primárias e secundárias, bem como os relacionamentos existentes entre essas entidades. Além disso, o DER reflete as restrições estruturais e a lógica de negócio envolvida no funcionamento do jogo. 
 
-
-O diagrama Entidade Relacionamento (DER) é composto por um conjunto de objetos gráficos que visa representar todos os objetos do modelo Entidade-Relacionamento tais como entidades, atributos, atributos chaves, relacionamentos, restrições estruturais, etc.
-
-O diagrama fornece uma visão lógica do banco de dados, fornecendo um conceito mais generalizado de como estão estruturados os dados de um sistema. 
+No contexto do nosso projeto inspirado em Stardew Valley, o DER fornece uma visão clara e organizada das informações essenciais, como os itens no inventário do personagem, os recursos coletados nas minas, as plantas cultivadas na fazenda e os ambientes exploráveis, como a caverna e a loja. Ele serve como base para a criação e manutenção do banco de dados, garantindo que todos os dados do sistema estejam interconectados de maneira eficiente e lógica, alinhados aos objetivos do jogo.
 
 
 === "<a href="#anchor-link-modulo1" tabindex="-1">Módulo 1</a>"
