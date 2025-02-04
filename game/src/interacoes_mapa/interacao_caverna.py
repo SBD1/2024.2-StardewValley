@@ -613,7 +613,7 @@ def minerar(jogador, caverna_andar):
         time.sleep(2)
         return
     print(f"Nesta caverna tem {minerios_disponiveis} minérios")
-    input()
+    time.sleep(2)
     if barra_de_precisao():
         minerio_id = random.choice(list(minerios.keys()))
         minerio = minerios[minerio_id]
