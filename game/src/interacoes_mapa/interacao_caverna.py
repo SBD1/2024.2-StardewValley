@@ -4,9 +4,25 @@ from setup.database import get_connection
 import os
 import random
 import src.avancar_tempo as avancar_tempo
+import time
 
 DDL_FILE_PATH = os.path.join(os.path.dirname(__file__), "db/ddl.sql")
 DML_FILE_PATH = os.path.join(os.path.dirname(__file__), "db/dml.sql")
+
+minerios = {
+    101: {"nome": "Pedra", "descricao": "Um material de construção básico."},
+    102: {"nome": "Bronze", "descricao": "Um metal utilizado em ferramentas."},
+    103: {"nome": "Ferro", "descricao": "Metal resistente e versátil."},
+    104: {"nome": "Ouro", "descricao": "Metal precioso e valioso."},
+    105: {"nome": "Fragmento Prismatico", "descricao": "Um raro cristal multicolorido."},
+    106: {"nome": "Água Marinha", "descricao": "Uma gema azul-esverdeada brilhante."},
+    107: {"nome": "Carvão", "descricao": "Material utilizado para fundição."},
+    108: {"nome": "Rubi", "descricao": "Uma gema vermelha reluzente."},
+    109: {"nome": "Jade", "descricao": "Uma pedra preciosa verde."},
+    110: {"nome": "Ametista", "descricao": "Uma gema roxa brilhante."},
+    111: {"nome": "Esmeralda", "descricao": "Uma gema verde de rara beleza."},
+    113: {"nome": "Diamante", "descricao": "Uma gema preciosa e brilhante."},
+}
 
 def clear_terminal():
     os.system('cls' if os.name == 'nt' else 'clear')
@@ -572,7 +588,7 @@ def interacao_caverna(jogador, ambiente):
                     
                     conferir_recompensa(jogador_dict, ambiente, caverna_andar)
                 elif opcao == 2:
-                    print("\nFuncionalidade de coleta de minérios ainda não implementada.")
+                    minerar(jogador_dict, caverna_andar)
                     input("Pressione enter para continuar...")
                 elif opcao == 3:
                     return  
@@ -588,9 +604,36 @@ def interacao_caverna(jogador, ambiente):
             cursor.close()
             connection.close()
     
-    # Antes minerar, você precisa 
-    # Adicionar view para possiveis recompensas
-    # assim que o jogador derrotar todo:  os mobs expecíficados em "quantidade_mobs"
-    # ele liberará a opção de minerar e coletar a recompensa da caverna
-    # a recompensa poderá ser tanto poções de vida que ajudam o jogador a continuar na caverna
-    # ou itens pré determinados na "view" de recompensas, decretados por um random()
+def minerar(jogador, caverna_andar):
+    andar = 1  # Consultar o banco para descobrir qual o andar atual
+    minerios_disponiveis = caverna_andar[3]
+    
+    if minerios_disponiveis <= 0:    
+        print("Você não encontrou minérios para minerar...")
+        time.sleep(2)
+        return
+    print(f"Nesta caverna tem {minerios_disponiveis} minérios")
+    input()
+    if barra_de_precisao():
+        minerio_id = random.choice(list(minerios.keys()))
+        minerio = minerios[minerio_id]
+        print(f"Parabéns! Você conseguiu minerar e encontrou {minerio['nome']} ({minerio['descricao']})!")
+        escolha = int(input("Deseja armazenar o minério? (1 - Sim, 2 - Não) "))
+        if escolha == 1:
+            connection = get_connection()
+            cursor = connection.cursor()
+            # cursor.execute("" (,)) (inserir minério na mochila)
+            print("Minério armazenado com sucesso!")
+            time.sleep(3)
+            return minerio
+        elif escolha == 2:
+            print("Minério descartado...")
+            time.sleep(2)
+            return
+        elif escolha != 1 or escolha != 2:
+            print("Opção inválida. Tente novamente.")
+            return
+    else:
+        print("Você quebrou a pedra, mas não encontrou nada de valor :(")
+        time.sleep(3)
+        return None

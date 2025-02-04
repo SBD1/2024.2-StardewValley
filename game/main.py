@@ -18,7 +18,7 @@ def clear_terminal():
 def iniciar_musica():
     pygame.mixer.init()
     pygame.mixer.music.load(os.path.join(os.path.dirname(__file__), "src/music-stardew.mp3"))
-    pygame.mixer.music.set_volume(0)  # Ajusta o volume (0.0 a 1.0)
+    pygame.mixer.music.set_volume(0.3)  # Ajusta o volume (0.0 a 1.0)
     pygame.mixer.music.play(-1)  # "-1" faz a música tocar em loop
 
 def criar_personagem():
@@ -101,7 +101,7 @@ def exibir_habilidades_jogador(jogador):
     try:
         conn = get_connection()
         cursor = conn.cursor()
-        cursor.execute("SELECT * FROM Habilidade WHERE id_habilidade in (%s,%s,%s)", (jogador[11],jogador[12],jogador[13]))
+        cursor.execute("SELECT * FROM Habilidade WHERE id_habilidade in (%s,%s,%s)", (jogador[12],jogador[13],jogador[14]))
         
         habilidades = cursor.fetchall()
         
