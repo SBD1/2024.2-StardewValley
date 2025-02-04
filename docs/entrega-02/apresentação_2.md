@@ -5,9 +5,9 @@ Esta página tem como foco o vídeo de apresentação do módulo 2 do projeto. A
 
 ## Apresentação
 
-<!-- Para o iframe do vídeo, use width="560" height="315" -->. 
+<!-- Para o iframe do vídeo, use width="560" height="315" -->
 <div style="text-align: center;">
-    <iframe width="560" height="315" src="https://youtu.be/c6Xt_laGxcM" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+    <iframe width="560" height="315" src="https://www.youtube.com/embed/c6Xt_laGxcM" title="2024.2 - Stardew Valley: Entrega 2" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
 </div>
 
 <p style="text-align: center">
@@ -21,4 +21,5 @@ Esta página tem como foco o vídeo de apresentação do módulo 2 do projeto. A
 | Data | Versão | Autor | Alterações | 
 | :--: | :----: | ----- | ---------- | 
 | 12/01/2024 | `1.0` | [Gabriel Fernando de Jesus Silva](https://github.com/MMcLovin)| Versão inicial do documento |
+| 13/01/2024 | `1.1` | [Marcos Vieira Marinho](https://github.com/devMarcosVM)| Adiciona vídeo da apresentação |
 
