@@ -44,12 +44,12 @@
               INSERT INTO Instancia_de_Inimigo (vidaAtual, fk_id_ambiente, fk_inimigo_id, fk_jogador_id) VALUES
               (vida_morcego, 16, 1, jogador_id),  -- Morcego da Caverna
               (vida_morcego, 16, 1, jogador_id),  -- Morcego da Caverna
-              (vida_morcego, 16, 1, jogador_id),  -- Morcego da Caverna
-              (vida_morcego, 16, 1, jogador_id),  -- Morcego da Caverna
+              --(vida_morcego, 16, 1, jogador_id),  -- Morcego da Caverna
+              --(vida_morcego, 16, 1, jogador_id),  -- Morcego da Caverna
               (vida_aranha, 16, 2, jogador_id),   -- Aranha das Sombras
-              (vida_rato, 16, 4, jogador_id),     -- Rato Gigante
-              (vida_escorpiao, 16, 7, jogador_id),-- Escorpião Caverneiro
-              (vida_serpente, 16, 8, jogador_id); -- Serpente Rochosa
+              --(vida_rato, 16, 4, jogador_id),     -- Rato Gigante
+              --(vida_escorpiao, 16, 7, jogador_id),-- Escorpião Caverneiro
+              (vida_serpente, 16, 8, jogador_id); -- Serpente Rochosa*/
 
               -- Andar 2: 2 mobs
               INSERT INTO Instancia_de_Inimigo (vidaAtual, fk_id_ambiente, fk_inimigo_id, fk_jogador_id) VALUES

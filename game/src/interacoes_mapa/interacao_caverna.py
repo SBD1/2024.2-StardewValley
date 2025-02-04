@@ -506,9 +506,9 @@ def conferir_recompensa(jogador_dict, ambiente, caverna_andar):
                     opcao = int(input("\nPressione 1 para coletar a recompensa e 0 para deixá-la para trás.\n> "))
                     if opcao:
                         cursor.execute("""
-                            INSERT INTO instancia_de_item (fk_id_jogador, fk_id_item, fk_id_estoque, fk_id_inventario)
+                            INSERT INTO instancia_de_item (fk_id_jogador, fk_id_item, fk_id_inventario)
                             VALUES
-                            (%s, %s, NULL, (
+                            (%s, %s, (
                                             SELECT id_inventario FROM Inventario WHERE fk_id_jogador = %s
                                     )
                             );""",
