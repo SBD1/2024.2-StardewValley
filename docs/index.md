@@ -1,8 +1,11 @@
 # 2024.2-StardewValley
+Stardew Valley é um RPG sem fim da vida no campo! Você herdou a antiga fazenda de seu avô no Vale do Orvalho. Equipado com ferramentas de segunda mão e algumas moedas, você irá começar sua nova vida. Será que você consegue aprender a viver da terra? Não vai ser fácil. Você pode buscar por minérios, criar uma plantação e cuidar de animais, evoluindo suas habilidades e vivendo numa simples fazenda. Clique na imagem a seguir para descobrir o mundo mágico de Stardew Valley.
 
-Repositório para documentação e implementação de projeto para a disciplina Sistema de Bancos de Dados 1.
+<div align="center">
+<a href="https://www.youtube.com/watch?v=FjJx6u_5RdU" target="_blank"> <img src="img/capa.jpg" height="230" width="auto"/> </a>
+</div>
 
-## Membros do Grupo
+## 💻Contribuidores
 
 <table>
   <tr>
@@ -18,64 +21,31 @@ Repositório para documentação e implementação de projeto para a disciplina 
 
 Maurício Serrano
 
-## Sobre o Jogo
+## 🎥Apresentações:
 
-Stardew Valley é um RPG sem fim da vida no campo! Você herdou a antiga fazenda de seu avô no Vale do Orvalho. Equipado com ferramentas de segunda mão e algumas moedas, você irá começar sua nova vida. Será que você consegue aprender a viver da terra? Não vai ser fácil. Você pode completar missões, criar uma plantação e cuidar de animais, evoluindo suas habilidades e vivendo numa simples fazenda. Clique na imagem a seguir para descobrir o mundo mágico de Stardew Valley.
+<table>
+  <tr>
+    <td align="center"><b>Módulo</b></td>
+    <td align="center"><b>Vídeo</b></td>
+  </tr>
+  <tr>
+    <td align="center">Módulo 1</td>
+    <td align="center"><a href="entrega-01/apresentação_1">Apresentação do Módulo 1</a></td>
+  </tr>
+  <tr>
+    <td align="center">Módulo 2</td>
+    <td align="center"><a href="entrega-02/apresentação_2">Apresentação do Módulo 2</a></td>
+  </tr>
+  <tr>
+    <td align="center">Módulo 3</td>
+    <td align="center"><a href="entrega-03/apresentação_3">Apresentação parcial e final do Módulo 3</a></td>
+  </tr>
 
-<div align="center">
-<a href="https://www.youtube.com/watch?v=FjJx6u_5RdU" target="_blank"> <img src="img/capa.jpg" height="230" width="auto"/> </a>
-</div>
 
-# Guia para Rodar o Jogo
+</table>
 
-## Pré-requisitos
 
-Antes de começar, verifique se você tem os seguintes itens instalados em sua máquina:
-
-- **Python** (versão 3.7 ou superior)
-- **Pip** (gerenciador de pacotes Python)
-- **Docker** e **Docker Compose** (para gerenciamento de contêineres)
-
-### 1. Clonar o Repositório
-
-Execute o seguinte comando no terminal para clonar o repositório do projeto:
-
-```bash
-git clone https://github.com/SBD1/2024.2-StardewValley.git
-```
-
-### 2. Entrar na Pasta do Jogo
-
-Acesse o diretório do jogo usando o comando:
-
-```bash
-cd 2024.2-StardewValley/game
-```
-
-### 3. Inicializar o Docker
-
-Inicie o contêiner Docker no modo em segundo plano (background) com o comando:
-
-```bash
-docker compose up -d
-```
-
-### 4. Rodar o Jogo
-
-Por fim, execute o seguinte comando para iniciar o jogo:
-
-```bash
-python3 main.py
-```
-
-## Observações Importantes
-
-- Caso encontre problemas ao executar algum dos comandos, verifique se todos os pré-requisitos estão devidamente instalados e configurados.
-- Certifique-se de que o Docker está ativo antes de iniciar o contêiner.
-
----
-
-## Entregas
+## 📅Entregas
 
 ### Módulo 1
 
@@ -95,3 +65,11 @@ python3 main.py
 - [_Queries_ DML](https://github.com/SBD1/2024.2-StardewValley/blob/main/game/db/dml.sql)
 - [_Queries_ DQL](https://github.com/SBD1/2024.2-StardewValley/blob/main/game/db/dql.sql)
 - [Apresentação do Módulo 2](./entrega-02/apresentação_2.md)
+
+### Módulo 3
+
+- [Diagrama Entidade-Relacionamento (Atualização)]()
+- [Dicionário de Dados (Atualização)]()
+- [Modelo Relacional (Atualização)]()
+- [Triggers e SP]()
+- [Apresentação Parcial e Final do Módulo 3](./entrega-03/apresentação_3.md)
