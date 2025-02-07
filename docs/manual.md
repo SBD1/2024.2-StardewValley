@@ -105,6 +105,55 @@ Os jogadores podem desenvolver habilidades em três áreas principais:
 
 Divirta-se explorando este mundo repleto de possibilidades! Que sua jornada seja próspera! 🌱
 
+## **9. Guia para Rodar o Jogo**
+
+## Pré-requisitos
+
+Antes de começar, verifique se você tem os seguintes itens instalados em sua máquina:
+
+- **Python** (versão 3.7 ou superior)
+- **Pip** (gerenciador de pacotes Python)
+- **Docker** e **Docker Compose** (para gerenciamento de contêineres)
+
+### 1. Clonar o Repositório
+
+Execute o seguinte comando no terminal para clonar o repositório do projeto:
+
+```bash
+git clone https://github.com/SBD1/2024.2-StardewValley.git
+```
+
+### 2. Entrar na Pasta do Jogo
+
+Acesse o diretório do jogo usando o comando:
+
+```bash
+cd 2024.2-StardewValley/game
+```
+
+### 3. Inicializar o Docker
+
+Inicie o contêiner Docker no modo em segundo plano (background) com o comando:
+
+```bash
+docker compose up -d
+```
+
+### 4. Rodar o Jogo
+
+Por fim, execute o seguinte comando para iniciar o jogo:
+
+```bash
+python3 main.py
+```
+
+## Observações Importantes
+
+- Caso encontre problemas ao executar algum dos comandos, verifique se todos os pré-requisitos estão devidamente instalados e configurados.
+- Certifique-se de que o Docker está ativo antes de iniciar o contêiner.
+
+---
+
 ## Bibliografia
 
 > 1. Stardew Wiki. Disponível em: [Stardew Wiki](https://pt.stardewvalleywiki.com/).
