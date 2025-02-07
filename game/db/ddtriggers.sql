@@ -395,7 +395,7 @@ $$ LANGUAGE plpgsql;
 CREATE TRIGGER trigger_animal_avancar_dia
 BEFORE UPDATE ON Jogador
 FOR EACH ROW
-WHEN (NEW.tempo = '06:00')-
+WHEN (NEW.tempo = '06:00')
 EXECUTE FUNCTION animal_avancar_dia();
 
 CREATE OR REPLACE FUNCTION planta_avancar_dia()
