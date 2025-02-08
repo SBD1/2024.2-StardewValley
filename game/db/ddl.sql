@@ -70,7 +70,7 @@ CREATE TABLE IF NOT EXISTS Jogador (
     moedas DECIMAL NOT NULL DEFAULT 1000.0,       
     fk_habMineracao_fk_Habilidade_id INT DEFAULT 1, 
     fk_habCombate_fk_Habilidade_id INT DEFAULT 11,   
-    fk_habCultivo_fk_Habilidade_id INT DEFAULT 21, 
+    fk_habCultivo_fk_Habilidade_id INT DEFAULT 21,
     CONSTRAINT fk_Jogador_habMineracao FOREIGN KEY (fk_habMineracao_fk_Habilidade_id)
         REFERENCES habMineracao (fk_Habilidade_id),
     CONSTRAINT fk_Jogador_habCombate FOREIGN KEY (fk_habCombate_fk_Habilidade_id)
@@ -113,6 +113,7 @@ CREATE TABLE IF NOT EXISTS item (
     id_item SERIAL PRIMARY KEY,
     tipo_item VARCHAR(20) NOT NULL
 );
+
 CREATE TABLE IF NOT EXISTS Animal (
     id_animal SERIAL PRIMARY KEY,
     tipo_animal VARCHAR(50) NOT NULL,
@@ -121,11 +122,13 @@ CREATE TABLE IF NOT EXISTS Animal (
     preco FLOAT NOT NULL,
     FOREIGN KEY (itemDrop) REFERENCES item(id_item)
 );
+
 CREATE TABLE IF NOT EXISTS instancia_de_item(
     id_instancia_de_item SERIAL PRIMARY KEY,
     fk_id_jogador INT NOT NULL,
     fk_id_item INT NOT NULL,
     fk_id_inventario INTEGER, 
+    is_equipado BOOLEAN DEFAULT FALSE,
     FOREIGN KEY (fk_id_item) REFERENCES item(id_item),
     FOREIGN KEY (fk_id_inventario) REFERENCES inventario(id_inventario),
     FOREIGN KEY (fk_id_jogador) REFERENCES jogador(id_jogador)

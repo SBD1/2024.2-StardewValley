@@ -92,8 +92,6 @@ INSERT INTO inventario(id_inventario, fk_id_jogador)
 VALUES
     (0,0);--inventario do jogador 0
 
-
-
 INSERT INTO inimigo (id_inimigo, nome, tipo, vidaMax, dano, xp_recompensa) VALUES
     (1, 'Morcego da Caverna',   'caverna', 20.0,  4, 120),
     (2, 'Aranha das Sombras',   'caverna', 20.0,  7,   5),
@@ -228,7 +226,6 @@ VALUES
 INSERT INTO Plantacao(fk_id_ambiente, qtd_plantas_max)
 VALUES
 (2, 15);
-
     
 INSERT INTO item (id_item, tipo_item) VALUES
 (1, 'consumivel'),
@@ -304,7 +301,6 @@ INSERT INTO item (id_item, tipo_item) VALUES
 (216, 'recurso'),
 (217, 'recurso'),
 
-
 (300, 'ferramenta'),
 (301, 'ferramenta'),
 (302, 'ferramenta'),
@@ -367,7 +363,6 @@ INSERT INTO ferramenta (fk_id_item, nome, descricao, eficiencia, preco) VALUES
 (313, 'Tesoura', 'Ferramenta para cortar arbustos e colher frutas.', 1, 150),
 (314, 'Martelo', 'Ferramenta para consertar equipamentos e construir estruturas.', 1, 5),
 (315, 'Pá de Jardineiro', 'Ferramenta para cavar buracos e plantar flores.', 1, 120);
-
 
 INSERT INTO arma (fk_id_item, nome, descricao, dano_arma, preco) VALUES
 (400, 'Espada enferrujada', 'Uma espada enferrujada e cega', 2, 10),
@@ -496,6 +491,7 @@ VALUES
 ('Trigo', 'Uma cultura essencial para fabricação de farinha e cerveja.', 18, 400,37),
 ('Rabanete', 'Um vegetal picante e crocante que cresce no verão.', 7, 150,38),
 ('Uva', 'Frutas roxas deliciosas, crescem em vinhedos no outono.', 16, 450,39);
+
 INSERT INTO Animal (id_animal,tipo_animal, diasTotalDropar, itemDrop, preco)
 VALUES
     (1, 'Vaca', 1, 14, 2500.00),
@@ -507,16 +503,18 @@ VALUES
     (7, 'Porco', 3, 215, 3000.00),
     (8, 'Coelho', 2, 217, 100.00),
     (9, 'Pato', 2, 29, 150.00);
+
 INSERT INTO instancia_de_item(fk_id_jogador, fk_id_item, fk_id_inventario)
 VALUES
-    (0,101,0),
-    (0,101,0),
-    (0,101,0),
-    (0,400,0),
-    (0,202,0),
-    (0,22,0),
-    (0,301,0),
-    (0,102,0);
+    (0, 101, 0),
+    (0, 101, 0),
+    (0, 101, 0),
+    (0, 400, 0),
+    (0, 202, 0),
+    (0,  22, 0),
+    (0, 301, 0),
+    (0, 102, 0),
+    (0, 405, 0);
 
 INSERT INTO Historia(dia, historia) VALUES
 (1, 'Você sonha que um terremoto desbloqueia a área da Ferrovia.'),
