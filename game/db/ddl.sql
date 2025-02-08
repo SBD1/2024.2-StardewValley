@@ -198,6 +198,7 @@ CREATE TABLE IF NOT EXISTS recurso (
     nome VARCHAR(100) NOT NULL,
     descricao VARCHAR(100) NOT NULL,
     preco DECIMAL(10,2) NOT NULL,
+    raridade INTEGER NOT NULL,
     FOREIGN KEY (fk_id_item) REFERENCES item(id_item)
 );
 
@@ -247,45 +248,6 @@ CREATE TABLE IF NOT EXISTS Instancia_de_Planta (
     FOREIGN KEY (fk_id_jogador) REFERENCES Jogador(id_jogador)
 );
 
-CREATE TABLE IF NOT EXISTS Missao (
-    id_missao SERIAL PRIMARY KEY, 
-    tipo VARCHAR(50) NOT NULL
-);
-
-CREATE TABLE IF NOT EXISTS missao_combate (
-    fk_id_missao INT NOT NULL PRIMARY KEY,
-    fk_id_Inimigo INT NOT NULL,
-    nome VARCHAR(255) NOT NULL,
-    descricao TEXT NOT NULL,
-    dataInicio INT NOT NULL,
-    dataFinalizacao INT,
-    fk_id_item_recompensa INT NOT NULL,
-    FOREIGN KEY (fk_id_item_recompensa) REFERENCES item(id_item),
-    FOREIGN KEY (fk_id_Inimigo) REFERENCES Inimigo(id_inimigo),
-    FOREIGN KEY (fk_id_missao) REFERENCES Missao(id_missao)
-);
-
-CREATE TABLE IF NOT EXISTS missao_coleta (
-    fk_id_missao INT NOT NULL PRIMARY KEY,
-    fk_id_minerio INT NOT NULL,
-    nome VARCHAR(255) NOT NULL,
-    descricao TEXT NOT NULL,
-    dataInicio INT NOT NULL,
-    dataFinalizacao INT,
-    fk_id_item_recompensa INT NOT NULL,
-    FOREIGN KEY (fk_id_item_recompensa) REFERENCES item(id_item),
-    FOREIGN KEY (fk_id_minerio) REFERENCES mineral(fk_id_item),
-    FOREIGN KEY (fk_id_missao) REFERENCES Missao(id_missao)
-);
-
-CREATE TABLE IF NOT EXISTS Instancia_Missao (
-    id_Instancia_Missao SERIAL PRIMARY KEY,
-    fk_id_jogador INT NOT NULL,
-    fk_Missao INT NOT NULL,
-    missao_finalizada BOOLEAN NOT NULL DEFAULT false,
-    FOREIGN KEY (fk_Missao) REFERENCES Missao(id_missao),
-    FOREIGN KEY (fk_id_jogador) REFERENCES Jogador(id_jogador)
-);
 
 CREATE TABLE IF NOT EXISTS estoque(
     fk_id_loja INTEGER NOT NULL,
@@ -294,4 +256,8 @@ CREATE TABLE IF NOT EXISTS estoque(
     FOREIGN KEY (fk_id_item) REFERENCES Item(id_item)
 );
 
-COMMIT;
+CREATE TABLE IF NOT EXISTS Historia(
+    dia INT PRIMARY KEY,
+    historia TEXT NOT NULL
+);
+COMMIT; 
