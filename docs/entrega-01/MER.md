@@ -3,8 +3,8 @@
 O Modelo Entidade Relacionamento para bancos de dados é um modelo que descreve os objetos (entidades) envolvidos em um negócio, com suas características (atributos) e como elas se relacionam entre si (relacionamentos).
 
 === "<a href="#anchor-link-modulo1" tabindex="-1">Módulo 1</a>"
-
-    ## 1. Entidades
+    ## Módulo 1
+    ### 1. Entidades
 
     - **Ambiente**
         - **caverna**
@@ -63,7 +63,7 @@ O Modelo Entidade Relacionamento para bancos de dados é um modelo que descreve 
         - **Coleta**
         - **Combate**
 
-    ## 2. Atributos
+    ### 2. Atributos
 
     - **Ambiente**: <ins>id_ambiente</ins>, `tipo`
 
@@ -136,7 +136,7 @@ O Modelo Entidade Relacionamento para bancos de dados é um modelo que descreve 
     - **Utensilio**: <ins>tipo_utensílio</ins>, `nível`
 
 
-    ## 3. Relacionamentos
+    ### 3. Relacionamentos
 
     **Missão possui InstânciaMissão**
 
@@ -251,8 +251,8 @@ O Modelo Entidade Relacionamento para bancos de dados é um modelo que descreve 
     -   Uma loja melhora nenhum ou vários untensílios (0, n) e um utensílio é melhorado apenas por uma loja (1, 1)
 
 === "<a href="#anchor-link-modulo2" tabindex="-1">Módulo 2</a>"
-
-    ## 1. Entidades
+    ## Módulo 2
+    ### 1. Entidades
 
     - **Ambiente**
         - **caverna**
@@ -311,7 +311,7 @@ O Modelo Entidade Relacionamento para bancos de dados é um modelo que descreve 
         - **Coleta**
         - **Combate**
 
-    ## 2. Atributos
+    ### 2. Atributos
 
     **Ambiente**: <ins>id_ambiente</ins>, `tipo`, `fk_id_mapa`, `fk_jogador_id`, `descricao`, `transitar_1`, `transitar_2`, `transitar_3`, `transitar_4`, `transitar_5`, `transitar_6`
 
@@ -382,7 +382,7 @@ O Modelo Entidade Relacionamento para bancos de dados é um modelo que descreve 
     **Utensilio**: <ins>id_item</ins>, `tipo_utensilio`
 
 
-    ## 3. Relacionamentos
+    ### 3. Relacionamentos
 
     **Missão possui InstânciaMissão**
 

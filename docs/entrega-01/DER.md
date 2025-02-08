@@ -30,5 +30,5 @@ No contexto do nosso projeto inspirado em Stardew Valley, o DER fornece uma vis�
 
 | Data | Versão | Autor | Alterações | 
 | :--: | :----: | ----- | ---------- | 
-|23/11/2024|  `1.0`   | [Manuella Valadares](https://github.com/manuvaladares)| Criação do documento DER |
-|13/01/2024|  `1.1`   | [Marcos Marinho](https://github.com/devMarcosVM)| Criação do documento DER |
+| 23/11/2024 | `1.0` | [Manuella Valadares](https://github.com/manuvaladares) | Criação do documento DER |
+| 13/01/2025 | `1.1` | [Marcos Marinho](https://github.com/devMarcosVM) | Atualização do documento DER |

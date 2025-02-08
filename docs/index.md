@@ -68,8 +68,8 @@ Maurício Serrano
 
 ### Módulo 3
 
-- [Diagrama Entidade-Relacionamento (Atualização)]()
-- [Dicionário de Dados (Atualização)]()
-- [Modelo Relacional (Atualização)]()
-- [Triggers e SP]()
+- [Diagrama Entidade-Relacionamento (Atualização)](./entrega-01/DER.md)
+- [Dicionário de Dados (Atualização)](./entrega-01/DicionáriodeDados.md)
+- [Modelo Relacional (Atualização)](./entrega-01/MREL.md)
+- [Triggers e SP](https://github.com/SBD1/2024.2-StardewValley/blob/main/game/db/ddtriggers.sql)
 - [Apresentação Parcial e Final do Módulo 3](./entrega-03/apresentação_3.md)

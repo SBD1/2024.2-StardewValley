@@ -21,14 +21,25 @@ Com base no modelo do jogo, você terá acesso às seguintes interações:
 #### **2.2. Inventário**
 O inventário consiste no conteúdo da mochila do jogador. Os espaços proporcionam ao jogador acesso imediato a certos itens e viaja com o jogador ao redor do mapa. Este acesso é crucial no jogo, pois define a lista de itens com os quais o jogador pode trabalhar enquanto participa de atividades do jogo. É um elemento importante do jogo para garantir que o inventário contenha os itens necessários para todas as tarefas em todos os momentos. Seu limite de tamanho pode apresentar desafios no planejamento e impor mudanças na ordem a que as coisas devem ser feitas.
 
+<font size="2"><p style="text-align: center">Figura 1: exemplo de um inventário</p></font>
 
-![inventário](img/inventario.png)
+<center>
+    ![inventário](img/inventario.png)
+</center>
+
+<font size="2"><p style="text-align: center">Fonte: [Stardew Wiki](https://pt.stardewvalleywiki.com/), 2025</p></font>
 
 #### **2.3. Ambientes**
 - O jogo é dividido em diferentes ambientes, cada um com suas características únicas
 - Você pode comprar e vender itens nas lojas, se aventurar na caverna, conhecer os lugares da Vila e viajar até o deserto.
 
-![Mapa](img/Map.png)
+<font size="2"><p style="text-align: center">Figura 2: mapa de onde o jogo se passsa</p></font>
+
+<center>
+    ![Mapa](img/Map.png)
+</center>
+
+<font size="2"><p style="text-align: center">Fonte: [Stardew Wiki](https://pt.stardewvalleywiki.com/), 2025</p></font>
 
 - No nosso MUD, de um mesmo ambiente você pode transitar para até 6 outros, as rotas estão definidas nas opções do terminal.
 
@@ -66,7 +77,14 @@ Os jogadores podem desenvolver habilidades em três áreas principais:
 #### **4.1. Cultivo**
 - Venda suas colheitas na loja ou use-as como itens consumíveis.
 
-![Cultivo](img/consumiveis.png)
+<font size="2"><p style="text-align: center">Figura 3: Consumíveis do jogo</p></font>
+
+<center>
+    ![Cultivo](img/consumiveis.png)
+</center>
+
+<font size="2"><p style="text-align: center">Fonte: [Stardew Wiki](https://pt.stardewvalleywiki.com/), 2025</p></font>
+
 
 #### **4.2. Mineração**
 - Entre na caverna para minerar pedras e coletar recursos preciosos.
@@ -157,3 +175,8 @@ python3 main.py
 ## Bibliografia
 
 > 1. Stardew Wiki. Disponível em: [Stardew Wiki](https://pt.stardewvalleywiki.com/).
+
+| Data | Versão | Autor | Alterações | 
+| :--: | :----: | ----- | ---------- | 
+| 06/02/2025 | `1.0` | [Manuella Magalhães Valadares](https://github.com/manuvaladares) | Criação do documento |
+| 08/02/2025 | `1.1` | [Gabriel Fernando de Jesus Silva](https://github.com/MMcLovin) | Adiciona fontes das imagens |

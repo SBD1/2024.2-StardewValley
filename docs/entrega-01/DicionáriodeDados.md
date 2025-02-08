@@ -1,12 +1,16 @@
 
 
-É o conjunto dos vocábulos ou dos termos utilizados na descrição dos objetos modelados para o banco de dados. Os termos são dispostos com o seu respectivo significado para apresentar uma descrição textual da estrutura lógica e física do banco de dados.
+Um Dicionário de Dados é o conjunto dos vocábulos ou dos termos utilizados na descrição dos objetos modelados para o banco de dados. Os termos são dispostos com o seu respectivo significado para apresentar uma descrição textual da estrutura lógica e física do banco de dados.
 
 === "<a href="#anchor-link-modulo1" tabindex="-1">Módulo 1</a>"
-    ### Entidade: Jogador
-    #### Descrição: Personagem principal, será manuseado pelo jogador.
+    </br>
+    ## Módulo 1
+    ## Entidades
+    ### Jogador
+    **Descrição:** Personagem principal, será manuseado pelo jogador.
 
-    #### Campos:
+    **Campos:**
+
     | Nome          | Descrição                  | Tipo de dado | Tamanho | Restrições de domínio (PK, FK, NOT NULL, Unique, Identity, intervalo de valores) |
     | :-----------: | :-----------------------:  | :----------: | :-----: | :----------------------------------------------------------------------------:   |
     | id            | Identificador único do jogador | INT         | -       | PK, NOT NULL, Identity                                                             |
@@ -19,10 +23,11 @@
 
     ---
 
-    ### Entidade: Ambiente
-    #### Descrição: Representa os locais do jogo.
+    ### Ambiente
+    **Descrição:** Representa os locais do jogo.
 
-    #### Campos:
+    **Campos:**
+
     | Nome          | Descrição                      | Tipo de dado | Tamanho | Restrições de domínio (PK, FK, NOT NULL, Unique, Identity, intervalo de valores) |
     | :-----------: | :---------------------------: | :----------: | :-----: | :----------------------------------------------------------------------------:   |
     | id_ambiente   | Identificador único do ambiente | INT         | -       | PK, NOT NULL, Identity                                                            |
@@ -31,10 +36,11 @@
     |Jogador_id     | identificador único do jogador | INT          |         |FK, NOT NULL, Unique|
     ---
 
-    ### Entidade: Animal
-    #### Descrição: Representa os animais do jogo.
+    ### Animal
+    **Descrição:** Representa os animais do jogo.
 
-    #### Campos:
+    **Campos:**
+
     | Nome           | Descrição                        | Tipo de dado | Tamanho | Restrições de domínio (PK, FK, NOT NULL, Unique, Identity, intervalo de valores) |
     | :------------: | :-----------------------------: | :----------: | :-----: | :----------------------------------------------------------------------------:   |
     | id             | Identificador único do animal   | INT          | -       | PK, NOT NULL, Unique                                                              |
@@ -46,10 +52,11 @@
 
     ---
 
-    ### Entidade: Minério_Bruto
-    #### Descrição: Representa os minérios brutos coletados no jogo.
+    ### Minério_Bruto
+    **Descrição:** Representa os minérios brutos coletados no jogo.
 
-    #### Campos:
+    **Campos:**
+
     | Nome          | Descrição | Tipo de dado | Tamanho | Restrições de domínio (PK, FK, NOT NULL, Unique, Identity, intervalo de valores) |
     | :-----------: | :-------: | :----------: | :-----: | :----------------------------------------------------------------------------:   |
     | idMinérioBruto| Identificador do minério| INT|         | PK, NOT NULL, Identity                                                                                |
@@ -58,10 +65,11 @@
     |Jogador_id | Identificador único do Jogador | INT | | FK, NOT NULL, Unique|
     ---
 
-    ### Entidade: Loja
-    #### Descrição: Local onde os jogadores podem comprar e vender itens.
+    ### Loja
+    **Descrição:** Local onde os jogadores podem comprar e vender itens.
 
-    #### Campos:
+    **Campos:**
+
     | Nome          | Descrição                      | Tipo de dado | Tamanho | Restrições de domínio (PK, FK, NOT NULL, Unique, Identity, intervalo de valores) |
     | :-----------: | :---------------------------: | :----------: | :-----: | :----------------------------------------------------------------------------:   |
     | id_loja       | Identificador único da loja   | INT          | -       | PK, NOT NULL, Identity                                                           |
@@ -70,10 +78,11 @@
     | descrição     | Breve descrição da loja       | TEXT         | -       | NOT NULL                                                                          |
     | id_ambiente    | Identificador único do ambiente       | INT          | -       | FK, Unique, NOT NULL                                                                          |
 
-    ### Entidade: Caverna  
-    #### Descrição: Representa as cavernas exploráveis no jogo.  
+    ### Caverna  
+    **Descrição:** Representa as cavernas exploráveis no jogo.  
 
-    #### Campos:  
+    **Campos:**
+
     | Nome               | Descrição                          | Tipo de dado | Tamanho | Restrições de domínio (PK, FK, NOT NULL, Unique, Identity, intervalo de valores) |  
     | :-----------------: | :-------------------------------: | :----------: | :-----: | :----------------------------------------------------------------------------:   |  
     | andar              | Andar específico da caverna       | INT          | -       | PK, NOT NULL, Unique                                                                          |  
@@ -83,19 +92,21 @@
     | id_ambiente    | Identificador único do ambiente       | INT          | -       | FK, Unique, NOT NULL                                                                          |
     ---
 
-    ### Entidade: CasaJogador  
-    #### Descrição: Representa a casa do jogador.  
+    ### CasaJogador  
+    **Descrição:** Representa a casa do jogador.  
 
-    #### Campos:  
+    **Campos:**
+
     | Nome               | Descrição                           | Tipo de dado | Tamanho | Restrições de domínio (PK, FK, NOT NULL, Unique, Identity, intervalo de valores) |  
     | :-----------------: | :--------------------------------: | :----------: | :-----: | :----------------------------------------------------------------------------:   |
     | id_ambiente    | Identificador único do ambiente       | INT          | -       | FK, Unique, NOT NULL                                                                          |
     ---
 
-    ### Entidade: Celeiro  
-    #### Descrição: Local para alojar os animais do jogador.  
+    ### Celeiro  
+    **Descrição:** Local para alojar os animais do jogador.  
 
-    #### Campos:  
+    **Campos:**
+
     | Nome               | Descrição                           | Tipo de dado | Tamanho | Restrições de domínio (PK, FK, NOT NULL, Unique, Identity, intervalo de valores) |  
     | :-----------------: | :--------------------------------: | :----------: | :-----: | :----------------------------------------------------------------------------:   |  
     | id_celeiro         | Identificador único do celeiro     | INT          | -       | PK, NOT NULL, Unique                                                              |  
@@ -103,10 +114,11 @@
     | id_ambiente        | Identificador único do ambiente       | INT          | -       | FK, Unique, NOT NULL                                                           |
     ---
 
-    ### Entidade: Missão  
-    #### Descrição: Representa as missões disponíveis no jogo.  
+    ### Missão  
+    **Descrição:** Representa as missões disponíveis no jogo.  
 
-    #### Campos:  
+    **Campos:**
+
     | Nome               | Descrição                           | Tipo de dado | Tamanho | Restrições de domínio (PK, FK, NOT NULL, Unique, Identity, intervalo de valores) |  
     | :-----------------: | :--------------------------------: | :----------: | :-----: | :----------------------------------------------------------------------------:   |  
     | id_missão    | Identificador único da missão      | INT          | -       | PK, Identity, NOT NULL                                                                          | 
@@ -115,10 +127,11 @@
     | descrição          | Descrição da missão                | TEXT         | -       |                                                                                  | 
 
     ---
-    ### Entidade: Instância Missão  
-    #### Descrição: Representa unitariamente as missões do jogo.  
+    ### Instância Missão  
+    **Descrição:** Representa unitariamente as missões do jogo.  
 
-    #### Campos:  
+    **Campos:**
+
     | Nome               | Descrição                           | Tipo de dado | Tamanho | Restrições de domínio (PK, FK, NOT NULL, Unique, Identity, intervalo de valores) |  
     | :-----------------: | :--------------------------------: | :----------: | :-----: | :----------------------------------------------------------------------------:   |  
     | Missão    | Identificador da missão      | INT          | -       | FK, NOT NULL                                                                          | 
@@ -128,10 +141,11 @@
 
     ---
 
-    ### Entidade: Inventário  
-    #### Descrição: Armazena os itens coletados ou adquiridos pelo jogador.  
+    ### Inventário  
+    **Descrição:** Armazena os itens coletados ou adquiridos pelo jogador.  
 
-    #### Campos:  
+    **Campos:**
+
     | Nome               | Descrição                           | Tipo de dado | Tamanho | Restrições de domínio (PK, FK, NOT NULL, Unique, Identity, intervalo de valores) |  
     | :-----------------: | :--------------------------------: | :----------: | :-----: | :----------------------------------------------------------------------------:   |  
     | id                 | Identificador único do inventário  | INT          | -       | PK, NOT NULL, Unique                                                              |  
@@ -140,10 +154,11 @@
     |Instância de Inimigo_id | Identificador único da Instância de Inimigo | INT | | FK, NOT NULL, Unique|
     ---
 
-    ### Entidade: Item  
-    #### Descrição: Representa qualquer item do jogo.  
+    ### Item  
+    **Descrição:** Representa qualquer item do jogo.  
 
-    #### Campos:  
+    **Campos:**
+
     | Nome               | Descrição                           | Tipo de dado | Tamanho | Restrições de domínio (PK, FK, NOT NULL, Unique, Identity, intervalo de valores) |  
     | :-----------------: | :--------------------------------: | :----------: | :-----: | :----------------------------------------------------------------------------:   |  
     | id_item            | Identificador único do item        | INT          | -       | PK, NOT NULL, Identity                                                             |  
@@ -156,20 +171,22 @@
     | Estoque_produto         | Itens em venda      | VARCHAR          | 255      | FK                                                                         |  
     ---
 
-    ### Entidade: Plantação  
-    #### Descrição: Representa as áreas cultiváveis no jogo.  
+    ### Plantação  
+    **Descrição:** Representa as áreas cultiváveis no jogo.  
 
-    #### Campos:  
+    **Campos:**
+
     | Nome               | Descrição                           | Tipo de dado | Tamanho | Restrições de domínio (PK, FK, NOT NULL, Unique, Identity, intervalo de valores) |  
     | :-----------------: | :--------------------------------: | :----------: | :-----: | :----------------------------------------------------------------------------:   |  
     | qtd_plantas        | Quantidade de plantas cultivadas   | INT          | -       | NOT NULL                                                                          |  
     | id_ambiente        | Identificador único do ambiente       | INT          | -       | FK, Unique, NOT NULL                                                           |
     ---
 
-    ### Entidade: Instância de Planta
-    #### Descrição: Representa as sementes plantáveis no jogo.  
+    ### Instância de Planta
+    **Descrição:** Representa as sementes plantáveis no jogo.  
 
-    #### Campos:  
+    **Campos:**
+
     | Nome               | Descrição                           | Tipo de dado | Tamanho | Restrições de domínio (PK, FK, NOT NULL, Unique, Identity, intervalo de valores) |  
     | :-----------------: | :--------------------------------: | :----------: | :-----: | :----------------------------------------------------------------------------:   |  
     | id                 | Identificador da instância de planta     | INT          | -       | PK, NOT NULL, Unique                                                              |  
@@ -178,10 +195,11 @@
     | plantaDrop          | consumível gerado               | VARCHAR         | 50       | NOT NULL                                                                          |  
     ---
 
-    ### Entidade: Semente  
-    #### Descrição: Representa as sementes plantáveis no jogo.  
+    ### Semente  
+    **Descrição:** Representa as sementes plantáveis no jogo.  
 
-    #### Campos:  
+    **Campos:**
+
     | Nome               | Descrição                           | Tipo de dado | Tamanho | Restrições de domínio (PK, FK, NOT NULL, Unique, Identity, intervalo de valores) |  
     | :-----------------: | :--------------------------------: | :----------: | :-----: | :----------------------------------------------------------------------------:   |  
     | id                 | Identificador único da semente     | INT          | -       | PK, NOT NULL, Unique                                                              |  
@@ -195,10 +213,11 @@
 
     ---
 
-    ### Entidade: Recompensa  
-    #### Descrição: Representa as recompensas obtidas no jogo.  
+    ### Recompensa  
+    **Descrição:** Representa as recompensas obtidas no jogo.  
 
-    #### Campos:  
+    **Campos:**
+
     | Nome               | Descrição                           | Tipo de dado | Tamanho | Restrições de domínio (PK, FK, NOT NULL, Unique, Identity, intervalo de valores) |  
     | :-----------------: | :--------------------------------: | :----------: | :-----: | :----------------------------------------------------------------------------:   |  
     | id                 | Identificador único da recompensa  | INT          | -       | PK, NOT NULL, Unique                                                              |  
@@ -208,10 +227,11 @@
     |Instância Missão | Identificador único da missão | INT | | FK, NOT NULL, Unique|
     ---
 
-    ### Entidade: InstânciaAnimal  
-    #### Descrição: Representa uma instância específica de um animal no jogo.  
+    ### InstânciaAnimal  
+    **Descrição:** Representa uma instância específica de um animal no jogo.  
 
-    #### Campos:  
+    **Campos:**
+
     | Nome               | Descrição                           | Tipo de dado | Tamanho | Restrições de domínio (PK, FK, NOT NULL, Unique, Identity, intervalo de valores) |  
     | :-----------------: | :--------------------------------: | :----------: | :-----: | :----------------------------------------------------------------------------:   |  
     | id                 | Identificador único da instância   | INT          | -       | PK, NOT NULL, Identity                                                            |  
@@ -222,10 +242,11 @@
     | id_celeiro         | Identificador único do celeiro     | INT          | -       | FK, NOT NULL, Unique                                                              |  
     ---
 
-    ### Entidade: Inimigo  
-    #### Descrição: Representa os inimigos encontrados no jogo.  
+    ### Inimigo  
+    **Descrição:** Representa os inimigos encontrados no jogo.  
 
-    #### Campos:  
+    **Campos:**
+
     | Nome               | Descrição                           | Tipo de dado | Tamanho | Restrições de domínio (PK, FK, NOT NULL, Unique, Identity, intervalo de valores) |  
     | :-----------------: | :--------------------------------: | :----------: | :-----: | :----------------------------------------------------------------------------:   |  
     | id                 | Identificador único do inimigo     | INT          | -       | PK, NOT NULL, Unique                                                              |  
@@ -236,10 +257,11 @@
 
     ---
 
-    ### Entidade: InstânciaInimigo  
-    #### Descrição: Representa uma instância específica de um inimigo no jogo.  
+    ### InstânciaInimigo  
+    **Descrição:** Representa uma instância específica de um inimigo no jogo.  
 
-    #### Campos:  
+    **Campos:**
+
     | Nome               | Descrição                           | Tipo de dado | Tamanho | Restrições de domínio (PK, FK, NOT NULL, Unique, Identity, intervalo de valores) |  
     | :-----------------: | :--------------------------------: | :----------: | :-----: | :----------------------------------------------------------------------------:   |  
     | id                 | Identificador único da instância   | INT          | -       | PK, NOT NULL, Unique                                                              |  
@@ -248,10 +270,11 @@
     | tipo               | Tipo de inimigo                    | VARCHAR      | 50      | NOT NULL                                                                          |  
 
 
-    ### Entidade: Mineral  
-    #### Descrição: Representa os minerais coletáveis no jogo.  
+    ### Mineral  
+    **Descrição:** Representa os minerais coletáveis no jogo.  
 
-    #### Campos:  
+    **Campos:**
+
     | Nome               | Descrição                           | Tipo de dado | Tamanho | Restrições de domínio (PK, FK, NOT NULL, Unique, Identity, intervalo de valores) |  
     | :-----------------: | :--------------------------------: | :----------: | :-----: | :----------------------------------------------------------------------------:   |  
     | tipo_minério       | Tipo de minério                    | VARCHAR      | 50      | NOT NULL                                                                          |  
@@ -260,10 +283,11 @@
 
     ---
 
-    ### Entidade: Caixa de Mensagem  
-    #### Descrição: Representa as caixas de mensagem usadas no jogo.  
+    ### Caixa de Mensagem  
+    **Descrição:** Representa as caixas de mensagem usadas no jogo.  
 
-    #### Campos:  
+    **Campos:**
+
     | Nome               | Descrição                           | Tipo de dado | Tamanho | Restrições de domínio (PK, FK, NOT NULL, Unique, Identity, intervalo de valores) |  
     | :-----------------: | :--------------------------------: | :----------: | :-----: | :----------------------------------------------------------------------------:   |  
     | id_caixa           | Identificador único da caixa       | INT          | -       | PK, NOT NULL, Identity                                                           |
@@ -271,10 +295,11 @@
 
     ---  
 
-    ### Entidade: Mapa  
-    #### Descrição: Representa os mapas disponíveis no jogo, onde as ações podem ocorrer.  
+    ### Mapa  
+    **Descrição:** Representa os mapas disponíveis no jogo, onde as ações podem ocorrer.  
 
-    #### Campos:  
+    **Campos:**
+
     | Nome       | Descrição                   | Tipo de dado | Tamanho | Restrições de domínio (PK, FK, NOT NULL, Unique, Identity, intervalo de valores) |  
     | :--------: | :-------------------------: | :----------: | :-----: | :----------------------------------------------------------------------------:   |  
     | idMapa     | Identificador único do mapa | INT          | -       | PK, NOT NULL, Unique                                                              |  
@@ -282,19 +307,21 @@
 
     ---
 
-    ### Entidade: Estoque  
-    #### Descrição: Representa os itens disponíveis no estoque da loja ou do jogador.  
+    ### Estoque  
+    **Descrição:** Representa os itens disponíveis no estoque da loja ou do jogador.  
 
-    #### Campos:  
+    **Campos:**
+
     | Nome       | Descrição                        | Tipo de dado | Tamanho | Restrições de domínio (PK, FK, NOT NULL, Unique, Identity, intervalo de valores) |  
     | :--------: | :------------------------------: | :----------: | :-----: | :----------------------------------------------------------------------------:   |  
     | produto    | Nome do produto no estoque       | VARCHAR      | 255     | NOT NULL                                                                          |  
     | preço      | Preço do produto no estoque      | DECIMAL      | -       | NOT NULL                                                                          |  
 
-    ### Entidade: Recurso  
-    #### Descrição: Representa os recursos coletáveis ou utilizáveis no jogo.  
+    ### Recurso  
+    **Descrição:** Representa os recursos coletáveis ou utilizáveis no jogo.  
 
-    #### Campos:  
+    **Campos:**
+
     | Nome         | Descrição                   | Tipo de dado | Tamanho | Restrições de domínio (PK, FK, NOT NULL, Unique, Identity, intervalo de valores) |  
     | :----------: | :-------------------------: | :----------: | :-----: | :----------------------------------------------------------------------------:   |  
     | tipo_recurso | Tipo do recurso             | VARCHAR      | 50      | NOT NULL                                                                          |  
@@ -302,20 +329,22 @@
 
     ---
 
-    ### Entidade: Solo  
-    #### Descrição: Representa solo para cultivo no jogo.  
+    ### Solo  
+    **Descrição:** Representa solo para cultivo no jogo.  
 
-    #### Campos:  
+    **Campos:**
+
     | Nome         | Descrição                   | Tipo de dado | Tamanho | Restrições de domínio (PK, FK, NOT NULL, Unique, Identity, intervalo de valores) |  
     | :----------: | :-------------------------: | :----------: | :-----: | :----------------------------------------------------------------------------:   |  
     | tipo_recurso | Tipo de recurso associado  | VARCHAR      | 50      | NOT NULL                                                                          |  
     |Jogador_id | Identificador único do Jogador | INT | | FK, NOT NULL, Unique|
     ---
 
-    ### Entidade: Habilidade  
-    #### Descrição: Representa as habilidades do jogador no jogo.  
+    ### Habilidade  
+    **Descrição:** Representa as habilidades do jogador no jogo.  
 
-    #### Campos:  
+    **Campos:**
+
     | Nome     | Descrição                   | Tipo de dado | Tamanho | Restrições de domínio (PK, FK, NOT NULL, Unique, Identity, intervalo de valores) |  
     | :------: | :-------------------------: | :----------: | :-----: | :----------------------------------------------------------------------------:   |  
     | id       | Identificador único         | INT          | -       | PK, NOT NULL, Unique                                                              |  
@@ -326,10 +355,11 @@
 
     ---
 
-    ### Entidade: HabCombate  
-    #### Descrição: Representa habilidades de combate do jogador.  
+    ### HabCombate  
+    **Descrição:** Representa habilidades de combate do jogador.  
 
-    #### Campos:  
+    **Campos:**
+
     | Nome        | Descrição                   | Tipo de dado | Tamanho | Restrições de domínio (PK, FK, NOT NULL, Unique, Identity, intervalo de valores) |  
     | :---------: | :-------------------------: | :----------: | :-----: | :----------------------------------------------------------------------------:   |  
     | Habilidade_id          | Identificador único         | INT          | -       | FK, NOT NULL, Unique                                                              |  
@@ -338,10 +368,11 @@
 
     ---
 
-    ### Entidade: HabCultivo  
-    #### Descrição: Representa habilidades relacionadas ao cultivo.  
+    ### HabCultivo  
+    **Descrição:** Representa habilidades relacionadas ao cultivo.  
 
-    #### Campos:  
+    **Campos:**
+
     | Nome                 | Descrição                       | Tipo de dado | Tamanho | Restrições de domínio (PK, FK, NOT NULL, Unique, Identity, intervalo de valores) |  
     | :------------------: | :-----------------------------: | :----------: | :-----: | :----------------------------------------------------------------------------:   |  
     | reducaoEnergiaCultivar | Redução de energia no cultivo  | INT          | -       |                                                                                  |  
@@ -350,10 +381,11 @@
 
     ---
 
-    ### Entidade: HabMineração  
-    #### Descrição: Representa habilidades relacionadas à mineração.  
+    ### HabMineração  
+    **Descrição:** Representa habilidades relacionadas à mineração.  
 
-    #### Campos:  
+    **Campos:**
+
     | Nome                  | Descrição                       | Tipo de dado | Tamanho | Restrições de domínio (PK, FK, NOT NULL, Unique, Identity, intervalo de valores) |  
     | :-------------------: | :-----------------------------: | :----------: | :-----: | :----------------------------------------------------------------------------:   |  
     | Habilidade_id          | Identificador único         | INT          | -       | FK, NOT NULL, Unique                                                              |  
@@ -362,10 +394,11 @@
 
     ---
 
-    ### Entidade: Consumível  
-    #### Descrição: Representa itens consumíveis no jogo.  
+    ### Consumível  
+    **Descrição:** Representa itens consumíveis no jogo.  
 
-    #### Campos:  
+    **Campos:**
+
     | Nome           | Descrição                   | Tipo de dado | Tamanho | Restrições de domínio (PK, FK, NOT NULL, Unique, Identity, intervalo de valores) |  
     | :------------: | :-------------------------: | :----------: | :-----: | :----------------------------------------------------------------------------:   |  
     | tipo_consumível | Tipo do consumível          | VARCHAR      | 50      | NOT NULL                                                                          |  
@@ -375,10 +408,11 @@
 
     ---
 
-    ### Entidade: Utensílio  
-    #### Descrição: Representa utensílios utilizados no jogo para diferentes funções.  
+    ### Utensílio  
+    **Descrição:** Representa utensílios utilizados no jogo para diferentes funções.  
 
-    #### Campos:  
+    **Campos:**
+
     | Nome           | Descrição                       | Tipo de dado | Tamanho | Restrições de domínio (PK, FK, NOT NULL, Unique, Identity, intervalo de valores) |  
     | :------------: | :-----------------------------: | :----------: | :-----: | :----------------------------------------------------------------------------:   |  
     | tipo_utensílio | Tipo do utensílio               | VARCHAR      | 100     | PK, NOT NULL                                                                          |  
@@ -386,10 +420,11 @@
     | id_item              | Identificador único do item                   | INT      | -       | FK, NOT NULL                                                     |  
     | id_loja              | Identificador único da loja                   | INT      | -       | FK, NOT NULL                                                     |  
 
-    ### Entidade: Coleta  
-    #### Descrição: Representa missões relacionadas à coleta de materiais no jogo.  
+    ### Coleta  
+    **Descrição:** Representa missões relacionadas à coleta de materiais no jogo.  
 
-    #### Campos:  
+    **Campos:**
+
     | Nome           | Descrição                       | Tipo de dado | Tamanho | Restrições de domínio (PK, FK, NOT NULL, Unique, Identity, intervalo de valores) |  
     | :------------: | :-----------------------------: | :----------: | :-----: | :----------------------------------------------------------------------------:   |  
     | tipoMaterial   | Tipo de material coletado       | VARCHAR      | 100     | NOT NULL                                                                          |  
@@ -399,10 +434,11 @@
 
     ---
 
-    ### Entidade: Combate  
-    #### Descrição: Representa missões ou interações relacionadas ao combate no jogo.  
+    ### Combate  
+    **Descrição:** Representa missões ou interações relacionadas ao combate no jogo.  
 
-    #### Campos:  
+    **Campos:**
+
     | Nome           | Descrição                       | Tipo de dado | Tamanho | Restrições de domínio (PK, FK, NOT NULL, Unique, Identity, intervalo de valores) |  
     | :------------: | :-----------------------------: | :----------: | :-----: | :----------------------------------------------------------------------------:   |  
     | tipoInimigo    | Tipo de inimigo                 | VARCHAR      | 100     | NOT NULL                                                                          |  
@@ -411,10 +447,11 @@
 
     --- 
 
-    ### Entidade: Ferramenta 
-    #### Descrição: Representa os utensílios do tipo ferramenta  
+    ### Ferramenta 
+    **Descrição:** Representa os utensílios do tipo ferramenta  
 
-    #### Campos:  
+    **Campos:**
+
     | Nome           | Descrição                       | Tipo de dado | Tamanho | Restrições de domínio (PK, FK, NOT NULL, Unique, Identity, intervalo de valores) |  
     | :------------: | :-----------------------------: | :----------: | :-----: | :----------------------------------------------------------------------------:   |  
     | tipo_ferramenta    | tipo da ferramenta                 | VARCHAR      | 100     | PK, Identity, NOT NULL                                         |  
@@ -422,10 +459,11 @@
     | eficiência    | Afinidade da ferramenta      | INT          | -       |  NOT NULL                                                                          |
 
     --- 
-    ### Entidade: Arma
-    #### Descrição: Representa os utensílios do tipo arma 
+    ### Arma
+    **Descrição:** Representa os utensílios do tipo arma 
 
-    #### Campos:  
+    **Campos:**
+
     | Nome           | Descrição                       | Tipo de dado | Tamanho | Restrições de domínio (PK, FK, NOT NULL, Unique, Identity, intervalo de valores) |  
     | :------------: | :-----------------------------: | :----------: | :-----: | :----------------------------------------------------------------------------:   |  
     | tipo_arma    | tipo da arma                | VARCHAR      | 100     | PK, Identity, NOT NULL                                         |  
@@ -435,11 +473,15 @@
     --- 
 
 === "<a href="#anchor-link-modulo2" tabindex="-1">Módulo 2</a>"
-    ### Entidade: Habilidade 
+    </br>
+    # Módulo 2
+    ## Entidades
+    ### Habilidade 
 
-    #### Descrição: Representa as habilidades do jogador no jogo.
+    **Descrição:** Representa as habilidades do jogador no jogo.
 
-    #### Campos:
+    **Campos:**
+
 
     | Nome | Descrição | Tipo de dado | Tamanho | Restrições de domínio (PK, FK, NOT NULL, Unique, Identity, intervalo de valores) |
     | :---: | :---: | :---: | :---: | :---: |
@@ -448,11 +490,12 @@
 
     ---
 
-    ### Entidade: Mapa 
+    ### Mapa 
 
-    #### Descrição: Representa os mapas disponíveis no jogo, onde as ações podem ocorrer.
+    **Descrição:** Representa os mapas disponíveis no jogo, onde as ações podem ocorrer.
 
-    #### Campos:
+    **Campos:**
+
 
     | Nome | Descrição | Tipo de dado | Tamanho | Restrições de domínio (PK, FK, NOT NULL, Unique, Identity, intervalo de valores) |
     | :---: | :---: | :---: | :---: | :---: |
@@ -461,11 +504,12 @@
 
     ---
 
-    ### Entidade: Inimigo 
+    ### Inimigo 
 
-    #### Descrição: Representa os inimigos encontrados no jogo.
+    **Descrição:** Representa os inimigos encontrados no jogo.
 
-    #### Campos:
+    **Campos:**
+
 
     | Nome | Descrição | Tipo de dado | Tamanho | Restrições de domínio (PK, FK, NOT NULL, Unique, Identity, intervalo de valores) |
     | :---: | :---: | :---: | :---: | :---: |
@@ -477,11 +521,12 @@
 
     ---
 
-    ### Entidade: Animal 
+    ### Animal 
 
-    #### Descrição: Representa os animais do jogo.
+    **Descrição:** Representa os animais do jogo.
 
-    #### Campos:
+    **Campos:**
+
 
     | Nome | Descrição | Tipo de dado | Tamanho | Restrições de domínio (PK, FK, NOT NULL, Unique, Identity, intervalo de valores) |
     | :---: | :---: | :---: | :---: | :---: |
@@ -494,11 +539,12 @@
 
     ---
 
-    ### Entidade: HabMineração 
+    ### HabMineração 
 
-    #### Descrição: Representa habilidades relacionadas à mineração.
+    **Descrição:** Representa habilidades relacionadas à mineração.
 
-    #### Campos:
+    **Campos:**
+
 
     | Nome | Descrição | Tipo de dado | Tamanho | Restrições de domínio (PK, FK, NOT NULL, Unique, Identity, intervalo de valores) |
     | :---: | :---: | :---: | :---: | :---: |
@@ -511,11 +557,12 @@
 
     ---
 
-    ### Entidade: HabCombate 
+    ### HabCombate 
 
-    #### Descrição: Representa habilidades de combate do jogador.
+    **Descrição:** Representa habilidades de combate do jogador.
 
-    #### Campos:
+    **Campos:**
+
 
     | Nome | Descrição | Tipo de dado | Tamanho | Restrições de domínio (PK, FK, NOT NULL, Unique, Identity, intervalo de valores) |
     | :---: | :---: | :---: | :---: | :---: |
@@ -528,11 +575,12 @@
 
     ---
 
-    ### Entidade: HabCultivo 
+    ### HabCultivo 
 
-    #### Descrição: Representa habilidades relacionadas ao cultivo.
+    **Descrição:** Representa habilidades relacionadas ao cultivo.
 
-    #### Campos:
+    **Campos:**
+
 
     | Nome | Descrição | Tipo de dado | Tamanho | Restrições de domínio (PK, FK, NOT NULL, Unique, Identity, intervalo de valores) |
     | :---: | :---: | :---: | :---: | :---: |
@@ -545,11 +593,12 @@
 
     ---
 
-    ### Entidade: Jogador 
+    ### Jogador 
 
-    #### Descrição: Personagem principal, será manuseado pelo jogador.
+    **Descrição:** Personagem principal, será manuseado pelo jogador.
 
-    #### Campos:
+    **Campos:**
+
 
     | Nome | Descrição | Tipo de dado | Tamanho | Restrições de domínio (PK, FK, NOT NULL, Unique, Identity, intervalo de valores) |
     | :---: | :---: | :---: | :---: | :---: |
@@ -569,11 +618,12 @@
 
     ---
 
-    ### Entidade: Ambiente 
+    ### Ambiente 
 
-    #### Descrição: Representa os locais do jogo.
+    **Descrição:** Representa os locais do jogo.
 
-    #### Campos:
+    **Campos:**
+
 
     | Nome | Descrição | Tipo de dado | Tamanho | Restrições de domínio (PK, FK, NOT NULL, Unique, Identity, intervalo de valores) |
     | :---: | :---: | :---: | :---: | :---: |
@@ -590,11 +640,12 @@
 
     ---
 
-    ### Entidade: CasaJogador 
+    ### CasaJogador 
 
-    #### Descrição: Representa a casa do jogador.
+    **Descrição:** Representa a casa do jogador.
 
-    #### Campos:
+    **Campos:**
+
 
     | Nome | Descrição | Tipo de dado | Tamanho | Restrições de domínio (PK, FK, NOT NULL, Unique, Identity, intervalo de valores) |
     | :---: | :---: | :---: | :---: | :---: |
@@ -603,11 +654,12 @@
 
     ---
 
-    ### Entidade: Caverna 
+    ### Caverna 
 
-    #### Descrição: Representa as cavernas exploráveis no jogo.
+    **Descrição:** Representa as cavernas exploráveis no jogo.
 
-    #### Campos:
+    **Campos:**
+
 
     | Nome | Descrição | Tipo de dado | Tamanho | Restrições de domínio (PK, FK, NOT NULL, Unique, Identity, intervalo de valores) |
     | :---: | :---: | :---: | :---: | :---: |
@@ -620,11 +672,12 @@
 
     ---
 
-    ### Entidade: Celeiro 
+    ### Celeiro 
 
-    #### Descrição: Local para alojar os animais do jogador.
+    **Descrição:** Local para alojar os animais do jogador.
 
-    #### Campos:
+    **Campos:**
+
 
     | Nome | Descrição | Tipo de dado | Tamanho | Restrições de domínio (PK, FK, NOT NULL, Unique, Identity, intervalo de valores) |
     | :---: | :---: | :---: | :---: | :---: |
@@ -635,11 +688,12 @@
 
     ---
 
-    ### Entidade: Plantação 
+    ### Plantação 
 
-    #### Descrição: Representa as áreas cultiváveis no jogo.
+    **Descrição:** Representa as áreas cultiváveis no jogo.
 
-    #### Campos:
+    **Campos:**
+
 
     | Nome | Descrição | Tipo de dado | Tamanho | Restrições de domínio (PK, FK, NOT NULL, Unique, Identity, intervalo de valores) |
     | :---: | :---: | :---: | :---: | :---: |
@@ -650,11 +704,12 @@
 
     ---
 
-    ### Entidade: Loja 
+    ### Loja 
 
-    #### Descrição: Local onde os jogadores podem comprar e vender itens.
+    **Descrição:** Local onde os jogadores podem comprar e vender itens.
 
-    #### Campos:
+    **Campos:**
+
 
     | Nome | Descrição | Tipo de dado | Tamanho | Restrições de domínio (PK, FK, NOT NULL, Unique, Identity, intervalo de valores) |
     | :---: | :---: | :---: | :---: | :---: |
@@ -666,11 +721,12 @@
 
     ---
 
-    ### Entidade: Estoque 
+    ### Estoque 
 
-    #### Descrição: Representa os itens disponíveis no estoque da loja ou do jogador.
+    **Descrição:** Representa os itens disponíveis no estoque da loja ou do jogador.
 
-    #### Campos:
+    **Campos:**
+
 
     | Nome | Descrição | Tipo de dado | Tamanho | Restrições de domínio (PK, FK, NOT NULL, Unique, Identity, intervalo de valores) |
     | :---: | :---: | :---: | :---: | :---: |
@@ -680,11 +736,12 @@
 
     ---
 
-    ### Entidade: Inventário 
+    ### Inventário 
 
-    #### Descrição: Armazena os itens coletados ou adquiridos pelo jogador.
+    **Descrição:** Armazena os itens coletados ou adquiridos pelo jogador.
 
-    #### Campos:
+    **Campos:**
+
 
     | Nome | Descrição | Tipo de dado | Tamanho | Restrições de domínio (PK, FK, NOT NULL, Unique, Identity, intervalo de valores) |
     | :---: | :---: | :---: | :---: | :---: |
@@ -693,11 +750,12 @@
 
     ---
 
-    ### Entidade: Item 
+    ### Item 
 
-    #### Descrição: Representa qualquer item do jogo.
+    **Descrição:** Representa qualquer item do jogo.
 
-    #### Campos:
+    **Campos:**
+
 
     | Nome | Descrição | Tipo de dado | Tamanho | Restrições de domínio (PK, FK, NOT NULL, Unique, Identity, intervalo de valores) |
     | :---: | :---: | :---: | :---: | :---: |
@@ -708,11 +766,12 @@
 
     ---
 
-    ### Entidade: Consumível 
+    ### Consumível 
 
-    #### Descrição: Representa itens consumíveis no jogo.
+    **Descrição:** Representa itens consumíveis no jogo.
 
-    #### Campos:
+    **Campos:**
+
 
     | Nome | Descrição | Tipo de dado | Tamanho | Restrições de domínio (PK, FK, NOT NULL, Unique, Identity, intervalo de valores) |
     | :---: | :---: | :---: | :---: | :---: |
@@ -723,22 +782,24 @@
 
     ---
 
-    ### Entidade: Utensílio 
+    ### Utensílio 
 
-    #### Descrição: Representa utensílios utilizados no jogo para diferentes funções.
+    **Descrição:** Representa utensílios utilizados no jogo para diferentes funções.
 
-    #### Campos:
+    **Campos:**
+
 
     | Nome | Descrição | Tipo de dado | Tamanho | Restrições de domínio (PK, FK, NOT NULL, Unique, Identity, intervalo de valores) |
     | :---: | :---: | :---: | :---: | :---: |
     | fk_id_item | Identificador único do item | INT | - | PK, FK, NOT NULL |
     | tipo_utensílio | Tipo do utensílio | VARCHAR | 100 | NOT NULL |
 
-    ### Entidade: Ferramenta 
+    ### Ferramenta 
 
-    #### Descrição: Representa os utensílios do tipo ferramenta
+    **Descrição:** Representa os utensílios do tipo ferramenta
 
-    #### Campos:
+    **Campos:**
+
 
     | Nome | Descrição | Tipo de dado | Tamanho | Restrições de domínio (PK, FK, NOT NULL, Unique, Identity, intervalo de valores) |
     | :---: | :---: | :---: | :---: | :---: |
@@ -751,11 +812,12 @@
 
     ---
 
-    ### Entidade: Arma 
+    ### Arma 
 
-    #### Descrição: Representa os utensílios do tipo arma
+    **Descrição:** Representa os utensílios do tipo arma
 
-    #### Campos:
+    **Campos:**
+
 
     | Nome | Descrição | Tipo de dado | Tamanho | Restrições de domínio (PK, FK, NOT NULL, Unique, Identity, intervalo de valores) |
     | :---: | :---: | :---: | :---: | :---: |
@@ -766,11 +828,12 @@
 
     ---
 
-    ### Entidade: Mineral 
+    ### Mineral 
 
-    #### Descrição: Representa os minerais coletáveis no jogo.
+    **Descrição:** Representa os minerais coletáveis no jogo.
 
-    #### Campos:
+    **Campos:**
+
 
     | Nome | Descrição | Tipo de dado | Tamanho | Restrições de domínio (PK, FK, NOT NULL, Unique, Identity, intervalo de valores) |
     | :---: | :---: | :---: | :---: | :---: |
@@ -782,11 +845,12 @@
 
     ---
 
-    ### Entidade: Recurso 
+    ### Recurso 
 
-    #### Descrição: Representa os recursos coletáveis ou utilizáveis no jogo.
+    **Descrição:** Representa os recursos coletáveis ou utilizáveis no jogo.
 
-    #### Campos:
+    **Campos:**
+
 
     | Nome | Descrição | Tipo de dado | Tamanho | Restrições de domínio (PK, FK, NOT NULL, Unique, Identity, intervalo de valores) |
     | :---: | :---: | :---: | :---: | :---: |
@@ -797,11 +861,12 @@
 
     ---
 
-    ### Entidade: InstânciaInimigo 
+    ### InstânciaInimigo 
 
-    #### Descrição: Representa uma instância específica de um inimigo no jogo.
+    **Descrição:** Representa uma instância específica de um inimigo no jogo.
 
-    #### Campos:
+    **Campos:**
+
 
     | Nome | Descrição | Tipo de dado | Tamanho | Restrições de domínio (PK, FK, NOT NULL, Unique, Identity, intervalo de valores) |
     | :---: | :---: | :---: | :---: | :---: |
@@ -812,11 +877,12 @@
 
     ---
 
-    ### Entidade: InstânciaAnimal 
+    ### InstânciaAnimal 
 
-    #### Descrição: Representa uma instância específica de um animal no jogo.
+    **Descrição:** Representa uma instância específica de um animal no jogo.
 
-    #### Campos:
+    **Campos:**
+
 
     | Nome | Descrição | Tipo de dado | Tamanho | Restrições de domínio (PK, FK, NOT NULL, Unique, Identity, intervalo de valores) |
     | :---: | :---: | :---: | :---: | :---: |
@@ -829,11 +895,12 @@
 
     ---
 
-    ### Entidade: Instância de Planta 
+    ### Instância de Planta 
 
-    #### Descrição: Representa as sementes plantáveis no jogo.
+    **Descrição:** Representa as sementes plantáveis no jogo.
 
-    #### Campos:
+    **Campos:**
+
 
     | Nome | Descrição | Tipo de dado | Tamanho | Restrições de domínio (PK, FK, NOT NULL, Unique, Identity, intervalo de valores) |
     | :---: | :---: | :---: | :---: | :---: |
@@ -844,11 +911,12 @@
 
     ---
 
-    ### Entidade: Semente 
+    ### Semente 
 
-    #### Descrição: Representa as sementes plantáveis no jogo.
+    **Descrição:** Representa as sementes plantáveis no jogo.
 
-    #### Campos:
+    **Campos:**
+
 
     | Nome | Descrição | Tipo de dado | Tamanho | Restrições de domínio (PK, FK, NOT NULL, Unique, Identity, intervalo de valores) |
     | :---: | :---: | :---: | :---: | :---: |
@@ -862,11 +930,12 @@
 
     ---
 
-    ### Entidade: Solo aaaaaaaaaaaaaaaaaaaaaaa
+    ### Solo 
 
-    #### Descrição: Representa solo para cultivo no jogo.
+    **Descrição:** Representa solo para cultivo no jogo.
 
-    #### Campos:
+    **Campos:**
+
 
     | Nome | Descrição | Tipo de dado | Tamanho | Restrições de domínio (PK, FK, NOT NULL, Unique, Identity, intervalo de valores) |
     | :---: | :---: | :---: | :---: | :---: |
@@ -878,11 +947,12 @@
 
     ---
 
-    ### Entidade: Missão 
+    ### Missão 
 
-    #### Descrição: Representa as missões disponíveis no jogo.
+    **Descrição:** Representa as missões disponíveis no jogo.
 
-    #### Campos:
+    **Campos:**
+
 
     | Nome | Descrição | Tipo de dado | Tamanho | Restrições de domínio (PK, FK, NOT NULL, Unique, Identity, intervalo de valores) |
     | :---: | :---: | :---: | :---: | :---: |
@@ -891,11 +961,12 @@
 
     ---
 
-    ### Entidade: Combate 
+    ### Combate 
 
-    #### Descrição: Representa missões ou interações relacionadas ao combate no jogo.
+    **Descrição:** Representa missões ou interações relacionadas ao combate no jogo.
 
-    #### Campos:
+    **Campos:**
+
 
     | Nome | Descrição | Tipo de dado | Tamanho | Restrições de domínio (PK, FK, NOT NULL, Unique, Identity, intervalo de valores) |
     | :---: | :---: | :---: | :---: | :---: |
@@ -908,11 +979,12 @@
 
     ---
 
-    ### Entidade: Coleta 
+    ### Coleta 
 
-    #### Descrição: Representa missões relacionadas à coleta de materiais no jogo.
+    **Descrição:** Representa missões relacionadas à coleta de materiais no jogo.
 
-    #### Campos:
+    **Campos:**
+
 
     | Nome | Descrição | Tipo de dado | Tamanho | Restrições de domínio (PK, FK, NOT NULL, Unique, Identity, intervalo de valores) |
     | :---: | :---: | :---: | :---: | :---: |
@@ -925,11 +997,12 @@
 
     ---
 
-    ### Entidade: Instância Missão 
+    ### Instância Missão 
 
-    #### Descrição: Representa unitariamente as missões do jogo.
+    **Descrição:** Representa unitariamente as missões do jogo.
 
-    #### Campos:
+    **Campos:**
+
 
     | Nome | Descrição | Tipo de dado | Tamanho | Restrições de domínio (PK, FK, NOT NULL, Unique, Identity, intervalo de valores) |
     | :---: | :---: | :---: | :---: | :---: |
@@ -940,11 +1013,12 @@
 
     ---
 
-    ### Entidade: Recompensa 
+    ### Recompensa 
 
-    #### Descrição: Representa as recompensas obtidas no jogo.
+    **Descrição:** Representa as recompensas obtidas no jogo.
 
-    #### Campos:
+    **Campos:**
+
 
     | Nome | Descrição | Tipo de dado | Tamanho | Restrições de domínio (PK, FK, NOT NULL, Unique, Identity, intervalo de valores) |
     | :---: | :---: | :---: | :---: | :---: |
@@ -956,11 +1030,12 @@
 
     ---
 
-    ### Entidade: Caixa de Mensagem 
+    ### Caixa de Mensagem 
 
-    #### Descrição: Representa as caixas de mensagem usadas no jogo.
+    **Descrição:** Representa as caixas de mensagem usadas no jogo.
 
-    #### Campos:
+    **Campos:**
+
 
     | Nome | Descrição | Tipo de dado | Tamanho | Restrições de domínio (PK, FK, NOT NULL, Unique, Identity, intervalo de valores) |
     | :---: | :---: | :---: | :---: | :---: |
@@ -981,3 +1056,4 @@
 | 25/11/2024 | `1.3` | [Marcos Marinho](https://github.com/devMarcosVM) | ajustando chaves e atributos das tabelas |
 | 25/11/2024 | `1.4` | [Marcos Marinho](https://github.com/devMarcosVM) | adicionando atributos faltantes |
 | 12/01/2025 | `1.5` | [Gabriel Fernando de Jesus Silva](https://github.com/MMcLovin) | Atualiza entidades e atributos |
+| 08/02/2025 | `1.6` | [Gabriel Fernando de Jesus Silva](https://github.com/MMcLovin) | Altera formatação do índice |
