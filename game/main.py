@@ -326,6 +326,25 @@ def interagir_ambiente(jogador, localizacao_atual):
         interacao_loja(jogador)
     elif localizacao_atual[1] == 'CasaJogador':
         interacao_cabana(jogador)
+    elif localizacao_atual[2] == 'Clínica do Harvey':
+        clear_terminal()
+        print("Não há nada para fazer aqui.")
+    elif localizacao_atual[2] == 'Praia':
+        clear_terminal()
+        print("Não há nada para fazer aqui.")
+        input("\n Precione enter para continuar")
+    elif localizacao_atual[2] == 'Centro Comunitário':
+        clear_terminal()
+        print("Não há nada para fazer aqui.")
+        input("\n Precione enter para continuar")
+    elif localizacao_atual[2] == 'Deserto':
+        clear_terminal()
+        print("Não há nada para fazer aqui.")
+        input("\n Precione enter para continuar")
+    elif localizacao_atual[2] == 'Praça da Vila':
+        clear_terminal()
+        print("Não há nada para fazer aqui.")
+        input("\n Precione enter para continuar")
 
 def abrir_mapa():
     clear_terminal()
@@ -341,7 +360,7 @@ def abrir_mapa():
                          [Praia]        [Clínica do Harvey]
                                         
           """)
-    input("\nDigite 1 para retornar ao menu\n>")
+    input("\nAperte enter para retornar ao menu\n>")
 
 def menu_jogo(jogador):
     while True:

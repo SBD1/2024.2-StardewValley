@@ -68,7 +68,12 @@ def dormir(jogador):
         if historia[0] > 100:
             clear_terminal()
             print("Não há mais histórias disponíveis para dias além do 100.")
+            print_animado("Você dormiu e acordou às 06:00\n")
+            input("Pressione enter para continuar")
         else:
+            clear_terminal()
+            print_animado(f"{historia[1]}")
+            input("Pressione enter para continuar")
             clear_terminal()
             print_animado("Você dormiu e acordou às 06:00\n")
             input("Pressione enter para continuar")
