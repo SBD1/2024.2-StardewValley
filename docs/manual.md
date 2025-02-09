@@ -1,12 +1,18 @@
 ### Manual do Jogador - MUD inspirado em Stardew Valley
 
+
 **Bem-vindo(a) ao mundo do nosso MUD inspirado em Stardew Valley!**  
 Neste manual, você encontrará informações essenciais para entender e aproveitar ao máximo as mecânicas do jogo.
+
+<div style="display: flex; justify-content: center;">
+    <img src="img/StardewOriginal.gif" alt="Stardew original" style="margin-right: 10px;">
+    <img src="img/StardewMUD.gif" alt="Stardew MUD">
+</div>
 
 ---
 
 ### **1. Objetivo do Jogo**
-Seu objetivo é gerenciar recursos, explorar ambientes, completar missões, interagir com os ambientes e evoluir suas habilidades enquanto vive como um fazendeiro(a) em um mundo repleto de aventuras e desafios.
+Seu objetivo é gerenciar recursos, explorar ambientes, interagir com os ambientes e evoluir suas habilidades enquanto vive como um fazendeiro(a) em um mundo repleto de aventuras e desafios.
 
 ---
 
