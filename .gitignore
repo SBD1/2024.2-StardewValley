@@ -1,6 +1,6 @@
 # Ignorar todos os diretórios __pycache__ em qualquer nível
 __pycache__/
-
+**/__pycache__/
 # Ignorar arquivos compilados do Python
 *.py[cod]
 *.so
