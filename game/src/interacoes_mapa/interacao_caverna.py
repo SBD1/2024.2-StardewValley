@@ -75,7 +75,7 @@ def exibir_status_combate(jogador_dict, inimigo_dict):
     print(f"\nStatus do jogador {jogador_dict['nome']}")
     barra_status_vida(vida_jogador, jogador_dict['vidaMax'])
     print(f"\nDano de ataque: {jogador_dict['dano_ataque']} ")  
-    print(f"Arma equipada: {jogador_dict['arma'][1]  if jogador_dict['arma'] is not None else "Nenhuma" } ")
+    print(f"Arma equipada: {jogador_dict['arma'][1]  if jogador_dict['arma'] is not None else 'Nenhuma' } ")
     print(f"Dano da arma: {jogador_dict['arma'][3]} ") if jogador_dict['arma'] is not None else None
     print(f"Itens consumíveis: {quantidade_pocoes} ")
     print(f"\nStatus do(a) {inimigo_dict['tipo'][1]}")
@@ -583,6 +583,7 @@ def interacao_caverna(jogador, ambiente):
         caverna_andar = cursor.fetchone()
         jogador_dict = atualizar_jogador(jogador)
 
+        minerios_disponiveis = caverna_andar[3]
         while True:
             clear_terminal()
 
@@ -617,7 +618,9 @@ def interacao_caverna(jogador, ambiente):
                     
                     conferir_recompensa(jogador_dict, ambiente, caverna_andar)
                 elif opcao == 2:
-                    minerar(jogador_dict, caverna_andar)
+                    resultado_minerar = minerar(jogador_dict, minerios_disponiveis)
+                    if (resultado_minerar): 
+                        minerios_disponiveis -= 1
                     input("Pressione enter para continuar...")
                 elif opcao == 3:
                     return  
@@ -635,36 +638,69 @@ def interacao_caverna(jogador, ambiente):
             cursor.close()
             connection.close()
     
-def minerar(jogador, caverna_andar):
-    andar = 1  # Consultar o banco para descobrir qual o andar atual
-    minerios_disponiveis = caverna_andar[3]
-    
+def minerar(jogador, minerios_disponiveis):    
     if minerios_disponiveis <= 0:    
         print("Você não encontrou minérios para minerar...")
         time.sleep(2)
         return
+    
     print(f"Nesta caverna tem {minerios_disponiveis} minérios")
-    time.sleep(2)
-    if barra_de_precisao():
-        minerio_id = random.choice(list(minerios.keys()))
-        minerio = minerios[minerio_id]
-        print(f"Parabéns! Você conseguiu minerar e encontrou {minerio['nome']} ({minerio['descricao']})!")
-        escolha = int(input("Deseja armazenar o minério? (1 - Sim, 2 - Não) "))
-        if escolha == 1:
-            connection = get_connection()
-            cursor = connection.cursor()
-            # cursor.execute("" (,)) (inserir minério na mochila)
-            print("Minério armazenado com sucesso!")
+    while(minerios_disponiveis > 0):
+        time.sleep(2)
+        if barra_de_precisao():
+            minerio_id = random.choice(list(minerios.keys()))
+            minerio = minerios[minerio_id]
+            print(f"Parabéns! Você conseguiu minerar e encontrou {minerio['nome']} ({minerio['descricao']})!")
+            escolha = int(input("Deseja armazenar o minério? (1 - Sim, 2 - Não) "))
+            if escolha == 1:
+                connection = get_connection()
+                cursor = connection.cursor()
+                cursor.execute("SELECT * FROM mineral WHERE nome = %s", (minerio['nome'],))
+
+                mineral = cursor.fetchall()
+                criar_item(jogador['id_jogador'], mineral[0][0])
+                # cursor.execute("" (,)) (inserir minério na mochila)
+                print("Minério armazenado com sucesso!")
+                time.sleep(2)
+                return True
+            elif escolha == 2:
+                print("Minério descartado...")
+                time.sleep(1)
+                return True
+            elif escolha != 1 or escolha != 2:
+                print("Opção inválida. Tente novamente.")
+                return
+        else:
+            print("Você quebrou a pedra, mas não encontrou nada de valor :(")
             time.sleep(3)
-            return minerio
-        elif escolha == 2:
-            print("Minério descartado...")
-            time.sleep(2)
+            return False
+    
+def criar_item(jogadorId, id_item):
+    try:
+        conn = get_connection()
+        cursor = conn.cursor()
+        # Buscar o ID do inventário do jogador
+        cursor.execute("SELECT id_inventario FROM inventario WHERE fk_id_jogador = %s", (jogadorId,))
+        inventario = cursor.fetchone()
+        
+        if not inventario:
+            print("❌ Inventário do jogador não encontrado.")
             return
-        elif escolha != 1 or escolha != 2:
-            print("Opção inválida. Tente novamente.")
-            return
-    else:
-        print("Você quebrou a pedra, mas não encontrou nada de valor :(")
-        time.sleep(3)
-        return None
+        
+        id_inventario = inventario[0]
+        # Inserir o item no inventário do jogador
+        cursor.execute(
+            "INSERT INTO instancia_de_item (fk_id_jogador, fk_id_item, fk_id_inventario) VALUES (%s, %s, %s)",
+            (jogadorId, id_item, id_inventario)
+        )
+        conn.commit()  # Confirma a transação
+
+
+    except Exception as e:
+        print(f"❌ Erro ao adicionar item ao inventário: {e}")
+    finally:
+        if cursor:
+            cursor.close()
+        if conn:
+            conn.close()
+     
