@@ -53,21 +53,21 @@ O Modelo Entidade Relacionamento para bancos de dados é um modelo que descreve 
 
 ### 2. Atributos
 
-**Ambiente**: <ins>id_ambiente</ins>, `tipo`, `fk_id_mapa`, `fk_jogador_id`, `descricao`, `transitar_1`, `transitar_2`, `transitar_3`, `transitar_4`, `transitar_5`, `transitar_6`
+**Ambiente**: <ins>id_ambiente</ins>, `tipo`, `descricao`, `nome`, `eh_casa`,`transitar_1`, `transitar_2`, `transitar_3`, `transitar_4`, `transitar_5`, `transitar_6`
 
-**Animal**: <ins>id_animal</ins>, `nome_animal`, `diasTotalDropar`, `tipo_animal`, `itemDrop`, `preco`
+**Animal**: <ins>id_animal</ins>, `diasTotalDropar`, `tipo_animal`, `itemDrop`, `preco`
 
-**arma**: <ins>id_item</ins>, `nome`, `descricao`, `fk_id_utensilio`
+**arma**: <ins>id_item</ins>, `nome`, `descricao`, `dano`, `preco`
 
-**caverna**: <ins>andar</ins>, `fk_id_ambiente`, `quantidade_mobs`, `qtd_minerio`, `fk_id_minerio_item`, `fk_id_item_recompensa`
+**caverna**: <ins>fk_id_ambiente</ins>, `andar`, `quantidade_mobs`, `qtd_minerio`, `fk_id_minerio_item`, `fk_id_item_recompensa`
 
-**celeiro**: <ins>id_celeiro</ins>, `qtd_animais`, `qtd_max_animais`, `fk_id_ambiente`
+**celeiro**: <ins>fk_id_ambiente</ins>, `qtd_max_animais`
 
-**Consumivel**: <ins>id_item</ins>, `nome`, `descricao`, `efeito_vida`
+**Consumivel**: <ins>fk_id_item</ins>, `nome`, `descricao`, `efeito_vida`, `preco`
 
-**Estoque**: <ins>id_estoque</ins>
+**Estoque**: `fk_id_loja`, `fk_id_item`
 
-**Ferramenta**: <ins>id_item</ins>, `nome`, `descricao`, `fk_id_utensilio`, `eficiencia`, `nivel`
+**Ferramenta**: <ins>fk_id_item</ins>, `nome`, `descricao`,`eficiencia`, `preco`
 
 **Habilidade**: <ins>id_habilidade</ins>, `tipo`
 
@@ -77,31 +77,29 @@ O Modelo Entidade Relacionamento para bancos de dados é um modelo que descreve 
 
 **HabMineracao**: <ins>fk_Habilidade_id</ins>, `reducaoEnergiaMinera`, `minerioBonus`, `nivel`, `xpMin`, `xpMax`
 
-**Inimigo**: <ins>id_inimigo</ins>, `nome`, `tipo`, `vidaMax`, `dano`
+**Inimigo**: <ins>id_inimigo</ins>, `nome`, `tipo`, `vidaMax`, `dano`, `xp_recompensa`
 
-**InstanciaAnimal**: <ins>id_instancia_de_animal</ins>, `prontoDropa`, `diaAtual`, `fk_Animal_id`, `fk_Jogador_id`, `fk_Celeiro_id`
+**InstanciaAnimal**: <ins>id_instancia_de_animal</ins>, `nome_animal`, `prontoDropa`, `diaAtual`, `fk_Animal_id`, `fk_Jogador_id`, `fk_Celeiro_id`
 
-**InstanciaInimigo**: <ins>id_instancia_de_inimigo</ins>, `vidaAtual`, `fk_Caverna_andar`, `fk_inimigo_id`
+**InstanciaInimigo**: <ins>id_instancia_de_inimigo</ins>, `vidaAtual`, `fk_Caverna_andar`, `fk_inimigo_id`, `fk_Jogador_id`, `fk_id_ambiente`
 
-**InstanciaPlanta**: <ins>id_instancia_de_planta</ins>, `nome`, `diaDropar`, `plantaDrop`
-
-**InstanciaMissao**: <ins>id_Instancia_Missao</ins>, `fk_id_jogador`, `fk_Missao`, `missao_finalizada`
+**InstanciaPlanta**: <ins>id_instancia_de_planta</ins>, `nome`, `ProntoColher`, `diaAtual`,`fk_id_planta`, `fk_Jogador_id`
 
 **Inventário**: <ins>id_inventario</ins>, `fk_id_jogador`
 
-**Item**: <ins>id_item</ins>, `tipo_item`, `fk_estoque`, `fk_inventario_id`
+**Item**: <ins>id_item</ins>, `tipo_item`
 
-**Jogador**: <ins>id_jogador</ins>, `nome`, `dia`, `tempo`, `vidaMax`, `vidaAtual`, `xp_mineracao`, `xp_cultivo`, `xp_combate`, `dano_ataque`, `fk_habMineracao_fk_Habilidade_id`, `fk_habCombate_fk_Habilidade_id`, `fk_habCultivo_fk_Habilidade_id`
+**Jogador**: <ins>id_jogador</ins>, `nome`, `dia`, `tempo`, `localizacao_atual`, `vidaMax`, `vidaAtual`, `xp_mineracao`, `xp_cultivo`, `xp_combate`, `dano_ataque`, `moedas`,`fk_habMineracao_fk_Habilidade_id`, `fk_habCombate_fk_Habilidade_id`, `fk_habCultivo_fk_Habilidade_id`
 
-**Loja**: <ins>id_loja</ins>, `nome`, `proprietario`, `fk_id_ambiente`, `fk_id_estoque`
+**Loja**: <ins>fk_id_ambiente</ins>, `nome`, `proprietario`
 
-**Mineral**: <ins>id_item</ins>, `nome`, `descricao`, `resistencia`, `preco`
+**Mineral**: <ins>fk_id_item</ins>, `nome`, `descricao`, `resistencia`, `preco`
 
-**Plantacao**: <ins>id_plantacao</ins>, `qtd_plantas`, `qtd_plantas_max`, `fk_id_ambiente`
+**Plantacao**: <ins>fk_id_ambiente</ins>, `qtd_plantas_max`
 
-**Recurso**: <ins>id_item</ins>, `nome`, `descricao`, `preco`
+**Recurso**: <ins>fk_id_item</ins>, `nome`, `descricao`, `preco`, `raridade`
 
-**Planta**: <ins>id_semente</ins>, `nome`, `descricao`, `diaAtual`, `prontoColher`, `id_item`, `fk_instancia_planta_id`
+**Planta**: <ins>id_planta</ins>, `nome`, `descricao`, `diaDropar`, `itemDrp`, `preco`
 
 **Historia**: <ins>dia</ins>, `historia`
 
@@ -112,9 +110,9 @@ O Modelo Entidade Relacionamento para bancos de dados é um modelo que descreve 
 
 -   Um tipo de animal pode possuir nenhuma ou várias instâncias (0, n), mas uma instância de animal está relacionada a apenas um tipo de animal (1, 1).
 
-**Inventario contém Item**
+**Instancia de item está Inventario**
 
--   Um inventário pode conter nenhum ou vários itens (0, n), mas um item está contido em apenas um inventário por vez (1,1) 
+-   Um inventário pode conter nenhum ou várias instancias de itens (0, n), mas um item está contido em apenas um inventário por vez (1,1) 
 
 
 **Instancia De Planta <ins>dropa</ins> Consumivel**
@@ -123,12 +121,12 @@ O Modelo Entidade Relacionamento para bancos de dados é um modelo que descreve 
 
 **Jogador quebra Minerio**
 
-- Um jogador pode quebrar nenhum ou vários minérios brutos (0, n) e um minério bruto é quebrado apenas por um jogador (1, 1)
+- Um jogador pode quebrar nenhum ou vários minérios (0, n) e um minério bruto é quebrado apenas por um jogador (1, 1)
 
 
 **Jogador possui Inventario**
 
-- Um jogador possui nenhum ou apenas um inventário (0, 1) e um inventário é possuído apenas por um um jogador (1, 1)
+- Um jogador possui um ou um inventário (1, 1) e um inventário é possuído apenas por um um jogador (1, 1)
 
 **Jogador possui HabMineração**
 
@@ -178,6 +176,18 @@ O Modelo Entidade Relacionamento para bancos de dados é um modelo que descreve 
 **Loja possui Estoque**
 
 - Uma loja possui nenhum ou apenas um estoque (0, 1) e um estoque é possuido por apenas uma loja (1, 1)
+
+**Aniamal gera Item**
+
+- Um animal pode gerar nenhum ou 1 item e um item pode ser gerado por nenhum ou n animais.
+
+**Jogador lê história**
+
+- Um jogador pode ler 0 a n histórias e uma história só pode ser lida por 1 jogador.
+
+**Item possui Instancia de item**
+
+- Um item pode possuir 0 a n instancias e uma instancia pode ser de 1 item. 
 
 ## Versionamento
 
