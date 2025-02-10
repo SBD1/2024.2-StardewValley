@@ -12,17 +12,17 @@ Neste manual, você encontrará informações essenciais para entender e aprovei
 ---
 
 ### **1. Objetivo do Jogo**
-Seu objetivo é gerenciar recursos, explorar ambientes, interagir com os ambientes e evoluir suas habilidades enquanto vive como um fazendeiro(a) em um mundo repleto de aventuras e desafios.
+Seu objetivo é gerenciar recursos, explorar a caverna da vila, interagir com os ambientes e principalmente **evoluir suas habilidades** enquanto vive como um fazendeiro(a) em um mundo repleto de aventuras e desafios.
 
----
 
-### **2. Entidades e Funcionalidades do Jogo**
+### **2. Funcionalidades do Jogo**
 Com base no modelo do jogo, você terá acesso às seguintes interações:
 
 #### **2.1. Jogador**
-- Cada jogador nasce com atributos 
-- Cada jogador possui atributos como **vida máxima**, **moedas** e um inventário pessoal. 
+- Cada jogador inicia com 3 habilidades para desenvolver: Cultivo, Combate e Mineração. A vida da cidade nunca iria te proporcionar essas habilidades, aproveite!
+- Cada jogador inicia com 1000 moedas para entrar na nova vida com o pé direito!
 - Você pode equipar ferramentas, armas e coletar itens, como minérios, plantas e recursos.
+- Você tem em sua fazenda uma plantação descampada e um celero empoeirado, traga vida com novas plantas e animais.
 
 ![menu do jogo](img/menu.jpeg)
 
@@ -52,6 +52,7 @@ O inventário consiste no conteúdo da mochila do jogador. Os espaços proporcio
 <font size="2"><p style="text-align: center">Fonte: [Stardew Wiki](https://pt.stardewvalleywiki.com/), 2025</p></font>
 
 - No nosso MUD, de um mesmo ambiente você pode transitar para até 6 outros, as rotas estão definidas nas opções do terminal.
+- O jogador carrega um mapa da vila que pode ser aberto em qualquer lugar, contendo todos os caminhos possíveis.
 
 <center>
     ![Mapa](img/mapa.jpeg)
@@ -78,6 +79,7 @@ Você pode ir até a loja para vender e comprar itens com as suas moedas.
 #### **2.6. Inimigos**
 - Enfrente inimigos em locais como a caverna.
 - Cada inimigo possui atributos como **vida** e **dano**.
+- Ao comater inimigos, você aumenta a sua Habilidade de Combate.
 
 <center>
     ![Combate](img/inimigo.jpeg)
@@ -86,8 +88,11 @@ Você pode ir até a loja para vender e comprar itens com as suas moedas.
 
 ### **3. Habilidades**
 Os jogadores podem desenvolver habilidades em três áreas principais:
+
 - **Habilidade de Cultivo:** Melhora a eficiência nas plantações.
+
 - **Habilidade de Mineração:** Aumenta a chance de obter minérios raros.
+
 - **Habilidade de Combate:** Melhora o dano causado e reduz o dano recebido.
 
 ---
@@ -121,7 +126,6 @@ Os jogadores podem desenvolver habilidades em três áreas principais:
 
 ### **5. Progressão no Jogo**
 - Melhore suas ferramentas, armas e habilidades para enfrentar desafios mais difíceis.
-- Complete missões para desbloquear novos ambientes e recompensas.
 - Gerencie bem seu tempo e energia para otimizar seu desempenho.
 
 ---
