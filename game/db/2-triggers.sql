@@ -345,7 +345,6 @@ BEGIN
     IF NEW.tempo > '02:00' AND NEW.tempo < '06:00' THEN
         NEW.localizacao_atual := 1;
         NEW.tempo := '06:00';
-        NEW.dia := NEW.dia + 1;
         NEW.moedas := NEW.moedas * 0.95;
         RAISE NOTICE 'O jogador % foi forçado a dormir e acordou às 06:00!', NEW.id_jogador;
     END IF;
@@ -395,7 +394,7 @@ $$ LANGUAGE plpgsql;
 CREATE TRIGGER trigger_animal_avancar_dia
 BEFORE UPDATE ON Jogador
 FOR EACH ROW
-WHEN (NEW.tempo = '06:00')
+WHEN (OLD.dia < NEW.dia)
 EXECUTE FUNCTION animal_avancar_dia();
 
 CREATE OR REPLACE FUNCTION planta_avancar_dia()
@@ -432,7 +431,7 @@ $$ LANGUAGE plpgsql;
 CREATE TRIGGER trigger_planta_avancar_dia
 BEFORE UPDATE ON Jogador
 FOR EACH ROW
-WHEN (NEW.tempo = '06:00')
+WHEN (OLD.dia < NEW.dia)
 EXECUTE FUNCTION planta_avancar_dia();
 
 COMMIT;

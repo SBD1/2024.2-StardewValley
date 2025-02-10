@@ -479,7 +479,7 @@ INSERT INTO recurso (fk_id_item, nome, descricao, preco, raridade) VALUES
 INSERT INTO Planta (nome, descricao, diaDropar, preco, itemDrop)
 VALUES
 ('Melão', 'Uma fruta doce e suculenta típica do verão.', 10, 300, 6),
-('Alface', 'Uma folha verde e crocante, ideal para saladas.', 5, 100,30),
+('Alface', 'Uma folha verde e crocante, ideal para saladas.', 1, 100,30),
 ('Cenoura', 'Um vegetal alaranjado e nutritivo, cresce bem na primavera.', 12, 200,31),
 ('Cebola', 'Um bulbo picante e saboroso, colhido no verão.', 8, 150,32),
 ('Pimentão', 'Uma fruta colorida e suculenta, cresce bem no verão.', 10, 250,33),
