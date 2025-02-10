@@ -448,4 +448,62 @@ FOR EACH ROW
 WHEN (OLD.dia < NEW.dia)
 EXECUTE FUNCTION planta_avancar_dia();
 
+-- inserir_habilidade()
+-- Função que insere um nova habilidade na tabela Habilidade e nas tabelas correspondentes (habCombate, habCultivo, habMineracao).
+CREATE FUNCTION inserir_habilidade(
+    tipo_habilidade_param VARCHAR(20),
+    nivel_param INTEGER,
+    xpMin_param INTEGER,
+    xpMax_param INTEGER,
+    reducaoEnergiaMinera_param INTEGER,
+    minerioBonus_param INTEGER,
+    vidaBonus_param INTEGER, 
+    danoBonus_param INTEGER,
+    cultivoBonus_param INTEGER,
+    reducaoEnergiaCultiva_param INTEGER
+)
+RETURNS INTEGER AS $$
+DECLARE
+    habilidade_id_result INTEGER;
+BEGIN
+    -- Inserir na tabela Habilidade
+    INSERT INTO habilidade (tipo_habilidade) VALUES (tipo_habilidade_param) RETURNING id_habilidade INTO habilidade_id_result;
+
+    -- Inserir na tabela correspondente
+    IF tipo_habilidade_param = 'mineracao' THEN
+        INSERT INTO habMineracao (fk_Habilidade_id, reducaoEnergiaMinera, minerioBonus, nivel, xpMin, xpMax)
+        VALUES (habilidade_id_result, reducaoEnergiaMinera_param, minerioBonus_param, nivel_param, xpMin_param,xpMax_param);
+    ELSIF tipo_habilidade_param = 'combate' THEN
+        INSERT INTO habCombate (fk_Habilidade_id, vidaBonus, danoBonus, nivel, xpMin, xpMax)
+        VALUES (habilidade_id_result, vidaBonus_param, danoBonus_param, nivel_param, xpMin_param,xpMax_param);
+    ELSIF tipo_habilidade_param = 'cultivo' THEN
+        INSERT INTO habCultivo (fk_Habilidade_id, cultivoBonus, reducaoEnergiaCultiva, nivel, xpMin, xpMax)
+        VALUES (habilidade_id_result, cultivoBonus_param, reducaoEnergiaCultiva_param, nivel_param, xpMin_param,xpMax_param);
+    END IF;
+
+    RETURN habilidade_id_result;
+END;
+$$ LANGUAGE plpgsql;
+
+-- exclusividade_tipo_habilidade()
+-- Função que garante que uma habilidade não pode ser associada a mais de um tipo (fhabCombate, habCultivo, habMineracao).
+CREATE OR REPLACE FUNCTION exclusividade_tipo_habilidade()
+RETURNS TRIGGER AS $$
+BEGIN
+    IF NEW.tipo = 'mineracao' AND EXISTS (SELECT 1 FROM habMineracao WHERE fk_Habilidade_id = NEW.id_habilidade) THEN
+        RAISE EXCEPTION 'O habilidade já está associado a uma habMineracao.';
+    ELSIF NEW.tipo = 'combate' AND EXISTS (SELECT 1 FROM habCombate WHERE fk_Habilidade_id = NEW.id_habilidade) THEN
+        RAISE EXCEPTION 'O habilidade já está associado a uma habCombate.';
+    ELSIF NEW.tipo = 'cultivo' AND EXISTS (SELECT 1 FROM habCultivo WHERE fk_Habilidade_id = NEW.id_habilidade) THEN
+        RAISE EXCEPTION 'O habilidade já está associado a um habCultivo.';
+    END IF;
+    RETURN NEW;
+END;
+$$ LANGUAGE plpgsql;
+
+-- Trigger que chama a função exclusividade_tipo_habilidade antes de inserir um novo habilidade.
+CREATE TRIGGER exclusividade_tipo_habilidade_trigger
+BEFORE INSERT ON habilidade
+FOR EACH ROW EXECUTE FUNCTION exclusividade_tipo_habilidade();
+
 COMMIT;
