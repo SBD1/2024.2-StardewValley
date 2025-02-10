@@ -4,9 +4,9 @@
 **Bem-vindo(a) ao mundo do nosso MUD inspirado em Stardew Valley!**  
 Neste manual, você encontrará informações essenciais para entender e aproveitar ao máximo as mecânicas do jogo.
 
-<div style="display: flex; justify-content: center;">
-    <img src="img/StardewOriginal.gif" alt="Stardew original" style="margin-right: 10px;">
-    <img src="img/StardewMUD.gif" alt="Stardew MUD">
+<div style="display: flex; text-align: center; width: 330px;">
+    <img src="https://github.com/SBD1/2024.2-StardewValley/blob/develop/docs/img/StardewOriginal.gif?raw=true" alt="Stardew original" style="margin-right: 10px;">
+    <img src="https://github.com/SBD1/2024.2-StardewValley/blob/develop/docs/img/StardewMUD.gif?raw=true" alt="Stardew MUD">
 </div>
 
 ---
@@ -24,6 +24,8 @@ Com base no modelo do jogo, você terá acesso às seguintes interações:
 - Cada jogador possui atributos como **vida máxima**, **moedas** e um inventário pessoal. 
 - Você pode equipar ferramentas, armas e coletar itens, como minérios, plantas e recursos.
 
+![menu do jogo](img/menu.jpeg)
+
 #### **2.2. Inventário**
 O inventário consiste no conteúdo da mochila do jogador. Os espaços proporcionam ao jogador acesso imediato a certos itens e viaja com o jogador ao redor do mapa. Este acesso é crucial no jogo, pois define a lista de itens com os quais o jogador pode trabalhar enquanto participa de atividades do jogo. É um elemento importante do jogo para garantir que o inventário contenha os itens necessários para todas as tarefas em todos os momentos. Seu limite de tamanho pode apresentar desafios no planejamento e impor mudanças na ordem a que as coisas devem ser feitas.
 
@@ -34,6 +36,8 @@ O inventário consiste no conteúdo da mochila do jogador. Os espaços proporcio
 </center>
 
 <font size="2"><p style="text-align: center">Fonte: [Stardew Wiki](https://pt.stardewvalleywiki.com/), 2025</p></font>
+
+<center>![inventário](img/inventario.jpeg)</center>
 
 #### **2.3. Ambientes**
 - O jogo é dividido em diferentes ambientes, cada um com suas características únicas
@@ -49,6 +53,10 @@ O inventário consiste no conteúdo da mochila do jogador. Os espaços proporcio
 
 - No nosso MUD, de um mesmo ambiente você pode transitar para até 6 outros, as rotas estão definidas nas opções do terminal.
 
+<center>
+    ![Mapa](img/mapa.jpeg)
+</center>
+
 #### **2.4. Itens**
 Os itens se dividem nas seguintes categorias:
 
@@ -58,17 +66,22 @@ Os itens se dividem nas seguintes categorias:
 
 - **Consumíveis:** Itens que restauram energia ou vida, como frutas e alimentos.
 
-- **Minérios e Recursos:** Obtidos na caverna ou em missões.
+- **Minérios e Recursos:** Obtidos na caverna ou na floresta.
 
-#### **2.5. Missões**
-- As missões são propostas por NPCs e podem envolver coletar itens, derrotar inimigos ou atingir objetivos específicos.
-- Ao completar missões, você recebe recompensas como experiência, moedas ou itens raros.
-- A missão pode ser do tipo combate, coleta ou geral.
+Você pode ir até a loja para vender e comprar itens com as suas moedas.
+
+<center>
+    ![Loja](img/loja.jpeg)
+</center>
+
 
 #### **2.6. Inimigos**
 - Enfrente inimigos em locais como a caverna.
 - Cada inimigo possui atributos como **vida** e **dano**.
 
+<center>
+    ![Combate](img/inimigo.jpeg)
+</center>
 ---
 
 ### **3. Habilidades**
@@ -90,6 +103,7 @@ Os jogadores podem desenvolver habilidades em três áreas principais:
 </center>
 
 <font size="2"><p style="text-align: center">Fonte: [Stardew Wiki](https://pt.stardewvalleywiki.com/), 2025</p></font>
+
 
 
 #### **4.2. Mineração**
