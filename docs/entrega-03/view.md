@@ -2,7 +2,7 @@
 
 Neste documento, você encontrará uma descrição das Views utilizadas no jogo, bem como exemplos de código para cada uma delas.
 
-[Acessar no repositório](https://github.com/SBD1/2024.2-StardewValley)
+[Acessar no repositório](https://github.com/SBD1/2024.2-StardewValley/blob/main/game/db/4-view.sql)
 
 ### vw_inventario_jogador
 
