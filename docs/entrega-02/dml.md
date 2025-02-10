@@ -6,7 +6,7 @@ DML, ou **Data Manipulation Language** (Linguagem de Manipulação de Dados), é
 
 ---
 
-## Inserir uma habilidade básica
+## 1. Inserir uma habilidade básica
 
 ```sql
 -- Inserir habilidades de mineração, combate e cultivo
@@ -44,7 +44,7 @@ VALUES
     ('cultivo');
 ```
 
-## Inserir registros relacionados nas tabelas `habMineracao`, `habCombate` e `habCultivo`
+## 2. Inserir registros relacionados nas tabelas `habMineracao`, `habCombate` e `habCultivo`
 
 ```sql
 -- Inserir dados de habilidades de mineração
@@ -89,7 +89,7 @@ VALUES
     (30, 2, 18, 10, 901, 1000);
 ```
 
-## Inserir dados de jogador, animais, inimigos e ambientes
+## 3. Inserir dados de jogador, animais, inimigos e ambientes
 
 ```sql
 -- Inserir dados do jogador
@@ -232,7 +232,7 @@ VALUES
  20, NULL, NULL, NULL, NULL, NULL);
 ```
 
-## Inserção de Lojas
+## 4. Inserção de Lojas
 
 ```sql
 -- Inserir dados de lojas
@@ -245,7 +245,7 @@ VALUES --fk_id_estoque com números aleatórios
 (7, 'Comércio do Deserto', 'Sandy');
 ```
 
-## Inserção de Celeiro
+## 5. Inserção de Celeiro
 
 ```sql
 -- Inserir dados de Celeiro
@@ -254,7 +254,7 @@ VALUES
 (3, 10);
 ```
 
-## Inserção de Plantacao
+## 6. Inserção de Plantacao
 
 ```sql
 -- Inserir dados de Plantacao
@@ -263,7 +263,7 @@ VALUES
 (2, 15);
 ```
 
-## Inserção de Caverna
+## 7. Inserção de Caverna
 
 ```sql
 -- Inserir dados de Caverna
@@ -277,7 +277,7 @@ INSERT INTO Caverna (fk_id_ambiente, andar, qtd_minerio, fk_id_minerio_item, fk_
     (21, 6, 3, 107,  7);
 ```
 
-## Inserção de Planta
+## 8. Inserção de Planta
 
 ```sql
 -- Inserir dados de Planta
@@ -298,7 +298,7 @@ VALUES
 ('Uva', 'Frutas roxas deliciosas, crescem em vinhedos no outono.', 16, 450,39);
 ```
 
-## Inserção de Itens
+## 9. Inserção de Itens
 
 ```sql
 -- Inserir dados de itens
@@ -558,7 +558,7 @@ INSERT INTO arma (fk_id_item, nome, descricao, dano_arma, preco) VALUES
 ```
 
 
-## Inserção de História
+## 10. Inserção de História
 
 ```sql
 -- Inserir dados de missões de História
@@ -665,7 +665,7 @@ INSERT INTO Historia(dia, historia) VALUES
 (100, 'Você ouve um som de ataque e, em seu sonho, um animal desaparece em um ataque de animal selvagem.');
 ```
 
-## Inserção de Estoque
+## 11. Inserção de Estoque
 
 ```sql
 -- Inserir dados de Estoque
