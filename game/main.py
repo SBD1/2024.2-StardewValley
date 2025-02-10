@@ -353,11 +353,12 @@ def abrir_mapa():
                 \              /
             [Deserto]───[Floresta]───[Guilda dos Aventureiros]
                              │                          
-            [Plantação]──[Cabana]───[Celeiro]     [Ferreiro]
-                             │                       /
+            [Plantação]──[Cabana]───[Celeiro]     
+                             │                       
 [Armazém do Pierre]──[Praça da Vila]───[Centro Comunitário]───[Mercado Joja]
-                            │                     │
-                         [Praia]        [Clínica do Harvey]
+                     /      │       \              
+            [Praia]  [Ferreiro]  [Clínica do Harvey]
+                                        
                                         
           """)
     input("\nAperte enter para retornar ao menu\n>")
