@@ -33,6 +33,7 @@ Antes de começar, verifique se você tem os seguintes itens instalados em sua m
 - **Python** (versão 3.7 ou superior)
 - **Pip** (gerenciador de pacotes Python)
 - **Docker** e **Docker Compose** (para gerenciamento de contêineres)
+- **Sistema Operacional Linux** 
 
 ### 1. Clonar o Repositório
 

@@ -363,4 +363,4 @@ WHERE i.fk_Jogador_id = NEW.id_jogador;
 | :--: | :----: | ----- | ---------- |
 | 13/01/2024 | `1.0` | [Marcos Vieira Marinho](https://github.com/devMarcosVM) | Versão inicial do documento |
 | 08/02/2024 | `1.1` | [Gabriel Fernando de Jesus Silva](https://github.com/MMcLovin) | Adiciona *queries* usadas no módulo 3 |
-| 08/02/2024 | `1.2` | [Gabriel Fernando de Jesus Silva](https://github.com/MMcLovin) | Atualiza para apenas *queries* usadas no módulo 3 |
+| 10/02/2024 | `1.2` | [Gabriel Fernando de Jesus Silva](https://github.com/MMcLovin) | Atualiza para apenas *queries* usadas no módulo 3 |
