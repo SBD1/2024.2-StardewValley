@@ -506,4 +506,75 @@ CREATE TRIGGER exclusividade_tipo_habilidade_trigger
 BEFORE INSERT ON habilidade
 FOR EACH ROW EXECUTE FUNCTION exclusividade_tipo_habilidade();
 
+-- inserir_ambiente()
+-- Função que insere um nova ambiente na tabela ambiente e nas tabelas correspondentes (habCombate, habCultivo, habMineracao).
+CREATE FUNCTION inserir_ambiente(
+    id_ambiente_param INTEGER,
+    tipo_param VARCHAR(50),
+    nome_param VARCHAR(50),
+    descricao_param TEXT,
+    eh_casa_param BOOLEAN,
+    transitar_1_param INTEGER,
+    transitar_2_param INTEGER,
+    transitar_3_param INTEGER,
+    transitar_4_param INTEGER,
+    transitar_5_param INTEGER,
+    transitar_6_param INTEGER,
+    qtd_plantas_max_param INTEGER,
+    andar_param INTEGER,
+    qtd_minerio_param INTEGER,
+    fk_id_minerio_item_param INTEGER,
+    fk_id_item_recompensa_param INTEGER,
+    proprietario_param INTEGER,
+    qtd_max_animais_param INTEGER
+)
+RETURNS INTEGER AS $$
+DECLARE
+    ambiente_id_result INTEGER;
+BEGIN
+    -- Inserir na tabela ambiente
+    INSERT INTO ambiente (id_ambiente,tipo,nome,descricao,eh_casa,transitar_1,transitar_2,transitar_3,transitar_4,transitar_5,transitar_6) VALUES (id_ambiente_param,tipo_param,nome_param,descricao_param,eh_casa_param,transitar_1_param,transitar_2_param,transitar_3_param,transitar_4_param,transitar_5_param,transitar_6_param) RETURNING id_ambiente INTO ambiente_id_result;
+
+    -- Inserir na tabela correspondente
+    IF tipo_ambiente_param = 'Plantação' THEN
+        INSERT INTO Plantacao (fk_id_ambiente, qtd_plantas_max)
+        VALUES (ambiente_id_result, qtd_plantas_max_param);
+    ELSIF tipo_ambiente_param = 'Caverna' THEN
+        INSERT INTO Caverna (fk_id_ambiente, andar, qtd_minerio, fk_id_minerio_item, fk_id_item_recompensa)
+        VALUES (ambiente_id_result, andar_param, qtd_minerio_param, fk_id_minerio_item_param, fk_id_item_recompensa_param);
+    ELSIF tipo_ambiente_param = 'Celeiro' THEN
+        INSERT INTO Celeiro (fk_id_ambiente, qtd_max_animais)
+        VALUES (ambiente_id_result, qtd_max_animais_param);
+    ELSIF tipo_ambiente_param = 'Loja' THEN
+        INSERT INTO loja (fk_id_ambiente, nome, proprietario)
+        VALUES (ambiente_id_result, nome_param, proprietario_param);
+    END IF;
+
+    RETURN ambiente_id_result;
+END;
+$$ LANGUAGE plpgsql;
+
+-- exclusividade_tipo_ambiente()
+-- Função que garante que uma ambiente não pode ser associada a mais de um tipo (fhabCombate, habCultivo, habMineracao).
+CREATE OR REPLACE FUNCTION exclusividade_tipo_ambiente()
+RETURNS TRIGGER AS $$
+BEGIN
+    IF NEW.tipo = 'Plantação' AND EXISTS (SELECT 1 FROM Plantacao WHERE fk_id_ambiente = NEW.id_ambiente) THEN
+        RAISE EXCEPTION 'O ambiente já está associado a uma Plantação.';
+    ELSIF NEW.tipo = 'Celeiro' AND EXISTS (SELECT 1 FROM Celeiro WHERE fk_id_ambiente = NEW.id_ambiente) THEN
+        RAISE EXCEPTION 'O ambiente já está associado a uma Celeiro.';
+    ELSIF NEW.tipo = 'Loja' AND EXISTS (SELECT 1 FROM loja WHERE fk_id_ambiente = NEW.id_ambiente) THEN
+        RAISE EXCEPTION 'O ambiente já está associado a um Loja.';
+    ELSIF NEW.tipo = 'Caverna' AND EXISTS (SELECT 1 FROM Caverna WHERE fk_id_ambiente = NEW.id_ambiente) THEN
+        RAISE EXCEPTION 'O ambiente já está associado a um Caverna.';
+    END IF;
+    RETURN NEW;
+END;
+$$ LANGUAGE plpgsql;
+
+-- Trigger que chama a função exclusividade_tipo_ambiente antes de inserir um novo ambiente.
+CREATE TRIGGER exclusividade_tipo_ambiente_trigger
+BEFORE INSERT ON ambiente
+FOR EACH ROW EXECUTE FUNCTION exclusividade_tipo_ambiente();
+
 COMMIT;
