@@ -30,4 +30,5 @@ Esta página tem como foco o vídeo de apresentação do módulo do projeto.
 | :--: | :----: | ----- | ---------- | 
 | 03/02/2025 | `1.0` | [Marcos Vieira Marinho](https://github.com/devMarcosVM)| Adiciona vídeo da apresentação parcial |
 | 06/02/2025 | `1.1` | [Manuella Magalhães Valadares](https://github.com/manuvaladares)| Adiciona vídeo da apresentação final |
+| 10/02/2025 | `1.2` | [Gabriel Zaranza](https://github.com/GZaranza) | Adiciona vídeo da apresentação final |
 

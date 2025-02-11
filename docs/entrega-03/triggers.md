@@ -121,7 +121,7 @@ END;
 $excluir_inimigos_mortos$ LANGUAGE plpgsql;
 ```
 
-### 3. trigger_excluir_inimigos_mortos
+#### trigger_excluir_inimigos_mortos
 
 Trigger que chama a função excluir_inimigos_mortos após a atualização da vida de um inimigo.
 
@@ -132,7 +132,8 @@ ON Instancia_de_Inimigo
 FOR EACH ROW
 EXECUTE FUNCTION excluir_inimigos_mortos();
 ```
-### 4. adiciona_xp_combate()
+
+### 3. adiciona_xp_combate()
 
 Função que adiciona experiência de combate ao jogador após derrotar um inimigo.
 
@@ -196,7 +197,7 @@ BEGIN
 END;
 $adiciona_xp$ LANGUAGE plpgsql;
 ```
-### 5. trigger_adiciona_xp
+#### trigger_adiciona_xp
 
 Trigger que chama a função adiciona_xp_combate após a exclusão de um inimigo.
 
@@ -207,7 +208,7 @@ ON Instancia_de_Inimigo
 FOR EACH ROW
 EXECUTE FUNCTION adiciona_xp_combate();
 ```
-### 6. inserir_item()
+### 4. inserir_item()
 
 Função que insere um novo item na tabela Item e nas tabelas correspondentes (ferramenta, arma, consumível, mineral, recurso).
 
@@ -251,7 +252,7 @@ BEGIN
 END;
 $$ LANGUAGE plpgsql;
 ```
-### 7. exclusividade_tipo_item()
+### 5. exclusividade_tipo_item()
 
 Função que garante que um item não pode ser associado a mais de um tipo (ferramenta, arma, consumível, mineral, recurso).
 
@@ -274,7 +275,7 @@ BEGIN
 END;
 $$ LANGUAGE plpgsql;
 ```
-### 8. exclusividade_tipo_item_trigger
+#### exclusividade_tipo_item_trigger
 
 Trigger que chama a função exclusividade_tipo_item antes de inserir um novo item.
 
@@ -283,7 +284,8 @@ CREATE TRIGGER exclusividade_tipo_item_trigger
 BEFORE INSERT ON item
 FOR EACH ROW EXECUTE FUNCTION exclusividade_tipo_item();
 ```
-### 9. avancar_dia_se_passar_meia_noite()
+
+### 6. avancar_dia_se_passar_meia_noite()
 
 Função que avança o dia do jogador se o tempo atual for menor que o tempo anterior.
 
@@ -306,7 +308,19 @@ BEGIN
 END;
 $$ LANGUAGE plpgsql;
 ```
-### 10. excluir_item_relacionado()
+#### trigger_avancar_dia
+
+Trigger que chama a função avancar_dia_se_passar_meia_noite antes de atualizar o jogador.
+
+```sql
+CREATE TRIGGER trigger_avancar_dia
+BEFORE UPDATE ON Jogador
+FOR EACH ROW
+WHEN (NEW.tempo < OLD.tempo)  
+EXECUTE FUNCTION avancar_dia_se_passar_meia_noite();
+```
+
+### 7. excluir_item_relacionado()
 
 Função que exclui os registros relacionados a um item nas tabelas específicas ao deletar um item.
 
@@ -323,7 +337,7 @@ BEGIN
 END;
 $$ LANGUAGE plpgsql;
 ```
-### 11. excluir_item_trigger
+#### excluir_item_trigger
 
 Trigger que chama a função excluir_item_relacionado antes de deletar um item.
 
@@ -332,7 +346,8 @@ CREATE TRIGGER excluir_item_trigger
 BEFORE DELETE ON item
 FOR EACH ROW EXECUTE FUNCTION excluir_item_relacionado();
 ```
-### 12. impedir_update_tipo_item()
+
+### 8. impedir_update_tipo_item()
 
 Função que impede a alteração do tipo de um item após sua criação.
 
@@ -347,7 +362,7 @@ BEGIN
 END;
 $$ LANGUAGE plpgsql;
 ```
-### 13. impedir_update_tipo_item_trigger
+#### impedir_update_tipo_item_trigger
 
 Trigger que chama a função impedir_update_tipo_item antes de atualizar um item.
 
@@ -356,18 +371,8 @@ CREATE TRIGGER impedir_update_tipo_item_trigger
 BEFORE UPDATE ON item
 FOR EACH ROW EXECUTE FUNCTION impedir_update_tipo_item();
 ```
-### 14. trigger_avancar_dia
 
-Trigger que chama a função avancar_dia_se_passar_meia_noite antes de atualizar o jogador.
-
-```sql
-CREATE TRIGGER trigger_avancar_dia
-BEFORE UPDATE ON Jogador
-FOR EACH ROW
-WHEN (NEW.tempo < OLD.tempo)  
-EXECUTE FUNCTION avancar_dia_se_passar_meia_noite();
-```
-### 15. forcar_jogador_a_dormir()
+### 9. forcar_jogador_a_dormir()
 
 Função que força o jogador a dormir se o tempo estiver entre 02:00 e 06:00.
 
@@ -386,7 +391,7 @@ BEGIN
 END;
 $$ LANGUAGE plpgsql;
 ```
-### 16. trigger_forcar_dormir
+#### trigger_forcar_dormir
 
 Trigger que chama a função forcar_jogador_a_dormir antes de atualizar o jogador.
 
@@ -398,7 +403,7 @@ WHEN (NEW.tempo > '02:00')
 EXECUTE FUNCTION forcar_jogador_a_dormir();
 ```
 
-### 17. animal_avancar_dia()
+### 10. animal_avancar_dia()
 
 Função que avança o dia dos animais do jogador.
 
@@ -436,7 +441,7 @@ END;
 $$ LANGUAGE plpgsql;
 ```
 
-### 18. trigger_animal_avancar_dia
+#### trigger_animal_avancar_dia
 
 Trigger que chama a função animal_avancar_dia antes de atualizar o jogador.
 
@@ -448,7 +453,7 @@ WHEN (OLD.dia < NEW.dia)
 EXECUTE FUNCTION animal_avancar_dia();
 ```
 
-### 19. planta_avancar_dia()
+### 11. planta_avancar_dia()
 
 Função que avança o dia das plantas do jogador.
 
@@ -486,7 +491,7 @@ END;
 $$ LANGUAGE plpgsql;
 ```
 
-### 20. trigger_planta_avancar_dia
+#### trigger_planta_avancar_dia
 
 Trigger que chama a função planta_avancar_dia antes de atualizar o jogador.
 
@@ -498,7 +503,7 @@ WHEN (OLD.dia < NEW.dia)
 EXECUTE FUNCTION planta_avancar_dia();
 ```
 
-### 21. inserir_habilidade()
+### 12. inserir_habilidade()
 
 Função que insere um nova habilidade na tabela Habilidade e nas tabelas correspondentes (habCombate, habCultivo, habMineracao).
 
@@ -539,7 +544,7 @@ END;
 $$ LANGUAGE plpgsql;
 ```
 
-### 22. exclusividade_tipo_habilidade()
+### 13. exclusividade_tipo_habilidade()
 
 Função que garante que uma habilidade não pode ser associada a mais de um tipo (fhabCombate, habCultivo, habMineracao).
 
@@ -559,7 +564,7 @@ END;
 $$ LANGUAGE plpgsql;
 ```
 
-### 23. exclusividade_tipo_habilidade_trigger
+#### exclusividade_tipo_habilidade_trigger
 
 Trigger que chama a função exclusividade_tipo_habilidade antes de inserir um novo habilidade.
 
@@ -569,7 +574,7 @@ BEFORE INSERT ON habilidade
 FOR EACH ROW EXECUTE FUNCTION exclusividade_tipo_habilidade();
 ```
 
-### 24. inserir_ambiente()
+### 13. inserir_ambiente()
 
 Função que insere um nova ambiente na tabela ambiente e nas tabelas correspondentes (habCombate, habCultivo, habMineracao).
 
@@ -621,7 +626,7 @@ END;
 $$ LANGUAGE plpgsql;
 ```
 
-### 25. exclusividade_tipo_ambiente()
+### 14. exclusividade_tipo_ambiente()
 
 Função que garante que uma ambiente não pode ser associada a mais de um tipo (fhabCombate, habCultivo, habMineracao).
 
@@ -643,7 +648,7 @@ END;
 $$ LANGUAGE plpgsql;
 ```
 
-### 26. exclusividade_tipo_ambiente_trigger
+#### exclusividade_tipo_ambiente_trigger
 
 Trigger que chama a função exclusividade_tipo_ambiente antes de inserir um novo ambiente.
 
@@ -660,3 +665,4 @@ FOR EACH ROW EXECUTE FUNCTION exclusividade_tipo_ambiente();
 |------------|--------|---------------------------------------------------|------------------------------|
 | 10/02/2025 | `1.0`  | [Manuella Valadares](https://github.com/manuvaladares)         | Criação do documento         |
 | 10/02/2025 | `1.1`  | [Gabriel Zaranza](https://github.com/GZaranza)         | Adicionando Triggers        |
+| 10/02/2025 | `1.2`  | [Gabriel Fernando de Jesus Silva](https://github.com/MMcLovin)         | Arrumando índice |
