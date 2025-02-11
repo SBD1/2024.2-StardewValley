@@ -1,0 +1,37 @@
+p{
+    text-align: justify;
+}
+body{
+    text-align: justify;
+}
+blockquote p{
+    text-align: left !important;
+}
+.md-nav{
+    text-align: left;
+}
+
+/* Cores principais de Stardew Valley */
+:root {
+    --stardew-green: #669933; /* Verde grama */
+    --stardew-brown: #A0522D; /* Marrom madeira */
+    --stardew-yellow: #FFD700; /* Amarelo claro */
+    --stardew-light-brown: #DEB887; /* Marrom claro */
+    --stardew-text: #222; /* Cor de texto */
+  }
+  
+  /* Estilos para cabeçalhos */
+  h1, h2, h3 {
+    color: var(--stardew-brown);
+  }
+
+  .custom-bold strong {
+    display: block;
+    font-size: 1.0em; /* Ajuste conforme necessário */
+    font-weight: bold;
+    color: var(--stardew-brown);
+    margin-top: 1em;
+    margin-bottom: 0.5em;
+}
+
+  
