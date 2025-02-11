@@ -15,11 +15,11 @@ Esta página tem como foco o vídeo de apresentação do módulo do projeto.
 ## Apresentação final (10/02/2024)
 
 <div style="text-align: center;">
-    <iframe width="560" height="315" src="https://www.youtube.com/embed/8rNqGB3zv8s?si=UdombialUej521Qw" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+    <iframe width="560" height="315" src="https://www.youtube.com/embed/2A2y4lwjQQc?si=Z2VKNsbxGTeqmf6U" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
 </div>
 
 <p style="text-align: center">
-    <a href="https://www.youtube.com/watch?v=8rNqGB3zv8s">Link para o vídeo</a>
+    <a href="https://www.youtube.com/watch?v=2A2y4lwjQQc&ab_channel=MarcosVieira">Link para o vídeo</a>
 </p>
 
 ## Bibliografia

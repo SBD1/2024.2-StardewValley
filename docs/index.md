@@ -40,7 +40,10 @@ Maurício Serrano
     <td align="center">Módulo 3</td>
     <td align="center"><a href="entrega-03/apresentação_3">Apresentação parcial e final do Módulo 3</a></td>
   </tr>
-
+  <tr>
+    <td align="center">Entrega final</td>
+    <td align="center"><a href="entrega-03/apresentação_3">Apresentação parcial e final do Módulo 3</a></td>
+  </tr>
 
 </table>
 
