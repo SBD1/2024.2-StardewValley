@@ -75,8 +75,8 @@ def exibir_status_combate(jogador_dict, inimigo_dict):
     print(f"\nStatus do jogador {jogador_dict['nome']}")
     barra_status_vida(vida_jogador, jogador_dict['vidaMax'])
     print(f"\nDano de ataque: {jogador_dict['dano_ataque']} ")  
-    print(f"Arma equipada: {jogador_dict['arma'][1]} ")
-    print(f"Dano da arma: {jogador_dict['arma'][3]} ") if jogador_dict['arma'][3] is not None else None
+    print(f"Arma equipada: {jogador_dict['arma'][1]  if jogador_dict['arma'] is not None else 'Nenhuma' } ")
+    print(f"Dano da arma: {jogador_dict['arma'][3]} ") if jogador_dict['arma'] is not None else None
     print(f"Itens consumíveis: {quantidade_pocoes} ")
     print(f"\nStatus do(a) {inimigo_dict['tipo'][1]}")
     barra_status_vida(vida_inimigo, inimigo_dict['tipo'][3])  
@@ -194,48 +194,56 @@ def usar_consumivel(jogador_dict):
             WHERE ii.fk_id_jogador = %s
             GROUP BY c.fk_id_item, c.nome, c.descricao, c.efeito_vida, c.preco, ii.fk_id_jogador;""",
         (jogador_dict['id_jogador'],))
-        pocoes = cursor.fetchall()
+        pocoes_inventario = cursor.fetchall()
 
-        quantidade_pocoes = sum([pocao[6] for pocao in pocoes])
+        pocoes_id = []
+        quantidade_pocoes = 0
+        for pocao in pocoes_inventario:
+            pocoes_id.append(pocao[0])
+            quantidade_pocoes += pocao[6]
 
-        while True and quantidade_pocoes > 0:
+        while quantidade_pocoes > 0:
             # listando poções no inventário do jogador
             #(fk_id_item, nome, descricao, efeito_vida, preco, fk_id_jogador, quantidade)
             clear_terminal()
-            for item in pocoes:
+
+            for item in pocoes_inventario:
                 print(f"-" * 60)
+                print(f"Id: {item[0]}")
                 print(f"Consumível: {item[1]}")
                 print(f"Descrição: {item[2]}")
                 print(f"Efeito de vida: {'+' + str(item[3]) if item[3] >= 0 else item[3]}")
                 print(f"Preço Unitário: {item[4]}")
                 print(f"Quantidade: {item[6]}\n")
-            
-            nomes_pocoes = [pocao[1].lower() for pocao in pocoes]
 
-            nome_pocao = (input("\nQual item deseja usar (digite o nome do consumível ou digite 0 para cancelar)?\n > "))
-            if nome_pocao == "0":
-                return jogador_dict
-            elif nome_pocao.lower() in nomes_pocoes:
-                for item in pocoes:
-                    if item[1].lower() == nome_pocao.lower():
-                        pocao = item
-                        cursor.execute("""
-                            DELETE FROM Instancia_de_Item 
-                            WHERE ctid = (
-                                SELECT ctid FROM Instancia_de_Item 
-                                WHERE fk_id_item = %s AND fk_id_jogador = %s 
-                                LIMIT 1
-                            );""", 
-                        (pocao[0], jogador_dict['id_jogador']))
-                        connection.commit()
-                        jogador_dict['vidaAtual'] = min(pocao[3] + jogador_dict['vidaAtual'], jogador_dict['vidaMax']) 
-                        commit_vidaAtual(jogador_dict)
-                        return jogador_dict
-            else:
+            try:
+                id_pocao = int(input("\nQual item deseja usar (digite o id do consumível ou digite 0 para cancelar)?\n > "))
+                if id_pocao == 0:
+                    return jogador_dict
+                elif id_pocao in pocoes_id:
+                    for item in pocoes_inventario:
+                        if item[0] == id_pocao:
+                            pocao = item
+                            cursor.execute("""
+                                DELETE FROM Instancia_de_Item 
+                                WHERE ctid = (
+                                    SELECT ctid FROM Instancia_de_Item 
+                                    WHERE fk_id_item = %s AND fk_id_jogador = %s 
+                                    LIMIT 1
+                                );""", 
+                            (pocao[0], jogador_dict['id_jogador']))
+                            connection.commit()
+                            jogador_dict['vidaAtual'] = min(pocao[3] + jogador_dict['vidaAtual'], jogador_dict['vidaMax']) 
+                            commit_vidaAtual(jogador_dict)
+                            print(f"\nVocê usou {pocao[1]} e recuperou {pocao[3]} de vida.")
+                            input("Pressione enter para continuar...")
+                            return jogador_dict
+                else:
+                    raise Exception
+            except Exception as error:
                 print("\nNome inválido. Tente novamente.")
                 input("Pressione enter para continuar...")
-                continue
-            break
+        
         print("\nVocê não possui consumíveis para usar.")
         input("Pressione enter para continuar...")
         return jogador_dict
@@ -260,36 +268,57 @@ def escolher_arma(jogador_dict):
             WHERE ii.fk_id_jogador = %s
             GROUP BY a.fk_id_item, a.nome, a.descricao, a.dano_arma, a.preco, ii.fk_id_jogador;""",
         (jogador_dict['id_jogador'],))
-        armas = cursor.fetchall()
-        quantidade_armas = sum([arma[6] for arma in armas])
-        # listando armas no inventário do jogador
-        #(fk_id_item, nome, descricao, dano_arma, preco, fk_id_jogador, quantidade)
-        while True and quantidade_armas > 0:
-            # listando poções no inventário do jogador
-            #(fk_id_item, nome, descricao, efeito_vida, preco, fk_id_jogador, quantidade)
+
+        armas_inventario = cursor.fetchall()
+
+        armas_id = []
+        quantidade_armas = 0
+        for item in armas_inventario:
+            armas_id.append(item[0])
+            quantidade_armas += item[6]
+
+        while quantidade_armas > 0:
             clear_terminal()
-            nomes_armas = []
-            for item in armas:
+            for item in armas_inventario:
                 print(f"-" * 60)
+                print(f"Id: {item[0]}")
                 print(f"Nome: {item[1]}")
                 print(f"Descrição: {item[2]}")
                 print(f"Dano: {item[3]}")
                 print(f"Preço Unitário: {item[4]}\n")
-                nomes_armas.append(item[1].lower())
 
-            nome_arma = (input("\nQual arma deseja equipar (digite o nome do item ou digite 0 para cancelar)?\n > "))
-            if nome_arma == "0":
-                return jogador_dict
-            elif nome_arma.lower() in nomes_armas:
-                for item in armas:
-                    if item[1].lower() == nome_arma.lower():
-                        jogador_dict['arma'] = item
-                        return jogador_dict
-            else:
+            try:
+                id_arma = int(input("\nQual arma deseja equipar (digite o id do item ou digite 0 para cancelar)?\n > "))
+                if id_arma == 0:
+                    return jogador_dict
+                elif id_arma in armas_id:
+                    for item in armas_inventario:
+                        if item[0] == id_arma:
+                            jogador_dict['arma'] = item
+                            # precisamos desequipar todas as armas antes de equipar uma nova
+                            cursor.execute("""
+                                UPDATE instancia_de_item ii
+                                SET is_equipado = FALSE
+                                FROM arma
+                                WHERE arma.fk_id_item = ii.fk_id_item
+                                AND ii.fk_id_jogador = %s;""",(jogador_dict['id_jogador'],))
+                            connection.commit()
+                            # equipando a arma escolhida
+                            cursor.execute("""
+                                UPDATE instancia_de_item ii
+                                SET is_equipado = TRUE
+                                FROM arma
+                                WHERE arma.fk_id_item = ii.fk_id_item
+                                AND ii.fk_id_item = %s
+                                AND ii.fk_id_jogador = %s;""",(id_arma, jogador_dict['id_jogador']))
+                            connection.commit()
+                            input(f"\n{item[1]} equipado(a) com sucesso!\nPressione enter para continuar...")
+                            return jogador_dict
+                raise Exception
+            except Exception as error:
                 print("\nNome inválido. Tente novamente.")
                 input("Pressione enter para continuar...")
                 continue
-            break
         print("\nVocê não possui armas para equipar.")
         input("Pressione enter para continuar...")
         return jogador_dict
@@ -317,20 +346,19 @@ def iniciar_combate(jogador_dict, inimigos_dict, ambiente):
                 break
 
         vida_inimigo = instancia_inimigo[1]
-
         inimigo_dict = {"vida": vida_inimigo, "tipo": tipo_inimigo, "instancia": instancia_inimigo}
 
         while inimigo_dict["vida"] > 0 and jogador_dict['vidaAtual'] > 0:        
-            if jogador_dict['arma'][3] is not None:
+            if jogador_dict['arma'] is not None:
                 dano_jogador = jogador_dict['dano_ataque'] + jogador_dict['arma'][3]
             else:
                 dano_jogador = jogador_dict['dano_ataque']
 
             exibir_status_combate(jogador_dict, inimigo_dict)
 
-            opcao = int(input("\n O que deseja fazer?\n 1 - Atacar\n 2 - Usar poção de vida\n 3 - Equipar ou trocar de arma\n 4 - Fugir\n> """))
-
             try:
+                opcao = int(input("\n O que deseja fazer?\n 1 - Atacar\n 2 - Usar poção de vida\n 3 - Equipar ou trocar de arma\n 4 - Fugir\n> """))
+
                 if opcao == 1:
                     inimigo_dict["vida"] -= dano_jogador 
                     dano_inimigo = ataque_inimigo(ambiente, tipo_inimigo)
@@ -346,21 +374,23 @@ def iniciar_combate(jogador_dict, inimigos_dict, ambiente):
                         print(f"O {inimigo_dict['tipo'][1]} tentou te atacar, mas você desviou do ataque!")
 
                     input("\nPressione enter para continuar...")
-                if opcao == 2:
+                elif opcao == 2:
                     jogador_dict = usar_consumivel(jogador_dict)
-                if opcao == 3:
+                elif opcao == 3:
                     jogador_dict = escolher_arma(jogador_dict)
-                if opcao == 4:
+                elif opcao == 4:
                     commit_vidaAtual(jogador_dict, inimigo_dict)
                     return "fuga", jogador_dict
+                else:
+                    raise Exception
             except ValueError:
                 print("\nOpção inválida. Tente novamente.")
                 input("Pressione enter para continuar...")
         resultado, jogador_dict = resultado_combate(inimigo_dict, jogador_dict)
         return resultado, jogador_dict
     except Exception as error:
-        print(f"Ocorreu um erro ao iniciar o combate: {error}")
-        input("\nPressione enter para continuar...")
+        print(f"\nOcorreu um erro ao iniciar o combate")
+        input("Pressione enter para continuar...")
     finally:
         if connection:
             cursor.close()
@@ -408,7 +438,7 @@ def info_andar(ambiente, caverna_andar, jogador_dict):
             cursor.close()
             connection.close()
 
-def atualizar_jogador(jogador, arma=None):
+def atualizar_jogador(jogador):
     try:
         connection = get_connection()
         cursor = connection.cursor()
@@ -416,45 +446,33 @@ def atualizar_jogador(jogador, arma=None):
         cursor.execute("SELECT * FROM jogador WHERE id_jogador = %s", (jogador[0],))
         jogador = cursor.fetchone()
 
-        if arma is not None:
-            jogador_dict = {
-                'id_jogador'                        : jogador[0],
-                'nome'                              : jogador[1],                  
-                'dia'                               : jogador[2],                   
-                'tempo'                             : jogador[3],
-                'localizacao_atual'                 : jogador[4],                
-                'vidaMax'                           : jogador[5],         
-                'vidaAtual'                         : jogador[6],       
-                'xp_mineracao'                      : jogador[7],     
-                'xp_cultivo'                        : jogador[8],       
-                'xp_combate'                        : jogador[9],       
-                'dano_ataque'                       : jogador[10],
-                'moedas'                            : jogador[11],       
-                'fk_habMineracao_fk_Habilidade_id'  : jogador[12], 
-                'fk_habCombate_fk_Habilidade_id'    : jogador[13],   
-                'fk_habCultivo_fk_Habilidade_id'    : jogador[14],
-                'arma' : arma
-            }
-        else:
-            jogador_dict = {
-                'id_jogador'                        : jogador[0],
-                'nome'                              : jogador[1],                  
-                'dia'                               : jogador[2],                   
-                'tempo'                             : jogador[3],
-                'localizacao_atual'                 : jogador[4],                
-                'vidaMax'                           : jogador[5],         
-                'vidaAtual'                         : jogador[6],       
-                'xp_mineracao'                      : jogador[7],     
-                'xp_cultivo'                        : jogador[8],       
-                'xp_combate'                        : jogador[9],       
-                'dano_ataque'                       : jogador[10],
-                'moedas'                            : jogador[11],       
-                'fk_habMineracao_fk_Habilidade_id'  : jogador[12], 
-                'fk_habCombate_fk_Habilidade_id'    : jogador[13],   
-                'fk_habCultivo_fk_Habilidade_id'    : jogador[14],
-                'arma'                              : (None, "Nenhuma arma equipada", None, None, None, None, None)
-            }
+        cursor.execute("""
+            SELECT a.*
+            FROM arma a
+            JOIN instancia_de_item ii on ii.fk_id_item = a.fk_id_item
+            AND ii.fk_id_jogador = %s
+            AND ii.is_equipado = TRUE""" ,(jogador[0],))
+        arma = cursor.fetchone()
 
+        jogador_dict = {
+            'id_jogador'                        : jogador[0],
+            'nome'                              : jogador[1],                  
+            'dia'                               : jogador[2],                   
+            'tempo'                             : jogador[3],
+            'localizacao_atual'                 : jogador[4],                
+            'vidaMax'                           : jogador[5],         
+            'vidaAtual'                         : jogador[6],       
+            'xp_mineracao'                      : jogador[7],     
+            'xp_cultivo'                        : jogador[8],       
+            'xp_combate'                        : jogador[9],       
+            'dano_ataque'                       : jogador[10],
+            'moedas'                            : jogador[11],       
+            'fk_habMineracao_fk_Habilidade_id'  : jogador[12], 
+            'fk_habCombate_fk_Habilidade_id'    : jogador[13],   
+            'fk_habCultivo_fk_Habilidade_id'    : jogador[14],
+            'arma'                              : arma
+        }
+            
         return jogador_dict
 
     except Exception as error:
@@ -516,22 +534,35 @@ def conferir_recompensa(jogador_dict, ambiente, caverna_andar):
             recompensas = cursor.fetchall()
 
             if recompensas != []:
-                print("\nParabéns! Você derrotou todos os inimigos deste andar e encontrou:")
-                for recompensa in recompensas:
-                    print(f"- {recompensa[1]}")
-                    opcao = int(input("\nPressione 1 para coletar a recompensa e 0 para deixá-la para trás.\n> "))
-                    if opcao:
-                        cursor.execute("""
-                            INSERT INTO instancia_de_item (fk_id_jogador, fk_id_item, fk_id_inventario)
-                            VALUES
-                            (%s, %s, (
-                                            SELECT id_inventario FROM Inventario WHERE fk_id_jogador = %s
-                                    )
-                            );""",
-                        (jogador_dict['id_jogador'], recompensa[0], jogador_dict['id_jogador']))
-                        connection.commit()
-                        print("\nVocê coletou a recompensa com sucesso!")
-                        input("\nPressione enter para continuar...")
+                while True:
+                    try:
+                        print("\nParabéns! Você derrotou todos os inimigos deste andar e encontrou:")
+                        for recompensa in recompensas:
+                            print(f"- 1x {recompensa[1]}")
+                            opcao = int(input("\nPressione 1 para coletar a recompensa e 0 para deixá-la para trás.\n> "))
+                            if opcao == 1:
+                                cursor.execute("""
+                                    INSERT INTO instancia_de_item (fk_id_jogador, fk_id_item, fk_id_inventario)
+                                    VALUES
+                                    (%s, %s, (
+                                                    SELECT id_inventario FROM Inventario WHERE fk_id_jogador = %s
+                                            )
+                                    );""",
+                                (jogador_dict['id_jogador'], recompensa[0], jogador_dict['id_jogador']))
+                                connection.commit()
+                                print("\nVocê coletou a recompensa com sucesso!")
+                                input("\nPressione enter para continuar...")
+                                return
+                            elif opcao == 0:
+                                print("\nVocê deixou a recompensa para trás.")
+                                input("\nPressione enter para continuar...")
+                                return
+                            else:
+                                raise Exception
+                    except Exception as error:
+                        print("\nOpção inválida. Tente novamente.")
+                        input("Pressione enter para continuar...")
+                        clear_terminal()
             else:
                 print("\nVocê derrotou todos os inimigos deste andar, mas não encontrou nenhuma recompensa.")
                 input("\nPressione enter para continuar...")
@@ -550,12 +581,11 @@ def interacao_caverna(jogador, ambiente):
 
         cursor.execute("SELECT * FROM caverna WHERE fk_id_ambiente = %s", (ambiente[0],))
         caverna_andar = cursor.fetchone()
-        jogador_dict = {'arma': (None, "Nenhuma arma equipada", None, None, None, None, None)}
+        jogador_dict = atualizar_jogador(jogador)
 
+        minerios_disponiveis = caverna_andar[3]
         while True:
             clear_terminal()
-            # POG: Progranação Orientada a Gambiarra :)
-            jogador_dict = atualizar_jogador(jogador, jogador_dict["arma"])
 
             if ambiente[0] == 15:
                 print("Não há nada para fazer na entrada da caverna.")
@@ -568,16 +598,16 @@ def interacao_caverna(jogador, ambiente):
 
             inimigos_dict = info_andar(ambiente, caverna_andar, jogador_dict)
 
-            opcao = selecionar_opcao_caverna(inimigos_dict)
 
             try:
+                opcao = selecionar_opcao_caverna(inimigos_dict)
                 if opcao == 1:
                     if inimigos_dict["quantidade_mobs"] == 0:
                         print("\nNão há inimigos para combater neste andar.")
                         input("Pressione enter para continuar...")
                         continue
                     
-                    resultado, jogador_dict = iniciar_combate(jogador_dict, inimigos_dict, ambiente)
+                    resultado = iniciar_combate(jogador_dict, inimigos_dict, ambiente)
                     avancar_tempo.avancar_tempo(jogador, 10)
                     
                     if resultado == "derrota":
@@ -588,10 +618,14 @@ def interacao_caverna(jogador, ambiente):
                     
                     conferir_recompensa(jogador_dict, ambiente, caverna_andar)
                 elif opcao == 2:
-                    minerar(jogador_dict, caverna_andar)
+                    resultado_minerar = minerar(jogador_dict, minerios_disponiveis)
+                    if (resultado_minerar): 
+                        minerios_disponiveis -= 1
                     input("Pressione enter para continuar...")
                 elif opcao == 3:
                     return  
+                else:
+                    raise Exception
             except ValueError:
                 print("\nOpção inválida. Tente novamente.")
                 input("Pressione enter para continuar...")
@@ -604,36 +638,69 @@ def interacao_caverna(jogador, ambiente):
             cursor.close()
             connection.close()
     
-def minerar(jogador, caverna_andar):
-    andar = 1  # Consultar o banco para descobrir qual o andar atual
-    minerios_disponiveis = caverna_andar[3]
-    
+def minerar(jogador, minerios_disponiveis):    
     if minerios_disponiveis <= 0:    
         print("Você não encontrou minérios para minerar...")
         time.sleep(2)
         return
+    
     print(f"Nesta caverna tem {minerios_disponiveis} minérios")
-    time.sleep(2)
-    if barra_de_precisao():
-        minerio_id = random.choice(list(minerios.keys()))
-        minerio = minerios[minerio_id]
-        print(f"Parabéns! Você conseguiu minerar e encontrou {minerio['nome']} ({minerio['descricao']})!")
-        escolha = int(input("Deseja armazenar o minério? (1 - Sim, 2 - Não) "))
-        if escolha == 1:
-            connection = get_connection()
-            cursor = connection.cursor()
-            # cursor.execute("" (,)) (inserir minério na mochila)
-            print("Minério armazenado com sucesso!")
+    while(minerios_disponiveis > 0):
+        time.sleep(2)
+        if barra_de_precisao():
+            minerio_id = random.choice(list(minerios.keys()))
+            minerio = minerios[minerio_id]
+            print(f"Parabéns! Você conseguiu minerar e encontrou {minerio['nome']} ({minerio['descricao']})!")
+            escolha = int(input("Deseja armazenar o minério? (1 - Sim, 2 - Não) "))
+            if escolha == 1:
+                connection = get_connection()
+                cursor = connection.cursor()
+                cursor.execute("SELECT * FROM mineral WHERE nome = %s", (minerio['nome'],))
+
+                mineral = cursor.fetchall()
+                criar_item(jogador['id_jogador'], mineral[0][0])
+                # cursor.execute("" (,)) (inserir minério na mochila)
+                print("Minério armazenado com sucesso!")
+                time.sleep(2)
+                return True
+            elif escolha == 2:
+                print("Minério descartado...")
+                time.sleep(1)
+                return True
+            elif escolha != 1 or escolha != 2:
+                print("Opção inválida. Tente novamente.")
+                return
+        else:
+            print("Você quebrou a pedra, mas não encontrou nada de valor :(")
             time.sleep(3)
-            return minerio
-        elif escolha == 2:
-            print("Minério descartado...")
-            time.sleep(2)
+            return False
+    
+def criar_item(jogadorId, id_item):
+    try:
+        conn = get_connection()
+        cursor = conn.cursor()
+        # Buscar o ID do inventário do jogador
+        cursor.execute("SELECT id_inventario FROM inventario WHERE fk_id_jogador = %s", (jogadorId,))
+        inventario = cursor.fetchone()
+        
+        if not inventario:
+            print("❌ Inventário do jogador não encontrado.")
             return
-        elif escolha != 1 or escolha != 2:
-            print("Opção inválida. Tente novamente.")
-            return
-    else:
-        print("Você quebrou a pedra, mas não encontrou nada de valor :(")
-        time.sleep(3)
-        return None
+        
+        id_inventario = inventario[0]
+        # Inserir o item no inventário do jogador
+        cursor.execute(
+            "INSERT INTO instancia_de_item (fk_id_jogador, fk_id_item, fk_id_inventario) VALUES (%s, %s, %s)",
+            (jogadorId, id_item, id_inventario)
+        )
+        conn.commit()  # Confirma a transação
+
+
+    except Exception as e:
+        print(f"❌ Erro ao adicionar item ao inventário: {e}")
+    finally:
+        if cursor:
+            cursor.close()
+        if conn:
+            conn.close()
+     

@@ -17,7 +17,9 @@ nav:
     - DQL: entrega-02/dql.md
     - Apresentação: entrega-02/apresentação_2.md
   - Módulo 3:
-    - Módulo 3: entrega-03/mudancas-mod3.md
+    - Triggers e SP: entrega-03/triggers.md
+    - Views: entrega-03/view.md
+    - Atualizações: entrega-03/mudancas-mod3.md
     - Apresentação: entrega-03/apresentação_3.md
   - Manual do Jogador: manual.md
 

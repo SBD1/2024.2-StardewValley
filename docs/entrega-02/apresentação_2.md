@@ -1,7 +1,7 @@
 # Apresentação 02
 
 ## Objetivo
-Esta página tem como foco o vídeo de apresentação do módulo 2 do projeto. A gravação da apresentação ocorreu no dia 13/12/2025.
+Esta página tem como foco o vídeo de apresentação do módulo 2 do projeto. A gravação da apresentação ocorreu no dia 13/01/2025.
 
 ## Apresentação
 
